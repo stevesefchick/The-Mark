@@ -1,7 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
+using The_Mark;
 
 class GameMain : Game
 {
+	protected WorldMap worldMap;
+
 	//run the game
 	static void Main(string[] args)
 	{
@@ -14,6 +17,9 @@ class GameMain : Game
 	private GameMain()
 	{
 		GraphicsDeviceManager gdm = new GraphicsDeviceManager(this);
+
+		// All content loaded will be in a "Content" folder
+		Content.RootDirectory = "Content";
 
 		//load configs here
 		gdm.PreferredBackBufferWidth = 1280;
