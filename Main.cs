@@ -24,19 +24,16 @@ class GameMain : Game
 
 	protected override void Initialize()
 	{
-		//init after config
 		base.Initialize();
 	}
 
 	protected override void LoadContent()
 	{
-		// Load textures, sounds, and so on in here...
 		base.LoadContent();
 	}
 
 	protected override void UnloadContent()
 	{
-		// Clean up after yourself!
 		base.UnloadContent();
 	}
 
