@@ -30,8 +30,16 @@ class GameMain : Game
 
 	protected override void Initialize()
 	{
+		createNewWorld();
 		base.Initialize();
 	}
+
+
+	//Creates a new world and all relevant items within should the player choose New Game
+	void createNewWorld()
+    {
+		worldMap = new WorldMap();
+    }
 
 	protected override void LoadContent()
 	{

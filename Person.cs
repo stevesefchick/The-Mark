@@ -7,10 +7,13 @@ namespace The_Mark
     {
 		//TODO: Unique ID
 
+		enum BirthType { Birthed, Created }
+
+
 		//person attributes
-		string personFirstName;
-		string personLastName;
-		int personAge;
+		protected string personFirstName;
+		protected string personLastName;
+		protected int personAge;
 		//TODO: Gender
 		//TODO: Sexuality
 
@@ -21,6 +24,8 @@ namespace The_Mark
 		//TODO: skills
 
 		//TODO: stats
+		
+
 		
 
 		public void Update(GameTime gameTime)

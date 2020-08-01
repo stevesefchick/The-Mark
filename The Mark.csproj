@@ -40,6 +40,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Place.cs" />
+    <Compile Include="Terrain.cs" />
     <Compile Include="WorldMap.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -49,8 +50,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Data\Person\" />
+    <Folder Include="Content\Data\Place\" />
     <Folder Include="Content\Sprites\Person\" />
     <Folder Include="Content\Sprites\Place\" />
+    <Folder Include="Content\Sprites\Terrain\" />
     <Folder Include="Content\Sprites\World\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
