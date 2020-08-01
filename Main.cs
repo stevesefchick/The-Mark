@@ -1,9 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using The_Mark;
 
 class GameMain : Game
 {
+	//basic stuff
+	protected SpriteBatch spriteBatch;
+
+	//content
 	protected WorldMap worldMap;
+
 
 	//run the game
 	static void Main(string[] args)
@@ -14,7 +20,7 @@ class GameMain : Game
 		}
 	}
 
-	private GameMain()
+	protected GameMain()
 	{
 		GraphicsDeviceManager gdm = new GraphicsDeviceManager(this);
 
@@ -38,11 +44,13 @@ class GameMain : Game
 	//Creates a new world and all relevant items within should the player choose New Game
 	void createNewWorld()
     {
-		worldMap = new WorldMap();
+		worldMap = new WorldMap(this);
     }
 
 	protected override void LoadContent()
 	{
+		spriteBatch = new SpriteBatch(GraphicsDevice);
+
 		base.LoadContent();
 	}
 

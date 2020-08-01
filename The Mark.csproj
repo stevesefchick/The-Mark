@@ -53,9 +53,17 @@
     <Folder Include="Content\Data\Person\" />
     <Folder Include="Content\Data\Place\" />
     <Folder Include="Content\Sprites\Person\" />
-    <Folder Include="Content\Sprites\Place\" />
-    <Folder Include="Content\Sprites\Terrain\" />
-    <Folder Include="Content\Sprites\World\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Sprites\Place\place_mockup.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Terrain\grass_mock.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\World\worldmock.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
