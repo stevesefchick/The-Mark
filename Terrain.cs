@@ -1,5 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-
+using Microsoft.Xna.Framework.Graphics;
 
 namespace The_Mark
 {
@@ -12,7 +12,7 @@ namespace The_Mark
 		{
 		}
 
-		public void Draw(GameTime gameTime)
+		public void Draw(GameTime gameTime,SpriteBatch spriteBatch)
 		{
 
 		}

@@ -35,6 +35,9 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="App.config" />
+    <None Include="Content\Data\Person\nameData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -50,7 +53,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Data\Person\" />
     <Folder Include="Content\Data\Place\" />
     <Folder Include="Content\Sprites\Person\" />
   </ItemGroup>

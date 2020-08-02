@@ -67,6 +67,13 @@ class GameMain : Game
 	protected override void Draw(GameTime gameTime)
 	{
 		GraphicsDevice.Clear(Color.CornflowerBlue);
+
+
+		spriteBatch.Begin();
+		worldMap.Draw(gameTime, spriteBatch);
+		spriteBatch.End();
+
+
 		base.Draw(gameTime);
 	}
 }
