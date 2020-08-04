@@ -36,5 +36,10 @@ namespace The_Mark
 		{
 
 		}
+
+		public void CreatePerson()
+        {
+
+        }
 	}
 }

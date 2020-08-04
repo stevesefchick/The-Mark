@@ -40,6 +40,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Camera.cs" />
+    <Compile Include="DataManager.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Place.cs" />

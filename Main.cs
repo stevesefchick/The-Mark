@@ -9,7 +9,8 @@ class GameMain : Game
 
 	//content
 	protected WorldMap worldMap;
-
+	public DataManager dataManager;
+	protected Camera camera;
 
 	//run the game
 	static void Main(string[] args)
@@ -37,8 +38,15 @@ class GameMain : Game
 	protected override void Initialize()
 	{
 		createNewWorld();
+		createHelpers();
 		base.Initialize();
 	}
+
+	private void createHelpers()
+    {
+		dataManager = new DataManager();
+		camera = new Camera();
+    }
 
 
 	//Creates a new world and all relevant items within should the player choose New Game
