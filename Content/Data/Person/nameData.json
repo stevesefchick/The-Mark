@@ -1,4 +1,6 @@
 {
-  "firstNamesMale": [ "John", "Jim", "Horse", "Aaron", "Randal", "Biff", "Clyde","Derrick","Ed","Edgar","Frank","Francis","Greg" ],
-  "firstNamesFemale": [ "Mary" ]
+  "Jim": { "gender": "male" },
+  "Joe": { "gender": "male" },
+  "Nancy": { "gender": "female" },
+  "Sprout": {"gender": "whocares"}
 }

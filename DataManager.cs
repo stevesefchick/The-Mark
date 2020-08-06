@@ -8,7 +8,7 @@ namespace The_Mark
 {
     class DataManager
     {
-		public List<string> firstNamesMale = new List<string>();
+        public Dictionary<string, NameData> firstNames = new Dictionary<string, NameData>();
 
         public void LoadAllData(GameMain gameMain)
         {
@@ -20,9 +20,20 @@ namespace The_Mark
 
         public void loadNames(GameMain gameMain, JsonSerializer serializer)
         {
-            firstNamesMale = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(@"Content/Data/Person/namedata.json"));
+            firstNames = JsonConvert.DeserializeObject<Dictionary<string, NameData>>(File.ReadAllText(@"Content/Data/Person/namedata.json"));
 
         }
 
+    }
+
+
+    class NameData
+    {
+        public string gender;
+
+        public NameData(string thegender)
+        {
+            gender = thegender;
+        }
     }
 }
