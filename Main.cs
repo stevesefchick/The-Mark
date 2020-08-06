@@ -39,6 +39,10 @@ class GameMain : Game
 	{
 		createNewWorld();
 		createHelpers();
+
+
+		dataManager.LoadAllData(this);
+
 		base.Initialize();
 	}
 

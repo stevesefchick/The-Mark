@@ -1,3 +1,4 @@
 {
-  "firstNames": [ "John", "Jim", "Horse" ]
+  "firstNamesMale": [ "John", "Jim", "Horse", "Aaron", "Randal", "Biff", "Clyde","Derrick","Ed","Edgar","Frank","Francis","Greg" ],
+  "firstNamesFemale": [ "Mary" ]
 }
