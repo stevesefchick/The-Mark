@@ -82,7 +82,7 @@ class GameMain : Game
 
 
 		spriteBatch.Begin();
-		worldMap.Draw(gameTime, spriteBatch);
+		worldMap.Draw(spriteBatch);
 		spriteBatch.End();
 
 

@@ -1,5 +1,7 @@
 {
   "Jim": { "gender": "male" },
+  "Corey": { "gender": "male" },
+  "Adrian": { "gender": "male" },
   "Joe": { "gender": "male" },
   "Andrew": { "gender": "male" },
   "Ben": { "gender": "male" },
@@ -34,6 +36,10 @@
   "Helena": { "gender": "female" },
   "Jackie": { "gender": "female" },
   "Kylie": { "gender": "female" },
+  "Avery": { "gender": "female" },
+  "Helen": { "gender": "female" },
+  "Beatrice": { "gender": "female" },
+  "Emily": { "gender": "female" },
   "Karen": { "gender": "female" },
   "Laura": { "gender": "female" },
   "Michelle": { "gender": "female" },
@@ -57,6 +63,26 @@
   "Waffle": { "gender": "whocares" },
   "Taco": { "gender": "whocares" },
   "Bean": { "gender": "whocares" },
-  "Yip": {"gender": "whocares"}
+  "Yip": { "gender": "whocares" },
+  "Biscuit": { "gender": "whocares" },
+  "Tater": { "gender": "whocares" },
+  "Tot": { "gender": "whocares" },
+  "Lentil": { "gender": "whocares" },
+  "Pickle": { "gender": "whocares" },
+  "Gravy": { "gender": "whocares" },
+  "Melon": { "gender": "whocares" },
+  "Mango": { "gender": "whocares" },
+  "Dylan": { "gender": "whocares" },
+  "Jordan": { "gender": "whocares" },
+  "Tango": { "gender": "whocares" },
+  "Hawk": { "gender": "whocares" },
+  "Aspen": { "gender": "whocares" },
+  "River": { "gender": "whocares" },
+  "Lake": { "gender": "whocares" },
+  "Everest": { "gender": "whocares" },
+  "Alpine": { "gender": "whocares" },
+  "Sunny": { "gender": "whocares" },
+  "Whoosh": { "gender": "whocares" }
+
 
 }
