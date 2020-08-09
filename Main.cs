@@ -1,16 +1,27 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
 using The_Mark;
 
 class GameMain : Game
 {
 	//basic stuff
 	protected SpriteBatch spriteBatch;
+	protected GraphicsDeviceManager gdm;
+
 
 	//content
 	protected WorldMap worldMap;
 	public DataManager dataManager;
 	protected Camera camera;
+
+	//controls
+	protected Boolean isRightPressed;
+	protected Boolean isLeftPressed;
+	protected Boolean isUpPressed;
+	protected Boolean isDownPressed;
+	
 
 	//run the game
 	static void Main(string[] args)
@@ -23,7 +34,7 @@ class GameMain : Game
 
 	protected GameMain()
 	{
-		GraphicsDeviceManager gdm = new GraphicsDeviceManager(this);
+		gdm = new GraphicsDeviceManager(this);
 
 		// All content loaded will be in a "Content" folder
 		Content.RootDirectory = "Content";
@@ -71,8 +82,56 @@ class GameMain : Game
 		base.UnloadContent();
 	}
 
+	protected void getInput()
+    {
+		KeyboardState kbState = Keyboard.GetState();
+
+		//right
+		if (kbState.IsKeyDown(Keys.Right)==true)
+        {
+			isRightPressed = true;
+        }
+		else
+        {
+			isRightPressed = false;
+        }
+
+		//left
+		if (kbState.IsKeyDown(Keys.Left) == true)
+		{
+			isLeftPressed = true;
+		}
+		else
+		{
+			isLeftPressed = false;
+		}
+
+		//up
+		if (kbState.IsKeyDown(Keys.Up) == true)
+		{
+			isUpPressed = true;
+		}
+		else
+		{
+			isUpPressed = false;
+		}
+
+		//down
+		if (kbState.IsKeyDown(Keys.Down) == true)
+		{
+			isDownPressed = true;
+		}
+		else
+		{
+			isDownPressed = false;
+		}
+
+	}
+
 	protected override void Update(GameTime gameTime)
 	{
+		getInput();
+		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed);
 		base.Update(gameTime);
 	}
 
@@ -81,7 +140,13 @@ class GameMain : Game
 		GraphicsDevice.Clear(Color.CornflowerBlue);
 
 
-		spriteBatch.Begin();
+		spriteBatch.Begin(SpriteSortMode.BackToFront,
+			BlendState.AlphaBlend,
+			null,
+			null,
+			null,
+			null,
+			camera.get_transformation(gdm));
 		worldMap.Draw(spriteBatch);
 		spriteBatch.End();
 
