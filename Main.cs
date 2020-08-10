@@ -21,6 +21,10 @@ class GameMain : Game
 	protected Boolean isLeftPressed;
 	protected Boolean isUpPressed;
 	protected Boolean isDownPressed;
+
+	//random stuff
+	Random rando = new Random();
+	
 	
 
 	//run the game
@@ -44,6 +48,7 @@ class GameMain : Game
 		gdm.PreferredBackBufferHeight = 720;
 		gdm.IsFullScreen = false;
 		gdm.SynchronizeWithVerticalRetrace = true;
+
 	}
 
 	protected override void Initialize()
@@ -67,7 +72,7 @@ class GameMain : Game
 	//Creates a new world and all relevant items within should the player choose New Game
 	void createNewWorld()
     {
-		worldMap = new WorldMap(this);
+		worldMap = new WorldMap(this,rando);
     }
 
 	protected override void LoadContent()
