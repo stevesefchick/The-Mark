@@ -35,6 +35,7 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="App.config" />
+    <None Include="Content\Data\Person\lastnameData.json" />
     <None Include="Content\Data\Person\nameData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

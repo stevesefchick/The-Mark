@@ -53,11 +53,11 @@ class GameMain : Game
 
 	protected override void Initialize()
 	{
-		createNewWorld();
 		createHelpers();
-
-
 		dataManager.LoadAllData(this);
+		createNewWorld();
+
+
 
 		base.Initialize();
 	}
@@ -72,7 +72,7 @@ class GameMain : Game
 	//Creates a new world and all relevant items within should the player choose New Game
 	void createNewWorld()
     {
-		worldMap = new WorldMap(this,rando);
+		worldMap = new WorldMap(this,rando,dataManager);
     }
 
 	protected override void LoadContent()

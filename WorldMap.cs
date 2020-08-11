@@ -16,11 +16,11 @@ namespace The_Mark
 		//assets
 		private Texture2D worldTexture;
 
-		public WorldMap(GameMain gamedeets,Random rando)
+		public WorldMap(GameMain gamedeets,Random rando,DataManager datamanager)
         {
 			
 			//if new
-			createNewWorld(gamedeets,rando);
+			createNewWorld(gamedeets,rando,datamanager);
         }
 
 		Vector2 getMajorPlaceLocation(Random rando)
@@ -41,7 +41,7 @@ namespace The_Mark
 			return newloc;
         }
 
-		protected void createNewWorld(GameMain gamedeets, Random rando)
+		protected void createNewWorld(GameMain gamedeets, Random rando, DataManager datamanager)
         {
 			//create world texture
 			worldTexture = gamedeets.Content.Load<Texture2D>("Sprites/World/worldmock");
@@ -71,6 +71,12 @@ namespace The_Mark
 			places.Add(newCastle);
 
 
+			//create a bunch of people
+			for (int i=0;i<100;++i)
+            {
+				Person person = new Person();
+				person.CreatePerson(datamanager, rando);
+            }
 
 		}
 
