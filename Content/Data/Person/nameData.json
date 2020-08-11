@@ -16,6 +16,7 @@
   "Kyle": { "gender": "male" },
   "Lyle": { "gender": "male" },
   "Mike": { "gender": "male" },
+  "Gilbert": { "gender": "male" },
   "Nick": { "gender": "male" },
   "Octavio": { "gender": "male" },
   "Pete": { "gender": "male" },
@@ -25,6 +26,7 @@
   "Vince": { "gender": "male" },
   "Will": { "gender": "male" },
   "Xavier": { "gender": "male" },
+  "Shrimply": { "gender": "male" },
   "Zakk": { "gender": "male" },
   "Nancy": { "gender": "female" },
   "Abby": { "gender": "female" },
@@ -82,7 +84,8 @@
   "Everest": { "gender": "whocares" },
   "Alpine": { "gender": "whocares" },
   "Sunny": { "gender": "whocares" },
-  "Whoosh": { "gender": "whocares" }
+  "Whoosh": { "gender": "whocares" },
+  "Stormy": { "gender": "whocares" }
 
 
 }

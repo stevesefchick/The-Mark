@@ -11,7 +11,7 @@ namespace The_Mark
 		//content
 		protected List<Terrain> terrains = new List<Terrain>();
 		protected List<Place> places = new List<Place>();
-
+		protected List<Person> people = new List<Person>();
 
 		//assets
 		private Texture2D worldTexture;
@@ -76,6 +76,7 @@ namespace The_Mark
             {
 				Person person = new Person();
 				person.CreatePerson(datamanager, rando);
+				people.Add(person);
             }
 
 		}

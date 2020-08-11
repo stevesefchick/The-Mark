@@ -9,6 +9,7 @@ namespace The_Mark
     class DataManager
     {
         public Dictionary<string, NameData> firstNames = new Dictionary<string, NameData>();
+        public Dictionary<string, LastNameData> lastNames = new Dictionary<string, LastNameData>();
 
         public void LoadAllData(GameMain gameMain)
         {
@@ -21,6 +22,7 @@ namespace The_Mark
         public void loadNames(GameMain gameMain, JsonSerializer serializer)
         {
             firstNames = JsonConvert.DeserializeObject<Dictionary<string, NameData>>(File.ReadAllText(@"Content/Data/Person/namedata.json"));
+            lastNames = JsonConvert.DeserializeObject<Dictionary<string, LastNameData>>(File.ReadAllText(@"Content/Data/Person/lastnameData.json"));
 
         }
 
@@ -30,10 +32,22 @@ namespace The_Mark
     class NameData
     {
         public string gender;
+        public enum lastNameType { Noun }
+        public lastNameType typeOfLastName;
 
         public NameData(string thegender)
         {
             gender = thegender;
         }
     }
+    class LastNameData
+    {
+        public string lastnametype;
+
+        public LastNameData(string thetype)
+        {
+            lastnametype = thetype;
+        }
+    }
+
 }
