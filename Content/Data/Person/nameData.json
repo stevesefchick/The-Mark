@@ -8,13 +8,20 @@
   "Chris": { "gender": "male" },
   "Dave": { "gender": "male" },
   "Ed": { "gender": "male" },
+  "Edwardo": { "gender": "male" },
   "Frank": { "gender": "male" },
   "Greg": { "gender": "male" },
   "Herbert": { "gender": "male" },
   "Isaac": { "gender": "male" },
   "Jake": { "gender": "male" },
   "Kyle": { "gender": "male" },
+  "Phillip": { "gender": "male" },
   "Lyle": { "gender": "male" },
+  "Slappy": { "gender": "male" },
+  "Skanky": { "gender": "male" },
+  "Guy": { "gender": "male" },
+  "Bumpus": { "gender": "male" },
+  "Mitch": { "gender": "male" },
   "Mike": { "gender": "male" },
   "Gilbert": { "gender": "male" },
   "Nick": { "gender": "male" },
@@ -85,7 +92,9 @@
   "Alpine": { "gender": "whocares" },
   "Sunny": { "gender": "whocares" },
   "Whoosh": { "gender": "whocares" },
-  "Stormy": { "gender": "whocares" }
+  "Stormy": { "gender": "whocares" },
+  "Greasy": { "gender": "whocares" },
+  "Charlie": { "gender": "whocares" }
 
 
 }
