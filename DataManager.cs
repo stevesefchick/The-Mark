@@ -33,7 +33,6 @@ namespace The_Mark
     {
         public string gender;
         public enum lastNameType { Noun }
-        public lastNameType typeOfLastName;
 
         public NameData(string thegender)
         {

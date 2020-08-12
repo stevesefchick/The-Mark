@@ -60,6 +60,21 @@ namespace The_Mark
 		void getLastName(DataManager datamanager,Random random)
         {
 			int lastnametype = random.Next(1, 3);
+			string mc = "";
+			string ski = "";
+			if (random.Next(1,30)==1)
+            {
+				mc = "Mc";
+            }
+			else if (random.Next(1,40)==1)
+            {
+				mc = "O'";
+            }
+			if (random.Next(1, 30) == 1)
+			{
+				ski = "ski";
+			}
+
 
 			//last name type 1 = noun + noun
 			if (lastnametype == 1)
@@ -97,11 +112,17 @@ namespace The_Mark
 				personLastName = animalcandidates[random.Next(0, animalcandidates.Count)].ToString() + nouncandidates[random.Next(0, nouncandidates.Count)].ToString();
 			}
 
+
+
+
+
+			//capitalize first letter
+			personLastName = personLastName.Substring(0, 1).ToUpper() + personLastName.Substring(1);
+			//add extras
+			personLastName = mc + personLastName + ski;
+
 			//last name type 2 = verb + noun
 			//last name type 3 = verb + r
-			//last name type 5 = noun + -ski
-			//last name type 6 = o' + noun
-			//last name type 7 = Mc + noun
 			//last name type 8 = adj + -man
 			//last name type 9 = adj + noun
 		}
