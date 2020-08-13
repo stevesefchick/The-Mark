@@ -59,7 +59,7 @@ namespace The_Mark
 
 		void getLastName(DataManager datamanager,Random random)
         {
-			int lastnametype = random.Next(1, 3);
+			int lastnametype = random.Next(1, 4);
 			string mc = "";
 			string ski = "";
 			if (random.Next(1,30)==1)
@@ -111,7 +111,27 @@ namespace The_Mark
 				}
 				personLastName = animalcandidates[random.Next(0, animalcandidates.Count)].ToString() + nouncandidates[random.Next(0, nouncandidates.Count)].ToString();
 			}
-
+			//last name type 3 = verb + noun
+			else if (lastnametype == 3)
+			{
+				List<string> nouncandidates = new List<string>();
+				List<string> verbcandidates = new List<string>();
+				foreach (KeyValuePair<string, LastNameData> entry in datamanager.lastNames)
+				{
+					if (entry.Value.lastnametype == "noun")
+					{
+						nouncandidates.Add(entry.Key);
+					}
+				}
+				foreach (KeyValuePair<string, LastNameData> entry in datamanager.lastNames)
+				{
+					if (entry.Value.lastnametype == "verb")
+					{
+						verbcandidates.Add(entry.Key);
+					}
+				}
+				personLastName = verbcandidates[random.Next(0, verbcandidates.Count)].ToString() + nouncandidates[random.Next(0, nouncandidates.Count)].ToString();
+			}
 
 
 
@@ -121,10 +141,10 @@ namespace The_Mark
 			//add extras
 			personLastName = mc + personLastName + ski;
 
-			//last name type 2 = verb + noun
 			//last name type 3 = verb + r
 			//last name type 8 = adj + -man
 			//last name type 9 = adj + noun
+			//last name type verb + adj
 		}
 
 
