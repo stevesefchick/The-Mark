@@ -60,14 +60,14 @@ namespace The_Mark
 			{
 				Place newPlace = new Place();
 				Vector2 newLocation = getMajorPlaceLocation(rando);
-				newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets);
+				newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets,rando);
 				places.Add(newPlace);
 			}
 
 			//create castle
 			Place newCastle = new Place();
 			Vector2 castleLoc = Vector2.Zero;
-			newCastle.CreateNewPlace(Place.PlaceType.Castle, castleLoc, gamedeets);
+			newCastle.CreateNewPlace(Place.PlaceType.Castle, castleLoc, gamedeets,rando);
 			places.Add(newCastle);
 
 

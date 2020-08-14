@@ -1,0 +1,10 @@
+{
+  "Dirt": { "townnametype": "noun" },
+  "Brick": { "townnametype": "noun" },
+  "Grey": { "townnametype": "noun" },
+  "Lord": { "townnametype": "noun" },
+  "town": { "townnametype": "townend" },
+  "burg": { "townnametype": "townend" },
+  "ston": { "townnametype": "townend" }
+
+}

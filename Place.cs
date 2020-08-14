@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using System;
 
 namespace The_Mark
 {
@@ -20,19 +20,35 @@ namespace The_Mark
 		//sprites
 		Texture2D placeTexture;
 
-		public void CreateNewPlace(PlaceType theplacetype, Vector2 theplacelocation, GameMain gamedeets)
+		void LoadPlaceTexture(GameMain gamedeets)
+        {
+			if (thisPlaceType == PlaceType.Town)
+			{
+				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/place_mockup");
+			}
+			else if (thisPlaceType == PlaceType.Castle)
+			{
+				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/castle_mockup");
+			}
+		}
+
+		void getPlaceName(DataManager datamanager, Random rando)
+        {
+			//type noun + town ending
+			//"person"'s place
+			//"The" noun
+        }
+
+		public void CreateNewPlace(PlaceType theplacetype, Vector2 theplacelocation, GameMain gamedeets,Random rando)
         {
 			thisPlaceType = theplacetype;
 			placeLocation = theplacelocation;
 
-			if (thisPlaceType == PlaceType.Town)
-            {
-				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/place_mockup");
-			}
-			else if (thisPlaceType == PlaceType.Castle)
-            {
-				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/castle_mockup");
-			}
+			//load texture
+			LoadPlaceTexture(gamedeets);
+			//get name
+			getPlaceName(gamedeets.dataManager, rando);
+
 		}
 
 		public void Update(GameTime gameTime)
