@@ -41,7 +41,9 @@
     <None Include="Content\Data\Person\nameData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\Data\Place\townNameData.json" />
+    <None Include="Content\Data\Place\townNameData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />

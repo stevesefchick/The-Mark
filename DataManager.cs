@@ -10,6 +10,7 @@ namespace The_Mark
     {
         public Dictionary<string, NameData> firstNames = new Dictionary<string, NameData>();
         public Dictionary<string, LastNameData> lastNames = new Dictionary<string, LastNameData>();
+        public Dictionary<string, TownNameData> townNames = new Dictionary<string, TownNameData>();
 
         public void LoadAllData(GameMain gameMain)
         {
@@ -23,6 +24,7 @@ namespace The_Mark
         {
             firstNames = JsonConvert.DeserializeObject<Dictionary<string, NameData>>(File.ReadAllText(@"Content/Data/Person/namedata.json"));
             lastNames = JsonConvert.DeserializeObject<Dictionary<string, LastNameData>>(File.ReadAllText(@"Content/Data/Person/lastnameData.json"));
+            townNames = JsonConvert.DeserializeObject<Dictionary<string, TownNameData>>(File.ReadAllText(@"Content/Data/Place/townNameData.json"));
 
         }
 
@@ -48,5 +50,13 @@ namespace The_Mark
             lastnametype = thetype;
         }
     }
+    class TownNameData
+    {
+        public string townnametype;
 
+        public TownNameData(string thetype)
+        {
+            townnametype = thetype;
+        }
+    }
 }
