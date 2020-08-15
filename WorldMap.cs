@@ -33,7 +33,7 @@ namespace The_Mark
 
 
 			//second value is distance
-			Vector2 localSword = new Vector2(0, rando.Next(100,200));
+			Vector2 localSword = new Vector2(0, rando.Next(300,550));
 			//rotation around castle origin
 			Matrix swordMatrix = Matrix.CreateRotationZ(rando.Next(0,360)) * castleOriginMatrix;
 			newloc = Vector2.Transform(localSword, swordMatrix);
@@ -87,7 +87,7 @@ namespace The_Mark
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(worldTexture, new Rectangle(0, 0,800,600), Color.White);
+			spriteBatch.Draw(worldTexture, new Rectangle(0, 0,1600,1200),null, Color.White,0,new Vector2(128,128), SpriteEffects.None,0);
 
 			for (int i = 0; i < terrains.Count;++i)
             {

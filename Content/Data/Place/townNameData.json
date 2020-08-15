@@ -6,6 +6,8 @@
   "Bustle": { "townnametype": "noun" },
   "Horse": { "townnametype": "noun" },
   "Shoe": { "townnametype": "noun" },
+  "Cozy": { "townnametype": "noun" },
+  "Cat": { "townnametype": "noun" },
   "Mile": { "townnametype": "noun" },
   "Fight": { "townnametype": "noun" },
   "Raven": { "townnametype": "noun" },
@@ -38,6 +40,7 @@
   "Home": { "townnametype": "townfancyend" },
   "Place": { "townnametype": "townfancyend" },
   "Town": { "townnametype": "townfancyend" },
+  "Hill": { "townnametype": "townfancyend" },
   "Acre": { "townnametype": "townfancyend" },
   "Gulch": { "townnametype": "townfancyend" },
   "Hole": { "townnametype": "townfancyend" },
@@ -48,6 +51,8 @@
   "Dream's": { "townnametype": "townstart" },
   "Hermit's": { "townnametype": "townstart" },
   "Beggar's": { "townnametype": "townstart" },
+  "Soldier's": { "townnametype": "townstart" },
+  "Dancer's": { "townnametype": "townstart" },
   "The Green": { "townnametype": "townstart" },
   "Light's": { "townnametype": "townstart" }
 

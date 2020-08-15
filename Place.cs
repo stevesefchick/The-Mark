@@ -13,6 +13,8 @@ namespace The_Mark
 		//place attributes
 		public string placeName;
 		public Vector2 placeLocation;
+		Vector2 placeSize;
+		Vector2 placeCenter;
 
 		//type
 		public enum PlaceType { Castle, Town}
@@ -21,15 +23,35 @@ namespace The_Mark
 		//sprites
 		Texture2D placeTexture;
 
-		void LoadPlaceTexture(GameMain gamedeets)
+		void LoadPlaceTexture(GameMain gamedeets,Random rando)
         {
 			if (thisPlaceType == PlaceType.Town)
 			{
-				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/place_mockup");
+				int rand = rando.Next(1, 4);
+				if (rand == 1)
+				{
+					placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/place_mockup");
+					placeSize = new Vector2(64, 64);
+					placeCenter = new Vector2(32, 64);
+				}
+				else if (rand == 2)
+				{
+					placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/place_mockup2");
+					placeSize = new Vector2(64, 64);
+					placeCenter = new Vector2(32, 64);
+				}
+				else if (rand == 3)
+				{
+					placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/place_mockup3");
+					placeSize = new Vector2(64, 64);
+					placeCenter = new Vector2(32, 64);
+				}
 			}
 			else if (thisPlaceType == PlaceType.Castle)
 			{
 				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/castle_mockup");
+				placeSize = new Vector2(128, 128);
+				placeCenter = new Vector2(64, 128);
 			}
 		}
 
@@ -108,7 +130,7 @@ namespace The_Mark
 			placeLocation = theplacelocation;
 
 			//load texture
-			LoadPlaceTexture(gamedeets);
+			LoadPlaceTexture(gamedeets,rando);
 			//get name
 			getPlaceName(gamedeets.dataManager, rando);
 
@@ -124,7 +146,7 @@ namespace The_Mark
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw(placeTexture, placeLocation, Color.White);
+			spriteBatch.Draw(placeTexture, new Rectangle((int)placeLocation.X,(int)placeLocation.Y,(int)placeSize.X,(int)placeSize.Y),null, Color.White,0,placeCenter,SpriteEffects.None,0);
 		}
 	}
 }
