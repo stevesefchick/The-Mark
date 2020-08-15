@@ -30,6 +30,25 @@
   "stone": { "townnametype": "townend" },
   "den": { "townnametype": "townend" },
   "moss": { "townnametype": "townend" },
-  "haven": { "townnametype": "townend" }
+  "haven": { "townnametype": "townend" },
+  "Rest": { "townnametype": "townfancyend" },
+  "Hovel": { "townnametype": "townfancyend" },
+  "Crossroads": { "townnametype": "townfancyend" },
+  "End": { "townnametype": "townfancyend" },
+  "Home": { "townnametype": "townfancyend" },
+  "Place": { "townnametype": "townfancyend" },
+  "Town": { "townnametype": "townfancyend" },
+  "Acre": { "townnametype": "townfancyend" },
+  "Gulch": { "townnametype": "townfancyend" },
+  "Hole": { "townnametype": "townfancyend" },
+  "Spot": { "townnametype": "townfancyend" },
+  "Dragon's": { "townnametype": "townstart" },
+  "The": { "townnametype": "townstart" },
+  "The Final": { "townnametype": "townstart" },
+  "Dream's": { "townnametype": "townstart" },
+  "Hermit's": { "townnametype": "townstart" },
+  "Beggar's": { "townnametype": "townstart" },
+  "The Green": { "townnametype": "townstart" },
+  "Light's": { "townnametype": "townstart" }
 
 }

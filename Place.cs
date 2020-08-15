@@ -35,10 +35,10 @@ namespace The_Mark
 
 		void getPlaceName(DataManager datamanager, Random rando)
         {
-			int placenametype = 1;
+			int placenametype = rando.Next(1, 5);
 
 			//type noun + town ending
-			if (placenametype == 1)
+			if (placenametype == 1 || placenametype == 2)
 			{
 				List<string> candidatesnoun = new List<string>();
 				List<string> candidatesend = new List<string>();
@@ -58,16 +58,48 @@ namespace The_Mark
 				}
 				placeName = candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
 			}
+			//type 2 - "person"'s place
+			else if (placenametype == 3)
+			{
+				List<string> candidatesname = new List<string>();
+				List<string> candidatesend = new List<string>();
+				foreach (KeyValuePair<string, NameData> entry in datamanager.firstNames)
+				{
+					candidatesname.Add(entry.Key);
+					
+				}
+				foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
+				{
+					if (entry.Value.townnametype == "townfancyend")
+					{
+						candidatesend.Add(entry.Key);
+					}
+				}
+				placeName = candidatesname[rando.Next(0, candidatesname.Count)].ToString() +"'s " + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
 
+			}
+			//type 3 - fancy town start, fancy town end
+			else if (placenametype == 4)
+			{
+				List<string> candidatestart = new List<string>();
+				List<string> candidatesend = new List<string>();
+				foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
+				{
+					if (entry.Value.townnametype == "townstart")
+					{
+						candidatestart.Add(entry.Key);
+					}
+				}
+				foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
+				{
+					if (entry.Value.townnametype == "townfancyend")
+					{
+						candidatesend.Add(entry.Key);
+					}
+				}
+				placeName = candidatestart[rando.Next(0, candidatestart.Count)].ToString() + " " + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
+			}
 
-
-
-
-
-
-
-			//type the noun + space + ending noun
-			//"person"'s place
 		}
 
 		public void CreateNewPlace(PlaceType theplacetype, Vector2 theplacelocation, GameMain gamedeets,Random rando)
