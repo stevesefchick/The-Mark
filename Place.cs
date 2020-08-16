@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace The_Mark
 {
@@ -140,8 +141,26 @@ namespace The_Mark
 
 		}
 
-		public void Update(GameTime gameTime)
+		Boolean checkForCollision(Vector2 mouse)
+        {
+			Boolean collided = false;
+			Rectangle thisPlace = new Rectangle((int)placeLocation.X, (int)placeLocation.Y, (int)placeSize.X, (int)placeSize.Y);
+			Rectangle mouseRect = new Rectangle((int)mouse.X, (int)mouse.Y, 32, 32);
+
+			if (thisPlace.Intersects(mouseRect))
+            {
+				collided = true;
+            }
+
+			return collided;
+        }
+
+		public void Update(GameMain gamedeets)
 		{
+			if (checkForCollision(gamedeets.mouse.getMousePosition(gamedeets.camera.cameraPosition,gamedeets.backbufferJamz)) == true)
+            {
+				System.Console.WriteLine(placeName + " is collided with");
+            }
 		}
 
 		public void Draw(SpriteBatch spriteBatch)

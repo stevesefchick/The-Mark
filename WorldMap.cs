@@ -81,8 +81,12 @@ namespace The_Mark
 
 		}
 
-		public void Update(GameTime gameTime)
+		public void Update(GameMain gamedeets)
 		{
+			for (int i =0;i<places.Count;++i)
+            {
+				places[i].Update(gamedeets);
+            }
 		}
 
 		public void Draw(SpriteBatch spriteBatch)

@@ -15,8 +15,8 @@ class GameMain : Game
 	//content
 	protected WorldMap worldMap;
 	public DataManager dataManager;
-	protected Camera camera;
-	protected MouseHandler mouse;
+	public Camera camera;
+	public MouseHandler mouse;
 
 	//controls
 	protected Boolean isRightPressed;
@@ -164,6 +164,7 @@ class GameMain : Game
 		getInput();
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
 		mouse.Update();
+		worldMap.Update(this);
 		base.Update(gameTime);
 	}
 

@@ -8,12 +8,16 @@
   "Shoe": { "townnametype": "noun" },
   "Cozy": { "townnametype": "noun" },
   "Cat": { "townnametype": "noun" },
+  "Dog": { "townnametype": "noun" },
+  "Deer": { "townnametype": "noun" },
+  "Stag": { "townnametype": "noun" },
   "Mile": { "townnametype": "noun" },
   "Fight": { "townnametype": "noun" },
   "Raven": { "townnametype": "noun" },
   "Sugar": { "townnametype": "noun" },
   "Brick": { "townnametype": "noun" },
   "Spring": { "townnametype": "noun" },
+  "Winter": { "townnametype": "noun" },
   "Summer": { "townnametype": "noun" },
   "Grey": { "townnametype": "noun" },
   "Lord": { "townnametype": "noun" },
@@ -23,6 +27,7 @@
   "Bottom": { "townnametype": "noun" },
   "town": { "townnametype": "townend" },
   "burg": { "townnametype": "townend" },
+  "sen": { "townnametype": "townend" },
   "berg": { "townnametype": "townend" },
   "ston": { "townnametype": "townend" },
   "ville": { "townnametype": "townend" },
@@ -54,6 +59,7 @@
   "Soldier's": { "townnametype": "townstart" },
   "Dancer's": { "townnametype": "townstart" },
   "The Green": { "townnametype": "townstart" },
-  "Light's": { "townnametype": "townstart" }
+  "Light's": { "townnametype": "townstart" },
+  "Summer's": { "townnametype": "townstart" }
 
 }
