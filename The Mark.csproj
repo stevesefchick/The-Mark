@@ -49,6 +49,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="MouseHandler.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="Terrain.cs" />
@@ -77,6 +78,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Terrain\grass_mock.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\UI\mouseCursor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\World\worldmock.png">

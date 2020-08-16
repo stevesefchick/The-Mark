@@ -7,13 +7,15 @@ namespace The_Mark
     class Camera
     {
 		public Vector2 cameraPosition;
+        public float cameraZoom;
 
 		public Camera()
         {
 			cameraPosition = Vector2.Zero;
+            cameraZoom = 1;
         }
 
-		public void Update(Boolean up,Boolean down,Boolean left, Boolean right)
+		public void Update(Boolean up,Boolean down,Boolean left, Boolean right,Boolean pagedown,Boolean pageup)
 		{
             if (up==true)
             {
@@ -31,14 +33,22 @@ namespace The_Mark
             {
                 cameraPosition.X += 1;
             }
+            if (pagedown==true)
+            {
+                cameraZoom -= 0.01f;
+            }
+            if (pageup==true)
+            {
+                cameraZoom += 0.01f;
+            }
 		}
 
         public Matrix get_transformation(GraphicsDeviceManager graphicsDevice)
         {
-            Matrix _transform =       // Thanks to o KB o for this solution
+            Matrix _transform =      
               Matrix.CreateTranslation(new Vector3(-cameraPosition.X, -cameraPosition.Y, 0)) *
                                          Matrix.CreateRotationZ(0) *
-                                         Matrix.CreateScale(new Vector3(1, 1, 1)) *
+                                         Matrix.CreateScale(new Vector3(cameraZoom, cameraZoom, 1)) *
                                          Matrix.CreateTranslation(new Vector3(graphicsDevice.PreferredBackBufferWidth * 0.5f, graphicsDevice.PreferredBackBufferHeight * 0.5f, 0));
             return _transform;
         }

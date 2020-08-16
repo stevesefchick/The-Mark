@@ -9,18 +9,22 @@ class GameMain : Game
 	//basic stuff
 	protected SpriteBatch spriteBatch;
 	protected GraphicsDeviceManager gdm;
+	public Vector2 backbufferJamz = Vector2.Zero;
 
 
 	//content
 	protected WorldMap worldMap;
 	public DataManager dataManager;
 	protected Camera camera;
+	protected MouseHandler mouse;
 
 	//controls
 	protected Boolean isRightPressed;
 	protected Boolean isLeftPressed;
 	protected Boolean isUpPressed;
 	protected Boolean isDownPressed;
+	protected Boolean isPageDownPressed;
+	protected Boolean isPageUpPressed;
 
 	//random stuff
 	Random rando = new Random();
@@ -46,6 +50,7 @@ class GameMain : Game
 		//load configs here
 		gdm.PreferredBackBufferWidth = 1280;
 		gdm.PreferredBackBufferHeight = 720;
+		backbufferJamz = new Vector2(gdm.PreferredBackBufferWidth, gdm.PreferredBackBufferHeight);
 		gdm.IsFullScreen = false;
 		gdm.SynchronizeWithVerticalRetrace = true;
 
@@ -65,6 +70,7 @@ class GameMain : Game
 	private void createHelpers()
     {
 		dataManager = new DataManager();
+		mouse = new MouseHandler(this);
 		camera = new Camera();
     }
 
@@ -131,12 +137,33 @@ class GameMain : Game
 			isDownPressed = false;
 		}
 
+		//pagedown
+		if (kbState.IsKeyDown(Keys.PageDown) == true)
+        {
+			isPageDownPressed = true;
+        }
+		else
+        {
+			isPageDownPressed = false;
+        }
+
+		//pageup
+		if (kbState.IsKeyDown(Keys.PageUp) == true)
+		{
+			isPageUpPressed = true;
+		}
+		else
+		{
+			isPageUpPressed = false;
+		}
+
 	}
 
 	protected override void Update(GameTime gameTime)
 	{
 		getInput();
-		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed);
+		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
+		mouse.Update();
 		base.Update(gameTime);
 	}
 
@@ -153,8 +180,8 @@ class GameMain : Game
 			null,
 			camera.get_transformation(gdm));
 		worldMap.Draw(spriteBatch);
+		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz);
 		spriteBatch.End();
-
 
 		base.Draw(gameTime);
 	}
