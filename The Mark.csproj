@@ -44,7 +44,7 @@
     <None Include="Content\Data\Place\townNameData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\Fonts\VCR_OSD_MONO_1.001.ttf">
+    <None Include="Content\Fonts\menuFont.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

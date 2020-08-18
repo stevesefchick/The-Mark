@@ -14,6 +14,7 @@ class GameMain : Game
 	public Vector2 backbufferJamz = Vector2.Zero;
 
 	//font info
+	SpriteFont testFont;
 	//private DynamicSpriteFont gamefont;
 
 
@@ -66,7 +67,7 @@ class GameMain : Game
 		createHelpers();
 		dataManager.LoadAllData(this);
 		createNewWorld();
-
+		
 
 
 		base.Initialize();
@@ -74,15 +75,9 @@ class GameMain : Game
 
 	void LoadFonts()
     {
-		/*
-		using (var stream = File.OpenRead(@"Content/Fonts/VCR_OSD_MONO_1.001.ttf"))
-		{
-			// Simple font
-			gamefont = DynamicSpriteFont.FromTtf(stream, 20);
-		}
-
-		gamefont.AddTtf(File.ReadAllBytes(@"Content/Fonts/VCR_OSD_MONO_1.001.ttf"));
-		*/
+		//todo: create new project to load fonts from
+		//TODO: add legit new fonts
+		testFont = Content.Load<SpriteFont>(@"Fonts/menuFont");
 	}
 
 	private void createHelpers()
@@ -202,6 +197,7 @@ class GameMain : Game
 			camera.get_transformation(gdm));
 		worldMap.Draw(spriteBatch);
 		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz);
+		spriteBatch.DrawString(testFont, "what the hell", new Vector2(100, 100), Color.White);
 		spriteBatch.End();
 
 		base.Draw(gameTime);
