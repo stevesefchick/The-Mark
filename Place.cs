@@ -58,70 +58,82 @@ namespace The_Mark
 
 		void getPlaceName(DataManager datamanager, Random rando)
         {
-			int placenametype = rando.Next(1, 5);
+            #region castle
+			if (thisPlaceType == PlaceType.Castle)
+            {
+				placeName = "The Castle";
+            }
+            #endregion
 
-			//type noun + town ending
-			if (placenametype == 1 || placenametype == 2)
+            #region town name
+            if (thisPlaceType == PlaceType.Town)
 			{
-				List<string> candidatesnoun = new List<string>();
-				List<string> candidatesend = new List<string>();
-				foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
-				{
-					if (entry.Value.townnametype == "noun")
-					{
-						candidatesnoun.Add(entry.Key);
-					}
-				}
-				foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
-				{
-					if (entry.Value.townnametype == "townend")
-					{
-						candidatesend.Add(entry.Key);
-					}
-				}
-				placeName = candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
-			}
-			//type 2 - "person"'s place
-			else if (placenametype == 3)
-			{
-				List<string> candidatesname = new List<string>();
-				List<string> candidatesend = new List<string>();
-				foreach (KeyValuePair<string, NameData> entry in datamanager.firstNames)
-				{
-					candidatesname.Add(entry.Key);
-					
-				}
-				foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
-				{
-					if (entry.Value.townnametype == "townfancyend")
-					{
-						candidatesend.Add(entry.Key);
-					}
-				}
-				placeName = candidatesname[rando.Next(0, candidatesname.Count)].ToString() +"'s " + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
+				int placenametype = rando.Next(1, 5);
 
-			}
-			//type 3 - fancy town start, fancy town end
-			else if (placenametype == 4)
-			{
-				List<string> candidatestart = new List<string>();
-				List<string> candidatesend = new List<string>();
-				foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
+				//type noun + town ending
+				if (placenametype == 1 || placenametype == 2)
 				{
-					if (entry.Value.townnametype == "townstart")
+					List<string> candidatesnoun = new List<string>();
+					List<string> candidatesend = new List<string>();
+					foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
 					{
-						candidatestart.Add(entry.Key);
+						if (entry.Value.townnametype == "noun")
+						{
+							candidatesnoun.Add(entry.Key);
+						}
 					}
+					foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
+					{
+						if (entry.Value.townnametype == "townend")
+						{
+							candidatesend.Add(entry.Key);
+						}
+					}
+					placeName = candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
 				}
-				foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
+				//type 2 - "person"'s place
+				else if (placenametype == 3)
 				{
-					if (entry.Value.townnametype == "townfancyend")
+					List<string> candidatesname = new List<string>();
+					List<string> candidatesend = new List<string>();
+					foreach (KeyValuePair<string, NameData> entry in datamanager.firstNames)
 					{
-						candidatesend.Add(entry.Key);
+						candidatesname.Add(entry.Key);
+
 					}
+					foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
+					{
+						if (entry.Value.townnametype == "townfancyend")
+						{
+							candidatesend.Add(entry.Key);
+						}
+					}
+					placeName = candidatesname[rando.Next(0, candidatesname.Count)].ToString() + "'s " + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
+
 				}
-				placeName = candidatestart[rando.Next(0, candidatestart.Count)].ToString() + " " + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
+				//type 3 - fancy town start, fancy town end
+				else if (placenametype == 4)
+				{
+					List<string> candidatestart = new List<string>();
+					List<string> candidatesend = new List<string>();
+					foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
+					{
+						if (entry.Value.townnametype == "townstart")
+						{
+							candidatestart.Add(entry.Key);
+						}
+					}
+					foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
+					{
+						if (entry.Value.townnametype == "townfancyend")
+						{
+							candidatesend.Add(entry.Key);
+						}
+					}
+					placeName = candidatestart[rando.Next(0, candidatestart.Count)].ToString() + " " + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
+				}
 			}
+			#endregion
 
 		}
 

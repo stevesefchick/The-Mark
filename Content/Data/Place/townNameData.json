@@ -8,6 +8,7 @@
   "Shoe": { "townnametype": "noun" },
   "Cozy": { "townnametype": "noun" },
   "Cat": { "townnametype": "noun" },
+  "Cosmo": { "townnametype": "noun" },
   "Dog": { "townnametype": "noun" },
   "Deer": { "townnametype": "noun" },
   "Stag": { "townnametype": "noun" },
@@ -32,6 +33,7 @@
   "ston": { "townnametype": "townend" },
   "ville": { "townnametype": "townend" },
   "field": { "townnametype": "townend" },
+  "gar": { "townnametype": "townend" },
   "pine": { "townnametype": "townend" },
   "wood": { "townnametype": "townend" },
   "stone": { "townnametype": "townend" },
@@ -49,6 +51,8 @@
   "Acre": { "townnametype": "townfancyend" },
   "Gulch": { "townnametype": "townfancyend" },
   "Hole": { "townnametype": "townfancyend" },
+  "View": { "townnametype": "townfancyend" },
+  "Lookout": { "townnametype": "townfancyend" },
   "Spot": { "townnametype": "townfancyend" },
   "Dragon's": { "townnametype": "townstart" },
   "The": { "townnametype": "townstart" },
@@ -60,6 +64,12 @@
   "Dancer's": { "townnametype": "townstart" },
   "The Green": { "townnametype": "townstart" },
   "Light's": { "townnametype": "townstart" },
-  "Summer's": { "townnametype": "townstart" }
+  "Summer's": { "townnametype": "townstart" },
+  "Heaven's": { "townnametype": "townstart" },
+  "First": { "townnametype": "townstart" },
+  "Second": { "townnametype": "townstart" },
+  "Seventh": { "townnametype": "townstart" },
+  "Fourth": { "townnametype": "townstart" },
+  "Flame's": { "townnametype": "townstart" }
 
 }

@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using The_Mark;
+//using SpriteFontPlus;
+using System.IO;
 
 class GameMain : Game
 {
@@ -10,6 +12,9 @@ class GameMain : Game
 	protected SpriteBatch spriteBatch;
 	protected GraphicsDeviceManager gdm;
 	public Vector2 backbufferJamz = Vector2.Zero;
+
+	//font info
+	//private DynamicSpriteFont gamefont;
 
 
 	//content
@@ -67,11 +72,26 @@ class GameMain : Game
 		base.Initialize();
 	}
 
+	void LoadFonts()
+    {
+		/*
+		using (var stream = File.OpenRead(@"Content/Fonts/VCR_OSD_MONO_1.001.ttf"))
+		{
+			// Simple font
+			gamefont = DynamicSpriteFont.FromTtf(stream, 20);
+		}
+
+		gamefont.AddTtf(File.ReadAllBytes(@"Content/Fonts/VCR_OSD_MONO_1.001.ttf"));
+		*/
+	}
+
 	private void createHelpers()
     {
 		dataManager = new DataManager();
 		mouse = new MouseHandler(this);
 		camera = new Camera();
+
+		LoadFonts();
     }
 
 
