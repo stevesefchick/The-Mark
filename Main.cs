@@ -30,6 +30,7 @@ class GameMain : Game
 	protected Boolean isDownPressed;
 	protected Boolean isPageDownPressed;
 	protected Boolean isPageUpPressed;
+	protected Boolean isEnterPressed;
 
 	//random stuff
 	Random rando = new Random();
@@ -171,15 +172,39 @@ class GameMain : Game
 			isPageUpPressed = false;
 		}
 
+		//enter
+		if (kbState.IsKeyDown(Keys.Enter) == true)
+		{
+			isEnterPressed = true;
+		}
+		else
+		{
+			isEnterPressed = false;
+		}
 	}
 
 	protected override void Update(GameTime gameTime)
 	{
+
+
 		getInput();
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
 		mouse.Update();
 		worldMap.Update(this);
+
+		//debug
+		checkForEnterPressed();
+
 		base.Update(gameTime);
+	}
+
+	private void checkForEnterPressed()
+    {
+		if (isEnterPressed == true)
+		{
+			worldMap = null;
+			createNewWorld();
+		}
 	}
 
 	protected override void Draw(GameTime gameTime)
