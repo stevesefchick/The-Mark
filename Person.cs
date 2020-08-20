@@ -59,7 +59,7 @@ namespace The_Mark
 
 		void getLastName(DataManager datamanager,Random random)
         {
-			int lastnametype = random.Next(1, 4);
+			int lastnametype = random.Next(1, 5);
 			string mc = "";
 			string ski = "";
 			if (random.Next(1,30)==1)
@@ -132,8 +132,27 @@ namespace The_Mark
 				}
 				personLastName = verbcandidates[random.Next(0, verbcandidates.Count)].ToString() + nouncandidates[random.Next(0, nouncandidates.Count)].ToString();
 			}
-
-
+			//last name type 4 = verb + adj
+			else if (lastnametype == 4)
+			{
+				List<string> adjcandidates = new List<string>();
+				List<string> verbcandidates = new List<string>();
+				foreach (KeyValuePair<string, LastNameData> entry in datamanager.lastNames)
+				{
+					if (entry.Value.lastnametype == "adj")
+					{
+						adjcandidates.Add(entry.Key);
+					}
+				}
+				foreach (KeyValuePair<string, LastNameData> entry in datamanager.lastNames)
+				{
+					if (entry.Value.lastnametype == "verb")
+					{
+						verbcandidates.Add(entry.Key);
+					}
+				}
+				personLastName = verbcandidates[random.Next(0, verbcandidates.Count)].ToString() + adjcandidates[random.Next(0, adjcandidates.Count)].ToString();
+			}
 
 
 			//capitalize first letter

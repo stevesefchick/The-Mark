@@ -23,20 +23,44 @@ namespace The_Mark
 			createNewWorld(gamedeets,rando,datamanager);
         }
 
+		//checks to see if the location is near another place
+		// if true, it's too close to another
+		Boolean isNearOtherPlaces(Vector2 loc)
+        {
+			Boolean well_is_it = false;
+
+			for (int i = 0; i < places.Count;++i)
+            {
+				if (MathHelper.Distance(loc.X,places[i].placeLocation.X) < 150 &&
+					MathHelper.Distance(loc.Y,places[i].placeLocation.Y) < 150)
+                {
+					well_is_it = true;
+					break;
+                }
+            }
+
+
+			return well_is_it;
+        }
+
 		Vector2 getMajorPlaceLocation(Random rando)
         {
 			Vector2 newloc = Vector2.Zero;
 
-			Matrix castleOriginMatrix = Matrix.CreateScale(1, 1, 1f) *
-		   Matrix.CreateRotationZ(0) *
-		   Matrix.CreateTranslation(new Vector3(0,0, 0f));
+			//check that it's not 0 or near another place
+			while (newloc == Vector2.Zero || isNearOtherPlaces(newloc) == true)
+            {
+				Matrix castleOriginMatrix = Matrix.CreateScale(1, 1, 1f) *
+Matrix.CreateRotationZ(0) *
+Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 
 
-			//second value is distance
-			Vector2 localSword = new Vector2(0, rando.Next(300,550));
-			//rotation around castle origin
-			Matrix swordMatrix = Matrix.CreateRotationZ(rando.Next(0,360)) * castleOriginMatrix;
-			newloc = Vector2.Transform(localSword, swordMatrix);
+				//second value is distance
+				Vector2 distance = new Vector2(0, rando.Next(250, 550));
+				//rotation around castle origin
+				Matrix distancematrix = Matrix.CreateRotationZ(rando.Next(0, 360)) * castleOriginMatrix;
+				newloc = Vector2.Transform(distance, distancematrix);
+			}
 
 			return newloc;
         }
