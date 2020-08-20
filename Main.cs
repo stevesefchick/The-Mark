@@ -14,8 +14,7 @@ class GameMain : Game
 	public Vector2 backbufferJamz = Vector2.Zero;
 
 	//font info
-	SpriteFont testFont;
-	//private DynamicSpriteFont gamefont;
+	public SpriteFont testFont;
 
 
 	//content
@@ -195,9 +194,8 @@ class GameMain : Game
 			null,
 			null,
 			camera.get_transformation(gdm));
-		worldMap.Draw(spriteBatch);
+		worldMap.Draw(spriteBatch,testFont);
 		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz);
-		spriteBatch.DrawString(testFont, "what the hell", new Vector2(100, 100), Color.White);
 		spriteBatch.End();
 
 		base.Draw(gameTime);

@@ -24,6 +24,9 @@ namespace The_Mark
 		//sprites
 		Texture2D placeTexture;
 
+		//states
+		public Boolean isColliding = false;
+
 		void LoadPlaceTexture(GameMain gamedeets,Random rando)
         {
 			if (thisPlaceType == PlaceType.Town)
@@ -156,7 +159,7 @@ namespace The_Mark
 		Boolean checkForCollision(Vector2 mouse)
         {
 			Boolean collided = false;
-			Rectangle thisPlace = new Rectangle((int)placeLocation.X, (int)placeLocation.Y, (int)placeSize.X, (int)placeSize.Y);
+			Rectangle thisPlace = new Rectangle((int)(placeLocation.X-placeCenter.X), (int)(placeLocation.Y-placeCenter.Y), (int)placeSize.X, (int)placeSize.Y);
 			Rectangle mouseRect = new Rectangle((int)mouse.X, (int)mouse.Y, 32, 32);
 
 			if (thisPlace.Intersects(mouseRect))
@@ -164,19 +167,25 @@ namespace The_Mark
 				collided = true;
             }
 
+
 			return collided;
         }
 
 		public void Update(GameMain gamedeets)
 		{
-			if (checkForCollision(gamedeets.mouse.getMousePosition(gamedeets.camera.cameraPosition,gamedeets.backbufferJamz)) == true)
-            {
-				System.Console.WriteLine(placeName + " is collided with");
-            }
+			isColliding = checkForCollision(gamedeets.mouse.getMousePosition(gamedeets.camera.cameraPosition, gamedeets.backbufferJamz));
+
+
+
 		}
 
-		public void Draw(SpriteBatch spriteBatch)
+		public void Draw(SpriteBatch spriteBatch,SpriteFont displayfont)
 		{
+			if (isColliding==true)
+            {
+				spriteBatch.DrawString(displayfont, placeName, new Vector2((int)(placeLocation.X - placeSize.X), (int)(placeLocation.Y-100) ), Color.White);
+
+			}
 			spriteBatch.Draw(placeTexture, new Rectangle((int)placeLocation.X,(int)placeLocation.Y,(int)placeSize.X,(int)placeSize.Y),null, Color.White,0,placeCenter,SpriteEffects.None,0);
 		}
 	}

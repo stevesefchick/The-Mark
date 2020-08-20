@@ -89,7 +89,7 @@ namespace The_Mark
             }
 		}
 
-		public void Draw(SpriteBatch spriteBatch)
+		public void Draw(SpriteBatch spriteBatch, SpriteFont displayFont)
 		{
 			spriteBatch.Draw(worldTexture, new Rectangle(0, 0,1600,1200),null, Color.White,0,new Vector2(128,128), SpriteEffects.None,0);
 
@@ -99,7 +99,7 @@ namespace The_Mark
             }
 			for (int i =0; i < places.Count;++i)
             {
-				places[i].Draw(spriteBatch);
+				places[i].Draw(spriteBatch,displayFont);
             }
 		}
 

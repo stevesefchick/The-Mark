@@ -4,6 +4,9 @@
   "bum": { "lastnametype": "noun" },
   "lust": { "lastnametype": "noun" },
   "grim": { "lastnametype": "noun" },
+  "bone": { "lastnametype": "noun" },
+  "gristle": { "lastnametype": "noun" },
+  "crime": { "lastnametype": "noun" },
   "ogre": { "lastnametype": "noun" },
   "butt": { "lastnametype": "noun" },
   "potato": { "lastnametype": "noun" },
@@ -15,6 +18,7 @@
   "spark": { "lastnametype": "noun" },
   "soul": { "lastnametype": "noun" },
   "wood": { "lastnametype": "noun" },
+  "lily": { "lastnametype": "noun" },
   "muse": { "lastnametype": "noun" },
   "song": { "lastnametype": "noun" },
   "peach": { "lastnametype": "noun" },
@@ -45,7 +49,6 @@
   "sun": { "lastnametype": "noun" },
   "bow": { "lastnametype": "noun" },
   "rose": { "lastnametype": "noun" },
-  "lily": { "lastnametype": "noun" },
   "ditch": { "lastnametype": "noun" },
   "troll": { "lastnametype": "noun" },
   "space": { "lastnametype": "noun" },
@@ -86,6 +89,7 @@
   "sing": { "lastnametype": "verb" },
   "creak": { "lastnametype": "verb" },
   "burn": { "lastnametype": "verb" },
+  "bounce": { "lastnametype": "verb" },
   "sneak": { "lastnametype": "verb" },
   "strike": { "lastnametype": "verb" },
   "dance": { "lastnametype": "verb" },
@@ -93,6 +97,8 @@
   "drink": { "lastnametype": "verb" },
   "bend": { "lastnametype": "verb" },
   "scream": { "lastnametype": "verb" },
-  "munch": { "lastnametype": "verb" }
+  "munch": { "lastnametype": "verb" },
+  "smear": { "lastnametype": "verb" },
+  "flex": { "lastnametype": "verb" }
 
 }
