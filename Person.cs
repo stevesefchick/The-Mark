@@ -59,7 +59,7 @@ namespace The_Mark
 
 		void getLastName(DataManager datamanager,Random random)
         {
-			int lastnametype = random.Next(1, 5);
+			int lastnametype = random.Next(1, 7);
 			string mc = "";
 			string ski = "";
 			if (random.Next(1,30)==1)
@@ -153,17 +153,54 @@ namespace The_Mark
 				}
 				personLastName = verbcandidates[random.Next(0, verbcandidates.Count)].ToString() + adjcandidates[random.Next(0, adjcandidates.Count)].ToString();
 			}
-
+			//last name type 5 = adj + noun
+			else if (lastnametype == 5)
+			{
+				List<string> adjcandidates = new List<string>();
+				List<string> nouncandidates = new List<string>();
+				foreach (KeyValuePair<string, LastNameData> entry in datamanager.lastNames)
+				{
+					if (entry.Value.lastnametype == "adj")
+					{
+						adjcandidates.Add(entry.Key);
+					}
+				}
+				foreach (KeyValuePair<string, LastNameData> entry in datamanager.lastNames)
+				{
+					if (entry.Value.lastnametype == "noun")
+					{
+						nouncandidates.Add(entry.Key);
+					}
+				}
+				personLastName = adjcandidates[random.Next(0, adjcandidates.Count)].ToString() + nouncandidates[random.Next(0, nouncandidates.Count)].ToString();
+			}
+			//last name type 6 = adj + animal
+			else if (lastnametype == 6)
+			{
+				List<string> adjcandidates = new List<string>();
+				List<string> animalcandidates = new List<string>();
+				foreach (KeyValuePair<string, LastNameData> entry in datamanager.lastNames)
+				{
+					if (entry.Value.lastnametype == "adj")
+					{
+						adjcandidates.Add(entry.Key);
+					}
+				}
+				foreach (KeyValuePair<string, LastNameData> entry in datamanager.lastNames)
+				{
+					if (entry.Value.lastnametype == "animal")
+					{
+						animalcandidates.Add(entry.Key);
+					}
+				}
+				personLastName = adjcandidates[random.Next(0, adjcandidates.Count)].ToString() + animalcandidates[random.Next(0, animalcandidates.Count)].ToString();
+			}
 
 			//capitalize first letter
 			personLastName = personLastName.Substring(0, 1).ToUpper() + personLastName.Substring(1);
 			//add extras
 			personLastName = mc + personLastName + ski;
-
-			//last name type 3 = verb + r
-			//last name type 8 = adj + -man
-			//last name type 9 = adj + noun
-			//last name type verb + adj
+			
 		}
 
 
