@@ -6,7 +6,8 @@ namespace The_Mark
 {
     class Person
     {
-		//TODO: Unique ID
+		//id
+		public string personID;
 
 		enum BirthType { Birthed, Created }
 		protected enum Gender { Male, Female, Whocares }
@@ -206,6 +207,8 @@ namespace The_Mark
 
 		public void CreatePerson(DataManager datamanager, Random random)
 		{
+			personID = datamanager.getRandomID(random);
+
 			//choose gender randomly
 			if (random.Next(1, 3) == 1)
 			{

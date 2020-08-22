@@ -212,7 +212,7 @@ class GameMain : Game
 		GraphicsDevice.Clear(Color.CornflowerBlue);
 
 
-		spriteBatch.Begin(SpriteSortMode.BackToFront,
+		spriteBatch.Begin(SpriteSortMode.Deferred,
 			BlendState.AlphaBlend,
 			null,
 			null,

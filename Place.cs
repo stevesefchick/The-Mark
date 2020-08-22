@@ -8,7 +8,8 @@ namespace The_Mark
 {
     class Place
     {
-		//TODO: Unique ID
+		//uniqueID
+		public string placeID;
 
 
 		//place attributes
@@ -144,6 +145,7 @@ namespace The_Mark
         {
 			thisPlaceType = theplacetype;
 			placeLocation = theplacelocation;
+			placeID = gamedeets.dataManager.getRandomID(rando);
 
 			//load texture
 			LoadPlaceTexture(gamedeets,rando);
