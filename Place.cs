@@ -181,12 +181,19 @@ namespace The_Mark
 
 		}
 
+		private void DrawFont(SpriteBatch spriteBatch,SpriteFont displayfont)
+        {
+			spriteBatch.DrawString(displayfont, placeName, new Vector2((int)(placeLocation.X - placeSize.X + 1), (int)(placeLocation.Y - 99)), Color.Black);
+			spriteBatch.DrawString(displayfont, placeName, new Vector2((int)(placeLocation.X - placeSize.X + 2), (int)(placeLocation.Y - 98)), Color.Black);
+			spriteBatch.DrawString(displayfont, placeName, new Vector2((int)(placeLocation.X - placeSize.X), (int)(placeLocation.Y - 100)), Color.White);
+
+		}
+
 		public void Draw(SpriteBatch spriteBatch,SpriteFont displayfont)
 		{
 			if (isColliding==true)
             {
-				spriteBatch.DrawString(displayfont, placeName, new Vector2((int)(placeLocation.X - placeSize.X), (int)(placeLocation.Y-100) ), Color.White);
-
+				DrawFont(spriteBatch,displayfont);
 			}
 			spriteBatch.Draw(placeTexture, new Rectangle((int)placeLocation.X,(int)placeLocation.Y,(int)placeSize.X,(int)placeSize.Y),null, Color.White,0,placeCenter,SpriteEffects.None,0);
 		}

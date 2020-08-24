@@ -77,7 +77,7 @@ class GameMain : Game
     {
 		//todo: create new project to load fonts from
 		//TODO: add legit new fonts
-		testFont = Content.Load<SpriteFont>(@"Fonts/menuFont");
+		testFont = Content.Load<SpriteFont>(@"Fonts/PaperJohnny");
 	}
 
 	private void createHelpers()
