@@ -14,7 +14,7 @@ class GameMain : Game
 	public Vector2 backbufferJamz = Vector2.Zero;
 
 	//font info
-	public SpriteFont testFont;
+	public SpriteFont worldFont;
 
 
 	//content
@@ -76,8 +76,7 @@ class GameMain : Game
 	void LoadFonts()
     {
 		//todo: create new project to load fonts from
-		//TODO: add legit new fonts
-		testFont = Content.Load<SpriteFont>(@"Fonts/PaperJohnny");
+		worldFont = Content.Load<SpriteFont>(@"Fonts/PaperJohnny");
 	}
 
 	private void createHelpers()
@@ -219,7 +218,7 @@ class GameMain : Game
 			null,
 			null,
 			camera.get_transformation(gdm));
-		worldMap.Draw(spriteBatch,testFont);
+		worldMap.Draw(spriteBatch,worldFont);
 		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz);
 		spriteBatch.End();
 

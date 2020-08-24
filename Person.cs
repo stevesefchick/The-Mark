@@ -9,14 +9,21 @@ namespace The_Mark
 		//id
 		public string personID;
 
+		//creation type
 		enum BirthType { Birthed, Created }
-		protected enum Gender { Male, Female, Whocares }
+
+		//enums
+		public enum Gender { Male, Female, Whocares }
 
 		//person attributes
-		protected string personFirstName;
-		protected string personLastName;
+		public string personFirstName;
+		public string personLastName;
 		protected int personAge;
-		protected Gender personGender;
+		public Gender personGender;
+
+		//home
+		public string placeIDHome;
+
 		//TODO: Sexuality
 
 		//TODO: appearance attributes
@@ -39,7 +46,8 @@ namespace The_Mark
 
 		}
 
-		void getFirstName(DataManager datamanager,Random random)
+        #region get name info
+        void getFirstName(DataManager datamanager,Random random)
         {
 			//get list of names
 			List<string> candidates = new List<string>();
@@ -204,8 +212,9 @@ namespace The_Mark
 			
 		}
 
+        #endregion
 
-		public void CreatePerson(DataManager datamanager, Random random)
+        public void CreatePerson(DataManager datamanager, Random random)
 		{
 			personID = datamanager.getRandomID(random);
 
@@ -224,9 +233,11 @@ namespace The_Mark
 			//get person last name
 			getLastName(datamanager, random);
 
-			//report out
-			Console.WriteLine(personFirstName + " " + personLastName + " is here and they are " + personGender);
+        }
 
+		public void assignPersonToHome(List<string> placeOptions,Random rando)
+        {
+			placeIDHome = placeOptions[rando.Next(0, placeOptions.Count)];
         }
 	}
 }

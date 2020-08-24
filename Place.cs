@@ -15,6 +15,8 @@ namespace The_Mark
 		//place attributes
 		public string placeName;
 		public Vector2 placeLocation;
+		public Boolean isLiveable;
+		//location info
 		Vector2 placeSize;
 		Vector2 placeCenter;
 
@@ -141,6 +143,18 @@ namespace The_Mark
 
 		}
 
+		void getPlaceAttributes()
+        {
+			if (thisPlaceType == PlaceType.Town)
+            {
+				isLiveable = true;
+            }
+			else if (thisPlaceType == PlaceType.Castle)
+            {
+				isLiveable = false;
+            }
+        }
+
 		public void CreateNewPlace(PlaceType theplacetype, Vector2 theplacelocation, GameMain gamedeets,Random rando)
         {
 			thisPlaceType = theplacetype;
@@ -151,10 +165,9 @@ namespace The_Mark
 			LoadPlaceTexture(gamedeets,rando);
 			//get name
 			getPlaceName(gamedeets.dataManager, rando);
+			//get properties based on type
+			getPlaceAttributes();
 
-
-			//console debug
-			Console.WriteLine(placeName + " is a wonderful place to live.");
 
 		}
 

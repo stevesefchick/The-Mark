@@ -65,10 +65,66 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 			return newloc;
         }
 
+		//debug - announce creations
+		protected void debugAnnounceCreation()
+        {
+
+			//announce people
+			Console.WriteLine("creating people!");
+			for (int i = 0; i < people.Count;++i)
+            {
+				string locname="";
+				foreach (Place p in places)
+                {
+					if (p.placeID==people[i].placeIDHome)
+                    {
+						locname = p.placeName;
+                    }
+                }
+
+				Console.WriteLine(people[i].personFirstName + " " + people[i].personLastName + " is here!\n" +
+					"Gender: " + people[i].personGender + "\n" +
+					"Home: " + locname + "\n");
+			}
+
+
+			//announce locations
+			Console.WriteLine("creating places!");
+
+			for (int i = 0; i < places.Count; ++i)
+			{
+				int population = 0;
+				foreach (Person p in people)
+                {
+					if (p.placeIDHome == places[i].placeID)
+                    {
+						population += 1;
+                    }
+                }
+
+
+
+				//console debug
+				Console.WriteLine(places[i].placeName + " is a new place!\n" +
+					"Type: " + places[i].thisPlaceType + "\n" + 
+					"Population: " + population + "\n");
+			}
+
+
+
+
+		}
+
+
+		//create the world
 		protected void createNewWorld(GameMain gamedeets, Random rando, DataManager datamanager)
         {
 			//create world texture
 			worldTexture = gamedeets.Content.Load<Texture2D>("Sprites/World/worldmock");
+
+			//liveable places, for persons
+			List<string> liveablePlaces = new List<string>();
+
 			//create terrains
 			for (int i =0; i < 5;++i)
             {
@@ -86,6 +142,9 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 				Vector2 newLocation = getMajorPlaceLocation(rando);
 				newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets,rando);
 				places.Add(newPlace);
+
+				//add to liveable places
+				liveablePlaces.Add(newPlace.placeID);
 			}
 
 			//create castle
@@ -100,8 +159,12 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
             {
 				Person person = new Person();
 				person.CreatePerson(datamanager, rando);
+				person.assignPersonToHome(liveablePlaces,rando);
 				people.Add(person);
             }
+
+			//finalization
+			debugAnnounceCreation();
 
 		}
 
