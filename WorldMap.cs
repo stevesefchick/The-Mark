@@ -147,6 +147,16 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 				liveablePlaces.Add(newPlace.placeID);
 			}
 
+			//test create graveyards
+			for (int i = 0; i < 10; ++i)
+			{
+				Place newPlace = new Place();
+				Vector2 newLocation = getMajorPlaceLocation(rando);
+				newPlace.CreateNewPlace(Place.PlaceType.Graveyard, newLocation, gamedeets, rando);
+				places.Add(newPlace);
+
+			}
+
 			//create castle
 			Place newCastle = new Place();
 			Vector2 castleLoc = Vector2.Zero;

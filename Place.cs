@@ -16,12 +16,15 @@ namespace The_Mark
 		public string placeName;
 		public Vector2 placeLocation;
 		public Boolean isLiveable;
+
 		//location info
+		protected enum PlaceLocationType { Castle, MajorNode,OrbitingNode}
 		Vector2 placeSize;
 		Vector2 placeCenter;
+		PlaceLocationType thisPlaceLocationType;
 
 		//type
-		public enum PlaceType { Castle, Town}
+		public enum PlaceType { Castle, Town, Graveyard}
 		public PlaceType thisPlaceType;
 
 		//sprites
@@ -59,6 +62,12 @@ namespace The_Mark
 				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/castle_mockup");
 				placeSize = new Vector2(128, 128);
 				placeCenter = new Vector2(64, 128);
+			}
+			else if (thisPlaceType== PlaceType.Graveyard)
+            {
+				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/place_graveyard");
+				placeSize = new Vector2(32, 32);
+				placeCenter = new Vector2(16, 32);
 			}
 		}
 
@@ -141,19 +150,33 @@ namespace The_Mark
 			}
 			#endregion
 
-		}
+			#region graveyard
+			if (thisPlaceType == PlaceType.Graveyard)
+			{
+				placeName = "Graveyard";
+			}
+			#endregion
 
-		void getPlaceAttributes()
+			}
+
+        void getPlaceAttributes()
         {
 			if (thisPlaceType == PlaceType.Town)
             {
 				isLiveable = true;
+				thisPlaceLocationType = PlaceLocationType.MajorNode;
             }
 			else if (thisPlaceType == PlaceType.Castle)
             {
 				isLiveable = false;
+				thisPlaceLocationType = PlaceLocationType.Castle;
             }
-        }
+			else if (thisPlaceType == PlaceType.Graveyard)
+			{
+				isLiveable = false;
+				thisPlaceLocationType = PlaceLocationType.OrbitingNode;
+			}
+		}
 
 		public void CreateNewPlace(PlaceType theplacetype, Vector2 theplacelocation, GameMain gamedeets,Random rando)
         {
