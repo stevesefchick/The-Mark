@@ -65,6 +65,28 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 			return newloc;
         }
 
+		Vector2 getOrbitalPlaceLocation(Random rando,Vector2 originLocation)
+		{
+			Vector2 newloc = Vector2.Zero;
+
+			//check that it's not 0 or near another place
+			while (newloc == Vector2.Zero || isNearOtherPlaces(newloc) == true)
+			{
+				Matrix originMatrix = Matrix.CreateScale(1, 1, 1f) *
+Matrix.CreateRotationZ(0) *
+Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
+
+
+				//second value is distance
+				Vector2 distance = new Vector2(0, rando.Next(50, 250));
+				//rotation around castle origin
+				Matrix distancematrix = Matrix.CreateRotationZ(rando.Next(0, 360)) * originMatrix;
+				newloc = Vector2.Transform(distance, distancematrix);
+			}
+
+			return newloc;
+		}
+
 		//debug - announce creations
 		protected void debugAnnounceCreation()
         {
@@ -146,17 +168,20 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 
 				//add to liveable places
 				liveablePlaces.Add(newPlace.placeID);
+
+				//create orbital locations
+				//test create graveyards
+				for (int i2 = 0; i2 < 2; ++i2)
+				{
+					Place newOrbitalPlace = new Place();
+					Vector2 newOrbitalLocation = getOrbitalPlaceLocation(rando, newLocation);
+					newOrbitalPlace.CreateNewPlace(Place.PlaceType.Graveyard, newOrbitalLocation, gamedeets, rando);
+					places.Add(newOrbitalPlace);
+
+				}
 			}
 
-			//test create graveyards
-			for (int i = 0; i < 10; ++i)
-			{
-				Place newPlace = new Place();
-				Vector2 newLocation = getMajorPlaceLocation(rando);
-				newPlace.CreateNewPlace(Place.PlaceType.Graveyard, newLocation, gamedeets, rando);
-				places.Add(newPlace);
 
-			}
 
 			//create castle
 			Place newCastle = new Place();

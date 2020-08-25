@@ -212,6 +212,18 @@ namespace The_Mark
 
         #endregion
 
+		void getAge(CreationType creationType,Random rando)
+        {
+			if (creationType == CreationType.Created)
+			{
+				personAge = rando.Next(14, 60);
+			}
+			else if (creationType == CreationType.Birthed)
+			{
+				personAge = 0;
+			}
+		}
+
         public void CreatePerson(DataManager datamanager, Random random, CreationType creationType)
 		{
 			personID = datamanager.getRandomID(random);
@@ -230,11 +242,9 @@ namespace The_Mark
 			getFirstName(datamanager, random);
 			//get person last name
 			getLastName(datamanager, random);
+			//get person's age
+			getAge(creationType, random);
 
-			if (creationType == CreationType.Created)
-            {
-				personAge = random.Next(14, 60);
-            }
 
         }
 
