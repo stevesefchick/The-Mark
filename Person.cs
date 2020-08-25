@@ -9,16 +9,14 @@ namespace The_Mark
 		//id
 		public string personID;
 
-		//creation type
-		enum BirthType { Birthed, Created }
-
 		//enums
+		public enum CreationType { Birthed, Created }
 		public enum Gender { Male, Female, Whocares }
 
 		//person attributes
 		public string personFirstName;
 		public string personLastName;
-		protected int personAge;
+		public int personAge;
 		public Gender personGender;
 
 		//home
@@ -214,7 +212,7 @@ namespace The_Mark
 
         #endregion
 
-        public void CreatePerson(DataManager datamanager, Random random)
+        public void CreatePerson(DataManager datamanager, Random random, CreationType creationType)
 		{
 			personID = datamanager.getRandomID(random);
 
@@ -232,6 +230,11 @@ namespace The_Mark
 			getFirstName(datamanager, random);
 			//get person last name
 			getLastName(datamanager, random);
+
+			if (creationType == CreationType.Created)
+            {
+				personAge = random.Next(14, 60);
+            }
 
         }
 

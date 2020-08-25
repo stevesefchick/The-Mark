@@ -83,6 +83,7 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
                 }
 
 				Console.WriteLine(people[i].personFirstName + " " + people[i].personLastName + " is here!\n" +
+					"Age: " + people[i].personAge + "\n" +
 					"Gender: " + people[i].personGender + "\n" +
 					"Home: " + locname + "\n");
 			}
@@ -168,7 +169,7 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 			for (int i=0;i<100;++i)
             {
 				Person person = new Person();
-				person.CreatePerson(datamanager, rando);
+				person.CreatePerson(datamanager, rando, Person.CreationType.Created);
 				person.assignPersonToHome(liveablePlaces,rando);
 				people.Add(person);
             }
