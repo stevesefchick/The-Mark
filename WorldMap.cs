@@ -78,7 +78,10 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 				//rotation around castle origin
 				Matrix distancematrix = Matrix.CreateRotationZ(rando.Next(0, 360)) * castleOriginMatrix;
 				newloc = Vector2.Transform(distance, distancematrix);
+
 			}
+
+
 
 			return newloc;
         }
@@ -86,9 +89,10 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 		Vector2 getOrbitalPlaceLocation(Random rando,Vector2 originLocation, Vector2 orbitRange)
 		{
 			Vector2 newloc = Vector2.Zero;
+			int attempts = 0;
 
 			//check that it's not 0 or near another place
-			while (newloc == Vector2.Zero || isNearOtherPlaces(newloc) == true)
+			while ((newloc == Vector2.Zero || isNearOtherPlaces(newloc) == true) && attempts<5)
 			{
 				Matrix originMatrix = Matrix.CreateScale(1, 1, 1f) *
 Matrix.CreateRotationZ(0) *
@@ -100,6 +104,13 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				//rotation around castle origin
 				Matrix distancematrix = Matrix.CreateRotationZ(rando.Next(0, 360)) * originMatrix;
 				newloc = Vector2.Transform(distance, distancematrix);
+
+				attempts += 1;
+			}
+
+			if (attempts >= 5)
+			{
+				newloc = Vector2.Zero;
 			}
 
 			return newloc;
@@ -193,12 +204,15 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				{
 					Place newOrbitalPlace = new Place();
 					Vector2 newOrbitalLocation = getOrbitalPlaceLocation(rando, newLocation,new Vector2(110,300));
-					newOrbitalPlace.CreateNewPlace(Place.PlaceType.Graveyard, newOrbitalLocation, gamedeets, rando);
-					//don't add if it's too close to the castle
-					if (isNearCastle(newOrbitalLocation) == false)
-                    {
-						places.Add(newOrbitalPlace);
+					if (newOrbitalLocation != Vector2.Zero)
+					{
+						newOrbitalPlace.CreateNewPlace(Place.PlaceType.Graveyard, newOrbitalLocation, gamedeets, rando);
+						//don't add if it's too close to the castle
+						if (isNearCastle(newOrbitalLocation) == false)
+						{
+							places.Add(newOrbitalPlace);
 
+						}
 					}
 
 				}
