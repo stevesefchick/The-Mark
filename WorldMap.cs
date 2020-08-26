@@ -46,6 +46,21 @@ namespace The_Mark
 			return well_is_it;
         }
 
+		Boolean isNearCastle(Vector2 loc)
+        {
+			Boolean well_is_it = false;
+
+			if ((MathHelper.Distance(loc.X, 0) < 150) && (MathHelper.Distance(loc.Y, 0) < 150))
+			{
+				well_is_it = true;
+			}
+
+
+
+			return well_is_it;
+
+		}
+
 		Vector2 getMajorPlaceLocation(Random rando)
         {
 			Vector2 newloc = Vector2.Zero;
@@ -179,7 +194,12 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 					Place newOrbitalPlace = new Place();
 					Vector2 newOrbitalLocation = getOrbitalPlaceLocation(rando, newLocation,new Vector2(110,300));
 					newOrbitalPlace.CreateNewPlace(Place.PlaceType.Graveyard, newOrbitalLocation, gamedeets, rando);
-					places.Add(newOrbitalPlace);
+					//don't add if it's too close to the castle
+					if (isNearCastle(newOrbitalLocation) == false)
+                    {
+						places.Add(newOrbitalPlace);
+
+					}
 
 				}
 			}
