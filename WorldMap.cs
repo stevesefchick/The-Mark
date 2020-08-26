@@ -16,6 +16,9 @@ namespace The_Mark
 		//assets
 		private Texture2D worldTexture;
 
+		//size
+		private Vector2 worldSize = new Vector2(2300, 2300);
+
 		public WorldMap(GameMain gamedeets,Random rando,DataManager datamanager)
         {
 			
@@ -56,7 +59,7 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 
 
 				//second value is distance
-				Vector2 distance = new Vector2(0, rando.Next(250, 550));
+				Vector2 distance = new Vector2(0, rando.Next(350, 800));
 				//rotation around castle origin
 				Matrix distancematrix = Matrix.CreateRotationZ(rando.Next(0, 360)) * castleOriginMatrix;
 				newloc = Vector2.Transform(distance, distancematrix);
@@ -65,7 +68,7 @@ Matrix.CreateTranslation(new Vector3(0, 0, 0f));
 			return newloc;
         }
 
-		Vector2 getOrbitalPlaceLocation(Random rando,Vector2 originLocation)
+		Vector2 getOrbitalPlaceLocation(Random rando,Vector2 originLocation, Vector2 orbitRange)
 		{
 			Vector2 newloc = Vector2.Zero;
 
@@ -78,7 +81,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 
 				//second value is distance
-				Vector2 distance = new Vector2(0, rando.Next(50, 250));
+				Vector2 distance = new Vector2(0, rando.Next((int)orbitRange.X, (int)orbitRange.Y));
 				//rotation around castle origin
 				Matrix distancematrix = Matrix.CreateRotationZ(rando.Next(0, 360)) * originMatrix;
 				newloc = Vector2.Transform(distance, distancematrix);
@@ -174,7 +177,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				for (int i2 = 0; i2 < 2; ++i2)
 				{
 					Place newOrbitalPlace = new Place();
-					Vector2 newOrbitalLocation = getOrbitalPlaceLocation(rando, newLocation);
+					Vector2 newOrbitalLocation = getOrbitalPlaceLocation(rando, newLocation,new Vector2(110,300));
 					newOrbitalPlace.CreateNewPlace(Place.PlaceType.Graveyard, newOrbitalLocation, gamedeets, rando);
 					places.Add(newOrbitalPlace);
 
@@ -214,7 +217,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 		public void Draw(SpriteBatch spriteBatch, SpriteFont displayFont)
 		{
-			spriteBatch.Draw(worldTexture, new Rectangle(0, 0,1600,1200),null, Color.White,0,new Vector2(128,128), SpriteEffects.None,0);
+			spriteBatch.Draw(worldTexture, new Rectangle(0, 0,(int)worldSize.X,(int)worldSize.Y),null, Color.White,0,new Vector2(128,128), SpriteEffects.None,0);
 
 			for (int i = 0; i < terrains.Count;++i)
             {
