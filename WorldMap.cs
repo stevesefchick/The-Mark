@@ -206,7 +206,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 					Vector2 newOrbitalLocation = getOrbitalPlaceLocation(rando, newLocation,new Vector2(110,300));
 					if (newOrbitalLocation != Vector2.Zero)
 					{
-						newOrbitalPlace.CreateNewPlace(Place.PlaceType.Graveyard, newOrbitalLocation, gamedeets, rando);
+						newOrbitalPlace.CreateNewPlace(newOrbitalPlace.determineOrbitalPlaceType(rando), newOrbitalLocation, gamedeets, rando);
 						//don't add if it's too close to the castle
 						if (isNearCastle(newOrbitalLocation) == false)
 						{

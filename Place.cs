@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Security.AccessControl;
 
 namespace The_Mark
 {
@@ -17,11 +18,14 @@ namespace The_Mark
 		public Vector2 placeLocation;
 		public Boolean isLiveable;
 
+		//type specific variables
+		private int graveyard_numberOfDead = 0;
+
 		//location info
 		protected enum PlaceLocationType { Castle, MajorNode,OrbitingNode}
 		Vector2 placeSize;
 		Vector2 placeCenter;
-		PlaceLocationType thisPlaceLocationType;
+		protected PlaceLocationType thisPlaceLocationType;
 
 		//type
 		public enum PlaceType { Castle, Town, Graveyard}
@@ -159,7 +163,7 @@ namespace The_Mark
 
 			}
 
-        void getPlaceAttributes()
+        void getPlaceAttributes(Random rando)
         {
 			if (thisPlaceType == PlaceType.Town)
             {
@@ -175,6 +179,7 @@ namespace The_Mark
 			{
 				isLiveable = false;
 				thisPlaceLocationType = PlaceLocationType.OrbitingNode;
+				graveyard_numberOfDead = rando.Next(2, 10);
 			}
 		}
 
@@ -189,7 +194,7 @@ namespace The_Mark
 			//get name
 			getPlaceName(gamedeets.dataManager, rando);
 			//get properties based on type
-			getPlaceAttributes();
+			getPlaceAttributes(rando);
 
 
 		}
@@ -207,6 +212,22 @@ namespace The_Mark
 
 
 			return collided;
+        }
+
+
+		//determine the random placetype based on available options
+		public PlaceType determineOrbitalPlaceType(Random rando)
+        {
+			List<PlaceType> possiblePlaceTypes = new List<PlaceType>();
+
+			possiblePlaceTypes.AddRange(new PlaceType[] { PlaceType.Graveyard });
+
+			PlaceType thisType = possiblePlaceTypes[rando.Next(0, possiblePlaceTypes.Count)];
+
+			//debug
+			thisPlaceType = PlaceType.Graveyard;
+
+			return thisType;
         }
 
 		public void Update(GameMain gamedeets)
