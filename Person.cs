@@ -12,12 +12,14 @@ namespace The_Mark
 		//enums
 		public enum CreationType { Birthed, Created }
 		public enum Gender { Male, Female, Whocares }
+		public enum PersonalityType { Calm, Grumpy, Cheerful}
 
 		//person attributes
 		public string personFirstName;
 		public string personLastName;
 		public int personAge;
 		public Gender personGender;
+		public PersonalityType personPersonalityType;
 
 		//home
 		public string placeIDHome;
@@ -224,6 +226,16 @@ namespace The_Mark
 			}
 		}
 
+		void getPersonality(CreationType creationType,Random rando)
+        {
+			if (creationType == CreationType.Created)
+            {
+				Array values = Enum.GetValues(typeof(PersonalityType));
+				PersonalityType randomPersonality = (PersonalityType)values.GetValue(rando.Next(values.Length));
+				personPersonalityType = randomPersonality;
+			}
+        }
+
         public void CreatePerson(DataManager datamanager, Random random, CreationType creationType)
 		{
 			personID = datamanager.getRandomID(random);
@@ -244,6 +256,8 @@ namespace The_Mark
 			getLastName(datamanager, random);
 			//get person's age
 			getAge(creationType, random);
+			//get personality
+			getPersonality(creationType, random);
 
 
         }

@@ -136,7 +136,8 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				Console.WriteLine(people[i].personFirstName + " " + people[i].personLastName + " is here!\n" +
 					"Age: " + people[i].personAge + "\n" +
 					"Gender: " + people[i].personGender + "\n" +
-					"Home: " + locname + "\n");
+					"Home: " + locname + "\n" +
+					"Personality Type: " + people[i].personPersonalityType + "\n");
 			}
 
 
