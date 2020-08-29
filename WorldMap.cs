@@ -200,8 +200,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				liveablePlaces.Add(newPlace.placeID);
 
 				//create orbital locations
-				//test create graveyards
-				for (int i2 = 0; i2 < 2; ++i2)
+				for (int i2 = 0; i2 < rando.Next(1,5); ++i2)
 				{
 					Place newOrbitalPlace = new Place();
 					Vector2 newOrbitalLocation = getOrbitalPlaceLocation(rando, newLocation,new Vector2(110,300));

@@ -98,6 +98,13 @@ namespace The_Mark
 				//type noun + town ending
 				if (placenametype == 1 || placenametype == 2)
 				{
+					string prefix = "";
+
+					if (rando.Next(1,30)==1)
+                    {
+						prefix = "New ";
+                    }
+
 					List<string> candidatesnoun = new List<string>();
 					List<string> candidatesend = new List<string>();
 					foreach (KeyValuePair<string, TownNameData> entry in datamanager.townNames)
@@ -114,7 +121,7 @@ namespace The_Mark
 							candidatesend.Add(entry.Key);
 						}
 					}
-					placeName = candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
+					placeName = prefix + candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
 				}
 				//type 2 - "person"'s place
 				else if (placenametype == 3)
