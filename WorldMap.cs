@@ -12,6 +12,7 @@ namespace The_Mark
 		protected List<Terrain> terrains = new List<Terrain>();
 		protected List<Place> places = new List<Place>();
 		protected List<Person> people = new List<Person>();
+		protected List<Road> roads = new List<Road>();
 
 		//assets
 		private Texture2D worldTexture;
@@ -167,6 +168,32 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 
 		}
+
+		//determine roads
+		protected void createRoads(Random rando)
+        {
+			for (int i = 0; i < places.Count;++i)
+            {
+				//get starting place
+				if (places[i].isLiveable == true)
+                {
+					Vector2 starting = places[i].placeLocation;
+					for (int i2 = 0; i2 < places.Count; ++i2)
+					{
+						//get destination
+						if (places[i2].isLiveable==true && places[i].placeID != places[i].placeID)
+						{
+							Vector2 ending = places[i].placeLocation;
+							Road newRoad = new Road(starting, ending);
+							roads.Add(newRoad);
+						}
+
+
+					}
+				}
+
+            }
+        }
 
 
 		//create the world

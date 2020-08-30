@@ -11,11 +11,12 @@ namespace The_Mark
 
 
         //sprites
+        Texture2D roadSprite;
 
-
-        public Road()
+        public Road(Vector2 start, Vector2 end)
         {
-
+            startingPosition = start;
+            endingPosition = end;
 
         }
 
@@ -28,7 +29,7 @@ namespace The_Mark
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            
 
 
         }
