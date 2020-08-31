@@ -38,13 +38,33 @@ namespace The_Mark
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            
-
+            DrawLine(spriteBatch, startingPosition, endingPosition);
 
         }
 
 
+        void DrawLine(SpriteBatch sb, Vector2 start, Vector2 end)
+        {
+            Vector2 edge = end - start;
+            // calculate angle to rotate line
+            float angle =
+                (float)Math.Atan2(edge.Y, edge.X);
 
+
+            sb.Draw(roadSprite,
+                new Rectangle(
+                    (int)start.X,
+                    (int)start.Y,
+                    (int)edge.Length(), //sb will strech the texture to fill this rectangle
+                    5), //width of line
+                null,
+                Color.White, 
+                angle,     
+                new Vector2(0, 0), 
+                SpriteEffects.None,
+                0);
+
+        }
 
     }
 }

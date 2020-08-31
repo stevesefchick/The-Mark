@@ -181,9 +181,9 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 					for (int i2 = 0; i2 < places.Count; ++i2)
 					{
 						//get destination
-						if (places[i2].isLiveable==true && places[i].placeID != places[i].placeID)
+						if (places[i2].isLiveable==true && places[i].placeID != places[i2].placeID && i2>i)
 						{
-							Vector2 ending = places[i].placeLocation;
+							Vector2 ending = places[i2].placeLocation;
 							Road newRoad = new Road(starting, ending,gamedeets,rando);
 							roads.Add(newRoad);
 						}
@@ -289,6 +289,10 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 			for (int i = 0; i < terrains.Count;++i)
             {
 				terrains[i].Draw(spriteBatch);
+            }
+			for (int i = 0; i < roads.Count;++i)
+            {
+				roads[i].Draw(spriteBatch);
             }
 			for (int i =0; i < places.Count;++i)
             {
