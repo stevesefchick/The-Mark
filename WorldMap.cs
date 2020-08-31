@@ -170,7 +170,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 		}
 
 		//determine roads
-		protected void createRoads(Random rando)
+		protected void createRoads(Random rando, GameMain gamedeets)
         {
 			for (int i = 0; i < places.Count;++i)
             {
@@ -184,7 +184,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 						if (places[i2].isLiveable==true && places[i].placeID != places[i].placeID)
 						{
 							Vector2 ending = places[i].placeLocation;
-							Road newRoad = new Road(starting, ending);
+							Road newRoad = new Road(starting, ending,gamedeets,rando);
 							roads.Add(newRoad);
 						}
 
@@ -262,6 +262,12 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				person.assignPersonToHome(liveablePlaces,rando);
 				people.Add(person);
             }
+
+
+			//create roads
+			createRoads(rando, gamedeets);
+
+
 
 			//finalization
 			debugAnnounceCreation();
