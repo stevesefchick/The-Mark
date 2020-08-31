@@ -56,10 +56,10 @@ namespace The_Mark
                     (int)start.X,
                     (int)start.Y,
                     (int)edge.Length(), //sb will strech the texture to fill this rectangle
-                    5), //width of line
+                    8), //width of line
                 null,
                 Color.White, 
-                angle,     
+                angle,
                 new Vector2(0, 0), 
                 SpriteEffects.None,
                 0);

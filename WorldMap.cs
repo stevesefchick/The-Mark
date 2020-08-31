@@ -181,7 +181,8 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 					for (int i2 = 0; i2 < places.Count; ++i2)
 					{
 						//get destination
-						if (places[i2].isLiveable==true && places[i].placeID != places[i2].placeID && i2>i)
+						if (places[i2].isLiveable==true && places[i].placeID != places[i2].placeID && i2>i &&
+							MathHelper.Distance(places[i].placeLocation.X,places[i2].placeLocation.X) < 800 && MathHelper.Distance(places[i].placeLocation.Y, places[i2].placeLocation.Y) < 800)
 						{
 							Vector2 ending = places[i2].placeLocation;
 							Road newRoad = new Road(starting, ending,gamedeets,rando);
