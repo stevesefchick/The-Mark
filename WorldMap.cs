@@ -196,6 +196,31 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
             }
         }
 
+		//cleanup colliding orbital locations
+		protected void cleanupOrbitalRoadCollision()
+        {
+			for (int i = 0; i < roads.Count;++i)
+            {
+				for (int rc=0; rc < roads[i].roadChunks.Count;++rc)
+                {
+					for (int ol=0; ol < places.Count;++ol)
+                    {
+						if (places[ol].thisPlaceLocationType == Place.PlaceLocationType.OrbitingNode)
+						{
+							Rectangle placesrect = new Rectangle((int)(places[ol].placeLocation.X - places[ol].placeCenter.X), (int)(places[ol].placeLocation.Y - places[ol].placeCenter.Y), (int)places[ol].placeSize.X, (int)places[ol].placeSize.Y);
+							Rectangle roadrect = roads[i].roadChunks[rc].rect;
+
+							if (placesrect.Intersects(roadrect))
+							{
+								places.RemoveAt(ol);
+							}
+						}
+                    }
+                }
+            }
+
+        }
+
 
 
 		//create the world
@@ -229,7 +254,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				liveablePlaces.Add(newPlace.placeID);
 
 				//create orbital locations
-				for (int i2 = 0; i2 < rando.Next(1,5); ++i2)
+				for (int i2 = 0; i2 < rando.Next(2,5); ++i2)
 				{
 					Place newOrbitalPlace = new Place();
 					Vector2 newOrbitalLocation = getOrbitalPlaceLocation(rando, newLocation,new Vector2(110,300));
@@ -268,8 +293,8 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 			//create roads
 			createRoads(rando, gamedeets);
-
-
+			//cleanup orbital locations that intersect with roads
+			cleanupOrbitalRoadCollision();
 
 			//finalization
 			debugAnnounceCreation();

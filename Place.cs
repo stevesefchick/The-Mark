@@ -22,10 +22,10 @@ namespace The_Mark
 		private int graveyard_numberOfDead = 0;
 
 		//location info
-		protected enum PlaceLocationType { Castle, MajorNode,OrbitingNode}
-		Vector2 placeSize;
-		Vector2 placeCenter;
-		protected PlaceLocationType thisPlaceLocationType;
+		public enum PlaceLocationType { Castle, MajorNode,OrbitingNode}
+		public Vector2 placeSize;
+		public Vector2 placeCenter;
+		public PlaceLocationType thisPlaceLocationType;
 
 		//type
 		public enum PlaceType { Castle, Town, Graveyard, Cave}

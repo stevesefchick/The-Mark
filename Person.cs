@@ -12,7 +12,7 @@ namespace The_Mark
 		//enums
 		public enum CreationType { Birthed, Created }
 		public enum Gender { Male, Female, Whocares }
-		public enum PersonalityType { Calm, Grumpy, Cheerful}
+		public enum PersonalityType { Calm, Grumpy, Cheerful, Curious, Sly, Guarded}
 
 		//person attributes
 		public string personFirstName;
