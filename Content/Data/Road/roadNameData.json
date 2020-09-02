@@ -1,0 +1,27 @@
+{
+  "Dirt": { "roadnametype": "roadnoun" },
+  "Golden": { "roadnametype": "roadnoun" },
+  "Stardust": { "roadnametype": "roadnoun" },
+  "Starry": { "roadnametype": "roadnoun" },
+  "Dream": { "roadnametype": "roadnoun" },
+  "Merchant": { "roadnametype": "roadnoun" },
+  "Heaven": { "roadnametype": "roadnoun" },
+  "Hell": { "roadnametype": "roadnoun" },
+  "King's": { "roadnametype": "roadnoun" },
+  "White": { "roadnametype": "roadnoun" },
+  "Gray": { "roadnametype": "roadnoun" },
+  "Red": { "roadnametype": "roadnoun" },
+  "Blue": { "roadnametype": "roadnoun" },
+  "Green": { "roadnametype": "roadnoun" },
+  "Garden": { "roadnametype": "roadnoun" },
+  "Way": { "roadnametype": "roadend" },
+  "Street": { "roadnametype": "roadend" },
+  "Path": { "roadnametype": "roadend" },
+  "Avenue": { "roadnametype": "roadend" },
+  "Highway": { "roadnametype": "roadend" },
+  "Road": { "roadnametype": "roadend" },
+  "Boulevard": { "roadnametype": "roadend" },
+  "March": { "roadnametype": "roadend" }
+
+
+}

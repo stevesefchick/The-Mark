@@ -29,6 +29,7 @@ namespace The_Mark
             endingPosition = end;
 
             createRoadChunks();
+            getRoadName(gamedeets.dataManager, rando);
             LoadRoadTexture(gamedeets,rando);
 
         }
@@ -77,6 +78,34 @@ namespace The_Mark
             }
 
             return collided;
+        }
+
+        void getRoadName(DataManager datamanager, Random rando)
+        {
+            int roadnametype = rando.Next(1, 3);
+            //debug
+            roadnametype = 1;
+
+            if (roadnametype == 1)
+            {
+                List<string> candidatesnoun = new List<string>();
+                List<string> candidatesend = new List<string>();
+                foreach (KeyValuePair<string, RoadNameData> entry in datamanager.roadNames)
+                {
+                    if (entry.Value.roadnametype == "roadnoun")
+                    {
+                        candidatesnoun.Add(entry.Key);
+                    }
+                }
+                foreach (KeyValuePair<string, RoadNameData> entry in datamanager.roadNames)
+                {
+                    if (entry.Value.roadnametype == "roadend")
+                    {
+                        candidatesend.Add(entry.Key);
+                    }
+                }
+                roadName = candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + " " + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
+            }
         }
 
         public void Update(GameMain gamedeets)
