@@ -94,11 +94,12 @@ namespace The_Mark
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, SpriteFont displayfont)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont displayfont,Boolean dontdrawfont)
         {
             DrawRoadChunks(spriteBatch);
+            //DrawLine(spriteBatch, startingPosition, endingPosition);
 
-            if (isColliding == true)
+            if (isColliding == true && dontdrawfont == false)
             {
                 DrawFont(spriteBatch, displayfont);
             }

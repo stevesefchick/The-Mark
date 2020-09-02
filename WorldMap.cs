@@ -20,6 +20,9 @@ namespace The_Mark
 		//size
 		private Vector2 worldSize = new Vector2(2300, 2300);
 
+		//checks
+		Boolean isDisplayTownAreaFont = false;
+
 		public WorldMap(GameMain gamedeets,Random rando,DataManager datamanager)
         {
 			
@@ -301,9 +304,15 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 		public void Update(GameMain gamedeets)
 		{
+			isDisplayTownAreaFont = false;
+
 			for (int i =0;i<places.Count;++i)
             {
 				places[i].Update(gamedeets);
+				if (places[i].isColliding==true)
+                {
+					isDisplayTownAreaFont = true;
+                }
             }
 			for (int i =0;i < roads.Count;++i)
             {
@@ -321,7 +330,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
             }
 			for (int i = 0; i < roads.Count;++i)
             {
-				roads[i].Draw(spriteBatch,displayFont);
+				roads[i].Draw(spriteBatch,displayFont,isDisplayTownAreaFont);
             }
 			for (int i =0; i < places.Count;++i)
             {
