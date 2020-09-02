@@ -170,7 +170,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 		}
 
 		//determine roads
-		protected void createRoads(Random rando, GameMain gamedeets)
+		protected void createMajorRoads(Random rando, GameMain gamedeets)
         {
 			for (int i = 0; i < places.Count;++i)
             {
@@ -272,8 +272,6 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				}
 			}
 
-
-
 			//create castle
 			Place newCastle = new Place();
 			Vector2 castleLoc = Vector2.Zero;
@@ -282,7 +280,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 
 			//create a bunch of people
-			for (int i=0;i<100;++i)
+			for (int i=0;i<rando.Next(90,120);++i)
             {
 				Person person = new Person();
 				person.CreatePerson(datamanager, rando, Person.CreationType.Created);
@@ -292,7 +290,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 
 			//create roads
-			createRoads(rando, gamedeets);
+			createMajorRoads(rando, gamedeets);
 			//cleanup orbital locations that intersect with roads
 			cleanupOrbitalRoadCollision();
 
@@ -307,6 +305,10 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
             {
 				places[i].Update(gamedeets);
             }
+			for (int i =0;i < roads.Count;++i)
+            {
+				roads[i].Update(gamedeets);
+            }
 		}
 
 		public void Draw(SpriteBatch spriteBatch, SpriteFont displayFont)
@@ -319,7 +321,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
             }
 			for (int i = 0; i < roads.Count;++i)
             {
-				roads[i].Draw(spriteBatch);
+				roads[i].Draw(spriteBatch,displayFont);
             }
 			for (int i =0; i < places.Count;++i)
             {

@@ -11,12 +11,17 @@ namespace The_Mark
         Vector2 startingPosition;
         Vector2 endingPosition;
 
+        //road name
+        string roadName = "Road";
+        Vector2 displayLoc = Vector2.Zero;
 
         //sprites
         Texture2D roadSprite;
 
         //road chunks
         public List<RoadChunk> roadChunks = new List<RoadChunk>();
+
+        Boolean isColliding;
 
         public Road(Vector2 start, Vector2 end, GameMain gamedeets, Random rando)
         {
@@ -53,17 +58,50 @@ namespace The_Mark
 
         }
 
-        public void Update()
+        Boolean checkForCollision(Vector2 mouse)
         {
+            Boolean collided = false;
+            Rectangle mouseRect = new Rectangle((int)mouse.X, (int)mouse.Y, 32, 32);
+
+            for (int i = 0; i <roadChunks.Count;++i)
+            {
+                Rectangle thisChunk = new Rectangle((int)(roadChunks[i].rect.X), (int)(roadChunks[i].rect.Y), (int)roadChunks[i].rect.Width, (int)roadChunks[i].rect.Height);
+
+                if (thisChunk.Intersects(mouseRect))
+                {
+                    collided = true;
+                    displayLoc = new Vector2(roadChunks[i].rect.X-25, roadChunks[i].rect.Y - 50);
+                    break;
+                }
+
+            }
+
+            return collided;
+        }
+
+        public void Update(GameMain gamedeets)
+        {
+            isColliding = checkForCollision(gamedeets.mouse.getMousePosition(gamedeets.camera.cameraPosition, gamedeets.backbufferJamz));
 
 
         }
 
-
-        public void Draw(SpriteBatch spriteBatch)
+        private void DrawFont(SpriteBatch spriteBatch, SpriteFont displayfont)
         {
-            //DrawLine(spriteBatch, startingPosition, endingPosition);
+            spriteBatch.DrawString(displayfont, roadName, new Vector2((int)(displayLoc.X+ 1), (int)(displayLoc.Y +1)), Color.Black);
+            spriteBatch.DrawString(displayfont, roadName, new Vector2((int)(displayLoc.X + 2), (int)(displayLoc.Y +2)), Color.Black);
+            spriteBatch.DrawString(displayfont, roadName, displayLoc, Color.White);
+
+        }
+
+        public void Draw(SpriteBatch spriteBatch, SpriteFont displayfont)
+        {
             DrawRoadChunks(spriteBatch);
+
+            if (isColliding == true)
+            {
+                DrawFont(spriteBatch, displayfont);
+            }
         }
 
         void DrawRoadChunks(SpriteBatch spriteBatch)
