@@ -174,21 +174,22 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 		//determine roads
 		protected void createMajorRoads(Random rando, GameMain gamedeets)
-        {
-			for (int i = 0; i < places.Count;++i)
-            {
+		{
+			//do all places
+			for (int i = 0; i < places.Count; ++i)
+			{
 				//get starting place
 				if (places[i].isLiveable == true)
-                {
+				{
 					Vector2 starting = places[i].placeLocation;
 					for (int i2 = 0; i2 < places.Count; ++i2)
 					{
 						//get destination
-						if (places[i2].isLiveable==true && places[i].placeID != places[i2].placeID && i2>i &&
-							MathHelper.Distance(places[i].placeLocation.X,places[i2].placeLocation.X) < 800 && MathHelper.Distance(places[i].placeLocation.Y, places[i2].placeLocation.Y) < 800)
+						if (places[i2].isLiveable == true && places[i].placeID != places[i2].placeID && i2 > i &&
+							MathHelper.Distance(places[i].placeLocation.X, places[i2].placeLocation.X) < 800 && MathHelper.Distance(places[i].placeLocation.Y, places[i2].placeLocation.Y) < 800)
 						{
 							Vector2 ending = places[i2].placeLocation;
-							Road newRoad = new Road(starting, ending,gamedeets,rando);
+							Road newRoad = new Road(starting, ending, gamedeets, rando);
 							roads.Add(newRoad);
 						}
 
@@ -196,8 +197,31 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 					}
 				}
 
-            }
-        }
+			}
+
+			//road to castle
+			for (int i = 0; i < places.Count; ++i)
+			{
+				//get starting place
+				if (places[i].isLiveable == true)
+				{
+					Vector2 starting = places[i].placeLocation;
+					//get destination
+					for (int i2 = 0; i2 < places.Count; ++i2)
+					{
+						if (places[i2].thisPlaceLocationType == Place.PlaceLocationType.Castle && rando.Next(1,3) == 1)
+						{
+							Vector2 ending = places[i2].placeLocation;
+							Road newRoad = new Road(starting, ending, gamedeets, rando);
+							roads.Add(newRoad);
+
+						}
+
+
+					}
+				}
+			}
+		}
 
 		//cleanup colliding orbital locations
 		protected void cleanupOrbitalRoadCollision()
