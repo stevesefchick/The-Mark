@@ -14,6 +14,13 @@ namespace The_Mark
 		protected List<Person> people = new List<Person>();
 		protected List<Road> roads = new List<Road>();
 
+		//***GRID stuff ***
+		public Vector2 gridSize = new Vector2(80, 80);
+		List<GridTile> gridTiles = new List<GridTile>();
+
+
+		//*** end GRID stuff ***
+
 		//assets
 		private Texture2D worldTexture;
 
@@ -260,6 +267,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 			List<string> liveablePlaces = new List<string>();
 
 			//create terrains
+			/*
 			for (int i =0; i < 5;++i)
             {
 				int randX = rando.Next(-250, 251);
@@ -269,6 +277,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				newTerrain.createNewTerrain(Terrain.TerrainType.Grass, newLocation,gamedeets);
 				terrains.Add(newTerrain);
             }
+			*/
 			//create normal places
 			for (int i = 0; i < 5; ++i)
 			{
@@ -324,6 +333,69 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 			//finalization
 			debugAnnounceCreation();
 
+
+			//***GRID
+			createGrid(gamedeets,rando);
+
+			//*** END GRID
+		}
+
+		void createGrid(GameMain gamedeets,Random rando)
+        {
+			for (int x=0; x < gridSize.X;++x)
+            {
+				for (int y=0; y < gridSize.Y; ++y)
+                {
+					GridTile newgridTile = new GridTile(x, y);
+					//terrain
+					Terrain newTerrain = new Terrain();
+					newTerrain.createNewTerrain(Terrain.TerrainType.Grass, new Vector2(x * newgridTile.gridSize, y * newgridTile.gridSize), gamedeets);
+					newgridTile.thisTerrainType = GridTile.GridTerrain.Grass;
+					terrains.Add(newTerrain);
+
+
+
+					gridTiles.Add(newgridTile);
+                }
+            }
+
+			//add castle
+			Place newCastle = new Place();
+			int XCenter = (int)(gridSize.X / 2);
+			int YCenter = (int)(gridSize.Y/2);
+
+			Vector2 castleLoc = new Vector2(XCenter * 64, YCenter * 64);
+			newCastle.CreateNewPlace(Place.PlaceType.Castle, castleLoc, gamedeets, rando);
+			places.Add(newCastle);
+
+			AssignNodeToGrid(GridTile.GridNode.Castle, XCenter, YCenter,2,2);
+
+		}
+
+
+		void AssignNodeToGrid(GridTile.GridNode nodetype, int Xpos, int YPos, int XLength, int YLength)
+		{
+			for (int i = 0; i < gridTiles.Count;++i)
+            {
+				if (gridTiles[i].XCoord == Xpos && 
+					gridTiles[i].YCoord == YPos)
+                {
+					gridTiles[i].thisNodeType = nodetype;
+
+					if (XLength > 1 || YLength > 1)
+					{
+						for (int i2 = 0; i2 < gridTiles.Count; ++i2)
+						{
+							if ((gridTiles[i2].XCoord > Xpos && gridTiles[i2].XCoord < Xpos+XLength) ||
+								(gridTiles[i2].YCoord > YPos && gridTiles[i2].YCoord < YPos + YLength))
+							{
+								gridTiles[i2].thisNodeType = nodetype;
+							}
+						}
+					}
+                }
+            }
+
 		}
 
 		public void Update(GameMain gamedeets)
@@ -360,6 +432,15 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
             {
 				places[i].Draw(spriteBatch,displayFont);
             }
+
+
+			//grid
+			foreach (GridTile g in gridTiles)
+            {
+				
+				//spriteBatch.DrawString(displayFont, "ok!", new Vector2((float)(g.XCoord * g.gridSize),(float)(g.YCoord * g.gridSize)), Color.White);
+            }
+
 		}
 
 	}

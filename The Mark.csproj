@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="DataManager.cs" />
+    <Compile Include="GridTile.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MouseHandler.cs" />
     <Compile Include="Person.cs" />
@@ -95,6 +96,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Road\road_test.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Terrain\grass_grid_1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Terrain\grass_mock.png">

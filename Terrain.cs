@@ -19,7 +19,7 @@ namespace The_Mark
 
 			if (thisTerrainType == TerrainType.Grass)
             {
-				terrainTexture = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/grass_mock");
+				terrainTexture = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/grass_grid_1");
 			}
 		}
 
