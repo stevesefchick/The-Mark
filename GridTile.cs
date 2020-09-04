@@ -16,7 +16,7 @@ namespace The_Mark
         public enum GridTerrain { Grass }
         public GridTerrain thisTerrainType;
 
-        public enum GridNode { Castle, Town }
+        public enum GridNode { None,Castle, Town }
         public GridNode thisNodeType;
 
 

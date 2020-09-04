@@ -15,7 +15,7 @@ namespace The_Mark
 		protected List<Road> roads = new List<Road>();
 
 		//***GRID stuff ***
-		public Vector2 gridSize = new Vector2(80, 80);
+		public Vector2 gridSize = new Vector2(50, 50);
 		List<GridTile> gridTiles = new List<GridTile>();
 
 
@@ -370,8 +370,56 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 			AssignNodeToGrid(GridTile.GridNode.Castle, XCenter, YCenter,2,2);
 
+			//add town nodes
+			Place newPlace = new Place();
+			Vector2 newLocation = getNewGridLocation(3, 9, castleLoc, rando);
+			newLocation.X *= 64;
+			newLocation.Y *= 64;
+			newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets, rando);
+			places.Add(newPlace);
+
+
 		}
 
+		Boolean isGridItemTooClose(int newX, int newY, int existingX, int existingY, int distance)
+        {
+			Boolean tellme = false;
+
+			if ((newX > existingX-distance ||
+				newX < existingX + distance) &&
+				(newY > existingY-distance ||
+				newY < existingY+distance))
+            {
+				tellme = true;
+            }
+
+			return tellme;
+        }
+
+		Vector2 getNewGridLocation(int minDistance,int maxDistance,Vector2 origin,Random rando)
+        {
+			Vector2 newloc = Vector2.Zero;
+			List<Vector2> locationCandidates = new List<Vector2>();
+
+			origin.X /= 64;
+			origin.Y /= 64;
+
+			for (int i=0;i<gridTiles.Count;++i)
+            {
+				if ((gridTiles[i].thisNodeType == GridTile.GridNode.None) &&
+					((gridTiles[i].XCoord < origin.X - minDistance || gridTiles[i].XCoord > origin.X + minDistance) ||
+					(gridTiles[i].YCoord < origin.Y - minDistance || gridTiles[i].YCoord > origin.Y + minDistance)) &&
+					(gridTiles[i].XCoord >= origin.X - maxDistance && gridTiles[i].XCoord <= origin.X + maxDistance) &&
+					(gridTiles[i].YCoord >= origin.Y - maxDistance && gridTiles[i].YCoord <= origin.Y + maxDistance))
+                {
+					locationCandidates.Add(new Vector2(gridTiles[i].XCoord, gridTiles[i].YCoord));
+                }
+            }
+
+			newloc = locationCandidates[rando.Next(0, locationCandidates.Count)];
+
+			return newloc;
+        }
 
 		void AssignNodeToGrid(GridTile.GridNode nodetype, int Xpos, int YPos, int XLength, int YLength)
 		{

@@ -11,7 +11,8 @@ namespace The_Mark
 
 		public Camera()
         {
-			cameraPosition = Vector2.Zero;
+            //cameraPosition = Vector2.Zero;
+            cameraPosition = new Vector2(1600, 1600);
             cameraZoom = 1;
         }
 
