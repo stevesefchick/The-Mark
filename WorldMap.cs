@@ -364,45 +364,70 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 			int XCenter = (int)(gridSize.X / 2);
 			int YCenter = (int)(gridSize.Y/2);
 
-			Vector2 castleLoc = new Vector2(XCenter * 64, YCenter * 64);
+			Vector2 castleLoc = multiplyBy64(new Vector2(XCenter, YCenter));
 			newCastle.CreateNewPlace(Place.PlaceType.Castle, castleLoc, gamedeets, rando);
 			places.Add(newCastle);
 
 			AssignNodeToGrid(GridTile.GridNode.Castle, XCenter, YCenter,2,2);
 
 			//add town nodes
-			Place newPlace = new Place();
-			Vector2 newLocation = getNewGridLocation(3, 9, castleLoc, rando);
-			newLocation.X *= 64;
-			newLocation.Y *= 64;
-			newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets, rando);
-			places.Add(newPlace);
+			for (int i = 0; i < 5; ++i)
+			{
+				Place newPlace = new Place();
+				Vector2 newLocation = getNewGridLocation(3, 12, castleLoc, rando);
+				AssignNodeToGrid(GridTile.GridNode.Town, (int)newLocation.X, (int)newLocation.Y, 2, 2);
+				newLocation = multiplyBy64(newLocation);
+
+				newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets, rando);
+				places.Add(newPlace);
+			}
 
 
 		}
 
-		Boolean isGridItemTooClose(int newX, int newY, int existingX, int existingY, int distance)
+		Boolean isGridItemTooClose(Vector2 location, int distance)
         {
 			Boolean tellme = false;
 
-			if ((newX > existingX-distance ||
-				newX < existingX + distance) &&
-				(newY > existingY-distance ||
-				newY < existingY+distance))
+			for (int g =0;g < gridTiles.Count;++g)
             {
-				tellme = true;
+				if (((gridTiles[g].XCoord > location.X - distance &&
+					gridTiles[g].XCoord < location.X + distance) &&
+					(gridTiles[g].YCoord > location.Y - distance &&
+					gridTiles[g].YCoord < location.Y + distance)) &&
+					gridTiles[g].thisNodeType != GridTile.GridNode.None)
+				{
+					tellme = true;
+				}
+
             }
+
 
 			return tellme;
         }
+
+		Vector2 multiplyBy64(Vector2 number)
+        {
+			number.X *= 64;
+			number.Y *= 64;
+
+			return number;
+        }
+
+		Vector2 divideBy64(Vector2 number)
+        {
+			number.X /= 64;
+			number.Y /= 64;
+
+			return number;
+		}
 
 		Vector2 getNewGridLocation(int minDistance,int maxDistance,Vector2 origin,Random rando)
         {
 			Vector2 newloc = Vector2.Zero;
 			List<Vector2> locationCandidates = new List<Vector2>();
+			origin = divideBy64(origin);
 
-			origin.X /= 64;
-			origin.Y /= 64;
 
 			for (int i=0;i<gridTiles.Count;++i)
             {
@@ -410,7 +435,8 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 					((gridTiles[i].XCoord < origin.X - minDistance || gridTiles[i].XCoord > origin.X + minDistance) ||
 					(gridTiles[i].YCoord < origin.Y - minDistance || gridTiles[i].YCoord > origin.Y + minDistance)) &&
 					(gridTiles[i].XCoord >= origin.X - maxDistance && gridTiles[i].XCoord <= origin.X + maxDistance) &&
-					(gridTiles[i].YCoord >= origin.Y - maxDistance && gridTiles[i].YCoord <= origin.Y + maxDistance))
+					(gridTiles[i].YCoord >= origin.Y - maxDistance && gridTiles[i].YCoord <= origin.Y + maxDistance) &&
+					isGridItemTooClose(new Vector2(gridTiles[i].XCoord,gridTiles[i].YCoord),3)==false)
                 {
 					locationCandidates.Add(new Vector2(gridTiles[i].XCoord, gridTiles[i].YCoord));
                 }
