@@ -14,19 +14,15 @@ namespace The_Mark
 		protected List<Person> people = new List<Person>();
 		protected List<Road> roads = new List<Road>();
 
-		//***GRID stuff ***
+
 		public Vector2 gridSize = new Vector2(50, 50);
 		//List<GridTile> gridTiles = new List<GridTile>();
 		Dictionary<Point, GridTile> gridTiles = new Dictionary<Point, GridTile>();
 
 
-		//*** end GRID stuff ***
-
 		//assets
 		private Texture2D worldTexture;
 
-		//size
-		private Vector2 worldSize = new Vector2(2300, 2300);
 
 		//checks
 		Boolean isDisplayTownAreaFont = false;
@@ -37,96 +33,6 @@ namespace The_Mark
 			//if new
 			createNewWorld(gamedeets,rando,datamanager);
         }
-
-		//checks to see if the location is near another place
-		// if true, it's too close to another
-		Boolean isNearOtherPlaces(Vector2 loc)
-        {
-			Boolean well_is_it = false;
-
-			for (int i = 0; i < places.Count;++i)
-            {
-				if (MathHelper.Distance(loc.X,places[i].placeLocation.X) < 150 &&
-					MathHelper.Distance(loc.Y,places[i].placeLocation.Y) < 150)
-                {
-					well_is_it = true;
-					break;
-                }
-            }
-
-
-			return well_is_it;
-        }
-
-		Boolean isNearCastle(Vector2 loc)
-        {
-			Boolean well_is_it = false;
-
-			if ((MathHelper.Distance(loc.X, 0) < 150) && (MathHelper.Distance(loc.Y, 0) < 150))
-			{
-				well_is_it = true;
-			}
-
-
-
-			return well_is_it;
-
-		}
-
-		Vector2 getMajorPlaceLocation(Random rando)
-        {
-			Vector2 newloc = Vector2.Zero;
-
-			//check that it's not 0 or near another place
-			while (newloc == Vector2.Zero || isNearOtherPlaces(newloc) == true)
-            {
-				Matrix castleOriginMatrix = Matrix.CreateScale(1, 1, 1f) *
-Matrix.CreateRotationZ(0) *
-Matrix.CreateTranslation(new Vector3(0, 0, 0f));
-
-
-				//second value is distance
-				Vector2 distance = new Vector2(0, rando.Next(350, 800));
-				//rotation around castle origin
-				Matrix distancematrix = Matrix.CreateRotationZ(rando.Next(0, 360)) * castleOriginMatrix;
-				newloc = Vector2.Transform(distance, distancematrix);
-
-			}
-
-
-
-			return newloc;
-        }
-
-		Vector2 getOrbitalPlaceLocation(Random rando,Vector2 originLocation, Vector2 orbitRange)
-		{
-			Vector2 newloc = Vector2.Zero;
-			int attempts = 0;
-
-			//check that it's not 0 or near another place
-			while ((newloc == Vector2.Zero || isNearOtherPlaces(newloc) == true) && attempts<5)
-			{
-				Matrix originMatrix = Matrix.CreateScale(1, 1, 1f) *
-Matrix.CreateRotationZ(0) *
-Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
-
-
-				//second value is distance
-				Vector2 distance = new Vector2(0, rando.Next((int)orbitRange.X, (int)orbitRange.Y));
-				//rotation around castle origin
-				Matrix distancematrix = Matrix.CreateRotationZ(rando.Next(0, 360)) * originMatrix;
-				newloc = Vector2.Transform(distance, distancematrix);
-
-				attempts += 1;
-			}
-
-			if (attempts >= 5)
-			{
-				newloc = Vector2.Zero;
-			}
-
-			return newloc;
-		}
 
 		//debug - announce creations
 		protected void debugAnnounceCreation()
@@ -267,6 +173,9 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 			//liveable places, for persons
 			List<string> liveablePlaces = new List<string>();
 
+			//***GRID
+			createGrid(gamedeets, rando);
+
 			//create terrains
 			/*
 			for (int i =0; i < 5;++i)
@@ -278,7 +187,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				newTerrain.createNewTerrain(Terrain.TerrainType.Grass, newLocation,gamedeets);
 				terrains.Add(newTerrain);
             }
-			*/
+			
 			//create normal places
 			for (int i = 0; i < 5; ++i)
 			{
@@ -314,6 +223,48 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 			Vector2 castleLoc = Vector2.Zero;
 			newCastle.CreateNewPlace(Place.PlaceType.Castle, castleLoc, gamedeets,rando);
 			places.Add(newCastle);
+			*/
+
+
+			//add castle
+			Place newCastle = new Place();
+			int XCenter = (int)(gridSize.X / 2);
+			int YCenter = (int)(gridSize.Y / 2);
+			//create the castle
+			Vector2 castleLoc = multiplyBy64(new Vector2(XCenter, YCenter));
+			newCastle.CreateNewPlace(Place.PlaceType.Castle, castleLoc, gamedeets, rando);
+			places.Add(newCastle);
+			//assign castle to grid
+			AssignNodeToGrid(GridTile.GridNode.Castle, XCenter, YCenter, 2, 2);
+
+
+			//add town nodes
+			for (int i = 0; i < 5; ++i)
+			{
+				Place newPlace = new Place();
+				Vector2 newLocation = getNewGridPlaceLocation(12, castleLoc, rando, 4);
+				AssignNodeToGrid(GridTile.GridNode.Town, (int)newLocation.X, (int)newLocation.Y, 2, 2);
+				newLocation = multiplyBy64(newLocation);
+
+				newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets, rando);
+				places.Add(newPlace);
+
+				//create orbital locations
+				for (int i2 = 0; i2 < rando.Next(2, 5); ++i2)
+				{
+					Place newOrbitalPlace = new Place();
+					Vector2 newOrbitalLocation = getNewGridPlaceLocation(4, newLocation, rando, 2);
+					if (newOrbitalLocation != Vector2.Zero)
+					{
+						newOrbitalPlace.CreateNewPlace(newOrbitalPlace.determineOrbitalPlaceType(rando), multiplyBy64(newOrbitalLocation), gamedeets, rando);
+						AssignNodeToGrid(GridTile.GridNode.OrbitalLocation, (int)newOrbitalLocation.X, (int)newOrbitalLocation.Y, 1, 1);
+						places.Add(newOrbitalPlace);
+					}
+				}
+
+				//add to liveable places
+				liveablePlaces.Add(newPlace.placeID);
+			}
 
 
 			//create a bunch of people
@@ -334,11 +285,6 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 			//finalization
 			debugAnnounceCreation();
 
-
-			//***GRID
-			createGrid(gamedeets,rando);
-
-			//*** END GRID
 		}
 
 		void createGrid(GameMain gamedeets,Random rando)
@@ -356,45 +302,8 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 					gridTiles.Add(new Point(x, y), newgridTile);
 
-					//gridTiles.Add(newgridTile);
                 }
             }
-
-			//add castle
-			Place newCastle = new Place();
-			int XCenter = (int)(gridSize.X / 2);
-			int YCenter = (int)(gridSize.Y/2);
-
-			Vector2 castleLoc = multiplyBy64(new Vector2(XCenter, YCenter));
-			newCastle.CreateNewPlace(Place.PlaceType.Castle, castleLoc, gamedeets, rando);
-			places.Add(newCastle);
-
-			AssignNodeToGrid(GridTile.GridNode.Castle, XCenter, YCenter,2,2);
-
-			//add town nodes
-			for (int i = 0; i < 5; ++i)
-			{
-				Place newPlace = new Place();
-				Vector2 newLocation = getNewGridPlaceLocation(12, castleLoc, rando,4);
-				AssignNodeToGrid(GridTile.GridNode.Town, (int)newLocation.X, (int)newLocation.Y, 2, 2);
-				newLocation = multiplyBy64(newLocation);
-
-				newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets, rando);
-				places.Add(newPlace);
-
-				//create orbital locations
-				for (int i2 = 0; i2 < rando.Next(2, 5); ++i2)
-				{
-					Place newOrbitalPlace = new Place();
-					Vector2 newOrbitalLocation = getNewGridPlaceLocation(4, newLocation, rando, 2);
-					newOrbitalPlace.CreateNewPlace(newOrbitalPlace.determineOrbitalPlaceType(rando), multiplyBy64(newOrbitalLocation), gamedeets, rando);
-					AssignNodeToGrid(GridTile.GridNode.Town, (int)newOrbitalLocation.X, (int)newOrbitalLocation.Y, 1, 1);
-					places.Add(newOrbitalPlace);
-
-				}
-			}
-
-			//TODO Add Roads
 
 		}
 
@@ -457,9 +366,15 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 			}
 
-			Vector2 newloc = locationCandidates[rando.Next(0, locationCandidates.Count)];
-
-			return newloc;
+			if (locationCandidates.Count > 0)
+			{
+				Vector2 newloc = locationCandidates[rando.Next(0, locationCandidates.Count)];
+				return newloc;
+			}
+			else
+            {
+				return Vector2.Zero;
+            }
         }
 
 
@@ -508,7 +423,7 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 
 		public void Draw(SpriteBatch spriteBatch, SpriteFont displayFont)
 		{
-			spriteBatch.Draw(worldTexture, new Rectangle(0, 0,(int)worldSize.X,(int)worldSize.Y),null, Color.White,0,new Vector2(128,128), SpriteEffects.None,0);
+			//spriteBatch.Draw(worldTexture, new Rectangle(0, 0,(int)worldSize.X,(int)worldSize.Y),null, Color.White,0,new Vector2(128,128), SpriteEffects.None,0);
 
 			for (int i = 0; i < terrains.Count;++i)
             {

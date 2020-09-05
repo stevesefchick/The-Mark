@@ -12,20 +12,23 @@ namespace The_Mark
         public int gridSize = 64;
         public Vector2 gridOffset = new Vector2(32, 32);
 
-        //details
+        //terrain details
         public enum GridTerrain { Grass }
         public GridTerrain thisTerrainType;
-
-        public enum GridNode { None,Castle, Town }
+        //place of interest details
+        public enum GridNode { None,Castle, Town, OrbitalLocation }
         public GridNode thisNodeType;
-
+        //road details
+        public enum RoadType { None, Road }
+        public RoadType thisRoadType;
 
         public GridTile(int x,int y)
         {
             XCoord = x;
             YCoord = y;
             thisTerrainType = GridTerrain.Grass;
-
+            thisRoadType = RoadType.None;
+            thisNodeType = GridNode.None;
         }
 
 
