@@ -28,12 +28,21 @@ namespace The_Mark
             startingPosition = start;
             endingPosition = end;
 
-            createRoadChunks();
+            //createRoadChunks();
             getRoadName(gamedeets.dataManager, rando);
             LoadRoadTexture(gamedeets,rando);
 
         }
 
+        public Road(GameMain gamedeets, Random rando)
+        {
+
+
+            getRoadName(gamedeets.dataManager, rando);
+            LoadRoadTexture(gamedeets, rando);
+        }
+
+        /*
         void createRoadChunks()
         {
             Vector2 currentPosition = startingPosition;
@@ -52,6 +61,7 @@ namespace The_Mark
             }
 
         }
+        */
 
         void LoadRoadTexture(GameMain gamedeets, Random rando)
         {
@@ -125,7 +135,7 @@ namespace The_Mark
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont displayfont,Boolean dontdrawfont)
         {
-            DrawRoadChunks(spriteBatch);
+            //DrawRoadChunks(spriteBatch);
             //DrawLine(spriteBatch, startingPosition, endingPosition);
 
             if (isColliding == true && dontdrawfont == false)
@@ -134,6 +144,7 @@ namespace The_Mark
             }
         }
 
+        /*
         void DrawRoadChunks(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < roadChunks.Count;++i)
@@ -142,30 +153,8 @@ namespace The_Mark
             }
 
         }
+        */
 
-
-        void DrawLine(SpriteBatch sb, Vector2 start, Vector2 end)
-        {
-            Vector2 edge = end - start;
-            // calculate angle to rotate line
-            float angle =
-                (float)Math.Atan2(edge.Y, edge.X);
-
-
-            sb.Draw(roadSprite,
-                new Rectangle(
-                    (int)start.X,
-                    (int)start.Y,
-                    (int)edge.Length(), //sb will strech the texture to fill this rectangle
-                    8), //width of line
-                null,
-                Color.White, 
-                angle,
-                new Vector2(0, 0), 
-                SpriteEffects.None,
-                0);
-
-        }
 
     }
 

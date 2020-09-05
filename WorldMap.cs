@@ -2,12 +2,16 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-
+using System.IO;
 
 namespace The_Mark
 {
 	class WorldMap
     {
+		//enums
+		public enum roadDirections { Up, Down, Left, Right }
+
+
 		//content
 		protected List<Terrain> terrains = new List<Terrain>();
 		protected List<Place> places = new List<Place>();
@@ -95,16 +99,14 @@ namespace The_Mark
 				//get starting place
 				if (places[i].isLiveable == true)
 				{
-					Vector2 starting = places[i].placeLocation;
+					Point starting = new Point((int)divideBy64(places[i].placeLocation).X, (int)divideBy64(places[i].placeLocation).Y);
 					for (int i2 = 0; i2 < places.Count; ++i2)
 					{
 						//get destination
-						if (places[i2].isLiveable == true && places[i].placeID != places[i2].placeID && i2 > i &&
-							MathHelper.Distance(places[i].placeLocation.X, places[i2].placeLocation.X) < 800 && MathHelper.Distance(places[i].placeLocation.Y, places[i2].placeLocation.Y) < 800)
+						if (places[i2].isLiveable == true && places[i].placeID != places[i2].placeID && i2 > i)
 						{
-							Vector2 ending = places[i2].placeLocation;
-							Road newRoad = new Road(starting, ending, gamedeets, rando);
-							roads.Add(newRoad);
+							Point ending = new Point((int)divideBy64(places[i2].placeLocation).X, (int)divideBy64(places[i2].placeLocation).Y);
+							pathRoad(starting, ending);
 						}
 
 
@@ -112,6 +114,57 @@ namespace The_Mark
 				}
 
 			}
+
+			void pathRoad(Point starting, Point ending)
+            {
+				roadDirections thisDirections;
+				List<roadDirections> roadOptions = new List<roadDirections>();
+				gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
+
+
+				while (starting != ending)
+                {
+					roadOptions.Clear();
+					if (ending.X > starting.X)
+						roadOptions.Add(roadDirections.Right);
+					if (ending.X < starting.X)
+						roadOptions.Add(roadDirections.Left);
+					if (ending.Y > starting.Y)
+						roadOptions.Add(roadDirections.Down);
+					if (ending.Y < starting.Y)
+						roadOptions.Add(roadDirections.Up);
+
+					if (roadOptions.Count==1)
+                    {
+						thisDirections = roadOptions[0];
+                    }
+					else
+                    {
+						thisDirections = roadOptions[rando.Next(0, roadOptions.Count)];
+                    }
+
+
+					if (thisDirections == roadDirections.Left)
+                    {
+						starting.X -= 1;
+                    }
+					else if (thisDirections == roadDirections.Right)
+					{
+						starting.X += 1;
+					}
+					else if (thisDirections == roadDirections.Down)
+					{
+						starting.Y += 1;
+					}
+					else if (thisDirections == roadDirections.Up)
+					{
+						starting.Y -= 1;
+					}
+
+					gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
+                }
+            }
+
 
 			//road to castle
 			for (int i = 0; i < places.Count; ++i)
@@ -278,9 +331,9 @@ namespace The_Mark
 
 
 			//create roads
-			createMajorRoads(rando, gamedeets);
+			//createMajorRoads(rando, gamedeets);
 			//cleanup orbital locations that intersect with roads
-			cleanupOrbitalRoadCollision();
+			//cleanupOrbitalRoadCollision();
 
 			//finalization
 			debugAnnounceCreation();
