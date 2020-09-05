@@ -16,7 +16,8 @@ namespace The_Mark
 
 		//***GRID stuff ***
 		public Vector2 gridSize = new Vector2(50, 50);
-		List<GridTile> gridTiles = new List<GridTile>();
+		//List<GridTile> gridTiles = new List<GridTile>();
+		Dictionary<Point, GridTile> gridTiles = new Dictionary<Point, GridTile>();
 
 
 		//*** end GRID stuff ***
@@ -353,9 +354,9 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 					newgridTile.thisTerrainType = GridTile.GridTerrain.Grass;
 					terrains.Add(newTerrain);
 
+					gridTiles.Add(new Point(x, y), newgridTile);
 
-
-					gridTiles.Add(newgridTile);
+					//gridTiles.Add(newgridTile);
                 }
             }
 
@@ -374,34 +375,46 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 			for (int i = 0; i < 5; ++i)
 			{
 				Place newPlace = new Place();
-				Vector2 newLocation = getNewGridLocation(3, 12, castleLoc, rando);
+				Vector2 newLocation = getNewGridPlaceLocation(12, castleLoc, rando,4);
 				AssignNodeToGrid(GridTile.GridNode.Town, (int)newLocation.X, (int)newLocation.Y, 2, 2);
 				newLocation = multiplyBy64(newLocation);
 
 				newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets, rando);
 				places.Add(newPlace);
+
+				//create orbital locations
+				for (int i2 = 0; i2 < rando.Next(2, 5); ++i2)
+				{
+					Place newOrbitalPlace = new Place();
+					Vector2 newOrbitalLocation = getNewGridPlaceLocation(4, newLocation, rando, 2);
+					newOrbitalPlace.CreateNewPlace(newOrbitalPlace.determineOrbitalPlaceType(rando), multiplyBy64(newOrbitalLocation), gamedeets, rando);
+					AssignNodeToGrid(GridTile.GridNode.Town, (int)newOrbitalLocation.X, (int)newOrbitalLocation.Y, 1, 1);
+					places.Add(newOrbitalPlace);
+
+				}
 			}
 
+			//TODO Add Roads
 
 		}
 
-		Boolean isGridItemTooClose(Vector2 location, int distance)
+		Boolean isGridItemTooClose(Point location, int distance)
         {
 			Boolean tellme = false;
 
-			for (int g =0;g < gridTiles.Count;++g)
-            {
-				if (((gridTiles[g].XCoord > location.X - distance &&
-					gridTiles[g].XCoord < location.X + distance) &&
-					(gridTiles[g].YCoord > location.Y - distance &&
-					gridTiles[g].YCoord < location.Y + distance)) &&
-					gridTiles[g].thisNodeType != GridTile.GridNode.None)
+			for (int x = (int)(location.X - distance); x < (int)(location.X + distance); ++x)
+			{
+				for (int y = (int)(location.Y - distance); y < (int)(location.Y + distance); ++y)
 				{
-					tellme = true;
+					Point thisLoc = new Point(x, y);
+					if (gridTiles[thisLoc].thisNodeType != GridTile.GridNode.None)
+                    {
+						tellme = true;
+						break;
+                    }
+
 				}
-
-            }
-
+			}
 
 			return tellme;
         }
@@ -422,53 +435,56 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 			return number;
 		}
 
-		Vector2 getNewGridLocation(int minDistance,int maxDistance,Vector2 origin,Random rando)
+		Vector2 getNewGridPlaceLocation(int maxDistanceFromSource,Vector2 origin,Random rando, int maxDistanceFromNearby)
         {
-			Vector2 newloc = Vector2.Zero;
 			List<Vector2> locationCandidates = new List<Vector2>();
 			origin = divideBy64(origin);
 
 
-			for (int i=0;i<gridTiles.Count;++i)
+			for (int x = (int)(origin.X- maxDistanceFromSource); x < (int)(origin.X+ maxDistanceFromSource);++x)
             {
-				if ((gridTiles[i].thisNodeType == GridTile.GridNode.None) &&
-					((gridTiles[i].XCoord < origin.X - minDistance || gridTiles[i].XCoord > origin.X + minDistance) ||
-					(gridTiles[i].YCoord < origin.Y - minDistance || gridTiles[i].YCoord > origin.Y + minDistance)) &&
-					(gridTiles[i].XCoord >= origin.X - maxDistance && gridTiles[i].XCoord <= origin.X + maxDistance) &&
-					(gridTiles[i].YCoord >= origin.Y - maxDistance && gridTiles[i].YCoord <= origin.Y + maxDistance) &&
-					isGridItemTooClose(new Vector2(gridTiles[i].XCoord,gridTiles[i].YCoord),3)==false)
-                {
-					locationCandidates.Add(new Vector2(gridTiles[i].XCoord, gridTiles[i].YCoord));
-                }
-            }
+				for (int y = (int)(origin.Y - maxDistanceFromSource); y < (int)(origin.Y + maxDistanceFromSource); ++y)
+				{
+					Point thisLoc = new Point(x, y);
+					if (gridTiles[thisLoc].thisNodeType == GridTile.GridNode.None &&
+						isGridItemTooClose(thisLoc, maxDistanceFromNearby) ==false)
+                    {
+						locationCandidates.Add(new Vector2(x,y));
 
-			newloc = locationCandidates[rando.Next(0, locationCandidates.Count)];
+					}
+
+				}
+
+			}
+
+			Vector2 newloc = locationCandidates[rando.Next(0, locationCandidates.Count)];
 
 			return newloc;
         }
 
+
 		void AssignNodeToGrid(GridTile.GridNode nodetype, int Xpos, int YPos, int XLength, int YLength)
 		{
-			for (int i = 0; i < gridTiles.Count;++i)
-            {
-				if (gridTiles[i].XCoord == Xpos && 
-					gridTiles[i].YCoord == YPos)
-                {
-					gridTiles[i].thisNodeType = nodetype;
 
-					if (XLength > 1 || YLength > 1)
+			Point gridLoc = new Point(Xpos, YPos);
+
+			if (XLength > 1 || YLength > 1)
+            {
+				for (int x = gridLoc.X; x < gridLoc.X + XLength; ++x)
+                {
+					for (int y = gridLoc.Y; y < gridLoc.Y + YLength; ++y)
 					{
-						for (int i2 = 0; i2 < gridTiles.Count; ++i2)
-						{
-							if ((gridTiles[i2].XCoord > Xpos && gridTiles[i2].XCoord < Xpos+XLength) ||
-								(gridTiles[i2].YCoord > YPos && gridTiles[i2].YCoord < YPos + YLength))
-							{
-								gridTiles[i2].thisNodeType = nodetype;
-							}
-						}
+						gridTiles[new Point(x,y)].thisNodeType = nodetype;
+
 					}
-                }
-            }
+				}
+			}
+			else
+            {
+				gridTiles[gridLoc].thisNodeType = nodetype;
+
+			}
+
 
 		}
 
@@ -507,13 +523,6 @@ Matrix.CreateTranslation(new Vector3(originLocation.X, originLocation.Y, 0f));
 				places[i].Draw(spriteBatch,displayFont);
             }
 
-
-			//grid
-			foreach (GridTile g in gridTiles)
-            {
-				
-				//spriteBatch.DrawString(displayFont, "ok!", new Vector2((float)(g.XCoord * g.gridSize),(float)(g.YCoord * g.gridSize)), Color.White);
-            }
 
 		}
 
