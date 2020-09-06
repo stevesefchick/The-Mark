@@ -70,15 +70,17 @@ namespace The_Mark
 			else if (thisPlaceType== PlaceType.Graveyard)
             {
 				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/place_graveyard");
-				placeSize = new Vector2(32, 32);
+				placeSize = new Vector2(64, 64);
 				placeCenter = new Vector2(16, 32);
 			}
 			else if (thisPlaceType == PlaceType.Cave)
 			{
 				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/place_cave");
-				placeSize = new Vector2(32, 32);
+				placeSize = new Vector2(64, 64);
 				placeCenter = new Vector2(16, 32);
 			}
+
+			placeCenter = new Vector2(0, 0);
 		}
 
 		void getPlaceName(DataManager datamanager, Random rando)

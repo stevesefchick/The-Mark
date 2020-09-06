@@ -26,6 +26,7 @@ namespace The_Mark
 
 		//assets
 		private Texture2D worldTexture;
+		private Texture2D debugGuideTexture;
 
 
 		//checks
@@ -36,6 +37,14 @@ namespace The_Mark
 			
 			//if new
 			createNewWorld(gamedeets,rando,datamanager);
+
+			//load textures
+			LoadTextures(gamedeets);
+        }
+
+		void LoadTextures(GameMain gamedeets)
+        {
+			debugGuideTexture = gamedeets.Content.Load<Texture2D>("Sprites/UI/debugGuide");
         }
 
 		//debug - announce creations
@@ -301,7 +310,7 @@ namespace The_Mark
 			{
 				Place newPlace = new Place();
 				Vector2 newLocation = getNewGridPlaceLocation(12, castleLoc, rando, 4);
-				AssignNodeToGrid(GridTile.GridNode.Town, (int)newLocation.X, (int)newLocation.Y, 2, 2);
+				AssignNodeToGrid(GridTile.GridNode.Town, (int)newLocation.X, (int)newLocation.Y, 1, 1);
 				newLocation = multiplyBy64(newLocation);
 
 				newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets, rando);
@@ -496,7 +505,14 @@ namespace The_Mark
 				places[i].Draw(spriteBatch,displayFont);
             }
 
-
+			/*
+			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
+			{
+				Vector2 loc = new Vector2(g.Key.X, g.Key.Y);
+				loc = multiplyBy64(loc);
+				spriteBatch.Draw(debugGuideTexture, loc, Color.White);
+			}
+			*/
 		}
 
 	}
