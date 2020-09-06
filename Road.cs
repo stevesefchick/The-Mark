@@ -135,7 +135,7 @@ namespace The_Mark
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont displayfont,Boolean dontdrawfont)
         {
-            //DrawRoadChunks(spriteBatch);
+            DrawRoadChunks(spriteBatch);
             //DrawLine(spriteBatch, startingPosition, endingPosition);
 
             if (isColliding == true && dontdrawfont == false)
@@ -144,16 +144,16 @@ namespace The_Mark
             }
         }
 
-        /*
+        
         void DrawRoadChunks(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < roadChunks.Count;++i)
             {
-                spriteBatch.Draw(roadSprite, roadChunks[i].rect, null, Color.White, roadChunks[i].angle, Vector2.Zero, SpriteEffects.None, 0);
+                spriteBatch.Draw(roadSprite, roadChunks[i].rect, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
             }
 
         }
-        */
+        
 
 
     }
@@ -165,10 +165,9 @@ namespace The_Mark
         public Rectangle rect;
         public float angle;
 
-        public RoadChunk(Vector2 thispos, float thisang)
+        public RoadChunk(Vector2 thispos)
         {
-            rect = new Rectangle((int)thispos.X, (int)thispos.Y, 10, 10);
-            angle = thisang;
+            rect = new Rectangle((int)thispos.X, (int)thispos.Y, 64, 64);
         }
 
 

@@ -117,10 +117,12 @@ namespace The_Mark
 
 			void pathRoad(Point starting, Point ending)
             {
+				Road newRoad = new Road(gamedeets, rando);
+
 				roadDirections thisDirections;
 				List<roadDirections> roadOptions = new List<roadDirections>();
 				gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
-
+				newRoad.roadChunks.Add(new RoadChunk(multiplyBy64(new Vector2(starting.X,starting.Y))));
 
 				while (starting != ending)
                 {
@@ -161,8 +163,11 @@ namespace The_Mark
 						starting.Y -= 1;
 					}
 
+					newRoad.roadChunks.Add(new RoadChunk(multiplyBy64(new Vector2(starting.X, starting.Y))));
 					gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
                 }
+
+				roads.Add(newRoad);
             }
 
 
@@ -331,7 +336,7 @@ namespace The_Mark
 
 
 			//create roads
-			//createMajorRoads(rando, gamedeets);
+			createMajorRoads(rando, gamedeets);
 			//cleanup orbital locations that intersect with roads
 			//cleanupOrbitalRoadCollision();
 
