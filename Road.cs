@@ -12,7 +12,7 @@ namespace The_Mark
         Vector2 endingPosition;
 
         //road name
-        string roadName = "Road";
+        public string roadName = "Road";
         Vector2 displayLoc = Vector2.Zero;
 
         //sprites
@@ -133,9 +133,9 @@ namespace The_Mark
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, SpriteFont displayfont,Boolean dontdrawfont)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont displayfont,Boolean dontdrawfont,Texture2D roadTiles)
         {
-            DrawRoadChunks(spriteBatch);
+            DrawRoadChunks(spriteBatch,roadTiles);
             //DrawLine(spriteBatch, startingPosition, endingPosition);
 
             if (isColliding == true && dontdrawfont == false)
@@ -145,11 +145,12 @@ namespace The_Mark
         }
 
         
-        void DrawRoadChunks(SpriteBatch spriteBatch)
+        void DrawRoadChunks(SpriteBatch spriteBatch,Texture2D roadTiles)
         {
             for (int i = 0; i < roadChunks.Count;++i)
             {
-                spriteBatch.Draw(roadSprite, roadChunks[i].rect, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+                    spriteBatch.Draw(roadTiles, roadChunks[i].rect, roadChunks[i].tile, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+                
             }
 
         }
@@ -163,13 +164,17 @@ namespace The_Mark
     class RoadChunk
     {
         public Rectangle rect;
-        public float angle;
+        public Rectangle tile;
 
         public RoadChunk(Vector2 thispos)
         {
             rect = new Rectangle((int)thispos.X, (int)thispos.Y, 64, 64);
+            tile = new Rectangle(0, 0, 64, 64);
         }
 
-
+        public void AssignTile(Rectangle tilevec)
+        {
+            tile = tilevec;
+        }
     }
 }

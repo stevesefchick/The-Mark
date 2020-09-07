@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Sprites\Person\" />
+    <Folder Include="Content\Sprites\World\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Sprites\Place\castle_mockup.png">
@@ -98,6 +99,9 @@
     <Content Include="Content\Sprites\Road\road_test.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Road\road_tiles.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Sprites\Terrain\grass_grid_1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -108,9 +112,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\UI\mouseCursor.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Sprites\World\worldmock.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

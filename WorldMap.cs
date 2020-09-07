@@ -25,8 +25,8 @@ namespace The_Mark
 
 
 		//assets
-		private Texture2D worldTexture;
 		private Texture2D debugGuideTexture;
+		protected Texture2D roadTiles;
 
 
 		//checks
@@ -45,6 +45,7 @@ namespace The_Mark
 		void LoadTextures(GameMain gamedeets)
         {
 			debugGuideTexture = gamedeets.Content.Load<Texture2D>("Sprites/UI/debugGuide");
+			roadTiles = gamedeets.Content.Load<Texture2D>("Sprites/Road/road_tiles");
         }
 
 		//debug - announce creations
@@ -95,6 +96,14 @@ namespace The_Mark
 			}
 
 
+			//announce roads
+			Console.WriteLine("creating roads!");
+			for (int i = 0; i < roads.Count; ++i)
+			{
+				//console debug
+				Console.WriteLine(roads[i].roadName + " is a new road!\n");
+			}
+
 
 
 		}
@@ -134,7 +143,7 @@ namespace The_Mark
 				newRoad.roadChunks.Add(new RoadChunk(multiplyBy64(new Vector2(starting.X,starting.Y))));
 
 				while (starting != ending)
-                {
+				{
 					roadOptions.Clear();
 					if (ending.X > starting.X)
 						roadOptions.Add(roadDirections.Right);
@@ -145,20 +154,20 @@ namespace The_Mark
 					if (ending.Y < starting.Y)
 						roadOptions.Add(roadDirections.Up);
 
-					if (roadOptions.Count==1)
-                    {
+					if (roadOptions.Count == 1)
+					{
 						thisDirections = roadOptions[0];
-                    }
+					}
 					else
-                    {
+					{
 						thisDirections = roadOptions[rando.Next(0, roadOptions.Count)];
-                    }
+					}
 
 
 					if (thisDirections == roadDirections.Left)
-                    {
+					{
 						starting.X -= 1;
-                    }
+					}
 					else if (thisDirections == roadDirections.Right)
 					{
 						starting.X += 1;
@@ -172,8 +181,15 @@ namespace The_Mark
 						starting.Y -= 1;
 					}
 
-					newRoad.roadChunks.Add(new RoadChunk(multiplyBy64(new Vector2(starting.X, starting.Y))));
-					gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
+					if (gridTiles[starting].thisRoadType == GridTile.RoadType.Road)
+					{
+						starting = ending;
+					}
+					else
+					{
+						newRoad.roadChunks.Add(new RoadChunk(multiplyBy64(new Vector2(starting.X, starting.Y))));
+						gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
+					}
                 }
 
 				roads.Add(newRoad);
@@ -220,7 +236,13 @@ namespace The_Mark
 
 							if (placesrect.Intersects(roadrect))
 							{
+								//remove places
 								places.RemoveAt(ol);
+								//remove place from grid, assumes is 1x1
+								Vector2 rectToVector = new Vector2(roadrect.X, roadrect.Y);
+								rectToVector = divideBy64(rectToVector);
+								gridTiles[new Point((int)rectToVector.X, (int)rectToVector.Y)].thisNodeType = GridTile.GridNode.None;
+
 							}
 						}
                     }
@@ -234,64 +256,14 @@ namespace The_Mark
 		//create the world
 		protected void createNewWorld(GameMain gamedeets, Random rando, DataManager datamanager)
         {
-			//create world texture
-			worldTexture = gamedeets.Content.Load<Texture2D>("Sprites/World/worldmock");
 
 			//liveable places, for persons
 			List<string> liveablePlaces = new List<string>();
 
-			//***GRID
+			//create grid
 			createGrid(gamedeets, rando);
 
-			//create terrains
-			/*
-			for (int i =0; i < 5;++i)
-            {
-				int randX = rando.Next(-250, 251);
-				int randY = rando.Next(-250, 251);
-				Terrain newTerrain = new Terrain();
-				Vector2 newLocation = new Vector2(randX, randY);
-				newTerrain.createNewTerrain(Terrain.TerrainType.Grass, newLocation,gamedeets);
-				terrains.Add(newTerrain);
-            }
-			
-			//create normal places
-			for (int i = 0; i < 5; ++i)
-			{
-				Place newPlace = new Place();
-				Vector2 newLocation = getMajorPlaceLocation(rando);
-				newPlace.CreateNewPlace(Place.PlaceType.Town, newLocation, gamedeets,rando);
-				places.Add(newPlace);
-
-				//add to liveable places
-				liveablePlaces.Add(newPlace.placeID);
-
-				//create orbital locations
-				for (int i2 = 0; i2 < rando.Next(2,5); ++i2)
-				{
-					Place newOrbitalPlace = new Place();
-					Vector2 newOrbitalLocation = getOrbitalPlaceLocation(rando, newLocation,new Vector2(110,300));
-					if (newOrbitalLocation != Vector2.Zero)
-					{
-						newOrbitalPlace.CreateNewPlace(newOrbitalPlace.determineOrbitalPlaceType(rando), newOrbitalLocation, gamedeets, rando);
-						//don't add if it's too close to the castle
-						if (isNearCastle(newOrbitalLocation) == false)
-						{
-							places.Add(newOrbitalPlace);
-
-						}
-					}
-
-				}
-			}
-
-			//create castle
-			Place newCastle = new Place();
-			Vector2 castleLoc = Vector2.Zero;
-			newCastle.CreateNewPlace(Place.PlaceType.Castle, castleLoc, gamedeets,rando);
-			places.Add(newCastle);
-			*/
-
+			//TODO: Add Terrains
 
 			//add castle
 			Place newCastle = new Place();
@@ -347,11 +319,148 @@ namespace The_Mark
 			//create roads
 			createMajorRoads(rando, gamedeets);
 			//cleanup orbital locations that intersect with roads
-			//cleanupOrbitalRoadCollision();
+			cleanupOrbitalRoadCollision();
+			//assign tile graphics to roads
+			createTileAssignmentsForRoads();
 
 			//finalization
 			debugAnnounceCreation();
 
+		}
+
+		void createTileAssignmentsForRoads()
+        {
+			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
+			{
+				if (g.Value.thisRoadType == GridTile.RoadType.Road)
+                {
+					Point thisRoadLoc = g.Key;
+					Vector2 thisLoc = new Vector2(thisRoadLoc.X, thisRoadLoc.Y);
+					thisLoc = multiplyBy64(thisLoc);
+					int theroad=0;
+					int thechunk=0;
+
+					//get the chunk to be assigned
+					for (int i =0; i < roads.Count;++i)
+                    {
+						for (int i2=0; i2 < roads[i].roadChunks.Count;++i2)
+                        {
+							if (roads[i].roadChunks[i2].rect.X == thisLoc.X &&
+								roads[i].roadChunks[i2].rect.Y == thisLoc.Y)
+                            {
+								theroad = i;
+								thechunk = i2;
+								break;
+                            }
+                        }
+                    }
+
+
+					Boolean above = false;
+					Boolean below = false;
+					Boolean left = false;
+					Boolean right = false;
+
+					//check above
+					if (gridTiles[new Point(thisRoadLoc.X,thisRoadLoc.Y-1)].thisRoadType == GridTile.RoadType.Road)
+                    {
+						above = true;
+                    }
+					//check below
+					if (gridTiles[new Point(thisRoadLoc.X, thisRoadLoc.Y + 1)].thisRoadType == GridTile.RoadType.Road)
+					{
+						below = true;
+					}
+					//check left
+					if (gridTiles[new Point(thisRoadLoc.X-1, thisRoadLoc.Y)].thisRoadType == GridTile.RoadType.Road)
+					{
+						left = true;
+					}
+					//check right
+					if (gridTiles[new Point(thisRoadLoc.X + 1, thisRoadLoc.Y)].thisRoadType == GridTile.RoadType.Road)
+					{
+						right = true;
+					}
+
+
+					//left only
+					if (above == false && below == false && left == true && right == false)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(256, 64, 64, 64));
+					}
+					//right only
+					if (above == false && below == false && left == false && right == true)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(256, 0, 64, 64));
+					}
+					//up only
+					if (above==true && below==false && left==false && right==false)
+                    {
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(256, 128, 64, 64));
+                    }
+					//down only
+					if (above == false && below == true && left == false && right == false)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(192, 128, 64, 64));
+					}
+					//left and right
+					if (above == false && below == false && left == true && right == true)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(64, 0, 64, 64));
+					}
+					//up and down
+					if (above == true && below == true && left == false && right == false)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(0, 0, 64, 64));
+					}
+					//left up
+					if (above == true && below == false && left == true && right == false)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(192, 64, 64, 64));
+					}
+					//up right
+					if (above == true && below == false && left == false && right == true)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(128, 64, 64, 64));
+					}
+					//right down
+					if (above == false && below == true && left == false && right == true)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(128, 0, 64, 64));
+					}
+					//down left
+					if (above == false && below == true && left == true && right == false)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(192, 0, 64, 64));
+					}
+					//left up right
+					if (above == true && below == false && left == true && right == true)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(0, 128, 64, 64));
+					}
+					//up right down
+					if (above == true && below == true && left == false && right == true)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(0, 64, 64, 64));
+					}
+					//left down right
+					if (above == false && below == true && left == true && right == true)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(64, 128, 64, 64));
+					}
+					//up left down
+					if (above == true && below == true && left == true && right == false)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(64, 64, 64, 64));
+					}
+					//all dir
+					if (above == true && below == true && left == true && right == true)
+					{
+						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(128, 128, 64, 64));
+					}
+				}
+
+			}
 		}
 
 		void createGrid(GameMain gamedeets,Random rando)
@@ -490,7 +599,6 @@ namespace The_Mark
 
 		public void Draw(SpriteBatch spriteBatch, SpriteFont displayFont)
 		{
-			//spriteBatch.Draw(worldTexture, new Rectangle(0, 0,(int)worldSize.X,(int)worldSize.Y),null, Color.White,0,new Vector2(128,128), SpriteEffects.None,0);
 
 			for (int i = 0; i < terrains.Count;++i)
             {
@@ -498,7 +606,7 @@ namespace The_Mark
             }
 			for (int i = 0; i < roads.Count;++i)
             {
-				roads[i].Draw(spriteBatch,displayFont,isDisplayTownAreaFont);
+				roads[i].Draw(spriteBatch,displayFont,isDisplayTownAreaFont,roadTiles);
             }
 			for (int i =0; i < places.Count;++i)
             {
