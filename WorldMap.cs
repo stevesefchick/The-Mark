@@ -78,16 +78,7 @@ namespace The_Mark
 
 			for (int i = 0; i < places.Count; ++i)
 			{
-				int population = 0;
-				foreach (Person p in people)
-                {
-					if (p.placeIDHome == places[i].placeID)
-                    {
-						population += 1;
-                    }
-                }
-
-
+				int population = getPopulationOfPlace(places[i].placeID);
 
 				//console debug
 				Console.WriteLine(places[i].placeName + " is a new place!\n" +
@@ -107,6 +98,22 @@ namespace The_Mark
 
 
 		}
+
+		int getPopulationOfPlace(string placeID)
+        {
+			int pop = 0;
+
+					foreach (Person p in people)
+					{
+						if (p.placeIDHome == placeID)
+						{
+							pop += 1;
+						}
+					}
+
+
+			return pop;
+        }
 
 		//determine roads
 		protected void createMajorRoads(Random rando, GameMain gamedeets)
