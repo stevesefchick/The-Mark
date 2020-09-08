@@ -151,6 +151,9 @@ namespace The_Mark
 
 				while (starting != ending)
 				{
+					//check for tiles ahead - to avoid crossthatching
+					Boolean checkAhead = false;
+
 					roadOptions.Clear();
 					if (ending.X > starting.X)
 						roadOptions.Add(roadDirections.Right);
@@ -174,18 +177,58 @@ namespace The_Mark
 					if (thisDirections == roadDirections.Left)
 					{
 						starting.X -= 1;
+
+                        //check ahead
+                        #region check ahead
+                        if (gridTiles[new Point(starting.X-1,starting.Y)].thisRoadType == GridTile.RoadType.Road ||
+							gridTiles[new Point(starting.X, starting.Y-1)].thisRoadType == GridTile.RoadType.Road ||
+							gridTiles[new Point(starting.X, starting.Y+1)].thisRoadType == GridTile.RoadType.Road)
+                        {
+							checkAhead = true;
+                        }
+						#endregion
 					}
 					else if (thisDirections == roadDirections.Right)
 					{
 						starting.X += 1;
+
+                        //check ahead
+                        #region checkahead
+                        if (gridTiles[new Point(starting.X + 1, starting.Y)].thisRoadType == GridTile.RoadType.Road ||
+							gridTiles[new Point(starting.X, starting.Y - 1)].thisRoadType == GridTile.RoadType.Road ||
+							gridTiles[new Point(starting.X, starting.Y + 1)].thisRoadType == GridTile.RoadType.Road)
+						{
+							checkAhead = true;
+						}
+						#endregion
 					}
 					else if (thisDirections == roadDirections.Down)
 					{
 						starting.Y += 1;
+
+                        //check ahead
+                        #region checkahead
+                        if (gridTiles[new Point(starting.X - 1, starting.Y)].thisRoadType == GridTile.RoadType.Road ||
+							gridTiles[new Point(starting.X + 1, starting.Y)].thisRoadType == GridTile.RoadType.Road ||
+							gridTiles[new Point(starting.X, starting.Y + 1)].thisRoadType == GridTile.RoadType.Road)
+						{
+							checkAhead = true;
+						}
+						#endregion
 					}
 					else if (thisDirections == roadDirections.Up)
 					{
 						starting.Y -= 1;
+
+                        //check ahead
+                        #region check ahead
+                        if (gridTiles[new Point(starting.X - 1, starting.Y)].thisRoadType == GridTile.RoadType.Road ||
+							gridTiles[new Point(starting.X, starting.Y - 1)].thisRoadType == GridTile.RoadType.Road ||
+							gridTiles[new Point(starting.X + 1, starting.Y)].thisRoadType == GridTile.RoadType.Road)
+						{
+							checkAhead = true;
+						}
+						#endregion
 					}
 
 					if (gridTiles[starting].thisRoadType == GridTile.RoadType.Road)
@@ -196,7 +239,15 @@ namespace The_Mark
 					{
 						newRoad.roadChunks.Add(new RoadChunk(multiplyBy64(new Vector2(starting.X, starting.Y))));
 						gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
+
+						//stop if running in parrallel
+						if (checkAhead == true)
+						{
+							starting = ending;
+						}
 					}
+
+
                 }
 
 				roads.Add(newRoad);
