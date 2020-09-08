@@ -74,6 +74,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Data\Creature\" />
+    <Folder Include="Content\Sprites\Creature\" />
     <Folder Include="Content\Sprites\Person\" />
     <Folder Include="Content\Sprites\World\" />
   </ItemGroup>

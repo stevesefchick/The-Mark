@@ -122,7 +122,7 @@ namespace The_Mark
 			for (int i = 0; i < places.Count; ++i)
 			{
 				//get starting place
-				if (places[i].isLiveable == true)
+				if (places[i].isLiveable == true || places[i].thisPlaceLocationType == Place.PlaceLocationType.Castle)
 				{
 					Point starting = new Point((int)divideBy64(places[i].placeLocation).X, (int)divideBy64(places[i].placeLocation).Y);
 					for (int i2 = 0; i2 < places.Count; ++i2)
@@ -204,18 +204,19 @@ namespace The_Mark
 
 
 			//road to castle
+			/*
 			for (int i = 0; i < places.Count; ++i)
 			{
 				//get starting place
 				if (places[i].isLiveable == true)
 				{
-					Vector2 starting = places[i].placeLocation;
+					Vector2 ending = places[i].placeLocation;
 					//get destination
 					for (int i2 = 0; i2 < places.Count; ++i2)
 					{
 						if (places[i2].thisPlaceLocationType == Place.PlaceLocationType.Castle && rando.Next(1,3) == 1)
 						{
-							Vector2 ending = places[i2].placeLocation;
+							Vector2 starting = places[i2].placeLocation;
 							Road newRoad = new Road(starting, ending, gamedeets, rando);
 							roads.Add(newRoad);
 
@@ -225,6 +226,7 @@ namespace The_Mark
 					}
 				}
 			}
+			*/
 		}
 
 		//cleanup colliding orbital locations
