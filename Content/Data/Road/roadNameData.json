@@ -4,7 +4,20 @@
   "Stardust": { "roadnametype": "roadnoun" },
   "Starry": { "roadnametype": "roadnoun" },
   "Dream": { "roadnametype": "roadnoun" },
+  "Quiet": { "roadnametype": "roadnoun" },
   "Merchant": { "roadnametype": "roadnoun" },
+  "Marsh": { "roadnametype": "roadnoun" },
+  "Prospect": { "roadnametype": "roadnoun" },
+  "Riverside": { "roadnametype": "roadnoun" },
+  "Grandview": { "roadnametype": "roadnoun" },
+  "Lore": { "roadnametype": "roadnoun" },
+  "Celes": { "roadnametype": "roadnoun" },
+  "Locke": { "roadnametype": "roadnoun" },
+  "Terra": { "roadnametype": "roadnoun" },
+  "Cloud": { "roadnametype": "roadnoun" },
+  "Barret": { "roadnametype": "roadnoun" },
+  "Edgar": { "roadnametype": "roadnoun" },
+  "Sabin": { "roadnametype": "roadnoun" },
   "Heaven": { "roadnametype": "roadnoun" },
   "Hell": { "roadnametype": "roadnoun" },
   "King's": { "roadnametype": "roadnoun" },
@@ -21,7 +34,9 @@
   "Highway": { "roadnametype": "roadend" },
   "Road": { "roadnametype": "roadend" },
   "Boulevard": { "roadnametype": "roadend" },
-  "March": { "roadnametype": "roadend" }
+  "March": { "roadnametype": "roadend" },
+  "Walk": { "roadnametype": "roadend" },
+  "Hike": { "roadnametype": "roadend" }
 
 
 }
