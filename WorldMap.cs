@@ -253,31 +253,6 @@ namespace The_Mark
 				roads.Add(newRoad);
             }
 
-
-			//road to castle
-			/*
-			for (int i = 0; i < places.Count; ++i)
-			{
-				//get starting place
-				if (places[i].isLiveable == true)
-				{
-					Vector2 ending = places[i].placeLocation;
-					//get destination
-					for (int i2 = 0; i2 < places.Count; ++i2)
-					{
-						if (places[i2].thisPlaceLocationType == Place.PlaceLocationType.Castle && rando.Next(1,3) == 1)
-						{
-							Vector2 starting = places[i2].placeLocation;
-							Road newRoad = new Road(starting, ending, gamedeets, rando);
-							roads.Add(newRoad);
-
-						}
-
-
-					}
-				}
-			}
-			*/
 		}
 
 		//cleanup colliding orbital locations
@@ -375,6 +350,8 @@ namespace The_Mark
 				people.Add(person);
             }
 
+			//create a bunch of creatures based on terrains and places
+			//assign creature to home
 
 			//create roads
 			createMajorRoads(rando, gamedeets);
