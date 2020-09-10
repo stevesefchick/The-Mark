@@ -351,10 +351,14 @@ namespace The_Mark
             }
 
 			//create a bunch of creatures based on terrains and places
-			//assign creature to home
+			#region creatures
+			lookForCreatureAvailability();
 
-			//create roads
-			createMajorRoads(rando, gamedeets);
+            #endregion
+            //assign creature to home
+
+            //create roads
+            createMajorRoads(rando, gamedeets);
 			//cleanup orbital locations that intersect with roads
 			cleanupOrbitalRoadCollision();
 			//assign tile graphics to roads
@@ -364,6 +368,11 @@ namespace The_Mark
 			debugAnnounceCreation();
 
 		}
+
+		void lookForCreatureAvailability()
+        {
+
+        }
 
 		void createTileAssignmentsForRoads()
         {

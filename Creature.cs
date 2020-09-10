@@ -11,8 +11,8 @@ namespace The_Mark
         public string creatureID;
 
         //enums
-        public enum AggressionType { Friendly, Neutral, Cautious, Aggressive}
-        public enum ThisCreatureType { Birb}
+        public enum AggressionType { Friendly, Neutral, Cautious, Defensive, Aggressive}
+        public enum ThisCreatureType { Birb, FlapFlap}
         public enum ActiveTime { Daytime, Nighttime, Both}
 
         //properties
@@ -26,11 +26,21 @@ namespace The_Mark
         public string placeIDHome;
 
 
-        public Creature()
+        public Creature(ThisCreatureType theType)
         {
+            AssignProperties(theType);
 
 
+        }
 
+        void AssignProperties(ThisCreatureType thisType)
+        {
+            if (thisType == ThisCreatureType.FlapFlap)
+            {
+                thisAggressionType = AggressionType.Neutral;
+                thisCreatureType = ThisCreatureType.FlapFlap;
+                thisCreatureActiveTime = ActiveTime.Nighttime;
+            }
         }
 
         public void Update()
