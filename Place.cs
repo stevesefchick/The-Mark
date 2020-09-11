@@ -28,7 +28,7 @@ namespace The_Mark
 		public PlaceLocationType thisPlaceLocationType;
 
 		//type
-		public enum PlaceType { Castle, Town, Graveyard, Cave}
+		public enum PlaceType { Castle, Town, Graveyard, Cave, Encampment}
 		public PlaceType thisPlaceType;
 
 		//sprites
@@ -79,7 +79,12 @@ namespace The_Mark
 				placeSize = new Vector2(64, 64);
 				placeCenter = new Vector2(16, 32);
 			}
-
+			else if (thisPlaceType == PlaceType.Encampment)
+			{
+				placeTexture = gamedeets.Content.Load<Texture2D>("Sprites/Place/place_encampment");
+				placeSize = new Vector2(64, 64);
+				placeCenter = new Vector2(16, 32);
+			}
 			placeCenter = new Vector2(0, 0);
 		}
 
@@ -176,10 +181,17 @@ namespace The_Mark
 			}
 			#endregion
 
-			#region graveyard
+			#region cave
 			if (thisPlaceType == PlaceType.Cave)
 			{
 				placeName = "Cave";
+			}
+			#endregion
+
+			#region encampment
+			if (thisPlaceType == PlaceType.Encampment)
+			{
+				placeName = "Encampment";
 			}
 			#endregion
 		}
@@ -203,6 +215,11 @@ namespace The_Mark
 				graveyard_numberOfDead = rando.Next(2, 10);
 			}
 			else if (thisPlaceType == PlaceType.Cave)
+			{
+				isLiveable = false;
+				thisPlaceLocationType = PlaceLocationType.OrbitingNode;
+			}
+			else if (thisPlaceType == PlaceType.Encampment)
 			{
 				isLiveable = false;
 				thisPlaceLocationType = PlaceLocationType.OrbitingNode;
@@ -246,12 +263,9 @@ namespace The_Mark
         {
 			List<PlaceType> possiblePlaceTypes = new List<PlaceType>();
 
-			possiblePlaceTypes.AddRange(new PlaceType[] { PlaceType.Graveyard, PlaceType.Cave });
+			possiblePlaceTypes.AddRange(new PlaceType[] { PlaceType.Graveyard, PlaceType.Cave, PlaceType.Encampment });
 
 			PlaceType thisType = possiblePlaceTypes[rando.Next(0, possiblePlaceTypes.Count)];
-
-			//debug
-			thisPlaceType = PlaceType.Graveyard;
 
 			return thisType;
         }

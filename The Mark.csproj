@@ -35,6 +35,9 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="App.config" />
+    <None Include="Content\Data\Creature\creatureNameData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Data\Person\lastnameData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -75,7 +78,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Data\Creature\" />
     <Folder Include="Content\Sprites\Creature\" />
     <Folder Include="Content\Sprites\Person\" />
     <Folder Include="Content\Sprites\World\" />
@@ -85,6 +87,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Place\place_cave.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Place\place_encampment.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Place\place_graveyard.png">

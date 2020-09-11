@@ -14,6 +14,7 @@ namespace The_Mark
         public Dictionary<string, LastNameData> lastNames = new Dictionary<string, LastNameData>();
         public Dictionary<string, TownNameData> townNames = new Dictionary<string, TownNameData>();
         public Dictionary<string, RoadNameData> roadNames = new Dictionary<string, RoadNameData>();
+        public Dictionary<string, CreatureNameData> creatureNames = new Dictionary<string, CreatureNameData>();
 
         //random id data
         public List<string> randomGenData = new List<string>();
@@ -34,6 +35,7 @@ namespace The_Mark
             lastNames = JsonConvert.DeserializeObject<Dictionary<string, LastNameData>>(File.ReadAllText(@"Content/Data/Person/lastnameData.json"));
             townNames = JsonConvert.DeserializeObject<Dictionary<string, TownNameData>>(File.ReadAllText(@"Content/Data/Place/townNameData.json"));
             roadNames = JsonConvert.DeserializeObject<Dictionary<string, RoadNameData>>(File.ReadAllText(@"Content/Data/Road/roadNameData.json"));
+            creatureNames = JsonConvert.DeserializeObject<Dictionary<string, CreatureNameData>>(File.ReadAllText(@"Content/Data/Creature/creatureNameData.json"));
 
         }
 
@@ -99,6 +101,16 @@ namespace The_Mark
         public RoadNameData(string thetype)
         {
             roadnametype = thetype;
+        }
+    }
+
+    class CreatureNameData
+    {
+        public string creaturenametype;
+
+        public CreatureNameData(string thetype)
+        {
+            creaturenametype = thetype;
         }
     }
 }
