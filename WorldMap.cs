@@ -17,6 +17,8 @@ namespace The_Mark
 		protected List<Place> places = new List<Place>();
 		protected List<Person> people = new List<Person>();
 		protected List<Road> roads = new List<Road>();
+		protected List<Creature> creatures = new List<Creature>();
+
 
 
 		public Vector2 gridSize = new Vector2(50, 50);
@@ -95,8 +97,13 @@ namespace The_Mark
 				Console.WriteLine(roads[i].roadName + " is a new road!\n");
 			}
 
-
-
+			//announce creatures
+			Console.WriteLine("creating creatures! coming in hot");
+			for (int i = 0; i < creatures.Count; ++i)
+			{
+				//console debug
+				Console.WriteLine("a creature is here! it's a " + creatures[i].thisCreatureType.ToString() + "!\n");
+			}
 		}
 
 		int getPopulationOfPlace(string placeID)
@@ -352,7 +359,7 @@ namespace The_Mark
 
 			//create a bunch of creatures based on terrains and places
 			#region creatures
-			lookForCreatureAvailability();
+			lookForCreatureAvailability(rando);
 
             #endregion
             //assign creature to home
@@ -369,10 +376,43 @@ namespace The_Mark
 
 		}
 
-		void lookForCreatureAvailability()
+		void lookForCreatureAvailability(Random rando)
         {
+            //FLAP FLAP
+            #region flap flap
+            List<string> availableLocationIDs = new List<string>();
+			int max = 0;
+			for (int i = 0; i <places.Count;++i)
+            {
+				if (places[i].thisPlaceType == Place.PlaceType.Cave ||
+					places[i].thisPlaceType == Place.PlaceType.Graveyard)
+                {
+					availableLocationIDs.Add(places[i].placeID);
+                }
+            }
 
-        }
+			if (availableLocationIDs.Count>0)
+            {
+				max = rando.Next(0, availableLocationIDs.Count * 10);
+            }
+
+			//create and assign creatures
+			for (int i =0; i < max; ++i)
+            {
+				Creature newCreature = new Creature(Creature.ThisCreatureType.FlapFlap);
+				newCreature.placeIDHome = availableLocationIDs[rando.Next(0, availableLocationIDs.Count)];
+				creatures.Add(newCreature);
+            }
+
+			max = 0;
+			availableLocationIDs.Clear();
+
+			#endregion
+
+
+
+
+		}
 
 		void createTileAssignmentsForRoads()
         {
