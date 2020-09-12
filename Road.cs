@@ -92,7 +92,7 @@ namespace The_Mark
 
         void getRoadName(DataManager datamanager, Random rando)
         {
-            int roadnametype = rando.Next(1, 3);
+            int roadnametype = rando.Next(1, 4);
 
 
             if (roadnametype == 1)
@@ -134,6 +134,35 @@ namespace The_Mark
                     }
                 }
                 roadName = candidatesadj[rando.Next(0, candidatesadj.Count)].ToString() + " " + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
+            }
+            else if (roadnametype == 3)
+            {
+                List<string> candidatesanimal = new List<string>();
+                List<string> candidatesadj = new List<string>();
+                List<string> candidatesend = new List<string>();
+
+                foreach (KeyValuePair<string, RoadNameData> entry in datamanager.roadNames)
+                {
+                    if (entry.Value.roadnametype == "roadanimal")
+                    {
+                        candidatesanimal.Add(entry.Key);
+                    }
+                }
+                foreach (KeyValuePair<string, RoadNameData> entry in datamanager.roadNames)
+                {
+                    if (entry.Value.roadnametype == "roadadj")
+                    {
+                        candidatesadj.Add(entry.Key);
+                    }
+                }
+                foreach (KeyValuePair<string, RoadNameData> entry in datamanager.roadNames)
+                {
+                    if (entry.Value.roadnametype == "roadend")
+                    {
+                        candidatesend.Add(entry.Key);
+                    }
+                }
+                roadName =  candidatesadj[rando.Next(0, candidatesadj.Count)].ToString() + " " + candidatesanimal[rando.Next(0, candidatesanimal.Count)].ToString() + " " + candidatesend[rando.Next(0, candidatesend.Count)].ToString();
             }
         }
 
