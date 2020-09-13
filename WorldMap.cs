@@ -94,7 +94,7 @@ namespace The_Mark
 			for (int i = 0; i < roads.Count; ++i)
 			{
 				//console debug
-				Console.WriteLine(roads[i].roadName + " is a new road!\n");
+				Console.Write(roads[i].roadName + " is a new road!\n");
 			}
 
 			//announce creatures
@@ -102,7 +102,11 @@ namespace The_Mark
 			for (int i = 0; i < creatures.Count; ++i)
 			{
 				//console debug
-				Console.WriteLine("a creature is here! it's a " + creatures[i].thisCreatureType.ToString() + "!\n");
+				Console.Write("a creature is here! it's a " + creatures[i].thisCreatureType.ToString() + "!\n");
+				if (creatures[i].isUnique==true)
+                {
+					Console.Write("It's unique! Name is " + creatures[i].uniqueCreatureName + "!\n");
+				}
 			}
 		}
 
@@ -359,10 +363,9 @@ namespace The_Mark
 
 			//create a bunch of creatures based on terrains and places
 			#region creatures
-			lookForCreatureAvailability(rando);
+			lookForCreatureAvailability(rando,datamanager);
 
             #endregion
-            //assign creature to home
 
             //create roads
             createMajorRoads(rando, gamedeets);
@@ -376,7 +379,7 @@ namespace The_Mark
 
 		}
 
-		void lookForCreatureAvailability(Random rando)
+		void lookForCreatureAvailability(Random rando,DataManager datamanager)
         {
             //FLAP FLAP
             #region flap flap
@@ -399,7 +402,7 @@ namespace The_Mark
 			//create and assign creatures
 			for (int i =0; i < max; ++i)
             {
-				Creature newCreature = new Creature(Creature.ThisCreatureType.FlapFlap);
+				Creature newCreature = new Creature(Creature.ThisCreatureType.FlapFlap, datamanager,rando);
 				newCreature.placeIDHome = availableLocationIDs[rando.Next(0, availableLocationIDs.Count)];
 				creatures.Add(newCreature);
             }

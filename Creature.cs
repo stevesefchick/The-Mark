@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-
+using System.Collections.Generic;
 
 namespace The_Mark
 {
@@ -33,7 +33,7 @@ namespace The_Mark
 
             if (rando.Next(1,50)==1)
             {
-                AssignUniqueCreatureProperties(rando);
+                AssignUniqueCreatureProperties(rando,dataManager);
             }
 
         }
@@ -55,16 +55,48 @@ namespace The_Mark
             }
         }
 
-        void AssignUniqueCreatureProperties(Random rando)
+        void AssignUniqueCreatureProperties(Random rando, DataManager dataManager)
         {
             isUnique = true;
-            uniqueCreatureName = generateCreatureName(rando);
+            uniqueCreatureName = generateCreatureName(rando,dataManager);
         }
 
-        string generateCreatureName(Random rando)
+        string generateCreatureName(Random rando, DataManager datamanager)
         {
             string thename = "";
+            int thischoice;
 
+            //flap flap
+            #region flap flap
+            if (thisCreatureType == ThisCreatureType.FlapFlap)
+            {
+                thischoice = 1;
+
+                //type 1 - name + the Flap Flap"
+                if (thischoice==1)
+                {
+                        string ending = " the FlapFlap";
+
+
+                        List<string> candidatesflapflapname = new List<string>();
+                        foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                        {
+                            if (entry.Value.creaturenametype == "flapflapname" || entry.Value.creaturenametype == "normalcreaturename")
+                            {
+                            candidatesflapflapname.Add(entry.Key);
+                            }
+                        }
+
+                        thename = candidatesflapflapname[rando.Next(0, candidatesflapflapname.Count)].ToString() + ending;
+                    
+                }
+
+                //type 2 - name + title "blank, the blank"
+                //type 3 - bitename + flyname
+                //type 4 - scratchname + flying
+
+            }
+            #endregion
 
             return thename;
         }
