@@ -70,7 +70,7 @@ namespace The_Mark
             #region flap flap
             if (thisCreatureType == ThisCreatureType.FlapFlap)
             {
-                thischoice = 1;
+                thischoice = rando.Next(1, 3);
 
                 //type 1 - name + the Flap Flap"
                 if (thischoice==1)
@@ -91,12 +91,38 @@ namespace The_Mark
                     
                 }
 
+                //type 3 - bitename + scratchname
+                if (thischoice == 2)
+                {
+                    List<string> candidatesscratchname = new List<string>();
+                    List<string> candidatesbitename = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturebitename")
+                        {
+                            candidatesbitename.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturescratchname")
+                        {
+                            candidatesscratchname.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesbitename[rando.Next(0, candidatesbitename.Count)].ToString() + candidatesscratchname[rando.Next(0, candidatesscratchname.Count)].ToString();
+
+                }
+
+                //type 5 - bitename + flying
                 //type 2 - name + title "blank, the blank"
-                //type 3 - bitename + flyname
                 //type 4 - scratchname + flying
 
             }
             #endregion
+
+            //capitalize first letter
+            thename = thename.Substring(0, 1).ToUpper() + thename.Substring(1);
 
             return thename;
         }

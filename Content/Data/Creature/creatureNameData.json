@@ -1,6 +1,7 @@
 {
   "Echo": { "creaturenametype": "flapflapname" },
   "Screech": { "creaturenametype": "flapflapname" },
+  "Dracula 2": { "creaturenametype": "flapflapname" },
   "Batty": { "creaturenametype": "flapflapname" },
   "Merlin": { "creaturenametype": "normalcreaturename" },
   "Spectre": { "creaturenametype": "normalcreaturename" },
@@ -12,7 +13,13 @@
   "nibble": { "creaturenametype": "creaturebitename" },
   "bite": { "creaturenametype": "creaturebitename" },
   "lick": { "creaturenametype": "creaturebitename" },
-  "tooth": { "creaturenametype": "creaturebitename" }
+  "tooth": { "creaturenametype": "creaturebitename" },
+  "fang": { "creaturenametype": "creaturebitename" },
+  "claw": { "creaturenametype": "creaturescratchname" },
+  "dagger": { "creaturenametype": "creaturescratchname" },
+  "blade": { "creaturenametype": "creaturescratchname" },
+  "scratch": { "creaturenametype": "creaturescratchname" },
+  "razor": { "creaturenametype": "creaturescratchname" }
 
 
 }
