@@ -25,6 +25,7 @@ namespace The_Mark
 
         //home
         public string placeIDHome;
+        public Terrain.TerrainType terrainTypeHome;
 
 
         public Creature(ThisCreatureType theType,DataManager dataManager,Random rando)

@@ -432,9 +432,19 @@ namespace The_Mark
 			//create and assign creatures
 			for (int i = 0; i < max; ++i)
 			{
-				Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
-				newCreature.placeIDHome = availableLocationIDs[rando.Next(0, availableLocationIDs.Count)];
-				creatures.Add(newCreature);
+				int randTerrainOrPlaceCheck = rando.Next(1, 3);
+				if (randTerrainOrPlaceCheck == 1)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
+					newCreature.placeIDHome = availableLocationIDs[rando.Next(0, availableLocationIDs.Count)];
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 2)
+                {
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Grass;
+					creatures.Add(newCreature);
+				}
 			}
 
 			max = 0;
