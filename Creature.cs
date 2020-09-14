@@ -53,6 +53,13 @@ namespace The_Mark
                 thisCreatureActiveTime = ActiveTime.Nighttime;
 
             }
+            else if (thisType == ThisCreatureType.Birb)
+            {
+                thisAggressionType = AggressionType.Cautious;
+                thisCreatureType = ThisCreatureType.Birb;
+                thisCreatureActiveTime = ActiveTime.Daytime;
+
+            }
         }
 
         void AssignUniqueCreatureProperties(Random rando, DataManager dataManager)
@@ -70,7 +77,7 @@ namespace The_Mark
             #region flap flap
             if (thisCreatureType == ThisCreatureType.FlapFlap)
             {
-                thischoice = rando.Next(1, 3);
+                thischoice = rando.Next(1, 6);
 
                 //type 1 - name + the Flap Flap"
                 if (thischoice==1)
@@ -92,7 +99,7 @@ namespace The_Mark
                 }
 
                 //type 3 - bitename + scratchname
-                if (thischoice == 2)
+                else if (thischoice == 2)
                 {
                     List<string> candidatesscratchname = new List<string>();
                     List<string> candidatesbitename = new List<string>();
@@ -115,11 +122,150 @@ namespace The_Mark
                 }
 
                 //type 5 - bitename + flying
-                //type 2 - name + title "blank, the blank"
+                else if (thischoice == 3)
+                {
+                    List<string> candidateflightname = new List<string>();
+                    List<string> candidatesbitename = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturebitename")
+                        {
+                            candidatesbitename.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creatureflyingname")
+                        {
+                            candidateflightname.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesbitename[rando.Next(0, candidatesbitename.Count)].ToString() + candidateflightname[rando.Next(0, candidateflightname.Count)].ToString();
+
+                }
                 //type 4 - scratchname + flying
+                else if (thischoice == 4)
+                {
+                    List<string> candidateflightname = new List<string>();
+                    List<string> candidatesscratchname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturescratchname")
+                        {
+                            candidatesscratchname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creatureflyingname")
+                        {
+                            candidateflightname.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesscratchname[rando.Next(0, candidatesscratchname.Count)].ToString() + candidateflightname[rando.Next(0, candidateflightname.Count)].ToString();
+
+                }
+                //type 2 - name + title "blank, the blank"
+                else if (thischoice == 5)
+                {
+                    List<string> candidatestitlename = new List<string>();
+                    List<string> candidatesflapflapname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "flapflapname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesflapflapname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturetitle")
+                        {
+                            candidatestitlename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesflapflapname[rando.Next(0, candidatesflapflapname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+
+
+
 
             }
             #endregion
+
+            //birb
+            #region birb
+            if (thisCreatureType == ThisCreatureType.Birb)
+            {
+                thischoice = rando.Next(1, 4);
+
+                //type 1 - name + the birb
+                if (thischoice == 1)
+                {
+                    string ending = " the Birb";
+
+
+                    List<string> candidatesbirbname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "birbname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesbirbname.Add(entry.Key);
+                        }
+                    }
+
+                    thename = candidatesbirbname[rando.Next(0, candidatesbirbname.Count)].ToString() + ending;
+
+                }
+                //type 2 - name + title
+                else if (thischoice == 2)
+                {
+                    List<string> candidatestitlename = new List<string>();
+                    List<string> candidatesbirbname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "birbname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesbirbname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturetitle")
+                        {
+                            candidatestitlename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesbirbname[rando.Next(0, candidatesbirbname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+                //type 3 - yelling + flying
+                else if (thischoice == 3)
+                {
+                    List<string> candidateflightname = new List<string>();
+                    List<string> candidatesyellingname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creatureyellingname")
+                        {
+                            candidatesyellingname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creatureflyingname")
+                        {
+                            candidateflightname.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesyellingname[rando.Next(0, candidatesyellingname.Count)].ToString() + candidateflightname[rando.Next(0, candidateflightname.Count)].ToString();
+
+                }
+
+            }
+            #endregion
+
 
             //capitalize first letter
             thename = thename.Substring(0, 1).ToUpper() + thename.Substring(1);

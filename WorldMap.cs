@@ -414,10 +414,40 @@ namespace The_Mark
 
 
 
+			//BIRB
+			#region birb
+			for (int i = 0; i < places.Count; ++i)
+			{
+				if (places[i].thisPlaceType == Place.PlaceType.Ruins)
+				{
+					availableLocationIDs.Add(places[i].placeID);
+				}
+			}
+
+			if (availableLocationIDs.Count > 0)
+			{
+				max = rando.Next(0, availableLocationIDs.Count * 10);
+			}
+
+			//create and assign creatures
+			for (int i = 0; i < max; ++i)
+			{
+				Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
+				newCreature.placeIDHome = availableLocationIDs[rando.Next(0, availableLocationIDs.Count)];
+				creatures.Add(newCreature);
+			}
+
+			max = 0;
+			availableLocationIDs.Clear();
+
+
+
+			#endregion
+
 
 		}
 
-		void createTileAssignmentsForRoads()
+        void createTileAssignmentsForRoads()
         {
 			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
 			{
