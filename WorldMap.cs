@@ -157,8 +157,14 @@ namespace The_Mark
 
 				roadDirections thisDirections;
 				List<roadDirections> roadOptions = new List<roadDirections>();
-				gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
-				newRoad.roadChunks.Add(new RoadChunk(multiplyBy64(new Vector2(starting.X,starting.Y))));
+
+				//Initial check, ensures that road doesn't exist in starting location
+				if (gridTiles[starting].thisRoadType != GridTile.RoadType.Road)
+				{
+					gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
+					newRoad.roadChunks.Add(new RoadChunk(multiplyBy64(new Vector2(starting.X, starting.Y))));
+				}
+
 
 				while (starting != ending)
 				{

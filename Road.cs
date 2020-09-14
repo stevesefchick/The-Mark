@@ -42,26 +42,6 @@ namespace The_Mark
             LoadRoadTexture(gamedeets, rando);
         }
 
-        /*
-        void createRoadChunks()
-        {
-            Vector2 currentPosition = startingPosition;
-            Vector2 distance = (endingPosition - startingPosition);
-            Vector2 chunkamount = distance / 100; //distance / size
-
-            Vector2 edge = endingPosition - startingPosition;
-            float angle =
-                (float)Math.Atan2(edge.Y, edge.X);
-
-            while (MathHelper.Distance(currentPosition.X,endingPosition.X) > 5 && MathHelper.Distance(currentPosition.Y,endingPosition.Y) > 5)
-            {
-                roadChunks.Add(new RoadChunk(currentPosition, angle));
-
-                currentPosition += chunkamount;
-            }
-
-        }
-        */
 
         void LoadRoadTexture(GameMain gamedeets, Random rando)
         {

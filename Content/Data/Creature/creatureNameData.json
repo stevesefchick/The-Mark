@@ -46,6 +46,7 @@
   "soar": { "creaturenametype": "creatureflyingname" },
   "wind": { "creaturenametype": "creatureflyingname" },
   "screech": { "creaturenametype": "creatureyellingname" },
+  "scream": { "creaturenametype": "creatureyellingname" },
   "murmur": { "creaturenametype": "creatureyellingname" },
   "song": { "creaturenametype": "creatureyellingname" },
   "yelp": { "creaturenametype": "creatureyellingname" },
