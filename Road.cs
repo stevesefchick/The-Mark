@@ -7,32 +7,18 @@ namespace The_Mark
 {
     class Road
     {
-        //position info
-        Vector2 startingPosition;
-        Vector2 endingPosition;
-
         //road name
         public string roadName = "Road";
         Vector2 displayLoc = Vector2.Zero;
 
         //sprites
-        Texture2D roadSprite;
+        private Texture2D roadSprite;
 
         //road chunks
         public List<RoadChunk> roadChunks = new List<RoadChunk>();
 
         Boolean isColliding;
 
-        public Road(Vector2 start, Vector2 end, GameMain gamedeets, Random rando)
-        {
-            startingPosition = start;
-            endingPosition = end;
-
-            //createRoadChunks();
-            getRoadName(gamedeets.dataManager, rando);
-            LoadRoadTexture(gamedeets,rando);
-
-        }
 
         public Road(GameMain gamedeets, Random rando)
         {

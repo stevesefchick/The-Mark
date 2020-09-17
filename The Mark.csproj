@@ -69,6 +69,7 @@
     <Compile Include="Place.cs" />
     <Compile Include="Road.cs" />
     <Compile Include="Terrain.cs" />
+    <Compile Include="Water.cs" />
     <Compile Include="WorldMap.cs" />
   </ItemGroup>
   <ItemGroup>
