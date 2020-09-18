@@ -8,7 +8,7 @@ namespace The_Mark
     class Water
     {
         //water name
-        public string roadName = "River";
+        public string riverName = "River";
         Vector2 displayLoc = Vector2.Zero;
 
         //sprites

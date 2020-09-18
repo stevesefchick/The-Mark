@@ -29,6 +29,8 @@ namespace The_Mark
 		//assets
 		private Texture2D debugGuideTexture;
 		protected Texture2D roadTiles;
+		protected Texture2D lakeTiles;
+		protected Texture2D riverTiles;
 
 
 		//checks
@@ -48,7 +50,9 @@ namespace The_Mark
         {
 			debugGuideTexture = gamedeets.Content.Load<Texture2D>("Sprites/UI/debugGuide");
 			roadTiles = gamedeets.Content.Load<Texture2D>("Sprites/Road/road_tiles");
-        }
+			riverTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/river_tiles");
+			lakeTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/river_tiles");
+		}
 
 		//debug - announce creations
 		protected void debugAnnounceCreation()
@@ -304,6 +308,21 @@ namespace The_Mark
         }
 
 
+		protected void createLakes(GameMain gamedeets, Random rando)
+        {
+			int numberoflakes = rando.Next(1, 4);
+
+			for (int i =0; i < numberoflakes;++i)
+            {
+
+
+
+
+            }
+
+
+
+        }
 
 		//create the world
 		protected void createNewWorld(GameMain gamedeets, Random rando, DataManager datamanager)
@@ -316,6 +335,13 @@ namespace The_Mark
 			createGrid(gamedeets, rando);
 
 			//TODO: Add Terrains
+
+
+			//ADD LAKES
+
+			//ADD RIVERS
+
+
 
 			//add castle
 			Place newCastle = new Place();

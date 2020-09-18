@@ -21,6 +21,9 @@ namespace The_Mark
         //road details
         public enum RoadType { None, Road }
         public RoadType thisRoadType;
+        //water detail
+        public enum WaterType { None, Lake, River }
+        public WaterType thisWaterType;
 
         public GridTile(int x,int y)
         {
@@ -29,6 +32,7 @@ namespace The_Mark
             thisTerrainType = GridTerrain.Grass;
             thisRoadType = RoadType.None;
             thisNodeType = GridNode.None;
+            thisWaterType = WaterType.None;
         }
 
 
