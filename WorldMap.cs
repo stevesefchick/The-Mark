@@ -17,6 +17,7 @@ namespace The_Mark
 		protected List<Place> places = new List<Place>();
 		protected List<Person> people = new List<Person>();
 		protected List<Road> roads = new List<Road>();
+		protected List<Water> waterbodies = new List<Water>();
 		protected List<Creature> creatures = new List<Creature>();
 
 
@@ -314,10 +315,30 @@ namespace The_Mark
 
 			for (int i =0; i < numberoflakes;++i)
             {
+				int lakesize = rando.Next(2, 5);
+				Vector2 startingArea;
+				startingArea.X = rando.Next(5, (int)gridSize.X - 5);
+				startingArea.Y = rando.Next(5, (int)gridSize.Y - 5);
 
+				startingArea = new Vector2(startingArea.X - lakesize, startingArea.Y - lakesize);
 
+				Water newLake = new Water();
 
+				for (int x = (int)startingArea.X; x < (int)(startingArea.X + lakesize);++x)
+                {
+					for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + lakesize); ++y)
+					{
+						int randodestruction = rando.Next(1, 12);
+						if (randodestruction != 1)
+						{
+							Vector2 position = multiplyBy64(new Vector2(x, y));
+							newLake.waterChunks.Add(new WaterChunk(position));
+							gridTiles[new Point(x, y)].thisWaterType = GridTile.WaterType.Lake;
+						}
+					}
+				}
 
+				waterbodies.Add(newLake);
             }
 
 
@@ -338,7 +359,7 @@ namespace The_Mark
 
 
 			//ADD LAKES
-
+			createLakes(gamedeets, rando);
 			//ADD RIVERS
 
 
@@ -756,6 +777,10 @@ namespace The_Mark
             {
 				roads[i].Update(gamedeets);
             }
+			for (int i = 0; i < waterbodies.Count; ++i)
+			{
+				waterbodies[i].Update(gamedeets);
+			}
 		}
 
 		public void Draw(SpriteBatch spriteBatch, SpriteFont displayFont)
@@ -765,6 +790,10 @@ namespace The_Mark
             {
 				terrains[i].Draw(spriteBatch);
             }
+			for (int i = 0; i < waterbodies.Count; ++i)
+			{
+				waterbodies[i].Draw(spriteBatch, riverTiles, displayFont, isDisplayTownAreaFont);
+			}
 			for (int i = 0; i < roads.Count;++i)
             {
 				roads[i].Draw(spriteBatch,displayFont,isDisplayTownAreaFont,roadTiles);
