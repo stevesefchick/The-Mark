@@ -315,6 +315,8 @@ namespace The_Mark
 
 			for (int i =0; i < numberoflakes;++i)
             {
+				Boolean isCollidingWithABadThing = false;
+
 				int lakesize = rando.Next(2, 5);
 				Vector2 startingArea;
 				startingArea.X = rando.Next(5, (int)gridSize.X - 5);
@@ -322,12 +324,22 @@ namespace The_Mark
 
 				startingArea = new Vector2(startingArea.X - lakesize, startingArea.Y - lakesize);
 
+				
 				Water newLake = new Water();
 
 				for (int x = (int)startingArea.X; x < (int)(startingArea.X + lakesize);++x)
                 {
 					for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + lakesize); ++y)
 					{
+						if (gridTiles[new Point(x, y)].thisWaterType == GridTile.WaterType.Lake)
+                        {
+							isCollidingWithABadThing = true;
+                        }
+						else if ((x > 22 && x < 28) && (y > 22 && y < 28))
+                        {
+							isCollidingWithABadThing = true;
+                        }
+
 						int randodestruction = rando.Next(1, 12);
 						if (randodestruction != 1)
 						{
@@ -337,8 +349,10 @@ namespace The_Mark
 						}
 					}
 				}
-
-				waterbodies.Add(newLake);
+				if (isCollidingWithABadThing == false)
+				{
+					waterbodies.Add(newLake);
+				}
             }
 
 
@@ -380,7 +394,7 @@ namespace The_Mark
 			for (int i = 0; i < 5; ++i)
 			{
 				Place newPlace = new Place();
-				Vector2 newLocation = getNewGridPlaceLocation(12, castleLoc, rando, 4);
+				Vector2 newLocation = getNewGridPlaceLocation(14, castleLoc, rando, 4);
 				AssignNodeToGrid(GridTile.GridNode.Town, (int)newLocation.X, (int)newLocation.Y, 1, 1);
 				newLocation = multiplyBy64(newLocation);
 
