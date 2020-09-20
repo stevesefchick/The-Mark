@@ -9,8 +9,8 @@ namespace The_Mark
 	class WorldMap
     {
 		//enums
-		public enum roadDirections { Up, Down, Left, Right }
-
+		protected enum roadDirections { Up, Down, Left, Right }
+		protected enum riverDirections { Up, Down, Left, Right }
 
 		//content
 		protected List<Terrain> terrains = new List<Terrain>();
@@ -308,6 +308,80 @@ namespace The_Mark
 
         }
 
+		void pathRiver(Point starting, Point ending, Random rando)
+		{
+			Water newRiver = new Water();
+
+			riverDirections thisDirections;
+			List<riverDirections> riverOptions = new List<riverDirections>();
+
+			while (starting != ending)
+			{
+				//check for tiles ahead - to avoid crossthatching
+				Boolean checkAhead = false;
+
+				riverOptions.Clear();
+				if (ending.X > starting.X)
+					riverOptions.Add(riverDirections.Right);
+				if (ending.X < starting.X)
+					riverOptions.Add(riverDirections.Left);
+				if (ending.Y > starting.Y)
+					riverOptions.Add(riverDirections.Down);
+				if (ending.Y < starting.Y)
+					riverOptions.Add(riverDirections.Up);
+
+				if (riverOptions.Count == 1)
+				{
+					thisDirections = riverOptions[0];
+				}
+				else
+				{
+					thisDirections = riverOptions[rando.Next(0, riverOptions.Count)];
+				}
+
+				if (thisDirections == riverDirections.Left)
+				{
+					starting.X -= 1;
+
+				}
+				else if (thisDirections == riverDirections.Right)
+				{
+					starting.X += 1;
+
+				}
+				else if (thisDirections == riverDirections.Down)
+				{
+					starting.Y += 1;
+
+				}
+				else if (thisDirections == riverDirections.Up)
+				{
+					starting.Y -= 1;
+
+				}
+
+				if (gridTiles[starting].thisWaterType != GridTile.WaterType.None && newRiver.waterChunks.Count>0)
+				{
+					starting = ending;
+				}
+				else
+				{
+					newRiver.waterChunks.Add(new WaterChunk(multiplyBy64(new Vector2(starting.X, starting.Y))));
+					gridTiles[starting].thisWaterType = GridTile.WaterType.River;
+
+					//stop if running in parrallel
+					if (checkAhead == true)
+					{
+						starting = ending;
+					}
+				}
+
+
+			}
+
+			waterbodies.Add(newRiver);
+		}
+
 
 		protected void createLakes(GameMain gamedeets, Random rando)
         {
@@ -324,7 +398,12 @@ namespace The_Mark
 
 				startingArea = new Vector2(startingArea.X - lakesize, startingArea.Y - lakesize);
 
-				
+
+				//river location options
+				List<Vector2> riverStartingLocCandidates = new List<Vector2>();
+				List<Vector2> riverEndingLocCandidates = new List<Vector2>();
+
+
 				Water newLake = new Water();
 
 				for (int x = (int)startingArea.X; x < (int)(startingArea.X + lakesize);++x)
@@ -340,24 +419,49 @@ namespace The_Mark
 							isCollidingWithABadThing = true;
                         }
 
-						int randodestruction = rando.Next(1, 12);
-						if (randodestruction != 1)
-						{
+						//add potential river starting locations
+						riverStartingLocCandidates.Add(new Vector2(x, y));
+
+						//int randodestruction = rando.Next(1, 12);
+						//if (randodestruction != 1)
+						//{
 							Vector2 position = multiplyBy64(new Vector2(x, y));
 							newLake.waterChunks.Add(new WaterChunk(position));
 							gridTiles[new Point(x, y)].thisWaterType = GridTile.WaterType.Lake;
-						}
+						//}
 					}
 				}
 				if (isCollidingWithABadThing == false)
 				{
 					waterbodies.Add(newLake);
 				}
-            }
+
+				//add river ending positions
+				for (int x = 0; x < gridSize.X;++x)
+                {
+					for (int y = 0; y < gridSize.Y;++y)
+                    {
+						if (x==0 || y == 0 || x == gridSize.X-1 || y == gridSize.Y-1)
+                        {
+							riverEndingLocCandidates.Add(new Vector2(x, y));
+                        }
+
+                    }
+                }
+
+				Vector2 actualRiverStarting = riverStartingLocCandidates[rando.Next(0, riverStartingLocCandidates.Count)];
+				Vector2 actualRiverEnding = riverEndingLocCandidates[rando.Next(0, riverEndingLocCandidates.Count)];
 
 
 
-        }
+				pathRiver(new Point((int)actualRiverStarting.X,(int)actualRiverStarting.Y), new Point((int)actualRiverEnding.X,(int)actualRiverEnding.Y),rando);
+
+
+			}
+
+
+
+		}
 
 		//create the world
 		protected void createNewWorld(GameMain gamedeets, Random rando, DataManager datamanager)
