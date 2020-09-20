@@ -319,9 +319,9 @@ namespace The_Mark
 
         }
 
-		void pathRiver(Point starting, Point ending, Random rando)
+		void pathRiver(Point starting, Point ending, Random rando,Game gamedeets)
 		{
-			Water newRiver = new Water();
+			Water newRiver = new Water(Water.WaterType.River, gamedeets, rando);
 
 			riverDirections thisDirections;
 			List<riverDirections> riverOptions = new List<riverDirections>();
@@ -409,7 +409,7 @@ namespace The_Mark
 				List<Vector2> riverEndingLocCandidates = new List<Vector2>();
 
 
-				Water newLake = new Water();
+				Water newLake = new Water(Water.WaterType.Lake,gamedeets,rando);
 
 				for (int x = (int)startingArea.X; x < (int)(startingArea.X + lakesize);++x)
                 {
@@ -459,7 +459,7 @@ namespace The_Mark
 
 
 
-				pathRiver(new Point((int)actualRiverStarting.X,(int)actualRiverStarting.Y), new Point((int)actualRiverEnding.X,(int)actualRiverEnding.Y),rando);
+				pathRiver(new Point((int)actualRiverStarting.X,(int)actualRiverStarting.Y), new Point((int)actualRiverEnding.X,(int)actualRiverEnding.Y),rando,gamedeets);
 
 
 			}

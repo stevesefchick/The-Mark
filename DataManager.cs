@@ -14,6 +14,7 @@ namespace The_Mark
         public Dictionary<string, LastNameData> lastNames = new Dictionary<string, LastNameData>();
         public Dictionary<string, TownNameData> townNames = new Dictionary<string, TownNameData>();
         public Dictionary<string, RoadNameData> roadNames = new Dictionary<string, RoadNameData>();
+        public Dictionary<string, WaterNameData> waterNames = new Dictionary<string, WaterNameData>();
         public Dictionary<string, CreatureNameData> creatureNames = new Dictionary<string, CreatureNameData>();
 
         //random id data
@@ -25,8 +26,8 @@ namespace The_Mark
 
             loadNames();
             loadRandomGenData();
-            System.Console.WriteLine("DataManager info loaded! \nfirstNames: " + firstNames.Count + ". \nlastNames: " + lastNames.Count + ". \ntownNames: " + townNames.Count + ". \nrandomGenData: " +
-                randomGenData.Count + ".");
+            System.Console.WriteLine("\n\nDataManager info loaded! \nfirstNames: " + firstNames.Count + ". \nlastNames: " + lastNames.Count + ". \ntownNames: " + townNames.Count + ". \nrandomGenData: " +
+                randomGenData.Count + ".\nroadNames: " + roadNames.Count + ".\nwaterNames: " + waterNames.Count + ".\ncreatureNames: " + creatureNames.Count + ".\n\n\n\n");
         }
 
         private void loadNames()
@@ -35,6 +36,7 @@ namespace The_Mark
             lastNames = JsonConvert.DeserializeObject<Dictionary<string, LastNameData>>(File.ReadAllText(@"Content/Data/Person/lastnameData.json"));
             townNames = JsonConvert.DeserializeObject<Dictionary<string, TownNameData>>(File.ReadAllText(@"Content/Data/Place/townNameData.json"));
             roadNames = JsonConvert.DeserializeObject<Dictionary<string, RoadNameData>>(File.ReadAllText(@"Content/Data/Road/roadNameData.json"));
+            waterNames = JsonConvert.DeserializeObject<Dictionary<string, WaterNameData>>(File.ReadAllText(@"Content/Data/Terrain/waterNameData.json"));
             creatureNames = JsonConvert.DeserializeObject<Dictionary<string, CreatureNameData>>(File.ReadAllText(@"Content/Data/Creature/creatureNameData.json"));
 
         }
@@ -101,6 +103,16 @@ namespace The_Mark
         public RoadNameData(string thetype)
         {
             roadnametype = thetype;
+        }
+    }
+
+    class WaterNameData
+    {
+        public string waternametype;
+
+        public WaterNameData(string thetype)
+        {
+            waternametype = thetype;
         }
     }
 

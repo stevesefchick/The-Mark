@@ -7,13 +7,13 @@ namespace The_Mark
 {
     class Water
     {
+        //enums
+        public enum WaterType { Lake, River }
+        public WaterType thisWaterType;
+
         //water name
         public string riverName = "Water";
         Vector2 displayLoc = Vector2.Zero;
-
-        //sprites
-        Texture2D waterSprite;
-
 
         //water chunks
         public List<WaterChunk> waterChunks = new List<WaterChunk>();
@@ -22,10 +22,10 @@ namespace The_Mark
         Boolean isColliding;
 
 
-        public Water()
+        public Water(WaterType gettinwet, Game gamedeets, Random rando)
         {
-
-
+            thisWaterType = gettinwet;
+            getWaterName(gamedeets, rando);
 
         }
 
@@ -37,6 +37,29 @@ namespace The_Mark
 
         }
 
+        void getWaterName(Game gamedeets, Random rando)
+        {
+            if (thisWaterType == WaterType.Lake)
+            {
+                //variation 1 - Noun + Lakename (Lake, Pond)
+                //variation 2 - Lake + Noun
+                //variation 3 - Noun + Noun + Lakename
+               //variation 4 - Adj + Noun + Lakename
+
+                riverName = "Lake";
+            }
+            else if (thisWaterType == WaterType.River)
+            {
+                //variation 1 - Noun + Rivername (River, Brook, Creek)
+                //variation 2 - Adj + Noun + Rivername
+
+
+                riverName = "River";
+            }
+
+
+        }
+        
         Boolean checkForCollision(Vector2 mouse)
         {
             Boolean collided = false;

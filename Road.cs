@@ -11,9 +11,6 @@ namespace The_Mark
         public string roadName = "Road";
         Vector2 displayLoc = Vector2.Zero;
 
-        //sprites
-        private Texture2D roadSprite;
-
         //road chunks
         public List<RoadChunk> roadChunks = new List<RoadChunk>();
 
@@ -22,18 +19,9 @@ namespace The_Mark
 
         public Road(GameMain gamedeets, Random rando)
         {
-
-
             getRoadName(gamedeets.dataManager, rando);
-            LoadRoadTexture(gamedeets, rando);
         }
 
-
-        void LoadRoadTexture(GameMain gamedeets, Random rando)
-        {
-            roadSprite = gamedeets.Content.Load<Texture2D>("Sprites/Road/road_test");
-
-        }
 
         Boolean checkForCollision(Vector2 mouse)
         {
@@ -150,7 +138,6 @@ namespace The_Mark
         public void Draw(SpriteBatch spriteBatch, SpriteFont displayfont,Boolean dontdrawfont,Texture2D roadTiles)
         {
             DrawRoadChunks(spriteBatch,roadTiles);
-            //DrawLine(spriteBatch, startingPosition, endingPosition);
 
             if (isColliding == true && dontdrawfont == false)
             {
