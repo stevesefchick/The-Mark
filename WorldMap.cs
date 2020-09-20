@@ -30,7 +30,6 @@ namespace The_Mark
 		//assets
 		private Texture2D debugGuideTexture;
 		protected Texture2D roadTiles;
-		protected Texture2D lakeTiles;
 		protected Texture2D riverTiles;
 
 
@@ -52,7 +51,6 @@ namespace The_Mark
 			debugGuideTexture = gamedeets.Content.Load<Texture2D>("Sprites/UI/debugGuide");
 			roadTiles = gamedeets.Content.Load<Texture2D>("Sprites/Road/road_tiles");
 			riverTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/river_tiles");
-			lakeTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/river_tiles");
 		}
 
 		//debug - announce creations
@@ -159,6 +157,7 @@ namespace The_Mark
 			void pathRoad(Point starting, Point ending)
             {
 				Road newRoad = new Road(gamedeets, rando);
+				Boolean abort = false;
 
 				roadDirections thisDirections;
 				List<roadDirections> roadOptions = new List<roadDirections>();
@@ -177,19 +176,28 @@ namespace The_Mark
 					Boolean checkAhead = false;
 
 					roadOptions.Clear();
-					if (ending.X > starting.X)
+					if (ending.X > starting.X &&
+						gridTiles[new Point(starting.X+1,starting.Y)].thisWaterType!= GridTile.WaterType.Lake)
 						roadOptions.Add(roadDirections.Right);
-					if (ending.X < starting.X)
+					if (ending.X < starting.X &&
+						gridTiles[new Point(starting.X - 1, starting.Y)].thisWaterType != GridTile.WaterType.Lake)
 						roadOptions.Add(roadDirections.Left);
-					if (ending.Y > starting.Y)
+					if (ending.Y > starting.Y &&
+						gridTiles[new Point(starting.X, starting.Y+1)].thisWaterType != GridTile.WaterType.Lake)
 						roadOptions.Add(roadDirections.Down);
-					if (ending.Y < starting.Y)
+					if (ending.Y < starting.Y &&
+						gridTiles[new Point(starting.X, starting.Y-1)].thisWaterType != GridTile.WaterType.Lake)
 						roadOptions.Add(roadDirections.Up);
 
 					if (roadOptions.Count == 1)
 					{
 						thisDirections = roadOptions[0];
 					}
+					else if (roadOptions.Count==0)
+                    {
+						abort = true;
+						break;
+                    }
 					else
 					{
 						thisDirections = roadOptions[rando.Next(0, roadOptions.Count)];
@@ -272,7 +280,10 @@ namespace The_Mark
 
                 }
 
-				roads.Add(newRoad);
+				if (abort == false)
+				{
+					roads.Add(newRoad);
+				}
             }
 
 		}
@@ -317,8 +328,6 @@ namespace The_Mark
 
 			while (starting != ending)
 			{
-				//check for tiles ahead - to avoid crossthatching
-				Boolean checkAhead = false;
 
 				riverOptions.Clear();
 				if (ending.X > starting.X)
@@ -360,7 +369,8 @@ namespace The_Mark
 
 				}
 
-				if (gridTiles[starting].thisWaterType != GridTile.WaterType.None && newRiver.waterChunks.Count>0)
+				if ((gridTiles[starting].thisWaterType != GridTile.WaterType.None && newRiver.waterChunks.Count>0) || 
+					(starting.X > 22 && starting.X < 28 && starting.Y > 22 && starting.Y < 28))
 				{
 					starting = ending;
 				}
@@ -369,11 +379,6 @@ namespace The_Mark
 					newRiver.waterChunks.Add(new WaterChunk(multiplyBy64(new Vector2(starting.X, starting.Y))));
 					gridTiles[starting].thisWaterType = GridTile.WaterType.River;
 
-					//stop if running in parrallel
-					if (checkAhead == true)
-					{
-						starting = ending;
-					}
 				}
 
 
@@ -476,10 +481,9 @@ namespace The_Mark
 			//TODO: Add Terrains
 
 
-			//ADD LAKES
+			//add lakes and rivers
 			createLakes(gamedeets, rando);
-			//ADD RIVERS
-
+			//assign graphics to water tiles
 
 
 			//add castle
@@ -832,6 +836,7 @@ namespace The_Mark
 				{
 					Point thisLoc = new Point(x, y);
 					if (gridTiles[thisLoc].thisNodeType == GridTile.GridNode.None &&
+						gridTiles[thisLoc].thisWaterType == GridTile.WaterType.None &&
 						isGridItemTooClose(thisLoc, maxDistanceFromNearby) ==false)
                     {
 						locationCandidates.Add(new Vector2(x,y));
