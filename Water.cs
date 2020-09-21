@@ -22,10 +22,10 @@ namespace The_Mark
         Boolean isColliding;
 
 
-        public Water(WaterType gettinwet, Game gamedeets, Random rando)
+        public Water(WaterType gettinwet, DataManager datamanager, Random rando)
         {
             thisWaterType = gettinwet;
-            getWaterName(gamedeets, rando);
+            getWaterName(datamanager, rando);
 
         }
 
@@ -37,26 +37,167 @@ namespace The_Mark
 
         }
 
-        void getWaterName(Game gamedeets, Random rando)
+        void getWaterName(DataManager datamanager, Random rando)
         {
+            #region Lake
             if (thisWaterType == WaterType.Lake)
             {
-                //variation 1 - Noun + Lakename (Lake, Pond)
-                //variation 2 - Lake + Noun
-                //variation 3 - Noun + Noun + Lakename
-               //variation 4 - Adj + Noun + Lakename
+                int waternametype = rando.Next(1, 5);
 
-                riverName = "Lake";
+                //variation 1 - Noun + Lakename 
+                if (waternametype == 1)
+                {
+                    List<string> candidatesnoun = new List<string>();
+                    List<string> candidateslakename = new List<string>();
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waternoun")
+                        {
+                            candidatesnoun.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waterlakename")
+                        {
+                            candidateslakename.Add(entry.Key);
+                        }
+                    }
+                    riverName = candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + " " + candidateslakename[rando.Next(0, candidateslakename.Count)].ToString();
+                }
+                //variation 2 - Lake + Noun
+                else if (waternametype == 2)
+                {
+                    List<string> candidatesnoun = new List<string>();
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waternoun")
+                        {
+                            candidatesnoun.Add(entry.Key);
+                        }
+                    }
+                    riverName = "Lake " + candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString();
+                }
+                //variation 3 - Noun + Noun + Lakename
+                else if (waternametype == 3)
+                {
+                    List<string> candidatesnoun = new List<string>();
+                    List<string> candidatesnoun2 = new List<string>();
+                    List<string> candidateslakename = new List<string>();
+
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waternoun")
+                        {
+                            candidatesnoun.Add(entry.Key);
+                            candidatesnoun2.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waterlakename")
+                        {
+                            candidateslakename.Add(entry.Key);
+                        }
+                    }
+
+                    riverName = candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + " " + candidatesnoun2[rando.Next(0, candidatesnoun2.Count)].ToString() + " " + candidateslakename[rando.Next(0, candidateslakename.Count)].ToString();
+                }
+                //variation 4 - Adj + Noun + Lakename
+                else if (waternametype == 4)
+                {
+                    List<string> candidatesnoun = new List<string>();
+                    List<string> candidatesadj = new List<string>();
+                    List<string> candidateslakename = new List<string>();
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waternoun")
+                        {
+                            candidatesnoun.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "wateradj")
+                        {
+                            candidatesadj.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waterlakename")
+                        {
+                            candidateslakename.Add(entry.Key);
+                        }
+                    }
+                    riverName = candidatesadj[rando.Next(0, candidatesadj.Count)].ToString() + " " + candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + " " + candidateslakename[rando.Next(0, candidateslakename.Count)].ToString();
+                }
+
+
             }
+            #endregion
+
+            #region River
             else if (thisWaterType == WaterType.River)
             {
+                int waternametype = rando.Next(1, 3);
+
                 //variation 1 - Noun + Rivername (River, Brook, Creek)
+                if (waternametype == 1)
+                {
+                    List<string> candidatesnoun = new List<string>();
+                    List<string> candidatesrivername = new List<string>();
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waternoun")
+                        {
+                            candidatesnoun.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waterrivername")
+                        {
+                            candidatesrivername.Add(entry.Key);
+                        }
+                    }
+                    riverName = candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + " " + candidatesrivername[rando.Next(0, candidatesrivername.Count)].ToString();
+                }
                 //variation 2 - Adj + Noun + Rivername
+                else if (waternametype == 2)
+                {
+                    List<string> candidatesnoun = new List<string>();
+                    List<string> candidatesadj = new List<string>();
+                    List<string> candidatesrivername = new List<string>();
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waternoun")
+                        {
+                            candidatesnoun.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "wateradj")
+                        {
+                            candidatesadj.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, WaterNameData> entry in datamanager.waterNames)
+                    {
+                        if (entry.Value.waternametype == "waterrivername")
+                        {
+                            candidatesrivername.Add(entry.Key);
+                        }
+                    }
+                    riverName = candidatesadj[rando.Next(0, candidatesadj.Count)].ToString() + " " + candidatesnoun[rando.Next(0, candidatesnoun.Count)].ToString() + " " + candidatesrivername[rando.Next(0, candidatesrivername.Count)].ToString();
+                }
 
 
-                riverName = "River";
+
+
             }
-
+            #endregion
 
         }
         

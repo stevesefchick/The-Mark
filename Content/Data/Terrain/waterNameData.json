@@ -1,6 +1,18 @@
 {
   "Crystal": { "waternametype": "waternoun" },
-  "Sand": { "waternametype": "waternoun" }
+  "Camp": { "waternametype": "waternoun" },
+  "Sand": { "waternametype": "waternoun" },
+  "Duck": { "waternametype": "waternoun" },
+  "Fantasy": { "waternametype": "waternoun" },
+  "Spice": { "waternametype": "waternoun" },
+  "Silent": { "waternametype": "wateradj" },
+  "Peaceful": { "waternametype": "wateradj" },
+  "Serene": { "waternametype": "wateradj" },
+  "Lake": { "waternametype": "waterlakename" },
+  "Pond": { "waternametype": "waterlakename" },
+  "River": { "waternametype": "waterrivername" },
+  "Brook": { "waternametype": "waterrivername" },
+  "Creek": { "waternametype": "waterrivername" }
 
 
 }

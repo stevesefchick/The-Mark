@@ -319,9 +319,9 @@ namespace The_Mark
 
         }
 
-		void pathRiver(Point starting, Point ending, Random rando,Game gamedeets)
+		void pathRiver(Point starting, Point ending, Random rando,DataManager datamanager)
 		{
-			Water newRiver = new Water(Water.WaterType.River, gamedeets, rando);
+			Water newRiver = new Water(Water.WaterType.River, datamanager, rando);
 
 			riverDirections thisDirections;
 			List<riverDirections> riverOptions = new List<riverDirections>();
@@ -388,7 +388,7 @@ namespace The_Mark
 		}
 
 
-		protected void createLakes(GameMain gamedeets, Random rando)
+		protected void createLakes(DataManager datamanager, Random rando)
         {
 			int numberoflakes = rando.Next(1, 4);
 
@@ -409,7 +409,7 @@ namespace The_Mark
 				List<Vector2> riverEndingLocCandidates = new List<Vector2>();
 
 
-				Water newLake = new Water(Water.WaterType.Lake,gamedeets,rando);
+				Water newLake = new Water(Water.WaterType.Lake, datamanager, rando);
 
 				for (int x = (int)startingArea.X; x < (int)(startingArea.X + lakesize);++x)
                 {
@@ -459,7 +459,7 @@ namespace The_Mark
 
 
 
-				pathRiver(new Point((int)actualRiverStarting.X,(int)actualRiverStarting.Y), new Point((int)actualRiverEnding.X,(int)actualRiverEnding.Y),rando,gamedeets);
+				pathRiver(new Point((int)actualRiverStarting.X,(int)actualRiverStarting.Y), new Point((int)actualRiverEnding.X,(int)actualRiverEnding.Y),rando,datamanager);
 
 
 			}
@@ -482,7 +482,7 @@ namespace The_Mark
 
 
 			//add lakes and rivers
-			createLakes(gamedeets, rando);
+			createLakes(datamanager, rando);
 			//assign graphics to water tiles
 
 
