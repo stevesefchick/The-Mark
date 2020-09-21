@@ -484,7 +484,7 @@ namespace The_Mark
 			//add lakes and rivers
 			createLakes(datamanager, rando);
 			//assign graphics to water tiles
-
+			createTileAssignmentsforRiversandLakes();
 
 			//add castle
 			Place newCastle = new Place();
@@ -630,6 +630,203 @@ namespace The_Mark
 			#endregion
 
 
+		}
+
+		void createTileAssignmentsforRiversandLakes()
+		{
+			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
+			{
+				if (g.Value.thisWaterType != GridTile.WaterType.None)
+                {
+					Point thisWaterLoc = g.Key;
+					Vector2 thisLoc = new Vector2(thisWaterLoc.X, thisWaterLoc.Y);
+					thisLoc = multiplyBy64(thisLoc);
+					int thewater = 0;
+					int thechunk = 0;
+
+					//get the chunk to be assigned
+					for (int i = 0; i < waterbodies.Count; ++i)
+					{
+						for (int i2 = 0; i2 < waterbodies[i].waterChunks.Count; ++i2)
+						{
+							if (waterbodies[i].waterChunks[i2].rect.X == thisLoc.X &&
+								waterbodies[i].waterChunks[i2].rect.Y == thisLoc.Y)
+							{
+								thewater = i;
+								thechunk = i2;
+								break;
+							}
+						}
+					}
+
+					Boolean above = false;
+					Boolean below = false;
+					Boolean left = false;
+					Boolean right = false;
+					Boolean topright = false;
+					Boolean topleft = false;
+					Boolean bottomright = false;
+					Boolean bottomleft = false;
+
+
+					//check above
+					if (thisWaterLoc.Y == 0 || gridTiles[new Point(thisWaterLoc.X, thisWaterLoc.Y - 1)].thisWaterType != GridTile.WaterType.None)
+					{
+						above = true;
+					}
+					//check below
+					if (thisWaterLoc.Y == 49 || gridTiles[new Point(thisWaterLoc.X, thisWaterLoc.Y + 1)].thisWaterType != GridTile.WaterType.None)
+					{
+						below = true;
+					}
+					//check left
+					if (thisWaterLoc.X == 0 || gridTiles[new Point(thisWaterLoc.X - 1, thisWaterLoc.Y)].thisWaterType != GridTile.WaterType.None)
+					{
+						left = true;
+					}
+					//check right
+					if (thisWaterLoc.X == 49 ||  gridTiles[new Point(thisWaterLoc.X + 1, thisWaterLoc.Y)].thisWaterType != GridTile.WaterType.None)
+					{
+						right = true;
+					}
+					//check topright
+					if ((thisWaterLoc.Y > 0 && thisWaterLoc.Y<49 && thisWaterLoc.X>0 && thisWaterLoc.X < 49) && gridTiles[new Point(thisWaterLoc.X+1, thisWaterLoc.Y - 1)].thisWaterType != GridTile.WaterType.None)
+					{
+						topright = true;
+					}
+					//check topleft
+					if ((thisWaterLoc.Y > 0 && thisWaterLoc.Y < 49 && thisWaterLoc.X > 0 && thisWaterLoc.X < 49) && gridTiles[new Point(thisWaterLoc.X - 1, thisWaterLoc.Y - 1)].thisWaterType != GridTile.WaterType.None)
+					{
+						topleft = true;
+					}
+					//check bottomright
+					if ((thisWaterLoc.Y > 0 && thisWaterLoc.Y < 49 && thisWaterLoc.X > 0 && thisWaterLoc.X < 49) && gridTiles[new Point(thisWaterLoc.X + 1, thisWaterLoc.Y + 1)].thisWaterType != GridTile.WaterType.None)
+					{
+						bottomright = true;
+					}
+					//check bottomleft
+					if ((thisWaterLoc.Y > 0 && thisWaterLoc.Y < 49 && thisWaterLoc.X > 0 && thisWaterLoc.X < 49) && gridTiles[new Point(thisWaterLoc.X - 1, thisWaterLoc.Y + 1)].thisWaterType != GridTile.WaterType.None)
+					{
+						bottomleft = true;
+					}
+
+					//left only
+					if (above == false && below == false && left == true && right == false)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(256, 64, 64, 64));
+					}
+					//right only
+					if (above == false && below == false && left == false && right == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(256, 0, 64, 64));
+					}
+					//up only
+					if (above == true && below == false && left == false && right == false)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(256, 128, 64, 64));
+					}
+					//down only
+					if (above == false && below == true && left == false && right == false)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 128, 64, 64));
+					}
+					//left and right
+					if (above == false && below == false && left == true && right == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 0, 64, 64));
+					}
+					//up and down
+					if (above == true && below == true && left == false && right == false)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 0, 64, 64));
+					}
+					//left up
+					if (above == true && below == false && left == true && right == false && topleft==false)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 64, 64, 64));
+					}
+					//left up + topleft
+					if (above == true && below == false && left == true && right == false && topleft==true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 256, 64, 64));
+					}
+					//up right
+					if (above == true && below == false && left == false && right == true && topright==false)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 64, 64, 64));
+					}
+					//up right + topright
+					if (above == true && below == false && left == false && right == true && topright == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 256, 64, 64));
+					}
+					//right down
+					if (above == false && below == true && left == false && right == true && bottomright==false)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 0, 64, 64));
+					}
+					//right down + bottomright
+					if (above == false && below == true && left == false && right == true && bottomright == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 192, 64, 64));
+					}
+					//down left
+					if (above == false && below == true && left == true && right == false && bottomleft == false)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 0, 64, 64));
+					}
+					//down left + bottomleft
+					if (above == false && below == true && left == true && right == false && bottomleft == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 192, 64, 64));
+					}
+					//left up right
+					if (above == true && below == false && left == true && right == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 128, 64, 64));
+					}
+					//up right down
+					if (above == true && below == true && left == false && right == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 64, 64, 64));
+					}
+					//left down right
+					if (above == false && below == true && left == true && right == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 128, 64, 64));
+					}
+					//up left down
+					if (above == true && below == true && left == true && right == false)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 64, 64, 64));
+					}
+
+					//TODO LAKE EDGES
+
+					//all dir/forked
+					if (above == true && below == true && left == true && right == true && (topleft==false && topright==false && bottomleft==false && bottomright==false))
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 128, 64, 64));
+					}
+					//all dir/deep
+					if (above == true && below == true && left == true && right == true && (topleft == true && topright == true && bottomleft == true && bottomright == true))
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 192, 64, 64));
+					}
+					//no dir
+					if (above == false && below == false && left == false && right == false)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 256, 64, 64));
+					}
+
+
+
+
+
+
+				}
+				
+			}
 		}
 
         void createTileAssignmentsForRoads()
