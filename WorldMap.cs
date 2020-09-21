@@ -802,7 +802,28 @@ namespace The_Mark
 					}
 
 					//TODO LAKE EDGES
+					//rightmost edge
+					if (above == true && below == true && left == true && right == false && topleft==true && bottomleft==true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(256, 192, 64, 64));
+					}
+					//leftmost edge
+					if (above == true && below == true && left == false && right == true && topright == true && bottomright == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(256, 256, 64, 64));
+					}
+					//topmost edge
+					if (above == false && below == true && left == true && right == true && bottomright == true && bottomleft == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 192, 64, 64));
+					}
+					//bottommost edge
+					if (above == true && below == false && left == true && right == true && topright == true && topleft == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 256, 64, 64));
+					}
 
+					//all dir
 					//all dir/forked
 					if (above == true && below == true && left == true && right == true && (topleft==false && topright==false && bottomleft==false && bottomright==false))
 					{
