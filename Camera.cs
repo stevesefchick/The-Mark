@@ -20,19 +20,19 @@ namespace The_Mark
 		{
             if (up==true)
             {
-                cameraPosition.Y -= 1;
+                cameraPosition.Y -= 3;
             }
             if (down==true)
             {
-                cameraPosition.Y += 1;
+                cameraPosition.Y += 3;
             }
             if (left==true)
             {
-                cameraPosition.X -= 1;
+                cameraPosition.X -= 3;
             }
             if (right==true)
             {
-                cameraPosition.X += 1;
+                cameraPosition.X += 3;
             }
             if (pagedown==true)
             {

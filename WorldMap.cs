@@ -374,7 +374,7 @@ namespace The_Mark
 				{
 					starting = ending;
 				}
-				else
+				else if (gridTiles[starting].thisWaterType== GridTile.WaterType.None)
 				{
 					newRiver.waterChunks.Add(new WaterChunk(multiplyBy64(new Vector2(starting.X, starting.Y))));
 					gridTiles[starting].thisWaterType = GridTile.WaterType.River;
@@ -415,7 +415,7 @@ namespace The_Mark
                 {
 					for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + lakesize); ++y)
 					{
-						if (gridTiles[new Point(x, y)].thisWaterType == GridTile.WaterType.Lake)
+						if (gridTiles[new Point(x, y)].thisWaterType != GridTile.WaterType.None)
                         {
 							isCollidingWithABadThing = true;
                         }
@@ -436,30 +436,36 @@ namespace The_Mark
 						//}
 					}
 				}
+
+
 				if (isCollidingWithABadThing == false)
 				{
 					waterbodies.Add(newLake);
+
+
+					//add river ending positions
+					for (int x = 0; x < gridSize.X; ++x)
+					{
+						for (int y = 0; y < gridSize.Y; ++y)
+						{
+							if (x == 0 || y == 0 || x == gridSize.X - 1 || y == gridSize.Y - 1)
+							{
+								riverEndingLocCandidates.Add(new Vector2(x, y));
+							}
+
+						}
+					}
+
+					Vector2 actualRiverStarting = riverStartingLocCandidates[rando.Next(0, riverStartingLocCandidates.Count)];
+					Vector2 actualRiverEnding = riverEndingLocCandidates[rando.Next(0, riverEndingLocCandidates.Count)];
+
+
+
+					pathRiver(new Point((int)actualRiverStarting.X, (int)actualRiverStarting.Y), new Point((int)actualRiverEnding.X, (int)actualRiverEnding.Y), rando, datamanager);
+
 				}
 
-				//add river ending positions
-				for (int x = 0; x < gridSize.X;++x)
-                {
-					for (int y = 0; y < gridSize.Y;++y)
-                    {
-						if (x==0 || y == 0 || x == gridSize.X-1 || y == gridSize.Y-1)
-                        {
-							riverEndingLocCandidates.Add(new Vector2(x, y));
-                        }
 
-                    }
-                }
-
-				Vector2 actualRiverStarting = riverStartingLocCandidates[rando.Next(0, riverStartingLocCandidates.Count)];
-				Vector2 actualRiverEnding = riverEndingLocCandidates[rando.Next(0, riverEndingLocCandidates.Count)];
-
-
-
-				pathRiver(new Point((int)actualRiverStarting.X,(int)actualRiverStarting.Y), new Point((int)actualRiverEnding.X,(int)actualRiverEnding.Y),rando,datamanager);
 
 
 			}
@@ -781,22 +787,22 @@ namespace The_Mark
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 192, 64, 64));
 					}
 					//left up right
-					if (above == true && below == false && left == true && right == true)
+					if (above == true && below == false && left == true && right == true && topleft==false && topright==false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 128, 64, 64));
 					}
 					//up right down
-					if (above == true && below == true && left == false && right == true)
+					if (above == true && below == true && left == false && right == true && topright==false && bottomright==false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 64, 64, 64));
 					}
 					//left down right
-					if (above == false && below == true && left == true && right == true)
+					if (above == false && below == true && left == true && right == true && bottomleft==false && topleft==false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 128, 64, 64));
 					}
 					//up left down
-					if (above == true && below == true && left == true && right == false)
+					if (above == true && below == true && left == true && right == false && topleft==false && bottomleft==false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 64, 64, 64));
 					}
@@ -844,7 +850,7 @@ namespace The_Mark
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 384, 64, 64));
 					}
 					//top left go left
-					if (above == false && below == true && left == true && right == true && bottomleft == false && topleft == false && bottomright==true)
+					if (above == false && below == true && left == true && right == true && bottomleft == false && bottomright==true)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 320, 64, 64));
 					}
@@ -855,7 +861,7 @@ namespace The_Mark
 					}
 
 					//top right go right
-					if (above == false && below == true && left == true && right == true && bottomleft == true && topright == false && bottomright == false)
+					if (above == false && below == true && left == true && right == true && bottomleft == true && bottomright == false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 320, 64, 64));
 					}
@@ -866,7 +872,7 @@ namespace The_Mark
 					}
 
 					//bottom left go left
-					if (above == true && below == false && left == true && right == true && bottomleft == false && topleft == false && topright == true)
+					if (above == true && below == false && left == true && right == true  && topleft == false && topright == true)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 448, 64, 64));
 					}
@@ -1212,14 +1218,6 @@ namespace The_Mark
 				places[i].Draw(spriteBatch,displayFont);
             }
 
-			/*
-			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
-			{
-				Vector2 loc = new Vector2(g.Key.X, g.Key.Y);
-				loc = multiplyBy64(loc);
-				spriteBatch.Draw(debugGuideTexture, loc, Color.White);
-			}
-			*/
 		}
 
 	}
