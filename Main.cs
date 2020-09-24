@@ -213,7 +213,7 @@ class GameMain : Game
 
 		spriteBatch.Begin(SpriteSortMode.Deferred,
 			BlendState.AlphaBlend,
-			null,
+			SamplerState.PointClamp,
 			null,
 			null,
 			null,
