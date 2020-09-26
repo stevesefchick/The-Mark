@@ -57,6 +57,16 @@ namespace The_Mark
 		protected void debugAnnounceCreation()
         {
 
+			Console.WriteLine("creating bodies of water!!");
+			for (int i = 0; i < waterbodies.Count;++i)
+            {
+				Console.WriteLine(waterbodies[i].riverName + " is a body of water!\n" +
+	"Type: " + waterbodies[i].thisWaterType + "\n");
+
+
+			}
+
+
 			//announce people
 			Console.WriteLine("creating people!");
 			for (int i = 0; i < people.Count;++i)
@@ -751,36 +761,39 @@ namespace The_Mark
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 64, 64, 64));
 					}
-					//left up + topleft
-					if (above == true && below == false && left == true && right == false && topleft==true)
-					{
-						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 256, 64, 64));
-					}
 					//up right
 					if (above == true && below == false && left == false && right == true && topright==false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 64, 64, 64));
-					}
-					//up right + topright
-					if (above == true && below == false && left == false && right == true && topright == true)
-					{
-						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 256, 64, 64));
 					}
 					//right down
 					if (above == false && below == true && left == false && right == true && bottomright==false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 0, 64, 64));
 					}
-					//right down + bottomright
-					if (above == false && below == true && left == false && right == true && bottomright == true)
-					{
-						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 192, 64, 64));
-					}
 					//down left
 					if (above == false && below == true && left == true && right == false && bottomleft == false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 0, 64, 64));
 					}
+					//left up + topleft
+					if (above == true && below == false && left == true && right == false && topleft==true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 256, 64, 64));
+					}
+
+					//up right + topright
+					if (above == true && below == false && left == false && right == true && topright == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 256, 64, 64));
+					}
+
+					//right down + bottomright
+					if (above == false && below == true && left == false && right == true && bottomright == true)
+					{
+						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 192, 64, 64));
+					}
+
 					//down left + bottomleft
 					if (above == false && below == true && left == true && right == false && bottomleft == true)
 					{
@@ -855,7 +868,7 @@ namespace The_Mark
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 320, 64, 64));
 					}
 					//top left go up
-					if (above == true && below == true && left == false && right == true && bottomleft == false && topleft == false && bottomright == true && topright==false)
+					if (above == true && below == true && left == false && right == true && bottomleft == false && topright == false && bottomright == true)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 320, 64, 64));
 					}
@@ -866,7 +879,7 @@ namespace The_Mark
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 320, 64, 64));
 					}
 					//top right go up
-					if (above == true && below == true && left == true && right == false && bottomleft == true && topright == false && bottomright == false && topleft==false)
+					if (above == true && below == true && left == true && right == false && bottomleft == true && topleft==false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(256, 320, 64, 64));
 					}
@@ -877,7 +890,7 @@ namespace The_Mark
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 448, 64, 64));
 					}
 					//bottom left go down
-					if (above == true && below == true && left == false && right == true && bottomleft == false && topright == true && bottomright == false && topleft == false)
+					if (above == true && below == true && left == false && right == true && topright == true && bottomright == false && topleft == false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 384, 64, 64));
 					}
@@ -890,7 +903,7 @@ namespace The_Mark
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 448, 64, 64));
 					}
 					//bottom right go down
-					if (above == true && below == true && left == true && right == false && bottomleft == false && topright == false && bottomright == false && topleft == true)
+					if (above == true && below == true && left == true && right == false && bottomleft == false && topright == false && topleft == true)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(256, 384, 64, 64));
 					}
