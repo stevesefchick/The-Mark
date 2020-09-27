@@ -1092,6 +1092,21 @@ namespace The_Mark
 					{
 						roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(128, 128, 64, 64));
 					}
+
+					//bridges
+					if (g.Value.thisWaterType == GridTile.WaterType.River)
+                    {
+						//up down bridge
+						if (above == false && below == false && left == true && right == true)
+						{
+							roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(0, 192, 64, 64));
+						}
+						//left right bridge
+						if (above == true && below == true && left == false && right == false)
+						{
+							roads[theroad].roadChunks[thechunk].AssignTile(new Rectangle(64, 192, 64, 64));
+						}
+					}
 				}
 
 			}
