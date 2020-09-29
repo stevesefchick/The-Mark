@@ -188,38 +188,44 @@ namespace The_Mark
 					roadOptions.Clear();
 					if (gridTiles[new Point(starting.X, starting.Y)].thisWaterType == GridTile.WaterType.None)
 					{
-						if (ending.X > starting.X && (gridTiles[new Point(starting.X + 1, starting.Y)].thisWaterType != GridTile.WaterType.Lake ||
+						if (ending.X > starting.X && 
+							(gridTiles[new Point(starting.X + 1, starting.Y)].thisWaterType == GridTile.WaterType.None ||
 							(gridTiles[new Point(starting.X + 1, starting.Y)].thisWaterType == GridTile.WaterType.River && gridTiles[new Point(starting.X + 2, starting.Y)].thisWaterType == GridTile.WaterType.None)))
 							roadOptions.Add(roadDirections.Right);
-						if (ending.X < starting.X && (gridTiles[new Point(starting.X - 1, starting.Y)].thisWaterType != GridTile.WaterType.Lake||
+						if (ending.X < starting.X && 
+							(gridTiles[new Point(starting.X - 1, starting.Y)].thisWaterType == GridTile.WaterType.None ||
 							(gridTiles[new Point(starting.X - 1, starting.Y)].thisWaterType == GridTile.WaterType.River && gridTiles[new Point(starting.X - 2, starting.Y)].thisWaterType == GridTile.WaterType.None)))
 							roadOptions.Add(roadDirections.Left);
 						if (ending.Y > starting.Y &&
-							(gridTiles[new Point(starting.X, starting.Y + 1)].thisWaterType != GridTile.WaterType.Lake ||
+							(gridTiles[new Point(starting.X, starting.Y + 1)].thisWaterType == GridTile.WaterType.None ||
 							(gridTiles[new Point(starting.X, starting.Y+1)].thisWaterType == GridTile.WaterType.River && gridTiles[new Point(starting.X, starting.Y+2)].thisWaterType == GridTile.WaterType.None)))
 							roadOptions.Add(roadDirections.Down);
 						if (ending.Y < starting.Y &&
-							(gridTiles[new Point(starting.X, starting.Y - 1)].thisWaterType != GridTile.WaterType.Lake ||
+							(gridTiles[new Point(starting.X, starting.Y - 1)].thisWaterType == GridTile.WaterType.None ||
 							(gridTiles[new Point(starting.X , starting.Y-1)].thisWaterType == GridTile.WaterType.River && gridTiles[new Point(starting.X, starting.Y-2)].thisWaterType == GridTile.WaterType.None)))
 							roadOptions.Add(roadDirections.Up);
 					}
 					else if (gridTiles[new Point(starting.X, starting.Y)].thisWaterType == GridTile.WaterType.River)
 					{
-						if (gridTiles[new Point(starting.X - 1, starting.Y)].thisRoadType == GridTile.RoadType.Road)
-						{
-							roadOptions.Add(roadDirections.Right);
-						}
-						else if (gridTiles[new Point(starting.X + 1, starting.Y)].thisRoadType == GridTile.RoadType.Road)
+						if (gridTiles[new Point(starting.X - 1, starting.Y)].thisWaterType == GridTile.WaterType.None &&
+							gridTiles[new Point(starting.X + 1, starting.Y)].thisRoadType == GridTile.RoadType.Road)
 						{
 							roadOptions.Add(roadDirections.Left);
 						}
-						else if (gridTiles[new Point(starting.X, starting.Y-1)].thisRoadType == GridTile.RoadType.Road)
+						else if (gridTiles[new Point(starting.X + 1, starting.Y)].thisWaterType == GridTile.WaterType.None &&
+							gridTiles[new Point(starting.X - 1, starting.Y)].thisRoadType == GridTile.RoadType.Road)
 						{
-							roadOptions.Add(roadDirections.Down);
+							roadOptions.Add(roadDirections.Right);
 						}
-						else if (gridTiles[new Point(starting.X, starting.Y + 1)].thisRoadType == GridTile.RoadType.Road)
+						else if (gridTiles[new Point(starting.X, starting.Y-1)].thisWaterType == GridTile.WaterType.None &&
+							gridTiles[new Point(starting.X, starting.Y+1)].thisRoadType == GridTile.RoadType.Road)
 						{
 							roadOptions.Add(roadDirections.Up);
+						}
+						else if (gridTiles[new Point(starting.X, starting.Y + 1)].thisWaterType == GridTile.WaterType.None &&
+							gridTiles[new Point(starting.X, starting.Y-1)].thisRoadType == GridTile.RoadType.Road)
+						{
+							roadOptions.Add(roadDirections.Down);
 						}
 					}
 
