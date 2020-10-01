@@ -427,6 +427,32 @@ namespace The_Mark
 			}
 
 			waterbodies.Add(newRiver);
+
+
+			//add child
+			/*
+			if (newRiver.waterChunks.Count>25 && rando.Next(1,4)==1)
+            {
+				Point childStarting = new Point();
+				Point childEnding = new Point();
+				childStarting.X = newRiver.waterChunks[rando.Next(5, newRiver.waterChunks.Count - 10)].rect.X;
+				childStarting.Y = newRiver.waterChunks[rando.Next(5, newRiver.waterChunks.Count - 10)].rect.Y;
+
+
+				//add river ending positions
+				for (int x = 0; x < gridSize.X; ++x)
+				{
+					for (int y = 0; y < gridSize.Y; ++y)
+					{
+						if (x == 0 || y == 0 || x == gridSize.X - 1 || y == gridSize.Y - 1)
+						{
+							//riverEndingLocCandidates.Add(new Vector2(x, y));
+						}
+
+					}
+				}
+			}
+			*/
 		}
 
 
@@ -526,13 +552,20 @@ namespace The_Mark
 			//create grid
 			createGrid(gamedeets, rando);
 
-			//TODO: Add Terrains
-
 
 			//add lakes and rivers
 			createLakes(datamanager, rando);
 			//assign graphics to water tiles
 			createTileAssignmentsforRiversandLakes();
+
+			//TODO: Add Terrains
+			//Add Forests
+
+			//Add Beaches
+
+			//Add Mountains
+
+
 
 			//add castle
 			Place newCastle = new Place();
@@ -1153,7 +1186,7 @@ namespace The_Mark
 					GridTile newgridTile = new GridTile(x, y);
 					//terrain
 					Terrain newTerrain = new Terrain();
-					newTerrain.createNewTerrain(Terrain.TerrainType.Grass, new Vector2(x * newgridTile.gridSize, y * newgridTile.gridSize), gamedeets);
+					newTerrain.createNewTerrain(Terrain.TerrainType.Grass, multiplyBy64(new Vector2(x,y)), gamedeets,rando);
 					newgridTile.thisTerrainType = GridTile.GridTerrain.Grass;
 					terrains.Add(newTerrain);
 
