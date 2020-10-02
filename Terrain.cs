@@ -22,7 +22,7 @@ namespace The_Mark
 			if (thisTerrainType == TerrainType.Grass)
             {
 				terrainTexture = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/grass_grid_1");
-				int texturerand = rando.Next(0, 4);
+				int texturerand = rando.Next(0, 8);
 				textureRect = new Rectangle(texturerand*64, 0, 64, 64);
 			}
 		}
