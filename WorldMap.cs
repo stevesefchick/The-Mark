@@ -23,14 +23,16 @@ namespace The_Mark
 
 
 		public Vector2 gridSize = new Vector2(50, 50);
-		//List<GridTile> gridTiles = new List<GridTile>();
 		Dictionary<Point, GridTile> gridTiles = new Dictionary<Point, GridTile>();
 
 
 		//assets
-		private Texture2D debugGuideTexture;
 		protected Texture2D roadTiles;
 		protected Texture2D riverTiles;
+		//terrains
+		protected Texture2D grassTerrainTiles;
+		protected Texture2D forestTerrainTiles;
+
 
 
 		//checks
@@ -48,9 +50,10 @@ namespace The_Mark
 
 		void LoadTextures(GameMain gamedeets)
         {
-			debugGuideTexture = gamedeets.Content.Load<Texture2D>("Sprites/UI/debugGuide");
 			roadTiles = gamedeets.Content.Load<Texture2D>("Sprites/Road/road_tiles");
 			riverTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/river_tiles");
+			grassTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/grass_grid_1");
+			forestTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/forest_grid_1");
 		}
 
 		//debug - announce creations
@@ -455,6 +458,22 @@ namespace The_Mark
 			*/
 		}
 
+		protected void createForests(DataManager datamanager, Random rando)
+		{
+			int numberofforests = rando.Next(1, 5);
+			for (int i = 0; i < numberofforests; ++i)
+			{
+				int forestsize = rando.Next(2, 7);
+				Vector2 startingArea;
+				startingArea.X = rando.Next(8, (int)gridSize.X - 8);
+				startingArea.Y = rando.Next(8, (int)gridSize.Y - 8);
+
+				startingArea = new Vector2(startingArea.X - forestsize, startingArea.Y - forestsize);
+
+			}
+
+		}
+
 
 		protected void createLakes(DataManager datamanager, Random rando)
         {
@@ -558,7 +577,7 @@ namespace The_Mark
 			//assign graphics to water tiles
 			createTileAssignmentsforRiversandLakes();
 
-			//TODO: Add Terrains
+			//Add Terrains
 			//Add Forests
 
 			//Add Beaches
@@ -1321,7 +1340,7 @@ namespace The_Mark
 
 			for (int i = 0; i < terrains.Count;++i)
             {
-				terrains[i].Draw(spriteBatch);
+				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles);
             }
 			for (int i = 0; i < waterbodies.Count; ++i)
 			{

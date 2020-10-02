@@ -7,12 +7,11 @@ namespace The_Mark
     class Terrain
     {
 		//main variables
-		public enum TerrainType { Grass}
+		public enum TerrainType { Grass, Forest}
 		public TerrainType thisTerrainType;
 		public Vector2 terrainLocation;
 		public Rectangle textureRect;
 
-		Texture2D terrainTexture;
 
 		public void createNewTerrain(TerrainType thisType, Vector2 location,GameMain gamedeets,Random rando)
         {
@@ -21,9 +20,12 @@ namespace The_Mark
 
 			if (thisTerrainType == TerrainType.Grass)
             {
-				terrainTexture = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/grass_grid_1");
 				int texturerand = rando.Next(0, 8);
 				textureRect = new Rectangle(texturerand*64, 0, 64, 64);
+			}
+			else if (thisTerrainType == TerrainType.Forest)
+			{
+				textureRect = new Rectangle(0, 0, 64, 64);
 			}
 		}
 
@@ -32,15 +34,15 @@ namespace The_Mark
 		{
 		}
 
-		public void Draw(SpriteBatch spriteBatch)
+		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain)
 		{
-			if (thisTerrainType != TerrainType.Grass)
+			if (thisTerrainType == TerrainType.Forest)
 			{
-				//todo, may need to draw underlying grass
+				spriteBatch.Draw(forestTerrain, terrainLocation, textureRect, Color.White);
 			}
-			else
+			else if (thisTerrainType == TerrainType.Grass)
 			{
-				spriteBatch.Draw(terrainTexture, terrainLocation, textureRect, Color.White);
+				spriteBatch.Draw(grassTerrain, terrainLocation, textureRect, Color.White);
 			}
 		}
 	}
