@@ -32,7 +32,8 @@ namespace The_Mark
 		//terrains
 		protected Texture2D grassTerrainTiles;
 		protected Texture2D forestTerrainTiles;
-
+		//doodads
+		protected Texture2D treeTerrainTiles;
 
 
 		//checks
@@ -54,6 +55,7 @@ namespace The_Mark
 			riverTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/river_tiles");
 			grassTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/grass_grid_1");
 			forestTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/forest_grid_1");
+			treeTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/tree_grid_1");
 		}
 
 		//debug - announce creations
@@ -1454,19 +1456,27 @@ namespace The_Mark
 
 		public void Draw(SpriteBatch spriteBatch, SpriteFont displayFont)
 		{
-
+			//draw terrain
 			for (int i = 0; i < terrains.Count;++i)
             {
 				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles);
             }
+			//draw water
 			for (int i = 0; i < waterbodies.Count; ++i)
 			{
 				waterbodies[i].Draw(spriteBatch, riverTiles, displayFont, isDisplayTownAreaFont);
 			}
+			//draw roads
 			for (int i = 0; i < roads.Count;++i)
             {
 				roads[i].Draw(spriteBatch,displayFont,isDisplayTownAreaFont,roadTiles);
             }
+			//draw terrain doodads
+			for (int i = 0; i < terrains.Count; ++i)
+			{
+				terrains[i].DrawDoodads(spriteBatch, treeTerrainTiles);
+			}
+			//draw places
 			for (int i =0; i < places.Count;++i)
             {
 				places[i].Draw(spriteBatch,displayFont);
