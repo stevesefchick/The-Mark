@@ -562,10 +562,10 @@ namespace The_Mark
 			int numberofforests = rando.Next(1, 5);
 			for (int i = 0; i < numberofforests; ++i)
 			{
-				int forestsize = rando.Next(2, 7);
+				int forestsize = rando.Next(3, 8);
 				Vector2 startingArea;
-				startingArea.X = rando.Next(8, (int)gridSize.X - 8);
-				startingArea.Y = rando.Next(8, (int)gridSize.Y - 8);
+				startingArea.X = rando.Next(9, (int)gridSize.X - 10);
+				startingArea.Y = rando.Next(9, (int)gridSize.Y - 10);
 
 				startingArea = new Vector2(startingArea.X - forestsize, startingArea.Y - forestsize);
 

@@ -13,13 +13,13 @@ namespace The_Mark
         public Rectangle Location;
         public Rectangle rect;
 
-        public TerrainDoodad(TerrainDoodadType thisType, Vector2 thisLoc)
+        public TerrainDoodad(TerrainDoodadType thisType, Vector2 thisLoc,Random rando)
         {
             thisDoodadType = thisType;
             if (thisDoodadType == TerrainDoodadType.NormalTree1)
             {
                 Location = new Rectangle((int)thisLoc.X, (int)thisLoc.Y, 16, 32);
-                rect = new Rectangle(0, 0, 16, 32);
+                rect = new Rectangle(rando.Next(0,3)*16, 0, 16, 32);
             }
         }
 

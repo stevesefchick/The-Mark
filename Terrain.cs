@@ -36,7 +36,7 @@ namespace The_Mark
 				int randTree = rando.Next(3, 9);
 				for (int i =0; i < randTree;++i)
                 {
-					terrainDoodads.Add(new TerrainDoodad(TerrainDoodad.TerrainDoodadType.NormalTree1, new Vector2(location.X + rando.Next(3, 63), location.Y + rando.Next(3, 63))));
+					terrainDoodads.Add(new TerrainDoodad(TerrainDoodad.TerrainDoodadType.NormalTree1, new Vector2(location.X + rando.Next(3, 63), location.Y + rando.Next(3, 63)),rando));
                 }
 			}
 		}
