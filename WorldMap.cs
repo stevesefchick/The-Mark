@@ -500,9 +500,46 @@ namespace The_Mark
 							}
 
 
-
-
-
+							//left side
+							if (above == true && below == true && left == false && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(64, 64));
+							}
+							//right side
+							if (above == true && below == true && left == true && right == false)
+							{
+								terrains[i].AssignForestTile(new Vector2(192, 64));
+							}
+							//top side
+							if (above == false && below == true && left == true && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(128, 0));
+							}
+							//bottom side
+							if (above == true && below == false && left == true && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(128, 128));
+							}
+							//top left
+							if (above == false && below == true && left == false && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(64, 0));
+							}
+							//top right
+							if (above == false && below == true && left == true && right == false)
+							{
+								terrains[i].AssignForestTile(new Vector2(192, 0));
+							}
+							//bottom left
+							if (above == true && below == false && left == false && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(64,128));
+							}
+							//bottom right
+							if (above == true && below == false && left == true && right == false)
+							{
+								terrains[i].AssignForestTile(new Vector2(192, 128));
+							}
 
 							//all dirs
 							if (above == true && below == true && left == true && right == true)
@@ -1130,7 +1167,7 @@ namespace The_Mark
         {
 			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
 			{
-				if (g.Value.thisRoadType == GridTile.RoadType.Road)
+				if (g.Value.thisRoadType == GridTile.RoadType.Road && roads.Count>0)
                 {
 					Point thisRoadLoc = g.Key;
 					Vector2 thisLoc = new Vector2(thisRoadLoc.X, thisRoadLoc.Y);
