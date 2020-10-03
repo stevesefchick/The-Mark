@@ -458,6 +458,66 @@ namespace The_Mark
 			*/
 		}
 
+		protected void assignTileToForest()
+		{
+			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
+			{
+				if (g.Value.thisTerrainType == GridTile.GridTerrain.Forest)
+				{
+					Point thisForestLoc = g.Key;
+					Vector2 thisLoc = new Vector2(thisForestLoc.X, thisForestLoc.Y);
+					thisLoc = multiplyBy64(thisLoc);
+
+					for (int i = 0; i < terrains.Count;++i)
+                    {
+						if (terrains[i].thisTerrainType == Terrain.TerrainType.Forest &&
+							terrains[i].terrainLocation == thisLoc)
+                        {
+							Boolean above = false;
+							Boolean below = false;
+							Boolean left = false;
+							Boolean right = false;
+
+							//check above
+							if (gridTiles[new Point(thisForestLoc.X, thisForestLoc.Y - 1)].thisTerrainType == GridTile.GridTerrain.Forest)
+							{
+								above = true;
+							}
+							//check below
+							if (gridTiles[new Point(thisForestLoc.X, thisForestLoc.Y + 1)].thisTerrainType == GridTile.GridTerrain.Forest)
+							{
+								below = true;
+							}
+							//check left
+							if (gridTiles[new Point(thisForestLoc.X - 1, thisForestLoc.Y)].thisTerrainType == GridTile.GridTerrain.Forest)
+							{
+								left = true;
+							}
+							//check right
+							if (gridTiles[new Point(thisForestLoc.X + 1, thisForestLoc.Y)].thisTerrainType == GridTile.GridTerrain.Forest)
+							{
+								right = true;
+							}
+
+
+
+
+
+
+							//all dirs
+							if (above == true && below == true && left == true && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(0, 0));
+							}
+
+						}
+                    }
+
+
+				}
+			}
+		}
+
 		protected void createForests(DataManager datamanager, Random rando)
 		{
 			int numberofforests = rando.Next(1, 5);
@@ -470,7 +530,27 @@ namespace The_Mark
 
 				startingArea = new Vector2(startingArea.X - forestsize, startingArea.Y - forestsize);
 
+				for (int x = (int)startingArea.X; x < (int)(startingArea.X + forestsize); ++x)
+				{
+					for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + forestsize); ++y)
+					{
+						//find existing terrain
+						for (int t =0; t < terrains.Count;++t)
+                        {
+							if (terrains[t].terrainLocation == multiplyBy64(new Vector2(x,y)))
+                            {
+								terrains[t].createNewTerrain(Terrain.TerrainType.Forest, multiplyBy64(new Vector2(x, y)),rando);
+								gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Forest;
+								break;
+                            }
+                        }
+
+
+					}
+				}
 			}
+
+			assignTileToForest();
 
 		}
 
@@ -579,7 +659,7 @@ namespace The_Mark
 
 			//Add Terrains
 			//Add Forests
-
+			createForests(datamanager, rando);
 			//Add Beaches
 
 			//Add Mountains
@@ -1205,7 +1285,7 @@ namespace The_Mark
 					GridTile newgridTile = new GridTile(x, y);
 					//terrain
 					Terrain newTerrain = new Terrain();
-					newTerrain.createNewTerrain(Terrain.TerrainType.Grass, multiplyBy64(new Vector2(x,y)), gamedeets,rando);
+					newTerrain.createNewTerrain(Terrain.TerrainType.Grass, multiplyBy64(new Vector2(x,y)),rando);
 					newgridTile.thisTerrainType = GridTile.GridTerrain.Grass;
 					terrains.Add(newTerrain);
 

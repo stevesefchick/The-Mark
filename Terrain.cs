@@ -13,7 +13,7 @@ namespace The_Mark
 		public Rectangle textureRect;
 
 
-		public void createNewTerrain(TerrainType thisType, Vector2 location,GameMain gamedeets,Random rando)
+		public void createNewTerrain(TerrainType thisType, Vector2 location,Random rando)
         {
 			thisTerrainType = thisType;
 			terrainLocation = location;
@@ -29,15 +29,20 @@ namespace The_Mark
 			}
 		}
 
+		public void AssignForestTile(Vector2 vect)
+        {
+			textureRect.X = (int)vect.X;
+			textureRect.Y = (int)vect.Y;
 
-		public void Update(GameTime gameTime)
-		{
-		}
+        }
 
 		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain)
 		{
 			if (thisTerrainType == TerrainType.Forest)
 			{
+				//grass under
+				spriteBatch.Draw(grassTerrain, terrainLocation, new Rectangle(0,0,64,64), Color.White);
+
 				spriteBatch.Draw(forestTerrain, terrainLocation, textureRect, Color.White);
 			}
 			else if (thisTerrainType == TerrainType.Grass)
