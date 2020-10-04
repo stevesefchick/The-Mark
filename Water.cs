@@ -235,9 +235,9 @@ namespace The_Mark
 
         private void DrawFont(SpriteBatch spriteBatch, SpriteFont displayfont)
         {
-            spriteBatch.DrawString(displayfont, riverName, new Vector2((int)(displayLoc.X + 1), (int)(displayLoc.Y + 1)), Color.Black);
-            spriteBatch.DrawString(displayfont, riverName, new Vector2((int)(displayLoc.X + 2), (int)(displayLoc.Y + 2)), Color.Black);
-            spriteBatch.DrawString(displayfont, riverName, displayLoc, Color.White);
+            spriteBatch.DrawString(displayfont, riverName, new Vector2((int)(displayLoc.X + 1), (int)(displayLoc.Y + 1)), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
+            spriteBatch.DrawString(displayfont, riverName, new Vector2((int)(displayLoc.X + 2), (int)(displayLoc.Y + 2)), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
+            spriteBatch.DrawString(displayfont, riverName, displayLoc, Color.White,0,Vector2.Zero,1,SpriteEffects.None,0.75f);
 
         }
 
@@ -245,7 +245,7 @@ namespace The_Mark
         {
             for (int i = 0; i < waterChunks.Count; ++i)
             {
-                spriteBatch.Draw(waterTiles, waterChunks[i].rect, waterChunks[i].tile, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+                spriteBatch.Draw(waterTiles, waterChunks[i].rect, waterChunks[i].tile, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.2f);
 
             }
 

@@ -12,6 +12,7 @@ namespace The_Mark
 
         public Rectangle Location;
         public Rectangle rect;
+        float doodadDepth;
 
         public TerrainDoodad(TerrainDoodadType thisType, Vector2 thisLoc,Random rando)
         {
@@ -21,11 +22,13 @@ namespace The_Mark
                 Location = new Rectangle((int)thisLoc.X, (int)thisLoc.Y, 16, 32);
                 rect = new Rectangle(rando.Next(0,3)*16, 0, 16, 32);
             }
+
+            doodadDepth = 0.3f + (thisLoc.Y * 0.00001f);
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D thisTexture)
         {
-            spriteBatch.Draw(thisTexture, Location, rect,Color.White,0,new Vector2(8,32), SpriteEffects.None,0);
+            spriteBatch.Draw(thisTexture, Location, rect,Color.White,0,new Vector2(8,32), SpriteEffects.None, doodadDepth);
         }
 
     }

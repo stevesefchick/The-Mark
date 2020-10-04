@@ -129,9 +129,9 @@ namespace The_Mark
 
         private void DrawFont(SpriteBatch spriteBatch, SpriteFont displayfont)
         {
-            spriteBatch.DrawString(displayfont, roadName, new Vector2((int)(displayLoc.X+ 1), (int)(displayLoc.Y +1)), Color.Black);
-            spriteBatch.DrawString(displayfont, roadName, new Vector2((int)(displayLoc.X + 2), (int)(displayLoc.Y +2)), Color.Black);
-            spriteBatch.DrawString(displayfont, roadName, displayLoc, Color.White);
+            spriteBatch.DrawString(displayfont, roadName, new Vector2((int)(displayLoc.X + 1), (int)(displayLoc.Y + 1)), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
+            spriteBatch.DrawString(displayfont, roadName, new Vector2((int)(displayLoc.X + 2), (int)(displayLoc.Y + 2)), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
+            spriteBatch.DrawString(displayfont, roadName, displayLoc, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.75f);
 
         }
 
@@ -150,7 +150,7 @@ namespace The_Mark
         {
             for (int i = 0; i < roadChunks.Count;++i)
             {
-                    spriteBatch.Draw(roadTiles, roadChunks[i].rect, roadChunks[i].tile, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+                    spriteBatch.Draw(roadTiles, roadChunks[i].rect, roadChunks[i].tile, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.25f);
                 
             }
 

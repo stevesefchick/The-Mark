@@ -10,7 +10,7 @@ namespace The_Mark
 		//main variables
 		public enum TerrainType { Grass, Forest}
 		public TerrainType thisTerrainType;
-		public Vector2 terrainLocation;
+		public Rectangle terrainLocation;
 		public Rectangle textureRect;
 
 		//doodads
@@ -20,13 +20,16 @@ namespace The_Mark
 		public void createNewTerrain(TerrainType thisType, Vector2 location,Random rando)
         {
 			thisTerrainType = thisType;
-			terrainLocation = location;
+			terrainLocation = new Rectangle((int)location.X, (int)location.Y, 64, 64);
 			terrainDoodads.Clear();
 
 			if (thisTerrainType == TerrainType.Grass)
             {
 				int texturerand = rando.Next(0, 8);
 				textureRect = new Rectangle(texturerand*64, 0, 64, 64);
+
+				//add doodads
+
 			}
 			else if (thisTerrainType == TerrainType.Forest)
 			{
@@ -48,19 +51,25 @@ namespace The_Mark
 
         }
 
+		public Vector2 returnTerrainLocation()
+        {
+			Vector2 loc = new Vector2(terrainLocation.X, terrainLocation.Y);
+			return loc;
+        }
+
 		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain)
 		{
 			if (thisTerrainType == TerrainType.Forest)
 			{
 				//grass under
-				spriteBatch.Draw(grassTerrain, terrainLocation, new Rectangle(0,0,64,64), Color.White);
+				spriteBatch.Draw(grassTerrain, terrainLocation, new Rectangle(0,0,64,64), Color.White,0,Vector2.Zero,SpriteEffects.None,0.1f);
 
-				spriteBatch.Draw(forestTerrain, terrainLocation, textureRect, Color.White);
+				spriteBatch.Draw(forestTerrain, terrainLocation, textureRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.15f);
 
 			}
 			else if (thisTerrainType == TerrainType.Grass)
 			{
-				spriteBatch.Draw(grassTerrain, terrainLocation, textureRect, Color.White);
+				spriteBatch.Draw(grassTerrain, terrainLocation, textureRect, Color.White,0, Vector2.Zero, SpriteEffects.None, 0.1f);
 			}
 		}
 

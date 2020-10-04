@@ -210,8 +210,17 @@ class GameMain : Game
 	{
 		GraphicsDevice.Clear(Color.CornflowerBlue);
 
+		//0 - background
+		//1 - grass
+		//1.5 - textures
+		//2 - water
+		//2.5 - roads
+		//3 - places and doodads
+		//7 - text
+		//8 - mouse
+		//9 - ui
 
-		spriteBatch.Begin(SpriteSortMode.Deferred,
+		spriteBatch.Begin(SpriteSortMode.FrontToBack,
 			BlendState.AlphaBlend,
 			SamplerState.PointClamp,
 			null,

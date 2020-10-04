@@ -473,7 +473,7 @@ namespace The_Mark
 					for (int i = 0; i < terrains.Count;++i)
                     {
 						if (terrains[i].thisTerrainType == Terrain.TerrainType.Forest &&
-							terrains[i].terrainLocation == thisLoc)
+							terrains[i].returnTerrainLocation() == thisLoc)
                         {
 							Boolean above = false;
 							Boolean below = false;
@@ -576,7 +576,7 @@ namespace The_Mark
 						//find existing terrain
 						for (int t =0; t < terrains.Count;++t)
                         {
-							if (terrains[t].terrainLocation == multiplyBy64(new Vector2(x,y)))
+							if (terrains[t].returnTerrainLocation() == multiplyBy64(new Vector2(x,y)))
                             {
 								terrains[t].createNewTerrain(Terrain.TerrainType.Forest, multiplyBy64(new Vector2(x, y)),rando);
 								gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Forest;
@@ -1016,7 +1016,7 @@ namespace The_Mark
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 64, 64, 64));
 					}
 					//left down right
-					if (above == false && below == true && left == true && right == true && bottomleft==false && topleft==false)
+					if (above == false && below == true && left == true && right == true && bottomleft==false && bottomright==false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(64, 128, 64, 64));
 					}
