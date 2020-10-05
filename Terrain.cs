@@ -57,7 +57,7 @@ namespace The_Mark
 			return loc;
         }
 
-		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain)
+		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain,Texture2D treeTerrain)
 		{
 			if (thisTerrainType == TerrainType.Forest)
 			{
@@ -71,6 +71,7 @@ namespace The_Mark
 			{
 				spriteBatch.Draw(grassTerrain, terrainLocation, textureRect, Color.White,0, Vector2.Zero, SpriteEffects.None, 0.1f);
 			}
+
 		}
 
 		public void DrawDoodads(SpriteBatch spriteBatch,Texture2D treeTerrain)

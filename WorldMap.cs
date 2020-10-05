@@ -806,10 +806,54 @@ namespace The_Mark
 
 			#endregion
 
-
-
 			//BIRB
 			#region birb
+			for (int i = 0; i < places.Count; ++i)
+			{
+				if (places[i].thisPlaceType == Place.PlaceType.Ruins)
+				{
+					availableLocationIDs.Add(places[i].placeID);
+				}
+			}
+
+			if (availableLocationIDs.Count > 0)
+			{
+				max = rando.Next(0, availableLocationIDs.Count * 10);
+			}
+
+			//create and assign creatures
+			for (int i = 0; i < max; ++i)
+			{
+				int randTerrainOrPlaceCheck = rando.Next(1, 4);
+				if (randTerrainOrPlaceCheck == 1)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
+					newCreature.placeIDHome = availableLocationIDs[rando.Next(0, availableLocationIDs.Count)];
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 2)
+                {
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Grass;
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 3)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Forest;
+					creatures.Add(newCreature);
+				}
+			}
+
+			max = 0;
+			availableLocationIDs.Clear();
+
+
+
+			#endregion
+
+			//LEGGY
+			#region leggy
 			for (int i = 0; i < places.Count; ++i)
 			{
 				if (places[i].thisPlaceType == Place.PlaceType.Ruins)
@@ -829,29 +873,27 @@ namespace The_Mark
 				int randTerrainOrPlaceCheck = rando.Next(1, 3);
 				if (randTerrainOrPlaceCheck == 1)
 				{
-					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Leggy, datamanager, rando);
 					newCreature.placeIDHome = availableLocationIDs[rando.Next(0, availableLocationIDs.Count)];
 					creatures.Add(newCreature);
 				}
 				else if (randTerrainOrPlaceCheck == 2)
-                {
+				{
 					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
-					newCreature.terrainTypeHome = Terrain.TerrainType.Grass;
+					newCreature.terrainTypeHome = Terrain.TerrainType.Forest;
 					creatures.Add(newCreature);
 				}
 			}
 
+
+
 			max = 0;
 			availableLocationIDs.Clear();
-
-
-
 			#endregion
-
 
 		}
 
-		void createTileAssignmentsforRiversandLakes()
+        void createTileAssignmentsforRiversandLakes()
 		{
 			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
 			{
@@ -1459,8 +1501,15 @@ namespace The_Mark
 			//draw terrain
 			for (int i = 0; i < terrains.Count;++i)
             {
-				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles);
-            }
+				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles,treeTerrainTiles);
+				//terrains[i].DrawDoodads(spriteBatch, treeTerrainTiles);
+
+			}
+			//draw terrain doodads
+			for (int i = 0; i < terrains.Count; ++i)
+			{
+				terrains[i].DrawDoodads(spriteBatch, treeTerrainTiles);
+			}
 			//draw water
 			for (int i = 0; i < waterbodies.Count; ++i)
 			{
@@ -1471,11 +1520,7 @@ namespace The_Mark
             {
 				roads[i].Draw(spriteBatch,displayFont,isDisplayTownAreaFont,roadTiles);
             }
-			//draw terrain doodads
-			for (int i = 0; i < terrains.Count; ++i)
-			{
-				terrains[i].DrawDoodads(spriteBatch, treeTerrainTiles);
-			}
+
 			//draw places
 			for (int i =0; i < places.Count;++i)
             {
