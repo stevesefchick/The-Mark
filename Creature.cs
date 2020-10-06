@@ -278,7 +278,70 @@ namespace The_Mark
             #region leggy
             if (thisCreatureType == ThisCreatureType.Leggy)
             {
-                thename = "Leggy";
+                thischoice = rando.Next(1, 4);
+                //type 1 - name + the Leggy
+                if (thischoice == 1)
+                {
+                    string ending = " the Leggy";
+
+
+                    List<string> candidatesleggyname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "leggyname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesleggyname.Add(entry.Key);
+                        }
+                    }
+
+                    thename = candidatesleggyname[rando.Next(0, candidatesleggyname.Count)].ToString() + ending;
+
+                }
+                //type 2 - name + title
+                else if (thischoice == 2)
+                {
+                    List<string> candidatestitlename = new List<string>();
+                    List<string> candidatesleggyname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "leggyname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesleggyname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturetitle")
+                        {
+                            candidatestitlename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesleggyname[rando.Next(0, candidatesleggyname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+                //type 3 - insect + bite
+                else if (thischoice == 3)
+                {
+                    List<string> candidatesbitename = new List<string>();
+                    List<string> candidatesinsectname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturebitename")
+                        {
+                            candidatesbitename.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creatureinsectname")
+                        {
+                            candidatesinsectname.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesinsectname[rando.Next(0, candidatesinsectname.Count)].ToString() + candidatesbitename[rando.Next(0, candidatesbitename.Count)].ToString();
+
+                }
+
             }
             #endregion
 
