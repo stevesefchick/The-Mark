@@ -29,6 +29,12 @@ namespace The_Mark
 				textureRect = new Rectangle(texturerand*64, 0, 64, 64);
 
 				//add doodads
+				int randTree = rando.Next(1, 9);
+				if (randTree == 1)
+				{
+						terrainDoodads.Add(new TerrainDoodad(TerrainDoodad.TerrainDoodadType.NormalTree1, new Vector2(location.X + rando.Next(3, 63), location.Y + rando.Next(3, 63)), rando));
+					
+				}
 
 			}
 			else if (thisTerrainType == TerrainType.Forest)
@@ -76,13 +82,11 @@ namespace The_Mark
 
 		public void DrawDoodads(SpriteBatch spriteBatch,Texture2D treeTerrain)
 		{
-			if (thisTerrainType == TerrainType.Forest)
-			{
 				for (int i = 0; i < terrainDoodads.Count; ++i)
 				{
 					terrainDoodads[i].Draw(spriteBatch, treeTerrain);
 				}
-			}
+			
 		}
 	}
 }
