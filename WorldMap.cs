@@ -578,7 +578,13 @@ namespace The_Mark
                         {
 							if (terrains[t].returnTerrainLocation() == multiplyBy64(new Vector2(x,y)))
                             {
-								terrains[t].createNewTerrain(Terrain.TerrainType.Forest, multiplyBy64(new Vector2(x, y)),rando);
+								Boolean isWaterOrRoads = true;
+								if (gridTiles[new Point(x,y)].thisWaterType== GridTile.WaterType.None && gridTiles[new Point(x,y)].thisRoadType== GridTile.RoadType.None)
+                                {
+									isWaterOrRoads = false;
+                                }
+
+								terrains[t].createNewTerrain(Terrain.TerrainType.Forest, multiplyBy64(new Vector2(x, y)),rando,isWaterOrRoads);
 								gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Forest;
 								break;
                             }
@@ -1366,7 +1372,7 @@ namespace The_Mark
 					GridTile newgridTile = new GridTile(x, y);
 					//terrain
 					Terrain newTerrain = new Terrain();
-					newTerrain.createNewTerrain(Terrain.TerrainType.Grass, multiplyBy64(new Vector2(x,y)),rando);
+					newTerrain.createNewTerrain(Terrain.TerrainType.Grass, multiplyBy64(new Vector2(x,y)),rando,true);
 					newgridTile.thisTerrainType = GridTile.GridTerrain.Grass;
 					terrains.Add(newTerrain);
 

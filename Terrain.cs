@@ -8,7 +8,7 @@ namespace The_Mark
     class Terrain
     {
 		//main variables
-		public enum TerrainType { Grass, Forest}
+		public enum TerrainType { Grass, Forest, Hills, Mountain}
 		public TerrainType thisTerrainType;
 		public Rectangle terrainLocation;
 		public Rectangle textureRect;
@@ -17,7 +17,7 @@ namespace The_Mark
 		public List<TerrainDoodad> terrainDoodads = new List<TerrainDoodad>();
 
 
-		public void createNewTerrain(TerrainType thisType, Vector2 location,Random rando)
+		public void createNewTerrain(TerrainType thisType, Vector2 location,Random rando,Boolean isOnWaterorRoad)
         {
 			thisTerrainType = thisType;
 			terrainLocation = new Rectangle((int)location.X, (int)location.Y, 64, 64);
@@ -29,11 +29,14 @@ namespace The_Mark
 				textureRect = new Rectangle(texturerand*64, 0, 64, 64);
 
 				//add doodads
-				int randTree = rando.Next(1, 9);
-				if (randTree == 1)
+				if (isOnWaterorRoad == false)
 				{
+					int randTree = rando.Next(1, 9);
+					if (randTree == 1)
+					{
 						terrainDoodads.Add(new TerrainDoodad(TerrainDoodad.TerrainDoodadType.NormalTree1, new Vector2(location.X + rando.Next(3, 63), location.Y + rando.Next(3, 63)), rando));
-					
+
+					}
 				}
 
 			}
@@ -42,11 +45,19 @@ namespace The_Mark
 				textureRect = new Rectangle(0, 0, 64, 64);
 
 				//add doodads
-				int randTree = rando.Next(3, 9);
-				for (int i =0; i < randTree;++i)
-                {
-					terrainDoodads.Add(new TerrainDoodad(TerrainDoodad.TerrainDoodadType.NormalTree1, new Vector2(location.X + rando.Next(3, 63), location.Y + rando.Next(3, 63)),rando));
-                }
+				if (isOnWaterorRoad == false)
+				{
+					int randTree = rando.Next(3, 9);
+					for (int i = 0; i < randTree; ++i)
+					{
+						terrainDoodads.Add(new TerrainDoodad(TerrainDoodad.TerrainDoodadType.NormalTree1, new Vector2(location.X + rando.Next(3, 63), location.Y + rando.Next(3, 63)), rando));
+					}
+				}
+			}
+			else if (thisTerrainType == TerrainType.Hills)
+			{
+				textureRect = new Rectangle(0, 0, 64, 64);
+
 			}
 		}
 
@@ -76,6 +87,10 @@ namespace The_Mark
 			else if (thisTerrainType == TerrainType.Grass)
 			{
 				spriteBatch.Draw(grassTerrain, terrainLocation, textureRect, Color.White,0, Vector2.Zero, SpriteEffects.None, 0.1f);
+			}
+			else if (thisTerrainType == TerrainType.Hills)
+			{
+				spriteBatch.Draw(grassTerrain, terrainLocation, textureRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.1f);
 			}
 
 		}
