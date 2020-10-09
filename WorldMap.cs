@@ -34,6 +34,7 @@ namespace The_Mark
 		protected Texture2D forestTerrainTiles;
 		//doodads
 		protected Texture2D treeTerrainTiles;
+		protected Texture2D hillTerrainTiles;
 
 
 		//checks
@@ -56,6 +57,7 @@ namespace The_Mark
 			grassTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/grass_grid_1");
 			forestTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/forest_grid_1");
 			treeTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/tree_grid_1");
+			hillTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/hills_grid_1");
 		}
 
 		//debug - announce creations
@@ -171,6 +173,9 @@ namespace The_Mark
 
 			void pathRoad(Point starting, Point ending)
             {
+				//all grid points, used to undo
+				List<Point> allGridPoints = new List<Point>();
+
 				Road newRoad = new Road(gamedeets, rando);
 				Boolean abort = false;
 
@@ -182,6 +187,8 @@ namespace The_Mark
 				{
 					gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
 					newRoad.roadChunks.Add(new RoadChunk(multiplyBy64(new Vector2(starting.X, starting.Y))));
+
+					allGridPoints.Add(starting);
 				}
 
 
@@ -316,6 +323,8 @@ namespace The_Mark
 					{
 						newRoad.roadChunks.Add(new RoadChunk(multiplyBy64(new Vector2(starting.X, starting.Y))));
 						gridTiles[starting].thisRoadType = GridTile.RoadType.Road;
+						allGridPoints.Add(starting);
+
 
 						//stop if running in parrallel
 						if (checkAhead == true)
@@ -331,6 +340,13 @@ namespace The_Mark
 				{
 					roads.Add(newRoad);
 				}
+				else if (abort==true)
+                {
+					for (int i =0;i<allGridPoints.Count;++i)
+                    {
+						gridTiles[allGridPoints[i]].thisRoadType = GridTile.RoadType.None;
+                    }
+                }
             }
 
 		}
@@ -431,8 +447,8 @@ namespace The_Mark
 
 			}
 
-			waterbodies.Add(newRiver);
-
+				waterbodies.Add(newRiver);
+			
 
 			//add child
 			/*
@@ -607,6 +623,7 @@ namespace The_Mark
 			for (int i =0; i < numberoflakes;++i)
             {
 				Boolean isCollidingWithABadThing = false;
+				List<Point> riverGridPoints = new List<Point>();
 
 				int lakesize = rando.Next(2, 5);
 				Vector2 startingArea;
@@ -645,6 +662,7 @@ namespace The_Mark
 							Vector2 position = multiplyBy64(new Vector2(x, y));
 							newLake.waterChunks.Add(new WaterChunk(position));
 							gridTiles[new Point(x, y)].thisWaterType = GridTile.WaterType.Lake;
+						riverGridPoints.Add(new Point(x, y));
 						//}
 					}
 				}
@@ -676,6 +694,14 @@ namespace The_Mark
 					pathRiver(new Point((int)actualRiverStarting.X, (int)actualRiverStarting.Y), new Point((int)actualRiverEnding.X, (int)actualRiverEnding.Y), rando, datamanager);
 
 				}
+				else if (isCollidingWithABadThing==true)
+                {
+					for (int i2 =0;i2 < riverGridPoints.Count;++i2)
+                    {
+						gridTiles[riverGridPoints[i2]].thisWaterType = GridTile.WaterType.None;
+
+                    }
+                }
 
 
 
@@ -697,22 +723,29 @@ namespace The_Mark
 			createGrid(gamedeets, rando);
 
 
-			//add lakes and rivers
-			createLakes(datamanager, rando);
+            //bodies of water
+            #region water
+            //add lakes and rivers
+            createLakes(datamanager, rando);
 			//assign graphics to water tiles
 			createTileAssignmentsforRiversandLakes();
-
-			//Add Terrains
-			//Add Forests
-			createForests(datamanager, rando);
-			//Add Beaches
-
-			//Add Mountains
+            #endregion
 
 
+            //Add Terrains
+            #region Terrain
+            //Add Forests
+            createForests(datamanager, rando);
+            //Add Beaches
 
-			//add castle
-			Place newCastle = new Place();
+            //Add Mountains
+
+            #endregion
+
+            //places
+            #region places
+            //add castle
+            Place newCastle = new Place();
 			int XCenter = (int)(gridSize.X / 2);
 			int YCenter = (int)(gridSize.Y / 2);
 			//create the castle
@@ -751,31 +784,37 @@ namespace The_Mark
 				liveablePlaces.Add(newPlace.placeID);
 			}
 
+            #endregion
 
-			//create a bunch of people
-			for (int i=0;i<rando.Next(90,120);++i)
+            //people
+            #region people
+            //create a bunch of people
+            for (int i=0;i<rando.Next(90,120);++i)
             {
 				Person person = new Person();
 				person.CreatePerson(datamanager, rando, Person.CreationType.Created);
 				person.assignPersonToHome(liveablePlaces,rando);
 				people.Add(person);
             }
+            #endregion
 
-			//create a bunch of creatures based on terrains and places
-			#region creatures
-			lookForCreatureAvailability(rando,datamanager);
+            //create a bunch of creatures based on terrains and places
+            #region creatures
+            lookForCreatureAvailability(rando,datamanager);
 
             #endregion
 
             //create roads
+            #region roads
             createMajorRoads(rando, gamedeets);
 			//cleanup orbital locations that intersect with roads
 			cleanupOrbitalRoadCollision();
 			//assign tile graphics to roads
 			createTileAssignmentsForRoads();
+            #endregion
 
-			//finalization
-			debugAnnounceCreation();
+            //finalization
+            debugAnnounceCreation();
 
 		}
 
@@ -1502,19 +1541,29 @@ namespace The_Mark
 			}
 		}
 
+		Texture2D returnDoodadTexture(Terrain.TerrainType thistype)
+        {
+			if (thistype== Terrain.TerrainType.Forest)
+            {
+				return treeTerrainTiles;
+            }
+			else
+            {
+				return null; 
+            }
+        }
+
 		public void Draw(SpriteBatch spriteBatch, SpriteFont displayFont)
 		{
 			//draw terrain
 			for (int i = 0; i < terrains.Count;++i)
             {
 				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles,treeTerrainTiles);
-				//terrains[i].DrawDoodads(spriteBatch, treeTerrainTiles);
-
 			}
 			//draw terrain doodads
 			for (int i = 0; i < terrains.Count; ++i)
 			{
-				terrains[i].DrawDoodads(spriteBatch, treeTerrainTiles);
+				terrains[i].DrawDoodads(spriteBatch, returnDoodadTexture(terrains[i].thisTerrainType));
 			}
 			//draw water
 			for (int i = 0; i < waterbodies.Count; ++i)
@@ -1532,6 +1581,8 @@ namespace The_Mark
             {
 				places[i].Draw(spriteBatch,displayFont);
             }
+
+
 
 		}
 

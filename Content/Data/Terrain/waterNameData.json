@@ -1,5 +1,7 @@
 {
   "Crystal": { "waternametype": "waternoun" },
+  "Spirit": { "waternametype": "waternoun" },
+  "Gem": { "waternametype": "waternoun" },
   "Mill": { "waternametype": "waternoun" },
   "Clover": { "waternametype": "waternoun" },
   "Rock": { "waternametype": "waternoun" },
@@ -20,8 +22,10 @@
   "Murky": { "waternametype": "wateradj" },
   "Wet": { "waternametype": "wateradj" },
   "Long": { "waternametype": "wateradj" },
+  "Deep": { "waternametype": "wateradj" },
   "Shallow": { "waternametype": "wateradj" },
   "Serene": { "waternametype": "wateradj" },
+  "Quiet": { "waternametype": "wateradj" },
   "Lake": { "waternametype": "waterlakename" },
   "Pond": { "waternametype": "waterlakename" },
   "River": { "waternametype": "waterrivername" },
