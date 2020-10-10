@@ -58,6 +58,15 @@ namespace The_Mark
 			{
 				textureRect = new Rectangle(0, 0, 64, 64);
 
+				//add doodads
+				if (isOnWaterorRoad == false)
+				{
+					int randhill = rando.Next(2, 4);
+					for (int i = 0; i < randhill; ++i)
+					{
+						terrainDoodads.Add(new TerrainDoodad(TerrainDoodad.TerrainDoodadType.Hill1, new Vector2(location.X + rando.Next(-20, 40), location.Y + rando.Next(0, 20) + (randhill*20)), rando));
+					}
+				}
 			}
 		}
 
@@ -74,7 +83,7 @@ namespace The_Mark
 			return loc;
         }
 
-		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain,Texture2D treeTerrain)
+		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain)
 		{
 			if (thisTerrainType == TerrainType.Forest)
 			{
@@ -95,11 +104,11 @@ namespace The_Mark
 
 		}
 
-		public void DrawDoodads(SpriteBatch spriteBatch,Texture2D treeTerrain)
+		public void DrawDoodads(SpriteBatch spriteBatch,Texture2D thisTerrain)
 		{
 				for (int i = 0; i < terrainDoodads.Count; ++i)
 				{
-					terrainDoodads[i].Draw(spriteBatch, treeTerrain);
+					terrainDoodads[i].Draw(spriteBatch, thisTerrain);
 				}
 			
 		}

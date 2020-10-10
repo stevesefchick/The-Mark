@@ -573,6 +573,64 @@ namespace The_Mark
 			}
 		}
 
+		Boolean terrainGridCollidesWith(GridTile.GridTerrain checkForTileType, Point startingPoint, int size)
+        {
+			for (int x=startingPoint.X;x<startingPoint.X+size;++x)
+            {
+				for (int y =startingPoint.Y;y<startingPoint.Y+size;++y)
+                {
+
+                }
+            }
+
+
+
+
+			return false;
+        }
+
+		protected void createHills(DataManager datamanager, Random rando)
+        {
+			int numberofhills = rando.Next(1, 4);
+			for (int i = 0; i < numberofhills; ++i)
+			{
+				int hillssize = rando.Next(2, 6);
+				Vector2 startingArea;
+				startingArea.X = rando.Next(3, (int)gridSize.X - 4);
+				startingArea.Y = rando.Next(3, (int)gridSize.Y - 4);
+
+				startingArea = new Vector2(startingArea.X - hillssize, startingArea.Y - hillssize);
+
+				for (int x = (int)startingArea.X; x < (int)(startingArea.X + hillssize); ++x)
+				{
+					for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + hillssize); ++y)
+					{
+						//find existing terrain
+						for (int t = 0; t < terrains.Count; ++t)
+						{
+							if (terrains[t].returnTerrainLocation() == multiplyBy64(new Vector2(x, y)))
+							{
+								Boolean isWaterOrRoads = true;
+								if (gridTiles[new Point(x, y)].thisWaterType == GridTile.WaterType.None && gridTiles[new Point(x, y)].thisRoadType == GridTile.RoadType.None)
+								{
+									isWaterOrRoads = false;
+								}
+
+								terrains[t].createNewTerrain(Terrain.TerrainType.Hills, multiplyBy64(new Vector2(x, y)), rando, isWaterOrRoads);
+								gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Hills;
+								break;
+							}
+						}
+
+
+
+					}
+				}
+
+			}
+
+		}
+
 		protected void createForests(DataManager datamanager, Random rando)
 		{
 			int numberofforests = rando.Next(1, 5);
@@ -736,9 +794,13 @@ namespace The_Mark
             #region Terrain
             //Add Forests
             createForests(datamanager, rando);
-            //Add Beaches
+			//Add Beaches
 
-            //Add Mountains
+
+			//Add Hills
+			createHills(datamanager, rando);
+
+
 
             #endregion
 
@@ -1547,6 +1609,10 @@ namespace The_Mark
             {
 				return treeTerrainTiles;
             }
+			else if (thistype == Terrain.TerrainType.Hills)
+            {
+				return hillTerrainTiles;
+            }
 			else
             {
 				return null; 
@@ -1558,7 +1624,7 @@ namespace The_Mark
 			//draw terrain
 			for (int i = 0; i < terrains.Count;++i)
             {
-				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles,treeTerrainTiles);
+				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles);
 			}
 			//draw terrain doodads
 			for (int i = 0; i < terrains.Count; ++i)
