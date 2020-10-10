@@ -579,7 +579,10 @@ namespace The_Mark
             {
 				for (int y =startingPoint.Y;y<startingPoint.Y+size;++y)
                 {
-
+					if (gridTiles[new Point(x,y)].thisTerrainType == checkForTileType)
+                    {
+						return true;
+                    }
                 }
             }
 
@@ -596,36 +599,40 @@ namespace The_Mark
 			{
 				int hillssize = rando.Next(2, 6);
 				Vector2 startingArea;
-				startingArea.X = rando.Next(3, (int)gridSize.X - 4);
-				startingArea.Y = rando.Next(3, (int)gridSize.Y - 4);
+				startingArea.X = rando.Next(6, (int)gridSize.X - 6);
+				startingArea.Y = rando.Next(6, (int)gridSize.Y - 6);
 
 				startingArea = new Vector2(startingArea.X - hillssize, startingArea.Y - hillssize);
 
-				for (int x = (int)startingArea.X; x < (int)(startingArea.X + hillssize); ++x)
-				{
-					for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + hillssize); ++y)
-					{
-						//find existing terrain
-						for (int t = 0; t < terrains.Count; ++t)
+				if (terrainGridCollidesWith(GridTile.GridTerrain.Forest, new Point((int)startingArea.X, (int)startingArea.Y), hillssize) == false)
+                {
+						for (int x = (int)startingArea.X; x < (int)(startingArea.X + hillssize); ++x)
 						{
-							if (terrains[t].returnTerrainLocation() == multiplyBy64(new Vector2(x, y)))
+							for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + hillssize); ++y)
 							{
-								Boolean isWaterOrRoads = true;
-								if (gridTiles[new Point(x, y)].thisWaterType == GridTile.WaterType.None && gridTiles[new Point(x, y)].thisRoadType == GridTile.RoadType.None)
+								//find existing terrain
+								for (int t = 0; t < terrains.Count; ++t)
 								{
-									isWaterOrRoads = false;
+									if (terrains[t].returnTerrainLocation() == multiplyBy64(new Vector2(x, y)))
+									{
+										Boolean isWaterOrRoads = true;
+										if (gridTiles[new Point(x, y)].thisWaterType == GridTile.WaterType.None && gridTiles[new Point(x, y)].thisRoadType == GridTile.RoadType.None)
+										{
+											isWaterOrRoads = false;
+										}
+
+										terrains[t].createNewTerrain(Terrain.TerrainType.Hills, multiplyBy64(new Vector2(x, y)), rando, isWaterOrRoads);
+										gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Hills;
+										break;
+									}
 								}
 
-								terrains[t].createNewTerrain(Terrain.TerrainType.Hills, multiplyBy64(new Vector2(x, y)), rando, isWaterOrRoads);
-								gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Hills;
-								break;
+
+
 							}
 						}
 
-
-
-					}
-				}
+                }
 
 			}
 
