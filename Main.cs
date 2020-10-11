@@ -189,7 +189,7 @@ class GameMain : Game
 		getInput();
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
 		mouse.Update();
-		worldMap.Update(this);
+		worldMap.Update(this,rando);
 
 		//debug
 		checkForEnterPressed();
@@ -216,12 +216,13 @@ class GameMain : Game
 		//2 - water
 		//2.5 - roads
 		//3 - places and doodads
+		//6 - clouds
 		//7 - text
 		//8 - mouse
 		//9 - ui
 
 		spriteBatch.Begin(SpriteSortMode.FrontToBack,
-			BlendState.AlphaBlend,
+			BlendState.NonPremultiplied,
 			SamplerState.PointClamp,
 			null,
 			null,

@@ -20,6 +20,8 @@ namespace The_Mark
 		protected List<Water> waterbodies = new List<Water>();
 		protected List<Creature> creatures = new List<Creature>();
 
+		//clouds
+		protected List<Cloud> clouds = new List<Cloud>();
 
 
 		public Vector2 gridSize = new Vector2(50, 50);
@@ -36,6 +38,8 @@ namespace The_Mark
 		//doodads
 		protected Texture2D treeTerrainTiles;
 		protected Texture2D hillTerrainTiles;
+		//world elements
+		protected Texture2D cloudTiles;
 
 
 		//checks
@@ -60,6 +64,7 @@ namespace The_Mark
 			treeTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/tree_grid_1");
 			hillTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/hills_grid_1");
 			beachTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/beach_grid_1");
+			cloudTiles = gamedeets.Content.Load<Texture2D>("Sprites/World/cloud_grid");
 		}
 
 		//debug - announce creations
@@ -1759,7 +1764,7 @@ namespace The_Mark
 
 		}
 
-		public void Update(GameMain gamedeets)
+		public void Update(GameMain gamedeets,Random rando)
 		{
 			isDisplayTownAreaFont = false;
 
@@ -1779,7 +1784,26 @@ namespace The_Mark
 			{
 				waterbodies[i].Update(gamedeets);
 			}
+
+
+			//clouds
+			for (int i =0; i < clouds.Count;++i)
+            {
+				clouds[i].Update();
+            }
+			addNewClouds(rando);
+
+
+
 		}
+
+		void addNewClouds(Random rando)
+        {
+			if (rando.Next(1,950)==1)
+            {
+				clouds.Add(new Cloud(rando));
+            }
+        }
 
 		Texture2D returnDoodadTexture(Terrain.TerrainType thistype)
         {
@@ -1826,6 +1850,11 @@ namespace The_Mark
 				places[i].Draw(spriteBatch,displayFont);
             }
 
+			//draw clouds
+			for (int i = 0; i < clouds.Count;++i)
+            {
+				clouds[i].Draw(spriteBatch, cloudTiles);
+            }
 
 
 		}
