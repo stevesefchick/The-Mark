@@ -357,7 +357,48 @@ namespace The_Mark
             #region stinkhorn
             if (thisCreatureType == ThisCreatureType.Stinkhorn)
             {
-                thename = "stinkhorn";
+                thischoice = rando.Next(1, 3);
+                //type 1 - name + the Stinkhorn
+                if (thischoice == 1)
+                {
+                    string ending = " the Stinkhorn";
+
+
+                    List<string> candidatesstinkhornname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "stinkhornname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesstinkhornname.Add(entry.Key);
+                        }
+                    }
+
+                    thename = candidatesstinkhornname[rando.Next(0, candidatesstinkhornname.Count)].ToString() + ending;
+
+                }
+                //type 2 - name + title
+                else if (thischoice == 2)
+                {
+                    List<string> candidatestitlename = new List<string>();
+                    List<string> candidatesstinkhornname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "stinkhornname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesstinkhornname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturetitle")
+                        {
+                            candidatestitlename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesstinkhornname[rando.Next(0, candidatesstinkhornname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+
             }
             #endregion
 

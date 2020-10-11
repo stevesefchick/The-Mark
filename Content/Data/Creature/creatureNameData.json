@@ -19,6 +19,8 @@
   "Legs": { "creaturenametype": "leggyname" },
   "Webster": { "creaturenametype": "leggyname" },
   "Buggle": { "creaturenametype": "leggyname" },
+  "Fluff": { "creaturenametype": "stinkhornname" },
+  "Stank": { "creaturenametype": "stinkhornname" },
   "Merlin": { "creaturenametype": "normalcreaturename" },
   "Spectre": { "creaturenametype": "normalcreaturename" },
   "Ash": { "creaturenametype": "normalcreaturename" },
