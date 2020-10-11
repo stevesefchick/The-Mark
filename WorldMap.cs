@@ -32,6 +32,7 @@ namespace The_Mark
 		//terrains
 		protected Texture2D grassTerrainTiles;
 		protected Texture2D forestTerrainTiles;
+		protected Texture2D beachTerrainTiles;
 		//doodads
 		protected Texture2D treeTerrainTiles;
 		protected Texture2D hillTerrainTiles;
@@ -58,6 +59,7 @@ namespace The_Mark
 			forestTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/forest_grid_1");
 			treeTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/tree_grid_1");
 			hillTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/hills_grid_1");
+			beachTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/beach_grid_1");
 		}
 
 		//debug - announce creations
@@ -573,6 +575,105 @@ namespace The_Mark
 			}
 		}
 
+
+		protected void assignTileToBeach()
+		{
+			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
+			{
+				if (g.Value.thisTerrainType == GridTile.GridTerrain.Beach)
+				{
+					Point thisBeachLoc = g.Key;
+					Vector2 thisLoc = new Vector2(thisBeachLoc.X, thisBeachLoc.Y);
+					thisLoc = multiplyBy64(thisLoc);
+
+					for (int i = 0; i < terrains.Count; ++i)
+					{
+						if (terrains[i].thisTerrainType == Terrain.TerrainType.Beach &&
+							terrains[i].returnTerrainLocation() == thisLoc)
+						{
+							Boolean above = false;
+							Boolean below = false;
+							Boolean left = false;
+							Boolean right = false;
+
+							//check above
+							if (gridTiles[new Point(thisBeachLoc.X, thisBeachLoc.Y - 1)].thisTerrainType == GridTile.GridTerrain.Beach)
+							{
+								above = true;
+							}
+							//check below
+							if (gridTiles[new Point(thisBeachLoc.X, thisBeachLoc.Y + 1)].thisTerrainType == GridTile.GridTerrain.Beach)
+							{
+								below = true;
+							}
+							//check left
+							if (gridTiles[new Point(thisBeachLoc.X - 1, thisBeachLoc.Y)].thisTerrainType == GridTile.GridTerrain.Beach)
+							{
+								left = true;
+							}
+							//check right
+							if (gridTiles[new Point(thisBeachLoc.X + 1, thisBeachLoc.Y)].thisTerrainType == GridTile.GridTerrain.Beach)
+							{
+								right = true;
+							}
+
+
+							//left side
+							if (above == true && below == true && left == false && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(64, 64));
+							}
+							//right side
+							if (above == true && below == true && left == true && right == false)
+							{
+								terrains[i].AssignForestTile(new Vector2(192, 64));
+							}
+							//top side
+							if (above == false && below == true && left == true && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(128, 0));
+							}
+							//bottom side
+							if (above == true && below == false && left == true && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(128, 128));
+							}
+							//top left
+							if (above == false && below == true && left == false && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(64, 0));
+							}
+							//top right
+							if (above == false && below == true && left == true && right == false)
+							{
+								terrains[i].AssignForestTile(new Vector2(192, 0));
+							}
+							//bottom left
+							if (above == true && below == false && left == false && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(64, 128));
+							}
+							//bottom right
+							if (above == true && below == false && left == true && right == false)
+							{
+								terrains[i].AssignForestTile(new Vector2(192, 128));
+							}
+
+							//all dirs
+							if (above == true && below == true && left == true && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(0, 0));
+							}
+
+						}
+					}
+
+
+				}
+			}
+		}
+
+
 		Boolean terrainGridCollidesWith(GridTile.GridTerrain checkForTileType, Point startingPoint, int size)
         {
 			for (int x=startingPoint.X;x<startingPoint.X+size;++x)
@@ -604,7 +705,8 @@ namespace The_Mark
 
 				startingArea = new Vector2(startingArea.X - hillssize, startingArea.Y - hillssize);
 
-				if (terrainGridCollidesWith(GridTile.GridTerrain.Forest, new Point((int)startingArea.X, (int)startingArea.Y), hillssize) == false)
+				if (terrainGridCollidesWith(GridTile.GridTerrain.Forest, new Point((int)startingArea.X, (int)startingArea.Y), hillssize) == false &&
+					terrainGridCollidesWith(GridTile.GridTerrain.Beach, new Point((int)startingArea.X, (int)startingArea.Y), hillssize) == false)
                 {
 						for (int x = (int)startingArea.X; x < (int)(startingArea.X + hillssize); ++x)
 						{
@@ -638,6 +740,38 @@ namespace The_Mark
 
 		}
 
+
+		protected void createBeaches(DataManager datamanager, Random rando,Point starting,int size)
+		{
+
+
+				for (int x = starting.X; x < (starting.X + size); ++x)
+				{
+					for (int y = starting.Y; y < (starting.Y + size); ++y)
+					{
+
+						//find existing terrain
+						for (int t = 0; t < terrains.Count; ++t)
+						{
+							if (terrains[t].returnTerrainLocation() == multiplyBy64(new Vector2(x, y)))
+							{
+
+								terrains[t].createNewTerrain(Terrain.TerrainType.Beach, multiplyBy64(new Vector2(x, y)), rando, false);
+								gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Beach;
+								break;
+							}
+						}
+
+					}
+				}
+
+
+			assignTileToBeach();
+
+		}
+
+
+
 		protected void createForests(DataManager datamanager, Random rando)
 		{
 			int numberofforests = rando.Next(1, 5);
@@ -650,10 +784,13 @@ namespace The_Mark
 
 				startingArea = new Vector2(startingArea.X - forestsize, startingArea.Y - forestsize);
 
-				for (int x = (int)startingArea.X; x < (int)(startingArea.X + forestsize); ++x)
+				if (terrainGridCollidesWith(GridTile.GridTerrain.Beach, new Point((int)startingArea.X, (int)startingArea.Y), forestsize) == false)
 				{
-					for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + forestsize); ++y)
+
+					for (int x = (int)startingArea.X; x < (int)(startingArea.X + forestsize); ++x)
 					{
+						for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + forestsize); ++y)
+						{
 
 							//find existing terrain
 							for (int t = 0; t < terrains.Count; ++t)
@@ -671,8 +808,9 @@ namespace The_Mark
 									break;
 								}
 							}
-						
 
+
+						}
 					}
 				}
 			}
@@ -737,7 +875,11 @@ namespace The_Mark
 				if (isCollidingWithABadThing == false)
 				{
 					waterbodies.Add(newLake);
-
+					//create beaches
+					if (rando.Next(1, 4) == 1)
+					{
+						createBeaches(datamanager, rando, new Point((int)(startingArea.X - 1), (int)(startingArea.Y - 1)), lakesize + 2);
+					}
 
 					//add river ending positions
 					for (int x = 0; x < gridSize.X; ++x)
@@ -802,9 +944,6 @@ namespace The_Mark
             #region Terrain
             //Add Forests
             createForests(datamanager, rando);
-			//Add Beaches
-
-
 			//Add Hills
 			createHills(datamanager, rando);
 
@@ -1663,7 +1802,7 @@ namespace The_Mark
 			//draw terrain
 			for (int i = 0; i < terrains.Count;++i)
             {
-				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles);
+				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles,beachTerrainTiles);
 			}
 			//draw terrain doodads
 			for (int i = 0; i < terrains.Count; ++i)

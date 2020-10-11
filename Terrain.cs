@@ -8,7 +8,7 @@ namespace The_Mark
     class Terrain
     {
 		//main variables
-		public enum TerrainType { Grass, Forest, Hills, Mountain}
+		public enum TerrainType { Grass, Forest, Hills, Mountain, Beach}
 		public TerrainType thisTerrainType;
 		public Rectangle terrainLocation;
 		public Rectangle textureRect;
@@ -83,7 +83,7 @@ namespace The_Mark
 			return loc;
         }
 
-		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain)
+		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain,Texture2D beachTerrain)
 		{
 			if (thisTerrainType == TerrainType.Forest)
 			{
@@ -96,6 +96,13 @@ namespace The_Mark
 			else if (thisTerrainType == TerrainType.Grass)
 			{
 				spriteBatch.Draw(grassTerrain, terrainLocation, textureRect, Color.White,0, Vector2.Zero, SpriteEffects.None, 0.1f);
+			}
+			else if (thisTerrainType == TerrainType.Beach)
+			{
+				//grass under
+				spriteBatch.Draw(grassTerrain, terrainLocation, new Rectangle(0, 0, 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.1f);
+
+				spriteBatch.Draw(beachTerrain, terrainLocation, textureRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.15f);
 			}
 			else if (thisTerrainType == TerrainType.Hills)
 			{

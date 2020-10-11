@@ -13,7 +13,7 @@ namespace The_Mark
         public Vector2 gridOffset = new Vector2(32, 32);
 
         //terrain details
-        public enum GridTerrain { Grass, Forest, Hills }
+        public enum GridTerrain { Grass, Forest, Hills, Beach }
         public GridTerrain thisTerrainType;
         //place of interest details
         public enum GridNode { None,Castle, Town, OrbitalLocation }
