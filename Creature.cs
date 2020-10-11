@@ -352,7 +352,6 @@ namespace The_Mark
             }
             #endregion
 
-
             //leggy
             #region stinkhorn
             if (thisCreatureType == ThisCreatureType.Stinkhorn)
