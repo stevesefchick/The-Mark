@@ -12,7 +12,7 @@ namespace The_Mark
 
         //enums
         public enum AggressionType { Friendly, Neutral, Cautious, Defensive, Aggressive}
-        public enum ThisCreatureType { Birb, FlapFlap, Leggy}
+        public enum ThisCreatureType { Birb, FlapFlap, Leggy, Stinkhorn}
         public enum ActiveTime { Daytime, Nighttime, Both}
 
         //properties
@@ -66,6 +66,13 @@ namespace The_Mark
                 thisAggressionType = AggressionType.Aggressive;
                 thisCreatureType = ThisCreatureType.Leggy;
                 thisCreatureActiveTime = ActiveTime.Nighttime;
+
+            }
+            else if (thisType == ThisCreatureType.Stinkhorn)
+            {
+                thisAggressionType = AggressionType.Neutral;
+                thisCreatureType = ThisCreatureType.Stinkhorn;
+                thisCreatureActiveTime = ActiveTime.Daytime;
 
             }
         }
@@ -345,7 +352,17 @@ namespace The_Mark
             }
             #endregion
 
-                //capitalize first letter
+
+            //leggy
+            #region stinkhorn
+            if (thisCreatureType == ThisCreatureType.Stinkhorn)
+            {
+                thename = "stinkhorn";
+            }
+            #endregion
+
+
+            //capitalize first letter
             thename = thename.Substring(0, 1).ToUpper() + thename.Substring(1);
 
             return thename;

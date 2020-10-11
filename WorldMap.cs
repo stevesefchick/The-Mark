@@ -654,23 +654,24 @@ namespace The_Mark
 				{
 					for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + forestsize); ++y)
 					{
-						//find existing terrain
-						for (int t =0; t < terrains.Count;++t)
-                        {
-							if (terrains[t].returnTerrainLocation() == multiplyBy64(new Vector2(x,y)))
-                            {
-								Boolean isWaterOrRoads = true;
-								if (gridTiles[new Point(x,y)].thisWaterType== GridTile.WaterType.None && gridTiles[new Point(x,y)].thisRoadType== GridTile.RoadType.None)
-                                {
-									isWaterOrRoads = false;
-                                }
 
-								terrains[t].createNewTerrain(Terrain.TerrainType.Forest, multiplyBy64(new Vector2(x, y)),rando,isWaterOrRoads);
-								gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Forest;
-								break;
-                            }
-                        }
+							//find existing terrain
+							for (int t = 0; t < terrains.Count; ++t)
+							{
+								if (terrains[t].returnTerrainLocation() == multiplyBy64(new Vector2(x, y)))
+								{
+									Boolean isWaterOrRoads = true;
+									if (gridTiles[new Point(x, y)].thisWaterType == GridTile.WaterType.None && gridTiles[new Point(x, y)].thisRoadType == GridTile.RoadType.None)
+									{
+										isWaterOrRoads = false;
+									}
 
+									terrains[t].createNewTerrain(Terrain.TerrainType.Forest, multiplyBy64(new Vector2(x, y)), rando, isWaterOrRoads);
+									gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Forest;
+									break;
+								}
+							}
+						
 
 					}
 				}
@@ -1005,6 +1006,37 @@ namespace The_Mark
 			availableLocationIDs.Clear();
 			#endregion
 
+			//STINKHORN
+			#region stinkhorn
+
+			max = rando.Next(1,10);
+
+
+			//create and assign creatures
+			for (int i = 0; i < max; ++i)
+			{
+				int randTerrainOrPlaceCheck = rando.Next(1, 3);
+				if (randTerrainOrPlaceCheck == 1)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Stinkhorn, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Hills;
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 2)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Stinkhorn, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Grass;
+					creatures.Add(newCreature);
+				}
+			}
+
+
+
+			max = 0;
+			availableLocationIDs.Clear();
+
+
+			#endregion
 		}
 
         void createTileAssignmentsforRiversandLakes()
