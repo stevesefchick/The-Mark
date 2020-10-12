@@ -74,6 +74,7 @@
     <Compile Include="Road.cs" />
     <Compile Include="Terrain.cs" />
     <Compile Include="TerrainDoodad.cs" />
+    <Compile Include="TimeManager.cs" />
     <Compile Include="Water.cs" />
     <Compile Include="WorldMap.cs" />
   </ItemGroup>

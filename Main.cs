@@ -22,6 +22,7 @@ class GameMain : Game
 	public DataManager dataManager;
 	public Camera camera;
 	public MouseHandler mouse;
+	protected TimeManager time;
 
 	//controls
 	protected Boolean isRightPressed;
@@ -31,6 +32,7 @@ class GameMain : Game
 	protected Boolean isPageDownPressed;
 	protected Boolean isPageUpPressed;
 	protected Boolean isEnterPressed;
+	protected Boolean isSpacePressed;
 
 	//random stuff
 	Random rando = new Random();
@@ -84,6 +86,7 @@ class GameMain : Game
 		dataManager = new DataManager();
 		mouse = new MouseHandler(this);
 		camera = new Camera();
+		time = new TimeManager();
 
 		LoadFonts();
     }
@@ -180,6 +183,16 @@ class GameMain : Game
 		{
 			isEnterPressed = false;
 		}
+
+		//space
+		if (kbState.IsKeyDown(Keys.Space) == true)
+		{
+			isSpacePressed = true;
+		}
+		else
+		{
+			isSpacePressed = false;
+		}
 	}
 
 	protected override void Update(GameTime gameTime)
@@ -193,10 +206,18 @@ class GameMain : Game
 
 		//debug
 		checkForEnterPressed();
+		checkForSpacePressed();
 
 		base.Update(gameTime);
 	}
 
+	private void checkForSpacePressed()
+    {
+		if (isSpacePressed==true)
+        {
+			time.timeTick(5);
+        }
+    }
 	private void checkForEnterPressed()
     {
 		if (isEnterPressed == true)
@@ -231,6 +252,13 @@ class GameMain : Game
 		worldMap.Draw(spriteBatch,worldFont);
 		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz);
 		spriteBatch.End();
+
+
+		//UI
+		spriteBatch.Begin();
+		time.Draw(spriteBatch, worldFont);
+		spriteBatch.End();
+
 
 		base.Draw(gameTime);
 	}
