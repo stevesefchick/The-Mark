@@ -8,15 +8,34 @@ namespace The_Mark
 {
     class TimeManager
     {
+        public int Year;
         public int Hour;
         public int Minute;
+        public int Day;
+        public int CurrentMonth;
+
         string hourMinutesToString;
+
+        //const
+        int daysPerMonth = 30;
+        List<string> calendarMonths = new List<string>();
+
 
         public TimeManager()
         {
+            Year = 0;
             Hour = 0;
             Minute = 0;
+            Day = 0;
+            CurrentMonth = 0;
+
             hourMinutesToString = hourminuteformat();
+
+            //add calendar months
+            calendarMonths.Add("Winter");
+            calendarMonths.Add("Spring");
+            calendarMonths.Add("Summer");
+            calendarMonths.Add("Autumn");
         }
 
         String hourminuteformat()
@@ -69,6 +88,18 @@ namespace The_Mark
                     if (Hour==24)
                     {
                         Hour = 0;
+                        Day += 1;
+                    }
+                }
+
+                if (Day>daysPerMonth)
+                {
+                    Day = 1;
+                    CurrentMonth += 1;
+                    if (CurrentMonth==calendarMonths.Count)
+                    {
+                        Year += 1;
+                        CurrentMonth = 0;
                     }
                 }
             }
@@ -79,6 +110,7 @@ namespace The_Mark
         public void Draw(SpriteBatch spriteBatch,SpriteFont spriteFont)
         {
             spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(100, 100), Color.White);
+            spriteBatch.DrawString(spriteFont, Day + " of " + calendarMonths[CurrentMonth], new Vector2(100, 150), Color.White);
         }
 
     }
