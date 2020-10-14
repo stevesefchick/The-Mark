@@ -201,7 +201,7 @@ class GameMain : Game
 
 		getInput();
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
-		mouse.Update();
+		mouse.Update(camera.cameraPosition,backbufferJamz);
 		worldMap.Update(this,rando);
 
 		//debug
@@ -250,7 +250,7 @@ class GameMain : Game
 			null,
 			camera.get_transformation(gdm));
 		worldMap.Draw(spriteBatch,worldFont);
-		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz);
+		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz, worldFont);
 		spriteBatch.End();
 
 

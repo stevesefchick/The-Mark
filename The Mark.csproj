@@ -85,6 +85,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Shaders\" />
     <Folder Include="Content\Sprites\Creature\" />
     <Folder Include="Content\Sprites\Person\" />
   </ItemGroup>
