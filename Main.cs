@@ -201,7 +201,7 @@ class GameMain : Game
 
 		getInput();
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
-		mouse.Update(camera.cameraPosition,backbufferJamz);
+		mouse.Update(camera.cameraPosition,backbufferJamz,worldFont);
 		worldMap.Update(this,rando);
 
 		//debug

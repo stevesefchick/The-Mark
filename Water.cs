@@ -19,7 +19,7 @@ namespace The_Mark
         public List<WaterChunk> waterChunks = new List<WaterChunk>();
 
         //colliding
-        Boolean isColliding;
+        public Boolean isColliding;
 
 
         public Water(WaterType gettinwet, DataManager datamanager, Random rando)
@@ -227,10 +227,10 @@ namespace The_Mark
         {
             DrawWaterChunks(spritebatch, waterTiles);
 
-            if (isColliding == true && dontdrawwatername == false)
-            {
-                DrawFont(spritebatch, displayFont);
-            }
+            //if (isColliding == true && dontdrawwatername == false)
+            //{
+            //    DrawFont(spritebatch, displayFont);
+            //}
         }
 
         private void DrawFont(SpriteBatch spriteBatch, SpriteFont displayfont)

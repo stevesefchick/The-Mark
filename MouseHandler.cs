@@ -12,9 +12,12 @@ namespace The_Mark
         MouseState mouseState;
 
         //font
-        String mouseHoverFont = "hell ass";
+        public String mouseHoverFont = "hell ass";
+        public String placeText = "";
+        public String roadText = "";
+        public String waterText = "";
+        public String terrainText = "";
         Vector2 fontPosition;
-        int fontCenter;
 
         public MouseHandler(GameMain gamedeets)
         {
@@ -22,7 +25,7 @@ namespace The_Mark
 
         }
 
-        public void Update(Vector2 cameraposition,Vector2 backbufferposition)
+        public void Update(Vector2 cameraposition,Vector2 backbufferposition,SpriteFont spritefont)
         {
             mouseState = Mouse.GetState();
             mousePosition.X = mouseState.X;
@@ -39,6 +42,36 @@ namespace The_Mark
             {
                 fontPosition.Y += 50;
             }
+
+            fontPosition.X -= spritefont.MeasureString(mouseHoverFont).X / 2;
+
+            mouseHoverFont = prioritizeText();
+        }
+
+        String prioritizeText()
+        {
+            if (placeText!="")
+            {
+                return placeText;
+            }
+            else if (roadText!="")
+            {
+                return roadText;
+            }
+            else if (waterText!="")
+            {
+                return waterText;
+            }
+            else if (terrainText!="")
+            {
+                return terrainText;
+            }
+            else
+            {
+                return "";
+            }
+
+
         }
 
         public Vector2 getMousePosition(Vector2 cameraposition,Vector2 backbufferposition)

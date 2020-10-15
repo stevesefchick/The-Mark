@@ -291,7 +291,7 @@ namespace The_Mark
 			if (thisPlace.Intersects(mouseRect))
             {
 				collided = true;
-            }
+			}
 
 
 			return collided;
@@ -314,8 +314,6 @@ namespace The_Mark
 		{
 			isColliding = checkForCollision(gamedeets.mouse.getMousePosition(gamedeets.camera.cameraPosition, gamedeets.backbufferJamz));
 
-
-
 		}
 
 		private void DrawFont(SpriteBatch spriteBatch,SpriteFont displayfont)
@@ -328,10 +326,10 @@ namespace The_Mark
 
 		public void Draw(SpriteBatch spriteBatch,SpriteFont displayfont)
 		{
-			if (isColliding==true)
-            {
-				DrawFont(spriteBatch,displayfont);
-			}
+			//if (isColliding==true)
+            //{
+			//	DrawFont(spriteBatch,displayfont);
+			//}
 			spriteBatch.Draw(placeTexture, new Rectangle((int)placeLocation.X,(int)placeLocation.Y,(int)placeSize.X,(int)placeSize.Y),null, Color.White,0,placeCenter,SpriteEffects.None, placeDepth);
 		}
 	}

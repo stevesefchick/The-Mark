@@ -1436,7 +1436,7 @@ namespace The_Mark
 
 
 					//bottom right go right
-					if (above == true && below == false && left == true && right == true && bottomleft == false && topleft == true && topright == false)
+					if (above == true && below == false && left == true && right == true  && topleft == true && topright == false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(128, 448, 64, 64));
 					}
@@ -1767,6 +1767,9 @@ namespace The_Mark
 		public void Update(GameMain gamedeets,Random rando)
 		{
 			isDisplayTownAreaFont = false;
+			String placeCollision = "";
+			String roadCollision = "";
+			String waterCollision = "";
 
 			for (int i =0;i<places.Count;++i)
             {
@@ -1774,15 +1777,24 @@ namespace The_Mark
 				if (places[i].isColliding==true)
                 {
 					isDisplayTownAreaFont = true;
+					placeCollision = places[i].placeName;
                 }
             }
 			for (int i =0;i < roads.Count;++i)
             {
 				roads[i].Update(gamedeets);
+				if (roads[i].isColliding==true)
+                {
+					roadCollision = roads[i].roadName;
+                }
             }
 			for (int i = 0; i < waterbodies.Count; ++i)
 			{
 				waterbodies[i].Update(gamedeets);
+				if (waterbodies[i].isColliding==true)
+                {
+					waterCollision = waterbodies[i].riverName;
+                }
 			}
 
 
@@ -1793,7 +1805,9 @@ namespace The_Mark
             }
 			addNewClouds(rando);
 
-
+			gamedeets.mouse.placeText = placeCollision;
+			gamedeets.mouse.roadText = roadCollision;
+			gamedeets.mouse.waterText = waterCollision;
 
 		}
 

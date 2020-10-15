@@ -14,7 +14,7 @@ namespace The_Mark
         //road chunks
         public List<RoadChunk> roadChunks = new List<RoadChunk>();
 
-        Boolean isColliding;
+        public Boolean isColliding;
 
 
         public Road(GameMain gamedeets, Random rando)
@@ -139,10 +139,10 @@ namespace The_Mark
         {
             DrawRoadChunks(spriteBatch,roadTiles);
 
-            if (isColliding == true && dontdrawfont == false)
-            {
-                DrawFont(spriteBatch, displayfont);
-            }
+            //if (isColliding == true && dontdrawfont == false)
+            //{
+            //    DrawFont(spriteBatch, displayfont);
+            //}
         }
 
         
