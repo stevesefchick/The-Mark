@@ -299,11 +299,30 @@ namespace The_Mark
 
 
 		//determine the random placetype based on available options
-		public PlaceType determineOrbitalPlaceType(Random rando)
+		public PlaceType determineOrbitalPlaceType(Random rando, GridTile.GridTerrain gridTerrain)
         {
 			List<PlaceType> possiblePlaceTypes = new List<PlaceType>();
 
 			possiblePlaceTypes.AddRange(new PlaceType[] { PlaceType.Graveyard, PlaceType.Cave, PlaceType.Encampment, PlaceType.Ruins, PlaceType.Farm });
+
+			//check for terrain specific possibilities
+			if (gridTerrain == GridTile.GridTerrain.Beach)
+            {
+
+            }
+			else if (gridTerrain == GridTile.GridTerrain.Forest)
+			{
+
+			}
+			else if (gridTerrain == GridTile.GridTerrain.Hills)
+			{
+
+			}
+			else if (gridTerrain == GridTile.GridTerrain.Grass)
+			{
+
+			}
+
 
 			PlaceType thisType = possiblePlaceTypes[rando.Next(0, possiblePlaceTypes.Count)];
 

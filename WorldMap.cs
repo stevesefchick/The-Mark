@@ -988,7 +988,7 @@ namespace The_Mark
 					Vector2 newOrbitalLocation = getNewGridPlaceLocation(4, newLocation, rando, 2);
 					if (newOrbitalLocation != Vector2.Zero)
 					{
-						newOrbitalPlace.CreateNewPlace(newOrbitalPlace.determineOrbitalPlaceType(rando), multiplyBy64(newOrbitalLocation), gamedeets, rando);
+						newOrbitalPlace.CreateNewPlace(newOrbitalPlace.determineOrbitalPlaceType(rando, gridTiles[new Point((int)newOrbitalLocation.X, (int)newOrbitalLocation.Y)].thisTerrainType), multiplyBy64(newOrbitalLocation), gamedeets, rando);
 						AssignNodeToGrid(GridTile.GridNode.OrbitalLocation, (int)newOrbitalLocation.X, (int)newOrbitalLocation.Y, 1, 1);
 						places.Add(newOrbitalPlace);
 					}
@@ -1104,7 +1104,7 @@ namespace The_Mark
 			//create and assign creatures
 			for (int i = 0; i < max; ++i)
 			{
-				int randTerrainOrPlaceCheck = rando.Next(1, 4);
+				int randTerrainOrPlaceCheck = rando.Next(1, 5);
 				if (randTerrainOrPlaceCheck == 1)
 				{
 					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
@@ -1121,6 +1121,12 @@ namespace The_Mark
 				{
 					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
 					newCreature.terrainTypeHome = Terrain.TerrainType.Forest;
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 4 && isBeachAvailable == true)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Beach;
 					creatures.Add(newCreature);
 				}
 			}
