@@ -1034,6 +1034,27 @@ namespace The_Mark
 
 		void lookForCreatureAvailability(Random rando,DataManager datamanager)
         {
+			Boolean isBeachAvailable = false;
+			Boolean isHillsAvailable = false;
+			Boolean isForestAvailable = false;
+
+			//terrain availability
+			for (int i=0;i<terrains.Count;++i)
+            {
+				if (terrains[i].thisTerrainType == Terrain.TerrainType.Beach)
+				{
+					isBeachAvailable = true;
+				}
+				else if (terrains[i].thisTerrainType == Terrain.TerrainType.Forest)
+				{
+					isForestAvailable = true;
+				}
+				else if (terrains[i].thisTerrainType == Terrain.TerrainType.Hills)
+				{
+					isHillsAvailable = true;
+				}
+			}
+
             //FLAP FLAP
             #region flap flap
             List<string> availableLocationIDs = new List<string>();
@@ -1096,7 +1117,7 @@ namespace The_Mark
 					newCreature.terrainTypeHome = Terrain.TerrainType.Grass;
 					creatures.Add(newCreature);
 				}
-				else if (randTerrainOrPlaceCheck == 3)
+				else if (randTerrainOrPlaceCheck == 3 && isForestAvailable==true)
 				{
 					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
 					newCreature.terrainTypeHome = Terrain.TerrainType.Forest;
@@ -1136,7 +1157,7 @@ namespace The_Mark
 					newCreature.placeIDHome = availableLocationIDs[rando.Next(0, availableLocationIDs.Count)];
 					creatures.Add(newCreature);
 				}
-				else if (randTerrainOrPlaceCheck == 2)
+				else if (randTerrainOrPlaceCheck == 2 && isForestAvailable==true)
 				{
 					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
 					newCreature.terrainTypeHome = Terrain.TerrainType.Forest;
@@ -1160,7 +1181,7 @@ namespace The_Mark
 			for (int i = 0; i < max; ++i)
 			{
 				int randTerrainOrPlaceCheck = rando.Next(1, 3);
-				if (randTerrainOrPlaceCheck == 1)
+				if (randTerrainOrPlaceCheck == 1 && isHillsAvailable==true)
 				{
 					Creature newCreature = new Creature(Creature.ThisCreatureType.Stinkhorn, datamanager, rando);
 					newCreature.terrainTypeHome = Terrain.TerrainType.Hills;
