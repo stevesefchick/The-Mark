@@ -602,22 +602,22 @@ namespace The_Mark
 							Boolean right = false;
 
 							//check above
-							if (gridTiles[new Point(thisBeachLoc.X, thisBeachLoc.Y - 1)].thisTerrainType == GridTile.GridTerrain.Beach)
+							if (thisBeachLoc.Y==0 ||  gridTiles[new Point(thisBeachLoc.X, thisBeachLoc.Y - 1)].thisTerrainType == GridTile.GridTerrain.Beach)
 							{
 								above = true;
 							}
 							//check below
-							if (gridTiles[new Point(thisBeachLoc.X, thisBeachLoc.Y + 1)].thisTerrainType == GridTile.GridTerrain.Beach)
+							if (thisBeachLoc.Y==49 || gridTiles[new Point(thisBeachLoc.X, thisBeachLoc.Y + 1)].thisTerrainType == GridTile.GridTerrain.Beach)
 							{
 								below = true;
 							}
 							//check left
-							if (gridTiles[new Point(thisBeachLoc.X - 1, thisBeachLoc.Y)].thisTerrainType == GridTile.GridTerrain.Beach)
+							if (thisBeachLoc.X==0 ||  gridTiles[new Point(thisBeachLoc.X - 1, thisBeachLoc.Y)].thisTerrainType == GridTile.GridTerrain.Beach)
 							{
 								left = true;
 							}
 							//check right
-							if (gridTiles[new Point(thisBeachLoc.X + 1, thisBeachLoc.Y)].thisTerrainType == GridTile.GridTerrain.Beach)
+							if (thisBeachLoc.Y==49 || gridTiles[new Point(thisBeachLoc.X + 1, thisBeachLoc.Y)].thisTerrainType == GridTile.GridTerrain.Beach)
 							{
 								right = true;
 							}
@@ -1455,7 +1455,7 @@ namespace The_Mark
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(0, 448, 64, 64));
 					}
 					//bottom left go down
-					if (above == true && below == true && left == false && right == true && topright == true && bottomright == false && topleft == false)
+					if (above == true && below == true && left == false && right == true && topright == true && bottomright == false)
 					{
 						waterbodies[thewater].waterChunks[thechunk].AssignTile(new Rectangle(192, 384, 64, 64));
 					}
@@ -1829,6 +1829,11 @@ namespace The_Mark
 			for (int i =0; i < clouds.Count;++i)
             {
 				clouds[i].Update();
+				if (clouds[i].position.X < -1000 && clouds[i].position.Y<-1000)
+                {
+					clouds.RemoveAt(i);
+					i -= 1;
+                }
             }
 			addNewClouds(rando);
 

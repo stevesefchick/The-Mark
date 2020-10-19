@@ -9,7 +9,7 @@ namespace The_Mark
     {
         public Rectangle position;
         public Rectangle shadowposition;
-        Vector2 drift = new Vector2(-0.5f, -0.5f);
+        Vector2 drift = new Vector2(-1, -1);
 
         Rectangle rect;
         Rectangle shadowrect;

@@ -1,5 +1,7 @@
 {
   "Jim": { "gender": "male" },
+  "Steve": { "gender": "male" },
+  "Victor": { "gender": "male" },
   "Corey": { "gender": "male" },
   "Adrian": { "gender": "male" },
   "Joe": { "gender": "male" },
@@ -11,6 +13,8 @@
   "Burger": { "gender": "male" },
   "Todd": { "gender": "male" },
   "Dio": { "gender": "male" },
+  "Dudley": { "gender": "male" },
+  "Giorno": { "gender": "male" },
   "Josuke": { "gender": "male" },
   "Joseph": { "gender": "male" },
   "Ed": { "gender": "male" },
@@ -46,7 +50,6 @@
   "Octavio": { "gender": "male" },
   "Pete": { "gender": "male" },
   "Reggie": { "gender": "male" },
-  "Steve": { "gender": "male" },
   "Tim": { "gender": "male" },
   "Vince": { "gender": "male" },
   "Will": { "gender": "male" },
@@ -151,6 +154,4 @@
   "Crouton": { "gender": "whocares" },
   "Cheddar": { "gender": "whocares" },
   "Peanut": { "gender": "whocares" }
-
-
 }

@@ -32,10 +32,13 @@ namespace The_Mark
             hourMinutesToString = hourminuteformat();
 
             //add calendar months
-            calendarMonths.Add("Winter");
-            calendarMonths.Add("Spring");
-            calendarMonths.Add("Summer");
-            calendarMonths.Add("Autumn");
+            calendarMonths.Add("Flame");
+            calendarMonths.Add("Frost");
+            calendarMonths.Add("Storm");
+            calendarMonths.Add("Earth");
+            calendarMonths.Add("Spirit");
+            calendarMonths.Add("Dew");
+            calendarMonths.Add("Light");
         }
 
         String hourminuteformat()
