@@ -7,11 +7,12 @@ namespace The_Mark
     class TerrainDoodad
     {
         //enum
-        public enum TerrainDoodadType { NormalTree1, Hill1 }
+        public enum TerrainDoodadType { NormalTree1, Hill1,Beach1 }
         public TerrainDoodadType thisDoodadType;
 
         public Rectangle Location;
         public Rectangle rect;
+        Vector2 offset;
         float doodadDepth;
 
         public TerrainDoodad(TerrainDoodadType thisType, Vector2 thisLoc,Random rando)
@@ -21,11 +22,21 @@ namespace The_Mark
             {
                 Location = new Rectangle((int)thisLoc.X, (int)thisLoc.Y, 16, 32);
                 rect = new Rectangle(rando.Next(0,3)*16, 0, 16, 32);
+                offset = new Vector2(8, 32);
             }
             else if (thisDoodadType == TerrainDoodadType.Hill1)
             {
                 Location = new Rectangle((int)thisLoc.X, (int)thisLoc.Y, 64, 64);
                 rect = new Rectangle(rando.Next(0,2)*64, 0, 64, 64);
+                offset = new Vector2(32, 64);
+
+            }
+            else if (thisDoodadType == TerrainDoodadType.Beach1)
+            {
+                Location = new Rectangle((int)thisLoc.X, (int)thisLoc.Y, 32, 32);
+                rect = new Rectangle(rando.Next(0, 5) * 32, 0, 32, 32);
+                offset = new Vector2(16, 32);
+
             }
 
             doodadDepth = 0.3f + (thisLoc.Y * 0.00001f);
@@ -33,7 +44,7 @@ namespace The_Mark
 
         public void Draw(SpriteBatch spriteBatch, Texture2D thisTexture)
         {
-            spriteBatch.Draw(thisTexture, Location, rect,Color.White,0,new Vector2(8,32), SpriteEffects.None, doodadDepth);
+            spriteBatch.Draw(thisTexture, Location, rect,Color.White,0,offset, SpriteEffects.None, doodadDepth);
         }
 
     }

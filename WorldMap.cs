@@ -38,6 +38,7 @@ namespace The_Mark
 		//doodads
 		protected Texture2D treeTerrainTiles;
 		protected Texture2D hillTerrainTiles;
+		protected Texture2D beachDoodadTerrainTiles;
 		//world elements
 		protected Texture2D cloudTiles;
 
@@ -64,6 +65,7 @@ namespace The_Mark
 			treeTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/tree_grid_1");
 			hillTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/hills_grid_1");
 			beachTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/beach_grid_1");
+			beachDoodadTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/beach_doodad_grid");
 			cloudTiles = gamedeets.Content.Load<Texture2D>("Sprites/World/cloud_grid");
 		}
 
@@ -760,8 +762,13 @@ namespace The_Mark
 						{
 							if (terrains[t].returnTerrainLocation() == multiplyBy64(new Vector2(x, y)))
 							{
+								Boolean isWaterOrRoads = true;
+								if (gridTiles[new Point(x, y)].thisWaterType == GridTile.WaterType.None && gridTiles[new Point(x, y)].thisRoadType == GridTile.RoadType.None)
+								{
+									isWaterOrRoads = false;
+								}
 
-								terrains[t].createNewTerrain(Terrain.TerrainType.Beach, multiplyBy64(new Vector2(x, y)), rando, false);
+							terrains[t].createNewTerrain(Terrain.TerrainType.Beach, multiplyBy64(new Vector2(x, y)), rando, isWaterOrRoads);
 								gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Beach;
 								break;
 							}
@@ -1860,6 +1867,10 @@ namespace The_Mark
 			else if (thistype == Terrain.TerrainType.Hills)
             {
 				return hillTerrainTiles;
+            }
+			else if (thistype == Terrain.TerrainType.Beach)
+            {
+				return beachDoodadTerrainTiles;
             }
 			else
             {

@@ -68,6 +68,20 @@ namespace The_Mark
 					}
 				}
 			}
+			else if (thisTerrainType == TerrainType.Beach)
+			{
+				textureRect = new Rectangle(0, 0, 64, 64);
+
+				//add doodads
+				if (isOnWaterorRoad == false)
+				{
+					int randdoodad = rando.Next(1, 4);
+					for (int i = 0; i < randdoodad; ++i)
+					{
+						terrainDoodads.Add(new TerrainDoodad(TerrainDoodad.TerrainDoodadType.Beach1, new Vector2(location.X + rando.Next(15,49), location.Y + rando.Next(15, 49)), rando));
+					}
+				}
+			}
 		}
 
 		public void AssignForestTile(Vector2 vect)
