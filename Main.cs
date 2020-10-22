@@ -16,6 +16,8 @@ class GameMain : Game
 	//font info
 	public SpriteFont worldFont;
 
+	//effects
+	Effect effectboy;
 
 	//content
 	protected WorldMap worldMap;
@@ -101,6 +103,7 @@ class GameMain : Game
 	protected override void LoadContent()
 	{
 		spriteBatch = new SpriteBatch(GraphicsDevice);
+		effectboy = Content.Load<Effect>("Shaders/MarkEffect");
 
 		base.LoadContent();
 	}
@@ -247,7 +250,7 @@ class GameMain : Game
 			SamplerState.PointClamp,
 			null,
 			null,
-			null,
+			effectboy,
 			camera.get_transformation(gdm));
 		worldMap.Draw(spriteBatch,worldFont);
 		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz, worldFont);

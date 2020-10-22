@@ -27,7 +27,7 @@ namespace The_Mark
 		public Vector2 gridSize = new Vector2(50, 50);
 		Dictionary<Point, GridTile> gridTiles = new Dictionary<Point, GridTile>();
 
-
+		
 		//assets
 		protected Texture2D roadTiles;
 		protected Texture2D riverTiles;
