@@ -20,6 +20,14 @@ namespace The_Mark
         int daysPerMonth = 30;
         List<string> calendarMonths = new List<string>();
 
+        float blue=0;
+        float red=0;
+        float green=0;
+
+        float actualblue;
+        float actualred;
+        float actualgreen;
+        float colormoveamount = 0.002f;
 
 
         public TimeManager()
@@ -79,16 +87,86 @@ namespace The_Mark
 
         public Vector3 returnColorInfluencesBasedOnTime()
         {
-            //X = red
-            //Y = green
-            //Z = blue
-            Vector3 colorreturn = new Vector3();
+            //deep night
+            if ((Hour>=1 && Hour <5))
+            {
+                red = -0.5f;
+                green = -0.3f;
+                blue = 0.3f;
+            }
+            //early morning
+            else if (Hour>=5 && Hour < 6)
+            {
+                red = -0.2f;
+                green = -0.1f;
+                blue = 0.5f;
+            }
+            //sunrise
+            else if (Hour >= 6 && Hour < 7)
+            {
+                red = 0.2f;
+                green = -0.1f;
+                blue = -0.1f;
+            }
+            //midday
+            else if (Hour >= 7 && Hour < 19)
+            {
+                red =0;
+                green = 0;
+                blue = 0;
+            }
+            //late day
+            else if (Hour >= 19 && Hour < 20)
+            {
+                red = 0.1f;
+                green = 0;
+                blue = 0.1f;
+            }
+            //sunset
+            else if (Hour >= 20 && Hour < 21)
+            {
+                red = 0.2f;
+                green = -0.1f;
+                blue = -0.1f;
+            }
+            //night
+            if ((Hour >= 0 && Hour < 1) || (Hour >= 21 && Hour < 24))
+            {
+                red = -0.4f;
+                green = -0.2f;
+                blue = 0.3f;
+            }
 
 
+            if (red > actualred)
+            {
+                actualred += colormoveamount;
+            }
+            else if (red < actualred)
+            {
+                actualred -= colormoveamount;
+            }
+
+            if (blue > actualblue)
+            {
+                actualblue += colormoveamount;
+            }
+            else if (blue < actualblue)
+            {
+                actualblue -= colormoveamount;
+            }
+
+            if (green > actualgreen)
+            {
+                actualgreen += colormoveamount;
+            }
+            else if (green < actualgreen)
+            {
+                actualgreen -= colormoveamount;
+            }
 
 
-
-            return colorreturn;
+            return new Vector3(actualred,actualgreen,actualblue);
         }
 
         public void timeTick(int minutes)
