@@ -1,10 +1,16 @@
 sampler TextureSampler : register(s0);
+float blueinfluence;
+float redinfluence;
+float greeninfluence;
 
-float4 main(float4 color : COLOR0, float2 texCoord : TEXCOORD0) : COLOR0
+float4 main(float2 texCoord : TEXCOORD0) : COLOR0
 {
-    return float4(0.5, 0.5, 0.5, 0.5);
+    float4 color = tex2D(TextureSampler, texCoord);
+    color.b += blueinfluence;
+    color.r += redinfluence;
+    color.g += greeninfluence;
+    return color;
 }
-
 
 technique Desaturate
 {

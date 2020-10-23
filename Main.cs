@@ -17,7 +17,7 @@ class GameMain : Game
 	public SpriteFont worldFont;
 
 	//effects
-	Effect effectboy;
+	Effect dayNightEffect;
 
 	//content
 	protected WorldMap worldMap;
@@ -103,7 +103,7 @@ class GameMain : Game
 	protected override void LoadContent()
 	{
 		spriteBatch = new SpriteBatch(GraphicsDevice);
-		effectboy = Content.Load<Effect>("Shaders/MarkEffect");
+		dayNightEffect = Content.Load<Effect>("Shaders/MarkEffect");
 
 		base.LoadContent();
 	}
@@ -198,11 +198,19 @@ class GameMain : Game
 		}
 	}
 
+	void getShaderColors()
+    {
+		Vector3 influences = time.returnColorInfluencesBasedOnTime();
+		dayNightEffect.Parameters["redinfluence"].SetValue(influences.X);
+		dayNightEffect.Parameters["greeninfluence"].SetValue(influences.Y);
+		dayNightEffect.Parameters["blueinfluence"].SetValue(influences.Z);
+
+	}
+
 	protected override void Update(GameTime gameTime)
 	{
-
-
 		getInput();
+		getShaderColors();
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
 		mouse.Update(camera.cameraPosition,backbufferJamz,worldFont);
 		worldMap.Update(this,rando);
@@ -250,7 +258,7 @@ class GameMain : Game
 			SamplerState.PointClamp,
 			null,
 			null,
-			effectboy,
+			dayNightEffect,
 			camera.get_transformation(gdm));
 		worldMap.Draw(spriteBatch,worldFont);
 		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz, worldFont);

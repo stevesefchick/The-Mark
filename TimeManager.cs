@@ -21,6 +21,7 @@ namespace The_Mark
         List<string> calendarMonths = new List<string>();
 
 
+
         public TimeManager()
         {
             Year = 0;
@@ -74,6 +75,20 @@ namespace The_Mark
         public void Update()
         {
 
+        }
+
+        public Vector3 returnColorInfluencesBasedOnTime()
+        {
+            //X = red
+            //Y = green
+            //Z = blue
+            Vector3 colorreturn = new Vector3();
+
+
+
+
+
+            return colorreturn;
         }
 
         public void timeTick(int minutes)
