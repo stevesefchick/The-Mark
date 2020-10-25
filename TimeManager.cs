@@ -27,7 +27,7 @@ namespace The_Mark
         float actualblue;
         float actualred;
         float actualgreen;
-        float colormoveamount = 0.002f;
+        float colormoveamount = 0.001f;
 
 
         public TimeManager()

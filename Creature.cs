@@ -213,7 +213,7 @@ namespace The_Mark
             #region birb
             if (thisCreatureType == ThisCreatureType.Birb)
             {
-                thischoice = rando.Next(1, 4);
+                thischoice = rando.Next(1, 5);
 
                 //type 1 - name + the birb
                 if (thischoice == 1)
@@ -277,7 +277,28 @@ namespace The_Mark
                     thename = candidatesyellingname[rando.Next(0, candidatesyellingname.Count)].ToString() + candidateflightname[rando.Next(0, candidateflightname.Count)].ToString();
 
                 }
+                //type 4 - flying + cute
+                else if (thischoice == 4)
+                {
+                    List<string> candidateflightname = new List<string>();
+                    List<string> candidatescutename = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturecutename")
+                        {
+                            candidatescutename.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creatureflyingname")
+                        {
+                            candidateflightname.Add(entry.Key);
+                        }
+                    }
+                    thename = candidateflightname[rando.Next(0, candidateflightname.Count)].ToString() + candidatescutename[rando.Next(0, candidatescutename.Count)].ToString();
 
+                }
             }
             #endregion
 
@@ -356,7 +377,7 @@ namespace The_Mark
             #region stinkhorn
             if (thisCreatureType == ThisCreatureType.Stinkhorn)
             {
-                thischoice = rando.Next(1, 3);
+                thischoice = rando.Next(1, 4);
                 //type 1 - name + the Stinkhorn
                 if (thischoice == 1)
                 {
@@ -395,6 +416,28 @@ namespace The_Mark
                         }
                     }
                     thename = candidatesstinkhornname[rando.Next(0, candidatesstinkhornname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+                //type 3 = cute + ground
+                else if (thischoice == 3)
+                {
+                    List<string> candidatescutename = new List<string>();
+                    List<string> candidatesgroundname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturecutename")
+                        {
+                            candidatescutename.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturegroundname")
+                        {
+                            candidatesgroundname.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatescutename[rando.Next(0, candidatescutename.Count)].ToString() + candidatesgroundname[rando.Next(0, candidatesgroundname.Count)].ToString();
 
                 }
 
