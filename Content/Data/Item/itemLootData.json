@@ -1,0 +1,17 @@
+{
+  "Birb Feather": {
+    "itemName": "Birb Feather",
+    "itemValue": 5,
+    "canStack": true
+  },
+  "Birb Talon": {
+    "itemName": "Birb Talon",
+    "itemValue": 8,
+    "canStack": true
+  },
+  "Birb Wing": {
+    "itemName": "Birb Wing",
+    "itemValue": 12,
+    "canStack": true
+  }
+}

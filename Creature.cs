@@ -38,8 +38,12 @@ namespace The_Mark
             }
 
         }
+        public Creature()
+        {
 
-        void AssignProperties(ThisCreatureType thisType, DataManager dataManager,Random rando)
+        }
+
+        protected void AssignProperties(ThisCreatureType thisType, DataManager dataManager,Random rando)
         {
             //global stuff
             isUnique = false;

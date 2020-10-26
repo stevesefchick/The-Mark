@@ -17,6 +17,9 @@ namespace The_Mark
         public Dictionary<string, WaterNameData> waterNames = new Dictionary<string, WaterNameData>();
         public Dictionary<string, CreatureNameData> creatureNames = new Dictionary<string, CreatureNameData>();
 
+        //item data
+        public Dictionary<string, Item> itemLootData = new Dictionary<string, Item>();
+
         //random id data
         public List<string> randomGenData = new List<string>();
 
@@ -25,6 +28,7 @@ namespace The_Mark
             //JsonSerializer serializer = new JsonSerializer();
 
             loadNames();
+            loadItems();
             loadRandomGenData();
             System.Console.WriteLine("\n\nDataManager info loaded! \nfirstNames: " + firstNames.Count + ". \nlastNames: " + lastNames.Count + ". \ntownNames: " + townNames.Count + ". \nrandomGenData: " +
                 randomGenData.Count + ".\nroadNames: " + roadNames.Count + ".\nwaterNames: " + waterNames.Count + ".\ncreatureNames: " + creatureNames.Count + ".\n\n\n\n");
@@ -39,6 +43,11 @@ namespace The_Mark
             waterNames = JsonConvert.DeserializeObject<Dictionary<string, WaterNameData>>(File.ReadAllText(@"Content/Data/Terrain/waterNameData.json"));
             creatureNames = JsonConvert.DeserializeObject<Dictionary<string, CreatureNameData>>(File.ReadAllText(@"Content/Data/Creature/creatureNameData.json"));
 
+        }
+
+        private void loadItems()
+        {
+            itemLootData = JsonConvert.DeserializeObject<Dictionary<string, Item>>(File.ReadAllText(@"Content/Data/Item/itemLootData.json"));
         }
 
         #region random gen

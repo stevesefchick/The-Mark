@@ -38,6 +38,9 @@
     <None Include="Content\Data\Creature\creatureNameData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\Data\Item\itemLootData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Data\Person\lastnameData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -70,7 +73,9 @@
     <Compile Include="Creature.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="GridTile.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Monster.cs" />
     <Compile Include="MouseHandler.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Place.cs" />
