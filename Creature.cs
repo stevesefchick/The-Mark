@@ -55,7 +55,11 @@ namespace The_Mark
                 possibleLoot.Add(dataManager.itemLootData["Birb Feather"]);
                 possibleLoot.Add(dataManager.itemLootData["Birb Talon"]);
                 possibleLoot.Add(dataManager.itemLootData["Birb Wing"]);
-
+            }
+            else if (thisCreatureType == ThisCreatureType.FlapFlap)
+            {
+                possibleLoot.Add(dataManager.itemLootData["FlapFlap Wing"]);
+                possibleLoot.Add(dataManager.itemLootData["FlapFlap Blood"]);
             }
 
             for (int i = 0; i < possibleLoot.Count;++i)

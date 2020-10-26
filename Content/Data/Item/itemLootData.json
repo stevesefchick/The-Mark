@@ -19,5 +19,19 @@
     "canStack": true,
     "dropRate": 15,
     "maxDropQuantity": 2
+  },
+  "FlapFlap Wing": {
+    "itemName": "FlapFlap Wing",
+    "itemValue": 14,
+    "canStack": true,
+    "dropRate": 35,
+    "maxDropQuantity": 2
+  },
+  "FlapFlap Blood": {
+    "itemName": "FlapFlap Blood",
+    "itemValue": 25,
+    "canStack": true,
+    "dropRate": 10,
+    "maxDropQuantity": 1
   }
 }
