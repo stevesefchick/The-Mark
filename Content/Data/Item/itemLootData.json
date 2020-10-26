@@ -2,16 +2,22 @@
   "Birb Feather": {
     "itemName": "Birb Feather",
     "itemValue": 5,
-    "canStack": true
+    "canStack": true,
+    "dropRate": 60,
+    "maxDropQuantity": 6
   },
   "Birb Talon": {
     "itemName": "Birb Talon",
     "itemValue": 8,
-    "canStack": true
+    "canStack": true,
+    "dropRate": 25,
+    "maxDropQuantity": 2
   },
   "Birb Wing": {
     "itemName": "Birb Wing",
     "itemValue": 12,
-    "canStack": true
+    "canStack": true,
+    "dropRate": 15,
+    "maxDropQuantity": 2
   }
 }

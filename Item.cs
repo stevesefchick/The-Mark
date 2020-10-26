@@ -12,6 +12,10 @@ namespace The_Mark
         public int itemValue;
         public Boolean canStack;
 
+        //drop rates
+        public int dropRate;
+        public int maxDropQuantity;
+
         //enums
         public enum ItemType { Loot }
         public ItemType thisItemType;

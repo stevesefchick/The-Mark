@@ -31,6 +31,7 @@ namespace The_Mark
         public Creature(ThisCreatureType theType,DataManager dataManager,Random rando)
         {
             AssignProperties(theType, dataManager,rando);
+            
 
             if (rando.Next(1,50)==1)
             {
@@ -41,6 +42,35 @@ namespace The_Mark
         public Creature()
         {
 
+        }
+
+        //get loot drops when killed
+        public List<Item> GetCreatureLoot(DataManager dataManager,Random rando)
+        {
+            List<Item> possibleLoot = new List<Item>();
+            List<Item> actualLoot = new List<Item>();
+
+            if (thisCreatureType == ThisCreatureType.Birb)
+            {
+                possibleLoot.Add(dataManager.itemLootData["Birb Feather"]);
+                possibleLoot.Add(dataManager.itemLootData["Birb Talon"]);
+                possibleLoot.Add(dataManager.itemLootData["Birb Wing"]);
+
+            }
+
+            for (int i = 0; i < possibleLoot.Count;++i)
+            {
+                int rand = rando.Next(1, 101);
+
+                if (rand <= possibleLoot[i].dropRate)
+                {
+                    actualLoot.Add(possibleLoot[i]);
+                }
+
+            }
+
+
+            return possibleLoot;
         }
 
         protected void AssignProperties(ThisCreatureType thisType, DataManager dataManager,Random rando)
