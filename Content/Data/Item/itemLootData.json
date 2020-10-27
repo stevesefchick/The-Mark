@@ -54,5 +54,19 @@
     "canStack": true,
     "dropRate": 15,
     "maxDropQuantity": 3
+  },
+  "Stinkhorn Horn": {
+    "itemName": "Stinkhorn Horn",
+    "itemValue": 25,
+    "canStack": true,
+    "dropRate": 35,
+    "maxDropQuantity": 2
+  },
+  "Stinkhorn Fluff": {
+    "itemName": "Stinkhorn Fluff",
+    "itemValue": 10,
+    "canStack": true,
+    "dropRate": 60,
+    "maxDropQuantity": 3
   }
 }

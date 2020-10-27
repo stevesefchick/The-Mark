@@ -67,7 +67,11 @@ namespace The_Mark
                 possibleLoot.Add(dataManager.itemLootData["Leggy Silk"]);
                 possibleLoot.Add(dataManager.itemLootData["Tuft of Leggy Hair"]);
             }
-
+            else if (thisCreatureType == ThisCreatureType.Stinkhorn)
+            {
+                possibleLoot.Add(dataManager.itemLootData["Stinkhorn Horn"]);
+                possibleLoot.Add(dataManager.itemLootData["Stinkhorn Fluff"]);
+            }
             for (int i = 0; i < possibleLoot.Count;++i)
             {
                 int rand = rando.Next(1, 101);
