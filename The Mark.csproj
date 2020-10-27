@@ -38,6 +38,9 @@
     <None Include="Content\Data\Creature\creatureNameData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\Data\Item\itemConsumableData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Data\Item\itemLootData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -70,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Camera.cs" />
     <Compile Include="Cloud.cs" />
+    <Compile Include="ConsumableItem.cs" />
     <Compile Include="Creature.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="GridTile.cs" />

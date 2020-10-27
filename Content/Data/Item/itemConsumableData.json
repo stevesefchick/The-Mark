@@ -1,0 +1,9 @@
+{
+  "Botion": {
+    "itemName": "Botion",
+    "itemValue": 50,
+    "canStack": true,
+    "dropRate": 0,
+    "maxDropQuantity": 0
+  }
+}
