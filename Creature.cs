@@ -61,6 +61,12 @@ namespace The_Mark
                 possibleLoot.Add(dataManager.itemLootData["FlapFlap Wing"]);
                 possibleLoot.Add(dataManager.itemLootData["FlapFlap Blood"]);
             }
+            else if (thisCreatureType == ThisCreatureType.Leggy)
+            {
+                possibleLoot.Add(dataManager.itemLootData["Leggy Leg"]);
+                possibleLoot.Add(dataManager.itemLootData["Leggy Silk"]);
+                possibleLoot.Add(dataManager.itemLootData["Tuft of Leggy Hair"]);
+            }
 
             for (int i = 0; i < possibleLoot.Count;++i)
             {

@@ -33,5 +33,26 @@
     "canStack": true,
     "dropRate": 10,
     "maxDropQuantity": 1
+  },
+  "Leggy Leg": {
+    "itemName": "Leggy Leg",
+    "itemValue": 10,
+    "canStack": true,
+    "dropRate": 30,
+    "maxDropQuantity": 4
+  },
+  "Leggy Silk": {
+    "itemName": "Leggy Silk",
+    "itemValue": 25,
+    "canStack": true,
+    "dropRate": 25,
+    "maxDropQuantity": 2
+  },
+  "Tuft of Leggy Hair": {
+    "itemName": "Tuft of Leggy Hair",
+    "itemValue": 15,
+    "canStack": true,
+    "dropRate": 15,
+    "maxDropQuantity": 3
   }
 }
