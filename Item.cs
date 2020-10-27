@@ -9,6 +9,7 @@ namespace The_Mark
     {
         //main item variables
         public String itemName;
+        public String itemDescription;
         public int itemValue;
         public Boolean canStack;
 

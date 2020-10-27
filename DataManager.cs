@@ -20,6 +20,7 @@ namespace The_Mark
         //item data
         public Dictionary<string, Item> itemLootData = new Dictionary<string, Item>();
         public Dictionary<string, ConsumableItem> itemConsumableData = new Dictionary<string, ConsumableItem>();
+        public Dictionary<string, EquipmentItem> itemEquipmentData = new Dictionary<string, EquipmentItem>();
 
         //random id data
         public List<string> randomGenData = new List<string>();
@@ -50,6 +51,7 @@ namespace The_Mark
         {
             itemLootData = JsonConvert.DeserializeObject<Dictionary<string, Item>>(File.ReadAllText(@"Content/Data/Item/itemLootData.json"));
             itemConsumableData = JsonConvert.DeserializeObject<Dictionary<string, ConsumableItem>>(File.ReadAllText(@"Content/Data/Item/itemConsumableData.json"));
+            itemEquipmentData = JsonConvert.DeserializeObject<Dictionary<string, EquipmentItem>>(File.ReadAllText(@"Content/Data/Item/itemEquipmentData.json"));
         }
 
         #region random gen

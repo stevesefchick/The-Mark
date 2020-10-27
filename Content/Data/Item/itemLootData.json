@@ -1,6 +1,7 @@
 {
   "Birb Feather": {
     "itemName": "Birb Feather",
+    "itemDescription": "It's a feather!",
     "itemValue": 5,
     "canStack": true,
     "dropRate": 60,
@@ -8,6 +9,7 @@
   },
   "Birb Talon": {
     "itemName": "Birb Talon",
+    "itemDescription": "Very sharp!",
     "itemValue": 8,
     "canStack": true,
     "dropRate": 25,
@@ -15,6 +17,7 @@
   },
   "Birb Wing": {
     "itemName": "Birb Wing",
+    "itemDescription": "It's a whole dang wing",
     "itemValue": 12,
     "canStack": true,
     "dropRate": 15,
@@ -22,6 +25,7 @@
   },
   "FlapFlap Wing": {
     "itemName": "FlapFlap Wing",
+    "itemDescription": "This wing is all webbed and weird",
     "itemValue": 14,
     "canStack": true,
     "dropRate": 35,
@@ -29,6 +33,7 @@
   },
   "FlapFlap Blood": {
     "itemName": "FlapFlap Blood",
+    "itemDescription": "A totally normal vial of blood from a FlapFlap",
     "itemValue": 25,
     "canStack": true,
     "dropRate": 10,
@@ -36,6 +41,7 @@
   },
   "Leggy Leg": {
     "itemName": "Leggy Leg",
+    "itemDescription": "It's all crunchy and weird",
     "itemValue": 10,
     "canStack": true,
     "dropRate": 30,
@@ -43,6 +49,7 @@
   },
   "Leggy Silk": {
     "itemName": "Leggy Silk",
+    "itemDescription": "A big ol' wad of silk",
     "itemValue": 25,
     "canStack": true,
     "dropRate": 25,
@@ -50,6 +57,7 @@
   },
   "Tuft of Leggy Hair": {
     "itemName": "Tuft of Leggy Hair",
+    "itemDescription": "It's alarmingly curly!",
     "itemValue": 15,
     "canStack": true,
     "dropRate": 15,
@@ -57,6 +65,7 @@
   },
   "Stinkhorn Horn": {
     "itemName": "Stinkhorn Horn",
+    "itemDescription": "As promised, it definitely stinks!",
     "itemValue": 25,
     "canStack": true,
     "dropRate": 35,
@@ -64,6 +73,7 @@
   },
   "Stinkhorn Fluff": {
     "itemName": "Stinkhorn Fluff",
+    "itemDescription": "You could sleep on this!",
     "itemValue": 10,
     "canStack": true,
     "dropRate": 60,

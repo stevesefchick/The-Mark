@@ -1,6 +1,7 @@
 {
   "Botion": {
     "itemName": "Botion",
+    "itemDescription": "Gotta get the botion for my dad",
     "itemValue": 50,
     "canStack": true,
     "dropRate": 0,

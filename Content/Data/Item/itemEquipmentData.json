@@ -1,0 +1,10 @@
+{
+  "Botion": {
+    "itemName": "Sward",
+    "itemDescription": "a real sword",
+    "itemValue": 100,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0
+  }
+}
