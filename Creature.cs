@@ -12,7 +12,7 @@ namespace The_Mark
 
         //enums
         public enum AggressionType { Friendly, Neutral, Cautious, Defensive, Aggressive}
-        public enum ThisCreatureType { Birb, FlapFlap, Leggy, Stinkhorn}
+        public enum ThisCreatureType { Birb, FlapFlap, Leggy, Stinkhorn, Krab}
         public enum ActiveTime { Daytime, Nighttime, Both}
 
         //properties
@@ -72,6 +72,13 @@ namespace The_Mark
                 possibleLoot.Add(dataManager.itemLootData["Stinkhorn Horn"]);
                 possibleLoot.Add(dataManager.itemLootData["Stinkhorn Fluff"]);
             }
+            else if (thisCreatureType == ThisCreatureType.Krab)
+            {
+                possibleLoot.Add(dataManager.itemLootData["Krab Claw"]);
+                possibleLoot.Add(dataManager.itemLootData["Krab Meat"]);
+            }
+
+
             for (int i = 0; i < possibleLoot.Count;++i)
             {
                 int rand = rando.Next(1, 101);
@@ -120,6 +127,13 @@ namespace The_Mark
             {
                 thisAggressionType = AggressionType.Neutral;
                 thisCreatureType = ThisCreatureType.Stinkhorn;
+                thisCreatureActiveTime = ActiveTime.Daytime;
+
+            }
+            else if (thisType == ThisCreatureType.Krab)
+            {
+                thisAggressionType = AggressionType.Defensive;
+                thisCreatureType = ThisCreatureType.Krab;
                 thisCreatureActiveTime = ActiveTime.Daytime;
 
             }
@@ -492,6 +506,54 @@ namespace The_Mark
             }
             #endregion
 
+            //krab
+            #region krab
+            if (thisCreatureType == ThisCreatureType.Stinkhorn)
+            {
+                thischoice = rando.Next(1, 3);
+                //type 1 - name + the Krab
+                if (thischoice == 1)
+                {
+                    string ending = " the Krab";
+
+
+                    List<string> candidateskrabname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "krabname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidateskrabname.Add(entry.Key);
+                        }
+                    }
+
+                    thename = candidateskrabname[rando.Next(0, candidateskrabname.Count)].ToString() + ending;
+
+                }
+                //type 2 - name + title
+                else if (thischoice == 2)
+                {
+                    List<string> candidatestitlename = new List<string>();
+                    List<string> candidateskrabname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "krabname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidateskrabname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturetitle")
+                        {
+                            candidatestitlename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidateskrabname[rando.Next(0, candidateskrabname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+            }
+
+            #endregion
 
             //capitalize first letter
             thename = thename.Substring(0, 1).ToUpper() + thename.Substring(1);

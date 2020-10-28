@@ -1187,7 +1187,7 @@ namespace The_Mark
 			//STINKHORN
 			#region stinkhorn
 
-			max = rando.Next(1,10);
+			max = rando.Next(3,10);
 
 
 			//create and assign creatures
@@ -1215,9 +1215,34 @@ namespace The_Mark
 
 
 			#endregion
+
+			//KRAB
+			#region krab
+
+			max = rando.Next(3, 10);
+
+			//create and assign creatures
+			for (int i = 0; i < max; ++i)
+			{
+				int randTerrainOrPlaceCheck = 1;
+
+
+				if (randTerrainOrPlaceCheck == 1 && isBeachAvailable == true)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Krab, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Beach;
+					creatures.Add(newCreature);
+				}
+			}
+
+
+			max = 0;
+			availableLocationIDs.Clear();
+
+			#endregion
 		}
 
-        void createTileAssignmentsforRiversandLakes()
+		void createTileAssignmentsforRiversandLakes()
 		{
 			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
 			{

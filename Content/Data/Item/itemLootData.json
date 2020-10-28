@@ -88,5 +88,23 @@
     "dropRate": 60,
     "maxDropQuantity": 3,
     "rareDescription": "Perfect"
+  },
+  "Krab Claw": {
+    "itemName": "Krab Claw",
+    "itemDescription": "Good for pinching",
+    "itemValue": 20,
+    "canStack": true,
+    "dropRate": 40,
+    "maxDropQuantity": 2,
+    "rareDescription": "Intact"
+  },
+  "Krab Meat": {
+    "itemName": "Krab Meat",
+    "itemDescription": "A fistful of glorious Krab meat",
+    "itemValue": 30,
+    "canStack": true,
+    "dropRate": 20,
+    "maxDropQuantity": 3,
+    "rareDescription": "Quality"
   }
 }

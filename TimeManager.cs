@@ -8,22 +8,29 @@ namespace The_Mark
 {
     class TimeManager
     {
+        //time values
         public int Year;
         public int Hour;
         public int Minute;
         public int Day;
         public int CurrentMonth;
-
+        //strings
         string hourMinutesToString;
+        string dayString;
+
+        //the mark time values
+        public int daysRemaining;
+        public int hoursRemaining;
+        public int minutesRemaining;
 
         //const
         int daysPerMonth = 30;
         List<string> calendarMonths = new List<string>();
 
+        //color values/adjustments
         float blue=0;
         float red=0;
         float green=0;
-
         float actualblue;
         float actualred;
         float actualgreen;
@@ -35,10 +42,11 @@ namespace The_Mark
             Year = 0;
             Hour = 0;
             Minute = 0;
-            Day = 0;
+            Day = 1;
             CurrentMonth = 0;
 
-            hourMinutesToString = hourminuteformat();
+            hourMinutesToString = Hourminuteformat();
+            dayString = Daystringformat();
 
             //add calendar months
             calendarMonths.Add("Flame");
@@ -50,7 +58,7 @@ namespace The_Mark
             calendarMonths.Add("Light");
         }
 
-        String hourminuteformat()
+        String Hourminuteformat()
         {
             string hourvalue = Hour.ToString();
             string minutevalue = Minute.ToString();
@@ -78,6 +86,32 @@ namespace The_Mark
 
 
             return hourvalue + ":" + minutevalue + " " + ampm;
+        }
+
+        String Daystringformat()
+        {
+            String ending = "";
+
+            if (Day == 1 || Day == 21)
+            {
+                ending = "st";
+            }
+            else if (Day==2 || Day == 22)
+            {
+                ending = "nd";
+            }
+            else if (Day==3 || Day == 23)
+            {
+                ending = "rd";
+            }    
+            else if (Day==4 || Day==5 || Day==6 || Day==7 || Day==8 || Day==9 || Day==10 || Day==11 || Day==12 || Day==13 || Day==14 || Day==15 || Day==16||
+                Day==17 || Day==18 || Day==19 || Day==20 || Day==24 || Day==25 || Day==26 || Day==27 || Day==28 || Day==29 || Day==30)
+            {
+                ending = "th";
+            }
+
+
+            return Day + ending;
         }
 
         public void Update()
@@ -200,13 +234,16 @@ namespace The_Mark
                 }
             }
 
-            hourMinutesToString = hourminuteformat();
+            hourMinutesToString = Hourminuteformat();
+            dayString = Daystringformat();
         }
+
+
 
         public void Draw(SpriteBatch spriteBatch,SpriteFont spriteFont)
         {
             spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(100, 100), Color.White);
-            spriteBatch.DrawString(spriteFont, Day + " of " + calendarMonths[CurrentMonth], new Vector2(100, 150), Color.White);
+            spriteBatch.DrawString(spriteFont, dayString + " day of " + calendarMonths[CurrentMonth], new Vector2(100, 150), Color.White);
         }
 
     }
