@@ -12,6 +12,7 @@ namespace The_Mark
         public String itemDescription;
         public int itemValue;
         public Boolean canStack;
+        public String rareDescription;
 
         //drop rates
         public int dropRate;
@@ -20,12 +21,21 @@ namespace The_Mark
         //enums
         public enum ItemType { Loot }
         public ItemType thisItemType;
+        public enum RarityType { Normal, Rare}
+        public RarityType thisRarityType;
 
         public Item(String itemname,int value, Boolean stackable)
         {
             itemName = itemname;
             itemValue = value;
             canStack = stackable;
+            thisRarityType = RarityType.Normal;
+        }
+
+        public void MakeItemRare()
+        {
+            thisRarityType = RarityType.Rare;
+            itemName = rareDescription + " " + itemName;
 
         }
 

@@ -5,7 +5,8 @@
     "itemValue": 5,
     "canStack": true,
     "dropRate": 60,
-    "maxDropQuantity": 6
+    "maxDropQuantity": 6,
+    "rareDescription": "Perfect"
   },
   "Birb Talon": {
     "itemName": "Birb Talon",
@@ -13,7 +14,8 @@
     "itemValue": 8,
     "canStack": true,
     "dropRate": 25,
-    "maxDropQuantity": 2
+    "maxDropQuantity": 2,
+    "rareDescription": "Lethal"
   },
   "Birb Wing": {
     "itemName": "Birb Wing",
@@ -21,7 +23,8 @@
     "itemValue": 12,
     "canStack": true,
     "dropRate": 15,
-    "maxDropQuantity": 2
+    "maxDropQuantity": 2,
+    "rareDescription": "Huge"
   },
   "FlapFlap Wing": {
     "itemName": "FlapFlap Wing",
@@ -29,7 +32,8 @@
     "itemValue": 14,
     "canStack": true,
     "dropRate": 35,
-    "maxDropQuantity": 2
+    "maxDropQuantity": 2,
+    "rareDescription": "Untattered"
   },
   "FlapFlap Blood": {
     "itemName": "FlapFlap Blood",
@@ -37,7 +41,8 @@
     "itemValue": 25,
     "canStack": true,
     "dropRate": 10,
-    "maxDropQuantity": 1
+    "maxDropQuantity": 1,
+    "rareDescription": "Bubbling"
   },
   "Leggy Leg": {
     "itemName": "Leggy Leg",
@@ -45,7 +50,8 @@
     "itemValue": 10,
     "canStack": true,
     "dropRate": 30,
-    "maxDropQuantity": 4
+    "maxDropQuantity": 4,
+    "rareDescription": "Huge"
   },
   "Leggy Silk": {
     "itemName": "Leggy Silk",
@@ -53,7 +59,8 @@
     "itemValue": 25,
     "canStack": true,
     "dropRate": 25,
-    "maxDropQuantity": 2
+    "maxDropQuantity": 2,
+    "rareDescription": "Perfect"
   },
   "Tuft of Leggy Hair": {
     "itemName": "Tuft of Leggy Hair",
@@ -61,7 +68,8 @@
     "itemValue": 15,
     "canStack": true,
     "dropRate": 15,
-    "maxDropQuantity": 3
+    "maxDropQuantity": 3,
+    "rareDescription": "Huge"
   },
   "Stinkhorn Horn": {
     "itemName": "Stinkhorn Horn",
@@ -69,7 +77,8 @@
     "itemValue": 25,
     "canStack": true,
     "dropRate": 35,
-    "maxDropQuantity": 2
+    "maxDropQuantity": 2,
+    "rareDescription": "Noxious"
   },
   "Stinkhorn Fluff": {
     "itemName": "Stinkhorn Fluff",
@@ -77,6 +86,7 @@
     "itemValue": 10,
     "canStack": true,
     "dropRate": 60,
-    "maxDropQuantity": 3
+    "maxDropQuantity": 3,
+    "rareDescription": "Perfect"
   }
 }
