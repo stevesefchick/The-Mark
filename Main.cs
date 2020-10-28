@@ -25,6 +25,8 @@ class GameMain : Game
 	public Camera camera;
 	public MouseHandler mouse;
 	protected TimeManager time;
+	protected PlayerHandler playerHandler;
+
 
 	//controls
 	protected Boolean isRightPressed;
@@ -68,10 +70,14 @@ class GameMain : Game
 
 	protected override void Initialize()
 	{
+		//Create necessary helpers
 		createHelpers();
+		//Load all data
 		dataManager.LoadAllData(this);
+		//Set up the world
 		createNewWorld();
-		
+		//Set up player character
+		playerHandler.CreateTheMark(worldMap, rando);
 
 
 		base.Initialize();
@@ -89,6 +95,7 @@ class GameMain : Game
 		mouse = new MouseHandler(this);
 		camera = new Camera();
 		time = new TimeManager();
+		playerHandler = new PlayerHandler();
 
 		LoadFonts();
     }

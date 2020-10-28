@@ -15,7 +15,7 @@ namespace The_Mark
 		//content
 		protected List<Terrain> terrains = new List<Terrain>();
 		protected List<Place> places = new List<Place>();
-		protected List<Person> people = new List<Person>();
+		public List<Person> people = new List<Person>();
 		protected List<Road> roads = new List<Road>();
 		protected List<Water> waterbodies = new List<Water>();
 		protected List<Creature> creatures = new List<Creature>();

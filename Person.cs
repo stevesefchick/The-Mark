@@ -32,9 +32,21 @@ namespace The_Mark
 
 		//TODO: skills
 
-		//TODO: stats
-		
+		//Stat Attributes
+		public int endurance;
+		public int strength;
+		public int dexterity;
+		public int wit;
+		public int wisdom;
+		public int charisma;
 
+		//Health
+		public int maxHealth;
+		public int currentHealth;
+		public int maxStamina;
+		public int currentStamina;
+		public int maxStress;
+		public int currentStress;
 		
 
 		public void Update(GameTime gameTime)
@@ -236,6 +248,28 @@ namespace The_Mark
 			}
         }
 
+		void GetHealthStats()
+        {
+			maxHealth = 100;
+			maxStamina = 100;
+			maxStress = 100;
+
+			currentHealth = maxHealth;
+			currentStamina = maxStamina;
+			currentStress = 0;
+
+        }
+
+		void GetAttributeStats()
+        {
+			endurance = 1;
+			strength = 1;
+			dexterity = 1;
+			wit = 1;
+			wisdom = 1;
+			charisma = 1;
+        }
+
         public void CreatePerson(DataManager datamanager, Random random, CreationType creationType)
 		{
 			personID = datamanager.getRandomID(random);
@@ -258,6 +292,14 @@ namespace The_Mark
 			getAge(creationType, random);
 			//get personality
 			getPersonality(creationType, random);
+			//TODO: Get Traits
+
+			//TODO:Get Skills
+
+			//get Stat Attributes
+			GetAttributeStats();
+			//get Health Stats
+			GetHealthStats();
 
 
         }
