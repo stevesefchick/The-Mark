@@ -40,7 +40,7 @@ namespace The_Mark
         public TimeManager()
         {
             Year = 0;
-            Hour = 0;
+            Hour = 7;
             Minute = 0;
             Day = 1;
             CurrentMonth = 0;
@@ -276,16 +276,16 @@ namespace The_Mark
 
 
 
-        public void Draw(SpriteBatch spriteBatch,SpriteFont spriteFont)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 baseposition)
         {
-            spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(100, 100), Color.White);
-            spriteBatch.DrawString(spriteFont, dayString + " day of " + calendarMonths[CurrentMonth], new Vector2(100, 150), Color.White);
-            DrawRemainingTime(spriteBatch, spriteFont);
+            spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(baseposition.X+10, baseposition.Y+30), Color.White);
+            spriteBatch.DrawString(spriteFont, dayString + " day of " + calendarMonths[CurrentMonth], new Vector2(baseposition.X + 200, baseposition.Y+30), Color.White);
+            DrawRemainingTime(spriteBatch, spriteFont,baseposition);
         }
 
-        void DrawRemainingTime(SpriteBatch spriteBatch, SpriteFont spriteFont)
+        void DrawRemainingTime(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 baseposition)
         {
-            spriteBatch.DrawString(spriteFont,daysRemaining + " days " + hoursRemaining + " hours " + minutesRemaining + " minutes remain", new Vector2(100, 200), Color.White);
+            spriteBatch.DrawString(spriteFont,daysRemaining + " days " + hoursRemaining + " hours " + minutesRemaining + " minutes remain", baseposition, Color.White);
         }
 
     }

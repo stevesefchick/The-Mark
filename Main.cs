@@ -19,6 +19,9 @@ class GameMain : Game
 	//effects
 	Effect dayNightEffect;
 
+	//UI Element positions
+	Vector2 timeUIPosition;
+
 	//content
 	protected WorldMap worldMap;
 	public DataManager dataManager;
@@ -40,6 +43,8 @@ class GameMain : Game
 
 	//random stuff
 	Random rando = new Random();
+
+
 	
 	
 
@@ -68,10 +73,18 @@ class GameMain : Game
 
 	}
 
+	private void GetUIElementPositions()
+    {
+		timeUIPosition = new Vector2(backbufferJamz.X - 475, 50);
+
+    }
+
 	protected override void Initialize()
 	{
 		//Create necessary helpers
 		createHelpers();
+		//generate UI Element Positions
+		GetUIElementPositions();
 		//Load all data
 		dataManager.LoadAllData(this);
 		//Set up the world
@@ -287,7 +300,7 @@ class GameMain : Game
 
 		//UI
 		spriteBatch.Begin();
-		time.Draw(spriteBatch, worldFont);
+		time.Draw(spriteBatch, worldFont,timeUIPosition);
 		spriteBatch.End();
 
 
