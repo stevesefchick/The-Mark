@@ -78,6 +78,8 @@ class GameMain : Game
 		createNewWorld();
 		//Set up player character
 		playerHandler.CreateTheMark(worldMap, rando);
+		//Start the timer
+		time.StartTimer();
 
 
 		base.Initialize();
@@ -260,6 +262,7 @@ class GameMain : Game
 		//8 - mouse
 		//9 - ui
 
+		//world
 		spriteBatch.Begin(SpriteSortMode.FrontToBack,
 			BlendState.NonPremultiplied,
 			SamplerState.PointClamp,
@@ -271,6 +274,16 @@ class GameMain : Game
 		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz, worldFont);
 		spriteBatch.End();
 
+		//mouse
+		spriteBatch.Begin(SpriteSortMode.FrontToBack,
+	BlendState.NonPremultiplied,
+	SamplerState.PointClamp,
+	null,
+	null,
+	null,
+	camera.get_transformation(gdm));
+		mouse.Draw(spriteBatch, camera.cameraPosition, backbufferJamz, worldFont);
+		spriteBatch.End();
 
 		//UI
 		spriteBatch.Begin();

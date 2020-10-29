@@ -88,6 +88,14 @@ namespace The_Mark
             return hourvalue + ":" + minutevalue + " " + ampm;
         }
 
+        public void StartTimer()
+        {
+            daysRemaining = 14;
+            hoursRemaining = 0;
+            minutesRemaining = 0;
+
+        }
+
         String Daystringformat()
         {
             String ending = "";
@@ -208,6 +216,7 @@ namespace The_Mark
             int minutesleft = minutes;
             while (minutesleft>0)
             {
+                #region time calculation
                 Minute += 1;
                 minutesleft -= 1;
 
@@ -232,6 +241,33 @@ namespace The_Mark
                         CurrentMonth = 0;
                     }
                 }
+                #endregion
+
+                #region countdown time calculation
+                if (minutesRemaining>0)
+                {
+                    minutesRemaining -= 1;
+                }
+                else
+                {
+                    minutesRemaining = 59;
+                    if (hoursRemaining>0)
+                    {
+                        hoursRemaining -= 1;
+                    }
+                    else
+                    {
+                        hoursRemaining = 23;
+                        if (daysRemaining>0)
+                        {
+                            daysRemaining -= 1;
+                        }
+                    }
+
+                }
+
+
+                #endregion
             }
 
             hourMinutesToString = Hourminuteformat();
@@ -244,6 +280,12 @@ namespace The_Mark
         {
             spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(100, 100), Color.White);
             spriteBatch.DrawString(spriteFont, dayString + " day of " + calendarMonths[CurrentMonth], new Vector2(100, 150), Color.White);
+            DrawRemainingTime(spriteBatch, spriteFont);
+        }
+
+        void DrawRemainingTime(SpriteBatch spriteBatch, SpriteFont spriteFont)
+        {
+            spriteBatch.DrawString(spriteFont,daysRemaining + " days " + hoursRemaining + " hours " + minutesRemaining + " minutes remain", new Vector2(100, 200), Color.White);
         }
 
     }

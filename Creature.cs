@@ -508,7 +508,7 @@ namespace The_Mark
 
             //krab
             #region krab
-            if (thisCreatureType == ThisCreatureType.Stinkhorn)
+            if (thisCreatureType == ThisCreatureType.Krab)
             {
                 thischoice = rando.Next(1, 3);
                 //type 1 - name + the Krab
