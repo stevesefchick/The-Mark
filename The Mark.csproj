@@ -68,6 +68,12 @@
     <None Include="Content\Fonts\PaperJohnny.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\Fonts\PaperJohnnyBig.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\Fonts\Pixellari.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Shaders\MarkEffect.fxb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -15,6 +15,8 @@ class GameMain : Game
 
 	//font info
 	public SpriteFont worldFont;
+	public SpriteFont bigWorldFont;
+	public SpriteFont textFont;
 
 	//effects
 	Effect dayNightEffect;
@@ -102,6 +104,8 @@ class GameMain : Game
     {
 		//todo: create new project to load fonts from
 		worldFont = Content.Load<SpriteFont>(@"Fonts/PaperJohnny");
+		bigWorldFont = Content.Load<SpriteFont>(@"Fonts/PaperJohnnyBig");
+		textFont = Content.Load<SpriteFont>(@"Fonts/Pixellari");
 	}
 
 	private void createHelpers()
