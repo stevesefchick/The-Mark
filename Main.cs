@@ -26,12 +26,14 @@ class GameMain : Game
 
 	//content
 	protected WorldMap worldMap;
+	protected PlayerHandler playerHandler;
+	protected TimeManager time;
+
+	//helpers
 	public DataManager dataManager;
+	public UI_Helper uiHelper;
 	public Camera camera;
 	public MouseHandler mouse;
-	protected TimeManager time;
-	protected PlayerHandler playerHandler;
-
 
 	//controls
 	protected Boolean isRightPressed;
@@ -115,6 +117,7 @@ class GameMain : Game
 		camera = new Camera();
 		time = new TimeManager();
 		playerHandler = new PlayerHandler();
+		uiHelper = new UI_Helper();
 
 		LoadFonts();
     }

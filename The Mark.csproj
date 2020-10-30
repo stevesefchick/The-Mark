@@ -98,6 +98,7 @@
     <Compile Include="Terrain.cs" />
     <Compile Include="TerrainDoodad.cs" />
     <Compile Include="TimeManager.cs" />
+    <Compile Include="UI Helper.cs" />
     <Compile Include="Water.cs" />
     <Compile Include="WorldMap.cs" />
   </ItemGroup>
