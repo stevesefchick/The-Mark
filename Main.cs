@@ -117,7 +117,7 @@ class GameMain : Game
 		camera = new Camera();
 		time = new TimeManager();
 		playerHandler = new PlayerHandler();
-		uiHelper = new UI_Helper();
+		uiHelper = new UI_Helper(this);
 
 		LoadFonts();
     }
@@ -308,6 +308,7 @@ class GameMain : Game
 		//UI
 		spriteBatch.Begin();
 		time.Draw(spriteBatch, worldFont,timeUIPosition);
+		uiHelper.Draw(spriteBatch);
 		spriteBatch.End();
 
 
