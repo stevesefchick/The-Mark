@@ -243,6 +243,7 @@ class GameMain : Game
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
 		mouse.Update(camera.cameraPosition,backbufferJamz,worldFont);
 		worldMap.Update(this,rando);
+		uiHelper.Update(mouse.isLeftClickDown);
 
 		//debug
 		checkForEnterPressed();
@@ -267,6 +268,14 @@ class GameMain : Game
 		}
 	}
 
+	Vector2 returnPositionCameraOffset(Vector2 position)
+    {
+		return position - backbufferJamz / 2 + camera.cameraPosition;
+
+
+
+	}
+
 	protected override void Draw(GameTime gameTime)
 	{
 		GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -279,8 +288,8 @@ class GameMain : Game
 		//3 - places and doodads
 		//6 - clouds
 		//7 - text
-		//8 - mouse
-		//9 - ui
+		//8 - ui
+		//9 - mouse
 
 		//world
 		spriteBatch.Begin(SpriteSortMode.FrontToBack,
@@ -291,10 +300,10 @@ class GameMain : Game
 			dayNightEffect,
 			camera.get_transformation(gdm));
 		worldMap.Draw(spriteBatch,worldFont);
-		mouse.Draw(spriteBatch,camera.cameraPosition,backbufferJamz, worldFont);
 		spriteBatch.End();
 
-		//mouse
+
+		//mouse and ui
 		spriteBatch.Begin(SpriteSortMode.FrontToBack,
 	BlendState.NonPremultiplied,
 	SamplerState.PointClamp,
@@ -303,14 +312,9 @@ class GameMain : Game
 	null,
 	camera.get_transformation(gdm));
 		mouse.Draw(spriteBatch, camera.cameraPosition, backbufferJamz, worldFont);
+		time.Draw(spriteBatch, worldFont, returnPositionCameraOffset(timeUIPosition));
+		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero));
 		spriteBatch.End();
-
-		//UI
-		spriteBatch.Begin();
-		time.Draw(spriteBatch, worldFont,timeUIPosition);
-		uiHelper.Draw(spriteBatch);
-		spriteBatch.End();
-
 
 		base.Draw(gameTime);
 	}

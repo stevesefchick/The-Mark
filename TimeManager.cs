@@ -278,14 +278,14 @@ namespace The_Mark
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 baseposition)
         {
-            spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(baseposition.X+10, baseposition.Y+30), Color.White);
-            spriteBatch.DrawString(spriteFont, dayString + " day of " + calendarMonths[CurrentMonth], new Vector2(baseposition.X + 200, baseposition.Y+30), Color.White);
+            spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(baseposition.X+10, baseposition.Y+30), Color.White,0,Vector2.Zero,1, SpriteEffects.None,0.8f);
+            spriteBatch.DrawString(spriteFont, dayString + " day of " + calendarMonths[CurrentMonth], new Vector2(baseposition.X + 200, baseposition.Y+30), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
             DrawRemainingTime(spriteBatch, spriteFont,baseposition);
         }
 
         void DrawRemainingTime(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 baseposition)
         {
-            spriteBatch.DrawString(spriteFont,daysRemaining + " days " + hoursRemaining + " hours " + minutesRemaining + " minutes remain", baseposition, Color.White);
+            spriteBatch.DrawString(spriteFont,daysRemaining + " days " + hoursRemaining + " hours " + minutesRemaining + " minutes remain", baseposition, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
         }
 
     }

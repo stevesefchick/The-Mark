@@ -11,6 +11,8 @@ namespace The_Mark
         Texture2D mouseTexture;
         MouseState mouseState;
 
+        public Boolean isLeftClickDown;
+
         //font
         public String mouseHoverFont = "hell ass";
         public String placeText = "";
@@ -46,6 +48,15 @@ namespace The_Mark
             fontPosition.X -= spritefont.MeasureString(mouseHoverFont).X / 2;
 
             mouseHoverFont = prioritizeText();
+
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                isLeftClickDown = true;
+            }
+            else
+            {
+                isLeftClickDown = false;
+            }
         }
 
         String prioritizeText()
@@ -99,7 +110,7 @@ namespace The_Mark
             spriteBatch.DrawString(font, mouseHoverFont, getTextOffset(fontPosition,1), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
             spriteBatch.DrawString(font, mouseHoverFont, getTextOffset(fontPosition,2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
 
-            spriteBatch.Draw(mouseTexture, positionFromVectorToRect(getMousePosition(cameraposition,backbuffer)),null, Color.White,0,Vector2.Zero, SpriteEffects.None,0.8f);
+            spriteBatch.Draw(mouseTexture, positionFromVectorToRect(getMousePosition(cameraposition,backbuffer)),null, Color.White,0,Vector2.Zero, SpriteEffects.None,0.9f);
 
         }
     }
