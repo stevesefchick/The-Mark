@@ -7,6 +7,11 @@ namespace The_Mark
 {
     class UI_Helper
     {
+        //fonts
+        SpriteFont titleFont;
+        SpriteFont mainFont;
+
+
         //foreground window sprites
 
         //background window sprites
@@ -15,10 +20,17 @@ namespace The_Mark
         Texture2D hoverCardSprite;
         List<UIHoverCard> hoverCards = new List<UIHoverCard>();
 
-        public UI_Helper(GameMain thegame)
+        public UI_Helper(GameMain thegame,SpriteFont bigfont, SpriteFont babyfont)
         {
+            titleFont = bigfont;
+            mainFont = babyfont;
             LoadAllTextures(thegame);
-            hoverCards.Add(new UIHoverCard(new Rectangle(200, 200, 300, 400)));
+            createHoverCard(new Rectangle(200, 200, 300, 400), "title", "body");
+        }
+
+        public void createHoverCard(Rectangle position, String title, String body)
+        {
+            hoverCards.Add(new UIHoverCard(position, title, body));
         }
 
         void LoadAllTextures(GameMain thegame)
@@ -48,7 +60,7 @@ namespace The_Mark
         {
             for (int i =0; i < hoverCards.Count;++i)
             {
-                hoverCards[i].Draw(spriteBatch, hoverCardSprite, getUIPosition(hoverCards[i].hovercardPosition, offset));
+                hoverCards[i].Draw(spriteBatch, hoverCardSprite, getUIPosition(hoverCards[i].hovercardPosition, offset),titleFont,mainFont);
 
             }
 

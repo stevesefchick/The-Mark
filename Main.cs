@@ -112,14 +112,15 @@ class GameMain : Game
 
 	private void createHelpers()
     {
+		LoadFonts();
+
 		dataManager = new DataManager();
 		mouse = new MouseHandler(this);
 		camera = new Camera();
 		time = new TimeManager();
 		playerHandler = new PlayerHandler();
-		uiHelper = new UI_Helper(this);
+		uiHelper = new UI_Helper(this,bigWorldFont,textFont);
 
-		LoadFonts();
     }
 
 

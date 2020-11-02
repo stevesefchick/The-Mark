@@ -9,8 +9,8 @@ namespace The_Mark
     class UIHoverCard
     {
         public Rectangle hovercardPosition;
-        String title;
-        String text;
+        String hovercardTitle;
+        String hovercardText;
 
         Rectangle hoverCardFillRect = new Rectangle(10, 10, 10, 10);
         Rectangle hoverCardTopLeft = new Rectangle(0, 0, 10, 10);
@@ -24,13 +24,30 @@ namespace The_Mark
 
        
 
-        public UIHoverCard(Rectangle location)
+        public UIHoverCard(Rectangle location, String title, String body)
         {
             hovercardPosition = location;
+            hovercardTitle = title;
+            hovercardText = body;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Texture2D hoverCardSprite, Rectangle offsetposition)
+        int returnTitlePosition(int offsetWidth, SpriteFont font, String thetext)
         {
+            return (int)((offsetWidth / 2) - (font.MeasureString(thetext).X / 2));
+        }
+
+        void DrawText(SpriteBatch spriteBatch,SpriteFont bigfont, SpriteFont littlefont, Rectangle offsetposition)
+        {
+            spriteBatch.DrawString(bigfont, hovercardTitle, new Vector2(offsetposition.X + returnTitlePosition(offsetposition.Width,bigfont,hovercardTitle), offsetposition.Y + 10), Color.Black,0,Vector2.Zero,1, SpriteEffects.None,0.82f);
+
+            spriteBatch.DrawString(littlefont, hovercardText, new Vector2(offsetposition.X + 10, offsetposition.Y+50), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.82f);
+
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Texture2D hoverCardSprite, Rectangle offsetposition,SpriteFont bigfont,SpriteFont littlefont)
+        {
+            DrawText(spriteBatch, bigfont, littlefont, offsetposition);
+
             //draw fill
             spriteBatch.Draw(hoverCardSprite, offsetposition, hoverCardFillRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
             
