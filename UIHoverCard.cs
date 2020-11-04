@@ -11,6 +11,7 @@ namespace The_Mark
         public Rectangle hovercardPosition;
         String hovercardTitle;
         String hovercardText;
+        List<String> hovercardTextLines = new List<String>();
 
         Rectangle hoverCardFillRect = new Rectangle(10, 10, 10, 10);
         Rectangle hoverCardTopLeft = new Rectangle(0, 0, 10, 10);
@@ -24,11 +25,63 @@ namespace The_Mark
 
        
 
-        public UIHoverCard(Rectangle location, String title, String body)
+        public UIHoverCard(Vector2 location, String title, String body, SpriteFont littlefont,SpriteFont titlefont)
         {
-            hovercardPosition = location;
             hovercardTitle = title;
             hovercardText = body;
+            hovercardPosition = new Rectangle((int)location.X, (int)location.Y, getCardWidth(titlefont, title), 300);
+            hovercardTextLines = getHovercardLines(hovercardText,littlefont);
+            hovercardPosition.Height = getCardHeight(hovercardTextLines.Count);
+        }
+
+        int getCardWidth(SpriteFont titlefont, String title)
+        {
+            int buffer = 100;
+
+            return ((int)titlefont.MeasureString(title).X + buffer);
+        }
+
+        int getCardHeight(int lines)
+        {
+            int buffer = 120;
+
+            return (buffer + lines * 25);
+
+        }
+
+        public List<String> getHovercardLines(String hovercardtext, SpriteFont littlefont)
+        {
+            List<String> list = new List<String>();
+            String basetext = hovercardtext;
+            int maxlength = basetext.Length;
+            int currentpointer = 0;
+            int lastline = 0;
+
+            while (currentpointer < maxlength)
+            {
+                if ((basetext.Substring(currentpointer, 1) == " " &&
+                    littlefont.MeasureString(basetext.Substring(lastline,currentpointer-lastline)).X > (hovercardPosition.Width-55)) ||
+                    currentpointer == (maxlength-1))
+                {
+
+
+                    //end
+                    if (currentpointer == maxlength - 1)
+                    {
+                        list.Add(basetext.Substring(lastline));
+                    }
+                    else
+                    {
+                        list.Add(basetext.Substring(lastline, currentpointer - lastline));
+                        lastline = currentpointer+1;
+                    }
+                }
+
+
+                currentpointer += 1;
+            }
+            
+            return list;
         }
 
         int returnTitlePosition(int offsetWidth, SpriteFont font, String thetext)
@@ -40,7 +93,12 @@ namespace The_Mark
         {
             spriteBatch.DrawString(bigfont, hovercardTitle, new Vector2(offsetposition.X + returnTitlePosition(offsetposition.Width,bigfont,hovercardTitle), offsetposition.Y + 10), Color.Black,0,Vector2.Zero,1, SpriteEffects.None,0.82f);
 
-            spriteBatch.DrawString(littlefont, hovercardText, new Vector2(offsetposition.X + 10, offsetposition.Y+50), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.82f);
+            //spriteBatch.DrawString(littlefont, hovercardText, new Vector2(offsetposition.X + 10, offsetposition.Y+50), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.82f);
+            for (int i =0; i < hovercardTextLines.Count;++i)
+            {
+                spriteBatch.DrawString(littlefont, hovercardTextLines[i], new Vector2(offsetposition.X + 10, offsetposition.Y + 75 + (25*i)), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.82f);
+
+            }
 
         }
 

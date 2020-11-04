@@ -25,12 +25,12 @@ namespace The_Mark
             titleFont = bigfont;
             mainFont = babyfont;
             LoadAllTextures(thegame);
-            createHoverCard(new Rectangle(200, 200, 300, 400), "title", "body");
+            createHoverCard(new Vector2(200,200), "Horse Crimes", "you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine");
         }
 
-        public void createHoverCard(Rectangle position, String title, String body)
+        public void createHoverCard(Vector2 position, String title, String body)
         {
-            hoverCards.Add(new UIHoverCard(position, title, body));
+            hoverCards.Add(new UIHoverCard(position, title, body,mainFont,titleFont));
         }
 
         void LoadAllTextures(GameMain thegame)
