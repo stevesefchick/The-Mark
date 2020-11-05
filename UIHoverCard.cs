@@ -107,31 +107,31 @@ namespace The_Mark
             DrawText(spriteBatch, bigfont, littlefont, offsetposition);
 
             //draw fill
-            spriteBatch.Draw(hoverCardSprite, offsetposition, hoverCardFillRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
+            spriteBatch.Draw(hoverCardSprite, offsetposition, hoverCardFillRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.86f);
             
             //draw top left
-            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y - 10, 10, 10), hoverCardTopLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y - 10, 10, 10), hoverCardTopLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.85f);
 
             //draw top right
-            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X + hovercardPosition.Width, offsetposition.Y - 10, 10, 10), hoverCardTopRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X + hovercardPosition.Width, offsetposition.Y - 10, 10, 10), hoverCardTopRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.85f);
 
             //draw bottom left
-            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y + hovercardPosition.Height, 10, 10), hoverCardBottomLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y + hovercardPosition.Height, 10, 10), hoverCardBottomLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.85f);
 
             //draw bottom right
-            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X + hovercardPosition.Width, offsetposition.Y + hovercardPosition.Height, 10, 10), hoverCardBottomRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X + hovercardPosition.Width, offsetposition.Y + hovercardPosition.Height, 10, 10), hoverCardBottomRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.85f);
 
             //draw top border
-            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X, offsetposition.Y - 10, hovercardPosition.Width, 10), hoverCardTopBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X, offsetposition.Y - 10, hovercardPosition.Width, 10), hoverCardTopBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.85f);
 
             //draw bottom border
-            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X, offsetposition.Y + hovercardPosition.Height, hovercardPosition.Width, 10), hoverCardBottomBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X, offsetposition.Y + hovercardPosition.Height, hovercardPosition.Width, 10), hoverCardBottomBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.85f);
 
             //draw left border
-            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y, 10, hovercardPosition.Height), hoverCardLeftBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y, 10, hovercardPosition.Height), hoverCardLeftBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.85f);
 
             //draw right border
-            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X + hovercardPosition.Width, offsetposition.Y, 10, hovercardPosition.Height), hoverCardRightBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+            spriteBatch.Draw(hoverCardSprite, new Rectangle(offsetposition.X + hovercardPosition.Width, offsetposition.Y, 10, hovercardPosition.Height), hoverCardRightBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.85f);
             
 
         }
