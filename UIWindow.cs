@@ -9,6 +9,7 @@ namespace The_Mark
     {
         Boolean isForeground;
         public Rectangle uiWindowPosition;
+        public Rectangle xButtonPosition;
 
         //foreground rects
         Rectangle uiWindowForegroundFill = new Rectangle(40, 10, 10, 10);
@@ -32,9 +33,14 @@ namespace The_Mark
         Rectangle uiWindowBackgroundLeftBorder = new Rectangle(60, 10, 10, 10);
         Rectangle uiWindowBackgroundRightBorder = new Rectangle(80, 10, 10, 10);
 
+        //X sprite rect
+        Rectangle uiWindowxButton= new Rectangle(0, 30, 20, 20);
+
+
         public UIWindow(Rectangle location)
         {
             uiWindowPosition = location;
+            xButtonPosition = new Rectangle((int)(location.Width - 40), 0, 20, 20);
             isForeground = false;
         }
 
@@ -50,9 +56,17 @@ namespace The_Mark
             }
         }
 
+        Rectangle returnActualXButtonPosition(Rectangle offset, Rectangle xbutton)
+        {
+            return new Rectangle(offset.X + xbutton.X, offset.Y + xbutton.Y, 40, 40);
+        }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D uiWindowSprite, Rectangle offsetposition)
         {
+            //X Button
+             spriteBatch.Draw(uiWindowSprite, returnActualXButtonPosition(offsetposition, xButtonPosition), uiWindowxButton, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.815f);
+
+
             if (isForeground == true)
             {
                 //draw fill
