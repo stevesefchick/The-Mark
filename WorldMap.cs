@@ -162,7 +162,7 @@ namespace The_Mark
 			for (int i = 0; i < places.Count; ++i)
 			{
 				//get starting place
-				if (places[i].isLiveable == true || places[i].thisPlaceLocationType == Place.PlaceLocationType.Castle)
+				if (places[i].isLiveable == true)// || places[i].thisPlaceLocationType == Place.PlaceLocationType.Castle)
 				{
 					Point starting = new Point((int)divideBy64(places[i].placeLocation).X, (int)divideBy64(places[i].placeLocation).Y);
 					for (int i2 = 0; i2 < places.Count; ++i2)

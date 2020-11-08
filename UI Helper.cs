@@ -23,8 +23,8 @@ namespace The_Mark
             titleFont = bigfont;
             mainFont = babyfont;
             LoadAllTextures(thegame);
-            createHoverCard(new Vector2(200,200), "Horse Crimes", "you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine");
-            createUIWindow(new Rectangle(600, 200, 200, 300));
+            //createHoverCard(new Vector2(200,200), "Horse Crimes", "you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine");
+            //createUIWindow(new Rectangle(600, 200, 200, 300));
         }
 
         public void createHoverCard(Vector2 position, String title, String body)
