@@ -12,9 +12,10 @@ namespace The_Mark
         MouseState mouseState;
 
         public Boolean isLeftClickDown;
+        public Rectangle leftMouseClickPosition;
 
         //font
-        public String mouseHoverFont = "hell ass";
+        public String mouseHoverFont = "";
         public String placeText = "";
         public String roadText = "";
         public String waterText = "";
@@ -52,6 +53,8 @@ namespace The_Mark
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
                 isLeftClickDown = true;
+                //leftMouseClickPosition = new Rectangle((int)mousePosition.X,(int)mousePosition.Y,50,50);
+                leftMouseClickPosition = new Rectangle((int)getMousePosition(cameraposition, backbufferposition).X, (int)getMousePosition(cameraposition, backbufferposition).Y,50,50);
             }
             else
             {

@@ -9,7 +9,8 @@ namespace The_Mark
     {
         Boolean isForeground;
         public Rectangle uiWindowPosition;
-        public Rectangle xButtonPosition;
+        Rectangle xButtonPosition;
+        public Rectangle publicxButtonPosition;
 
         //foreground rects
         Rectangle uiWindowForegroundFill = new Rectangle(40, 10, 10, 10);
@@ -40,7 +41,7 @@ namespace The_Mark
         public UIWindow(Rectangle location)
         {
             uiWindowPosition = location;
-            xButtonPosition = new Rectangle((int)(location.Width - 40), 0, 20, 20);
+            xButtonPosition = new Rectangle((int)(location.Width - 40), -10, 20, 20);
             isForeground = false;
         }
 
@@ -56,9 +57,10 @@ namespace The_Mark
             }
         }
 
-        Rectangle returnActualXButtonPosition(Rectangle offset, Rectangle xbutton)
+        public Rectangle returnActualXButtonPosition(Rectangle offset, Rectangle xbutton)
         {
-            return new Rectangle(offset.X + xbutton.X, offset.Y + xbutton.Y, 40, 40);
+            publicxButtonPosition = new Rectangle(offset.X + xbutton.X, offset.Y + xbutton.Y, 40, 40);
+            return publicxButtonPosition;
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D uiWindowSprite, Rectangle offsetposition)
@@ -73,28 +75,28 @@ namespace The_Mark
                 spriteBatch.Draw(uiWindowSprite, offsetposition, uiWindowForegroundFill, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
 
                 //draw top left
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y - 10, 10, 10), uiWindowForegroundTopLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 20, offsetposition.Y - 20, 20, 20), uiWindowForegroundTopLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw top right
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y - 10, 10, 10), uiWindowForegroundTopRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y - 20, 20, 20), uiWindowForegroundTopRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw bottom left
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y + uiWindowPosition.Height, 10, 10), uiWindowForegroundBottomLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 20, offsetposition.Y + uiWindowPosition.Height, 20, 20), uiWindowForegroundBottomLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw bottom right
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y + uiWindowPosition.Height, 10, 10), uiWindowForegroundBottomRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y + uiWindowPosition.Height, 20, 20), uiWindowForegroundBottomRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw top border
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X, offsetposition.Y - 10, uiWindowPosition.Width, 10), uiWindowForegroundTopBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X, offsetposition.Y - 20, uiWindowPosition.Width, 20), uiWindowForegroundTopBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw bottom border
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X, offsetposition.Y + uiWindowPosition.Height, uiWindowPosition.Width, 10), uiWindowForegroundBottomBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X, offsetposition.Y + uiWindowPosition.Height, uiWindowPosition.Width, 20), uiWindowForegroundBottomBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw left border
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y, 10, uiWindowPosition.Height), uiWindowForegroundLeftBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 20, offsetposition.Y, 20, uiWindowPosition.Height), uiWindowForegroundLeftBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw right border
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y, 10, uiWindowPosition.Height), uiWindowForegroundRightBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y, 20, uiWindowPosition.Height), uiWindowForegroundRightBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
             }
             else if (isForeground == false)
             {
@@ -102,28 +104,28 @@ namespace The_Mark
                 spriteBatch.Draw(uiWindowSprite, offsetposition, uiWindowBackgroundFill, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
 
                 //draw top left
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y - 10, 10, 10), uiWindowBackgroundTopLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 20, offsetposition.Y - 20, 20, 20), uiWindowBackgroundTopLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw top right
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y - 10, 10, 10), uiWindowBackgroundTopRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y - 20, 20, 20), uiWindowBackgroundTopRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw bottom left
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y + uiWindowPosition.Height, 10, 10), uiWindowBackgroundBottomLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 20, offsetposition.Y + uiWindowPosition.Height, 20, 20), uiWindowBackgroundBottomLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw bottom right
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y + uiWindowPosition.Height, 10, 10), uiWindowBackgroundBottomRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y + uiWindowPosition.Height, 20, 20), uiWindowBackgroundBottomRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw top border
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X, offsetposition.Y - 10, uiWindowPosition.Width, 10), uiWindowBackgroundTopBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X, offsetposition.Y - 20, uiWindowPosition.Width, 20), uiWindowBackgroundTopBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw bottom border
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X, offsetposition.Y + uiWindowPosition.Height, uiWindowPosition.Width, 10), uiWindowBackgroundBottomBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X, offsetposition.Y + uiWindowPosition.Height, uiWindowPosition.Width, 20), uiWindowBackgroundBottomBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw left border
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 10, offsetposition.Y, 10, uiWindowPosition.Height), uiWindowBackgroundLeftBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X - 20, offsetposition.Y, 20, uiWindowPosition.Height), uiWindowBackgroundLeftBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
 
                 //draw right border
-                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y, 10, uiWindowPosition.Height), uiWindowBackgroundRightBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
+                spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y, 20, uiWindowPosition.Height), uiWindowBackgroundRightBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
             }
         }
 

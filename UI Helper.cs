@@ -50,12 +50,23 @@ namespace The_Mark
             return posish;
         }
 
-        public void Update(Boolean isLeftClick)
+        public void Update(MouseHandler mouse)
         {
-            if (isLeftClick==true)
+            if (mouse.isLeftClickDown == true)
             {
                 hoverCards.Clear();
+
+                for (int i = 0; i < uiWindows.Count;++i)
+                {
+                    if (mouse.leftMouseClickPosition.Intersects(uiWindows[i].publicxButtonPosition) == true)
+                    {
+                        uiWindows.RemoveAt(i);
+                    }
+                }
+
             }
+
+
 
 
         }
