@@ -12,17 +12,20 @@ namespace The_Mark
         SpriteFont mainFont;
 
         //Sprites
-        Texture2D hoverCardSprite;
+        Texture2D uiWindowSprites;
         //hover cards
         List<UIHoverCard> hoverCards = new List<UIHoverCard>();
         //ui windows
         List<UIWindow> uiWindows = new List<UIWindow>();
+        //character bubbles
+        List<UICharacterBubble> uiCharacterBubbles = new List<UICharacterBubble>();
 
         public UI_Helper(GameMain thegame,SpriteFont bigfont, SpriteFont babyfont)
         {
             titleFont = bigfont;
             mainFont = babyfont;
             LoadAllTextures(thegame);
+            uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(100, 500)));
             //createHoverCard(new Vector2(200,200), "Horse Crimes", "you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine");
             //createUIWindow(new Rectangle(600, 200, 200, 300));
         }
@@ -39,7 +42,7 @@ namespace The_Mark
 
         void LoadAllTextures(GameMain thegame)
         {
-            hoverCardSprite = thegame.Content.Load<Texture2D>("Sprites/UI/uiWindow");
+            uiWindowSprites = thegame.Content.Load<Texture2D>("Sprites/UI/uiWindow");
 
         }
 
@@ -76,14 +79,19 @@ namespace The_Mark
             //Hovercards
             for (int i =0; i < hoverCards.Count;++i)
             {
-                hoverCards[i].Draw(spriteBatch, hoverCardSprite, getUIPosition(hoverCards[i].hovercardPosition, offset),titleFont,mainFont);
+                hoverCards[i].Draw(spriteBatch, uiWindowSprites, getUIPosition(hoverCards[i].hovercardPosition, offset),titleFont,mainFont);
 
             }
             //UI Windows
             for (int i = 0; i < uiWindows.Count;++i)
             {
-                uiWindows[i].Draw(spriteBatch, hoverCardSprite, getUIPosition(uiWindows[i].uiWindowPosition, offset));
+                uiWindows[i].Draw(spriteBatch, uiWindowSprites, getUIPosition(uiWindows[i].uiWindowPosition, offset));
 
+            }
+            //character bubbles
+            for (int i = 0; i < uiCharacterBubbles.Count;++i)
+            {
+                uiCharacterBubbles[i].Draw(spriteBatch, uiWindowSprites, getUIPosition(uiCharacterBubbles[i].bubblePosition, offset));
             }
 
         }

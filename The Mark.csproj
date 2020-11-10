@@ -99,6 +99,7 @@
     <Compile Include="TerrainDoodad.cs" />
     <Compile Include="TimeManager.cs" />
     <Compile Include="UI Helper.cs" />
+    <Compile Include="UICharacterBubble.cs" />
     <Compile Include="UIHoverCard.cs" />
     <Compile Include="UIWindow.cs" />
     <Compile Include="Water.cs" />
