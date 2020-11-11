@@ -11,6 +11,8 @@ namespace The_Mark
         SpriteFont titleFont;
         SpriteFont mainFont;
 
+        Vector2 backbuffersize;
+
         //Sprites
         Texture2D uiWindowSprites;
         //hover cards
@@ -24,10 +26,29 @@ namespace The_Mark
         {
             titleFont = bigfont;
             mainFont = babyfont;
+            backbuffersize = thegame.backbufferJamz;
+
             LoadAllTextures(thegame);
-            uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(100, 500)));
+            uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.1f,true), backbuffersize.Y - 100 -  returnLocationBasedonBackBuffer(0.15f,false))));
             //createHoverCard(new Vector2(200,200), "Horse Crimes", "you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine");
             //createUIWindow(new Rectangle(600, 200, 200, 300));
+        }
+
+        public void assignMarkToPartyWindow(String id)
+        {
+            uiCharacterBubbles[0].associatedCharacter = id;
+        }
+
+        int returnLocationBasedonBackBuffer(float percentage,Boolean isX)
+        {
+            if (isX==true)
+            {
+                return (int)(percentage * backbuffersize.X);
+            }
+            else
+            {
+                return (int)(percentage * backbuffersize.Y);
+            }
         }
 
         public void createHoverCard(Vector2 position, String title, String body)
@@ -64,6 +85,14 @@ namespace The_Mark
                     if (mouse.leftMouseClickPosition.Intersects(uiWindows[i].publicxButtonPosition) == true)
                     {
                         uiWindows.RemoveAt(i);
+                    }
+                }
+
+                for (int i = 0; i < uiCharacterBubbles.Count;++i)
+                {
+                    if (mouse.leftMouseClickPosition.Intersects(uiCharacterBubbles[i].bubblePosition) == true)
+                    {
+                        //do a thing here
                     }
                 }
 

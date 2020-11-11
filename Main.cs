@@ -1,4 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿//GAME NAME IDEAS
+//The Mark --> taken
+//Deathpunk --> a band
+//Dead Legends --> larping?
+
+
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;

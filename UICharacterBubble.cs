@@ -15,7 +15,7 @@ namespace The_Mark
 
         public UICharacterBubble(Vector2 position)
         {
-            bubblePosition = new Rectangle((int)position.X, (int)position.Y, 30, 30);
+            bubblePosition = new Rectangle((int)position.X, (int)position.Y, 100, 100);
 
         }
 
