@@ -40,6 +40,8 @@ namespace The_Mark
 		public int wisdom;
 		public int charisma;
 
+		//Combat Stats
+
 		//Health
 		public int maxHealth;
 		public int currentHealth;
