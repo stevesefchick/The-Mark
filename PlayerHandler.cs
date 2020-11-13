@@ -38,6 +38,21 @@ namespace The_Mark
             return (theMark.maxStress, theMark.currentStress, theMark.currentStress / theMark.maxStress);
         }
 
+        public (int, int, float) returnHealthValuesForPartyMember(int member)
+        {
+            return (partyMembers[member].maxHealth, partyMembers[member].currentHealth, partyMembers[member].currentHealth / partyMembers[member].maxHealth);
+        }
+
+        public (int, int, float) returnStaminaValuesForPartyMember(int member)
+        {
+            return (partyMembers[member].maxStamina, partyMembers[member].currentStamina, partyMembers[member].currentStamina / partyMembers[member].maxStamina);
+        }
+
+        public (int, int, float) returnStressValuesForPartyMember(int member)
+        {
+            return (partyMembers[member].maxStress, partyMembers[member].currentStress, partyMembers[member].currentStress / partyMembers[member].maxStress);
+        }
+
         Person selectTheMark(WorldMap world,Random rando)
         {
             Person thisPerson = null;

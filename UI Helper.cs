@@ -29,7 +29,15 @@ namespace The_Mark
             backbuffersize = thegame.backbufferJamz;
 
             LoadAllTextures(thegame);
-            uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.1f,true), backbuffersize.Y - 100 -  returnLocationBasedonBackBuffer(0.15f,false))));
+            //the mark
+            uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.05f,true), backbuffersize.Y - 100 -  returnLocationBasedonBackBuffer(0.05f,false)),true));
+            //party members
+            for (int i =0; i < 6;++i)
+            {
+                uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.05f, true) + (i * 100), backbuffersize.Y - 100 - returnLocationBasedonBackBuffer(0.05f, false)),false));
+
+            }
+
             //createHoverCard(new Vector2(200,200), "Horse Crimes", "you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine");
             //createUIWindow(new Rectangle(600, 200, 200, 300));
         }
