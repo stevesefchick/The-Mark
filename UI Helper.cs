@@ -15,6 +15,7 @@ namespace The_Mark
 
         //Sprites
         Texture2D uiWindowSprites;
+        Texture2D healtbarSprites;
         //hover cards
         List<UIHoverCard> hoverCards = new List<UIHoverCard>();
         //ui windows
@@ -30,11 +31,11 @@ namespace The_Mark
 
             LoadAllTextures(thegame);
             //the mark
-            uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.05f,true), backbuffersize.Y - 100 -  returnLocationBasedonBackBuffer(0.05f,false)),true));
+            uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.05f,true), backbuffersize.Y - 100 -  returnLocationBasedonBackBuffer(0.15f,false)),true));
             //party members
-            for (int i =0; i < 6;++i)
+            for (int i =0; i < 5;++i)
             {
-                uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.05f, true) + (i * 100), backbuffersize.Y - 100 - returnLocationBasedonBackBuffer(0.05f, false)),false));
+                uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.05f, true) + 100 +  (i * 100), backbuffersize.Y - 100 - returnLocationBasedonBackBuffer(0.15f, false)),false));
 
             }
 
@@ -72,6 +73,7 @@ namespace The_Mark
         void LoadAllTextures(GameMain thegame)
         {
             uiWindowSprites = thegame.Content.Load<Texture2D>("Sprites/UI/uiWindow");
+            healtbarSprites = thegame.Content.Load<Texture2D>("Sprites/UI/uiHealthBars");
 
         }
 
@@ -128,7 +130,7 @@ namespace The_Mark
             //character bubbles
             for (int i = 0; i < uiCharacterBubbles.Count;++i)
             {
-                uiCharacterBubbles[i].Draw(spriteBatch, uiWindowSprites, getUIPosition(uiCharacterBubbles[i].bubblePosition, offset));
+                uiCharacterBubbles[i].Draw(spriteBatch, uiWindowSprites, healtbarSprites, getUIPosition(uiCharacterBubbles[i].bubblePosition, offset));
             }
 
         }
