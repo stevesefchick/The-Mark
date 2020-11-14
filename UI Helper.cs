@@ -84,7 +84,7 @@ namespace The_Mark
             return posish;
         }
 
-        public void Update(MouseHandler mouse)
+        public void Update(MouseHandler mouse, PlayerHandler party)
         {
             if (mouse.isLeftClickDown == true)
             {
@@ -104,11 +104,24 @@ namespace The_Mark
                     {
                         //do a thing here
                     }
+
+                    if (i==0)
+                    {
+                        uiCharacterBubbles[i].HealthScale = party.returnHealthValuesForMark().Item3;
+                        uiCharacterBubbles[i].StaminaScale = party.returnStaminaValuesForMark().Item3;
+                        uiCharacterBubbles[i].StressScale = party.returnStressValuesForMark().Item3;
+                    }
+                    else if (uiCharacterBubbles[i].isActive==true)
+                    {
+                        uiCharacterBubbles[i].HealthScale = party.returnHealthValuesForPartyMember(i).Item3;
+                        uiCharacterBubbles[i].StaminaScale = party.returnStaminaValuesForPartyMember(i).Item3;
+                        uiCharacterBubbles[i].StressScale = party.returnStressValuesForPartyMember(i).Item3;
+                    }
                 }
 
             }
 
-
+            
 
 
         }

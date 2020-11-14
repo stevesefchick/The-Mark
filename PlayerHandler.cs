@@ -25,32 +25,32 @@ namespace The_Mark
 
         public (int,int,float) returnHealthValuesForMark()
         {
-            return (theMark.maxHealth, theMark.currentHealth, theMark.currentHealth/theMark.maxHealth);
+            return (theMark.maxHealth, theMark.currentHealth, (float)theMark.currentHealth/(float)theMark.maxHealth);
         }
 
         public (int, int, float) returnStaminaValuesForMark()
         {
-            return (theMark.maxStamina, theMark.currentStamina, theMark.currentStamina / theMark.maxStamina);
+            return (theMark.maxStamina, theMark.currentStamina, (float)theMark.currentStamina / (float)theMark.maxStamina);
         }
 
         public (int, int, float) returnStressValuesForMark()
         {
-            return (theMark.maxStress, theMark.currentStress, theMark.currentStress / theMark.maxStress);
+            return (theMark.maxStress, theMark.currentStress, (float)theMark.currentStress / (float)theMark.maxStress);
         }
 
         public (int, int, float) returnHealthValuesForPartyMember(int member)
         {
-            return (partyMembers[member].maxHealth, partyMembers[member].currentHealth, partyMembers[member].currentHealth / partyMembers[member].maxHealth);
+            return (partyMembers[member].maxHealth, partyMembers[member].currentHealth, (float)partyMembers[member].currentHealth / (float)partyMembers[member].maxHealth);
         }
 
         public (int, int, float) returnStaminaValuesForPartyMember(int member)
         {
-            return (partyMembers[member].maxStamina, partyMembers[member].currentStamina, partyMembers[member].currentStamina / partyMembers[member].maxStamina);
+            return (partyMembers[member].maxStamina, partyMembers[member].currentStamina, (float)partyMembers[member].currentStamina / (float)partyMembers[member].maxStamina);
         }
 
         public (int, int, float) returnStressValuesForPartyMember(int member)
         {
-            return (partyMembers[member].maxStress, partyMembers[member].currentStress, partyMembers[member].currentStress / partyMembers[member].maxStress);
+            return (partyMembers[member].maxStress, partyMembers[member].currentStress, (float)partyMembers[member].currentStress / (float)partyMembers[member].maxStress);
         }
 
         Person selectTheMark(WorldMap world,Random rando)

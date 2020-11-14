@@ -8,7 +8,10 @@ namespace The_Mark
     class UICharacterBubble
     {
         //has an active party member
-        Boolean isActive;
+        public Boolean isActive;
+        public float HealthScale = 1;
+        public float StaminaScale = 1;
+        public float StressScale = 1;
 
         public Rectangle bubblePosition;
         int healthbaroffset = 90;
@@ -34,9 +37,9 @@ namespace The_Mark
 
         }
 
-        Rectangle getBarPosition(Rectangle offset,int thisoffset)
+        Rectangle getBarPosition(Rectangle offset,int thisoffset,float scale)
         {
-            return new Rectangle(offset.X, offset.Y + thisoffset, 100, 25);
+            return new Rectangle(offset.X, offset.Y + thisoffset, (int)(100 * scale), 25);
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D bubblesprite, Texture2D healthbarSprite, Rectangle offsetposition)
@@ -46,16 +49,16 @@ namespace The_Mark
             {
                 spriteBatch.Draw(bubblesprite, offsetposition, bubbleSheet, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.8f);
                 //health bar
-                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition,healthbaroffset), healthbarempty, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
-                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition,healthbaroffset), healthbarfull, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.82f);
+                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition,healthbaroffset,1), healthbarempty, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
+                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition,healthbaroffset,HealthScale), healthbarfull, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.82f);
 
                 //stamina bar
-                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition,staminabaroffset), staminabarempty, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
-                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition,staminabaroffset), staminabarfull, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.82f);
+                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition,staminabaroffset,1), staminabarempty, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
+                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition,staminabaroffset,StaminaScale), staminabarfull, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.82f);
 
                 //stress bar
-                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition, stressbaroffset), stressbarempty, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
-                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition, stressbaroffset), stressbarfull, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.82f);
+                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition, stressbaroffset,1), stressbarempty, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
+                spriteBatch.Draw(healthbarSprite, getBarPosition(offsetposition, stressbaroffset,StressScale), stressbarfull, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.82f);
 
 
             }
