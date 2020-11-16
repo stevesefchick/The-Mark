@@ -7,6 +7,10 @@ namespace The_Mark
 {
     class UI_Helper
     {
+        //enums
+        public enum UIWindowCreationTypes { CharacterStatWindow }
+
+
         //fonts
         SpriteFont titleFont;
         SpriteFont mainFont;
@@ -31,11 +35,11 @@ namespace The_Mark
 
             LoadAllTextures(thegame);
             //the mark
-            uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.05f,true), backbuffersize.Y - 100 -  returnLocationBasedonBackBuffer(0.15f,false)),true));
+            uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.05f,true,0,0), backbuffersize.Y - 100 -  returnLocationBasedonBackBuffer(0.15f,false,0,0)),true));
             //party members
             for (int i =0; i < 5;++i)
             {
-                uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.05f, true) + 100 +  (i * 100), backbuffersize.Y - 100 - returnLocationBasedonBackBuffer(0.15f, false)),false));
+                uiCharacterBubbles.Add(new UICharacterBubble(new Vector2(returnLocationBasedonBackBuffer(0.05f, true,0,0) + 100 +  (i * 100), backbuffersize.Y - 100 - returnLocationBasedonBackBuffer(0.15f, false,0,0)),false));
 
             }
 
@@ -48,15 +52,15 @@ namespace The_Mark
             uiCharacterBubbles[0].associatedCharacter = id;
         }
 
-        int returnLocationBasedonBackBuffer(float percentage,Boolean isX)
+        int returnLocationBasedonBackBuffer(float percentage,Boolean isX, int XOffset, int YOffset)
         {
             if (isX==true)
             {
-                return (int)(percentage * backbuffersize.X);
+                return (int)((percentage * backbuffersize.X) + XOffset);
             }
             else
             {
-                return (int)(percentage * backbuffersize.Y);
+                return (int)((percentage * backbuffersize.Y) + YOffset);
             }
         }
 
@@ -68,6 +72,16 @@ namespace The_Mark
         public void createUIWindow(Rectangle position)
         {
             uiWindows.Add(new UIWindow(position));
+        }
+
+        public void createUIWindow(UIWindowCreationTypes creationType, Boolean isMark,int associatedChar)
+        {
+            if (creationType == UIWindowCreationTypes.CharacterStatWindow)
+            {
+                UIWindow newwindow = new UIWindow(new Rectangle(returnLocationBasedonBackBuffer(0.5f,true,-250,0), returnLocationBasedonBackBuffer(0.25f,false,0,-100), 500, 400));
+                newwindow.AssignTitle("Character Screen", titleFont);
+                uiWindows.Add(newwindow);
+            }
         }
 
         void LoadAllTextures(GameMain thegame)
@@ -84,7 +98,7 @@ namespace The_Mark
             return posish;
         }
 
-        public void Update(MouseHandler mouse, PlayerHandler party)
+        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset)
         {
             if (mouse.isLeftClickDown == true)
             {
@@ -100,9 +114,17 @@ namespace The_Mark
 
                 for (int i = 0; i < uiCharacterBubbles.Count;++i)
                 {
-                    if (mouse.leftMouseClickPosition.Intersects(uiCharacterBubbles[i].bubblePosition) == true)
+                    if (mouse.leftMouseClickPosition.Intersects(getUIPosition(uiCharacterBubbles[i].bubblePosition, offset)) == true &&
+                        uiWindows.Count==0)
                     {
-                        //do a thing here
+                        if (i == 0)
+                        {
+                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, true, 0);
+                        }
+                        else
+                        {
+                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, false, i);
+                        }
                     }
 
                     if (i==0)
@@ -137,7 +159,7 @@ namespace The_Mark
             //UI Windows
             for (int i = 0; i < uiWindows.Count;++i)
             {
-                uiWindows[i].Draw(spriteBatch, uiWindowSprites, getUIPosition(uiWindows[i].uiWindowPosition, offset));
+                uiWindows[i].Draw(spriteBatch, uiWindowSprites, getUIPosition(uiWindows[i].uiWindowPosition, offset),titleFont);
 
             }
             //character bubbles

@@ -11,7 +11,7 @@ namespace The_Mark
         public Boolean isActive;
         public float HealthScale = 1;
         public float StaminaScale = 1;
-        public float StressScale = 1;
+        public float StressScale = 0;
 
         public Rectangle bubblePosition;
         int healthbaroffset = 90;
@@ -40,6 +40,7 @@ namespace The_Mark
         Rectangle getBarPosition(Rectangle offset,int thisoffset,float scale)
         {
             return new Rectangle(offset.X, offset.Y + thisoffset, (int)(100 * scale), 25);
+
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D bubblesprite, Texture2D healthbarSprite, Rectangle offsetposition)
