@@ -40,6 +40,9 @@ namespace The_Mark
 		public int charisma;
 
 		//Combat Stats
+		public int attack;
+		public int defense;
+		public int ability;
 
 		//Health
 		public int maxHealth;
@@ -269,6 +272,10 @@ namespace The_Mark
 			wit = 1;
 			wisdom = 1;
 			charisma = 1;
+
+			attack = 1;
+			defense = 1;
+			ability = 1;
         }
 
         public void CreatePerson(DataManager datamanager, Random random, CreationType creationType)

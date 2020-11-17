@@ -7,6 +7,9 @@ namespace The_Mark
 {
     class UIWindow
     {
+        //enums
+        public enum UIWindowAlignmentType { Normal, Left, Right, Center }
+
         Boolean isForeground;
         public Rectangle uiWindowPosition;
         Rectangle xButtonPosition;
@@ -56,14 +59,33 @@ namespace The_Mark
         {
             title = titlevalue;
             int length = (int)font.MeasureString(title).X;
-            titleposition = new Vector2(uiWindowPosition.Width / 2 - length / 2 - 40, -10);
+            titleposition = new Vector2(uiWindowPosition.Width / 2 - length / 2, -10);
         }
 
-        public void AssignTextBody(String textvalue, Vector2 textlocation, Color textcolor)
+        public void AssignTextBody(String textvalue, Vector2 textlocation, Color textcolor, UIWindowAlignmentType alignment, SpriteFont mainfont)
         {
             textBodies.Add(textvalue);
-            textBodiesLocations.Add(textlocation);
             textBodiesColors.Add(textcolor);
+
+            if (alignment == UIWindowAlignmentType.Normal)
+            {
+                textBodiesLocations.Add(textlocation);
+            }
+            else if (alignment == UIWindowAlignmentType.Left)
+            {
+                Vector2 location = new Vector2(0, textlocation.Y);
+                textBodiesLocations.Add(location);
+            }
+            else if (alignment == UIWindowAlignmentType.Right)
+            {
+                Vector2 location = new Vector2(uiWindowPosition.Width - mainfont.MeasureString(textvalue).X - 20, textlocation.Y);
+                textBodiesLocations.Add(location);
+            }
+            else if (alignment == UIWindowAlignmentType.Center)
+            {
+                Vector2 location = new Vector2((uiWindowPosition.Width/2) - (mainfont.MeasureString(textvalue).X /2), textlocation.Y);
+                textBodiesLocations.Add(location);
+            }
         }
 
 
@@ -85,9 +107,12 @@ namespace The_Mark
             return publicxButtonPosition;
         }
 
-        public Vector2 returnTextPosition(Vector2 text, Rectangle offset)
+        public Vector2 returnTextPosition(Vector2 text, Rectangle offset, int shadowvalue)
         {
-            return new Vector2(text.X + offset.X, text.Y + offset.Y);
+            Vector2 plusshadow = new Vector2(shadowvalue, shadowvalue);
+
+
+            return new Vector2(text.X + offset.X+ plusshadow.X, text.Y + offset.Y + plusshadow.Y);
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D uiWindowSprite, Rectangle offsetposition,SpriteFont titlefont, SpriteFont normalfont)
@@ -96,11 +121,16 @@ namespace The_Mark
              spriteBatch.Draw(uiWindowSprite, returnActualXButtonPosition(offsetposition, xButtonPosition), uiWindowxButton, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.845f);
 
             //title
-            spriteBatch.DrawString(titlefont, title, returnTextPosition(titleposition, offsetposition), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.845f);
+            spriteBatch.DrawString(titlefont, title, returnTextPosition(titleposition, offsetposition,0), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.845f);
+            spriteBatch.DrawString(titlefont, title, returnTextPosition(titleposition, offsetposition, 1), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.844f);
+            spriteBatch.DrawString(titlefont, title, returnTextPosition(titleposition, offsetposition, 2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.844f);
+
 
             for (int i =0; i < textBodies.Count;++i)
             {
-                spriteBatch.DrawString(normalfont, textBodies[i], returnTextPosition(textBodiesLocations[i], offsetposition), textBodiesColors[i], 0, Vector2.Zero, 1, SpriteEffects.None, 0.845f);
+                spriteBatch.DrawString(normalfont, textBodies[i], returnTextPosition(textBodiesLocations[i], offsetposition, 0), textBodiesColors[i], 0, Vector2.Zero, 1, SpriteEffects.None, 0.845f);
+                spriteBatch.DrawString(normalfont, textBodies[i], returnTextPosition(textBodiesLocations[i], offsetposition, 1), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.844f);
+                spriteBatch.DrawString(normalfont, textBodies[i], returnTextPosition(textBodiesLocations[i], offsetposition, 2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.844f);
             }
 
             if (isForeground == true)

@@ -80,10 +80,10 @@ namespace The_Mark
             if (creationType == UIWindowCreationTypes.CharacterStatWindow)
             {
                 UIWindow newwindow = new UIWindow(new Rectangle(returnLocationBasedonBackBuffer(0.5f,true,-250,0), returnLocationBasedonBackBuffer(0.25f,false,0,-100), 500, 400));
-                newwindow.AssignTitle("Character Screen", titleFont);
-                //character name
-                String charname = "";
-                if (isMark==true)
+
+                //character name / title
+                String charname;
+                if (isMark == true)
                 {
                     charname = playerhandler.theMark.personFirstName + " " + playerhandler.theMark.personLastName;
                 }
@@ -91,18 +91,58 @@ namespace The_Mark
                 {
                     charname = playerhandler.partyMembers[associatedChar].personFirstName + " " + playerhandler.partyMembers[associatedChar].personLastName;
                 }
-                newwindow.AssignTextBody(charname, new Vector2(0, 50), Color.White);
+                newwindow.AssignTitle(charname, titleFont);
 
                 //the mark flag
                 if (isMark == true)
                 {
-                    newwindow.AssignTextBody("The Mark", new Vector2(0, 75), Color.Gold);
+                    newwindow.AssignTextBody("The Mark", new Vector2(0, 35), Color.Gold, UIWindow.UIWindowAlignmentType.Center,mainFont);
                 }
 
+                //health stats
+                //health
+                newwindow.AssignTextBody("Health", new Vector2(0, 75), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
+                newwindow.AssignTextBody("Fine", new Vector2(100, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                //stamina
+                newwindow.AssignTextBody("Stamina", new Vector2(0, 100), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
+                newwindow.AssignTextBody("Fine", new Vector2(100, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                //stress
+                newwindow.AssignTextBody("Stress", new Vector2(0, 125), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
+                newwindow.AssignTextBody("Fine", new Vector2(100, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+
+
+                //equipment stats
+                //attack
+                newwindow.AssignTextBody("Attack", new Vector2(250, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody("Fine", new Vector2(400, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                //defense
+                newwindow.AssignTextBody("Defense", new Vector2(250, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody("Fine", new Vector2(400, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                //ability
+                newwindow.AssignTextBody("Ability", new Vector2(250, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody("Fine", new Vector2(400, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
 
 
 
-
+                //personal stats
+                //endurance
+                newwindow.AssignTextBody("Endurance", new Vector2(250, 175), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody("Good", new Vector2(400, 175), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                //strength
+                newwindow.AssignTextBody("Strength", new Vector2(250, 200), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody("Good", new Vector2(400, 200), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                //dexterity
+                newwindow.AssignTextBody("Dexterity", new Vector2(250, 225), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody("Good", new Vector2(400, 225), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                //wit
+                newwindow.AssignTextBody("Wit", new Vector2(250, 250), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody("Good", new Vector2(400, 250), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                //wisdom
+                newwindow.AssignTextBody("Wisdom", new Vector2(250, 275), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody("Good", new Vector2(400, 275), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                //charisma
+                newwindow.AssignTextBody("Charisma", new Vector2(250, 300), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody("Good", new Vector2(400, 300), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
 
 
 
