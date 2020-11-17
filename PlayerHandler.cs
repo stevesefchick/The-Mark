@@ -23,6 +23,21 @@ namespace The_Mark
             theMark = selectTheMark(world, rando);
         }
 
+        public void AddPartyMembers(Person person,WorldMap world)
+        {
+            partyMembers.Add(person);
+
+            for (int i =0; i < world.people.Count;++i)
+            {
+                if (world.people[i] == person)
+                {
+                    world.people.RemoveAt(i);
+                    break;
+                }
+            }
+
+        }
+
         public (int,int,float) returnHealthValuesForMark()
         {
             return (theMark.maxHealth, theMark.currentHealth, (float)theMark.currentHealth/(float)theMark.maxHealth);

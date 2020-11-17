@@ -185,16 +185,19 @@ namespace The_Mark
         {
             if (mouse.isLeftClickDown == true)
             {
+                //Hovercards
                 hoverCards.Clear();
 
+                //UI Windows
                 for (int i = 0; i < uiWindows.Count;++i)
                 {
-                    if (mouse.leftMouseClickPosition.Intersects(uiWindows[i].publicxButtonPosition) == true)
+                    if (mouse.leftMouseClickPosition.Intersects(uiWindows[i].publicxButtonPosition) == true && hoverCards.Count==0)
                     {
                         uiWindows.RemoveAt(i);
                     }
                 }
 
+                //Character Bubbles
                 for (int i = 0; i < uiCharacterBubbles.Count;++i)
                 {
                     if (mouse.leftMouseClickPosition.Intersects(getUIPosition(uiCharacterBubbles[i].bubblePosition, offset)) == true &&
