@@ -74,12 +74,40 @@ namespace The_Mark
             uiWindows.Add(new UIWindow(position));
         }
 
-        public void createUIWindow(UIWindowCreationTypes creationType, Boolean isMark,int associatedChar)
+        //Create Window for player stats
+        public void createUIWindow(UIWindowCreationTypes creationType, Boolean isMark,int associatedChar, PlayerHandler playerhandler)
         {
             if (creationType == UIWindowCreationTypes.CharacterStatWindow)
             {
                 UIWindow newwindow = new UIWindow(new Rectangle(returnLocationBasedonBackBuffer(0.5f,true,-250,0), returnLocationBasedonBackBuffer(0.25f,false,0,-100), 500, 400));
                 newwindow.AssignTitle("Character Screen", titleFont);
+                //character name
+                String charname = "";
+                if (isMark==true)
+                {
+                    charname = playerhandler.theMark.personFirstName + " " + playerhandler.theMark.personLastName;
+                }
+                else
+                {
+                    charname = playerhandler.partyMembers[associatedChar].personFirstName + " " + playerhandler.partyMembers[associatedChar].personLastName;
+                }
+                newwindow.AssignTextBody(charname, new Vector2(0, 50), Color.White);
+
+                //the mark flag
+                if (isMark == true)
+                {
+                    newwindow.AssignTextBody("The Mark", new Vector2(0, 75), Color.Gold);
+                }
+
+
+
+
+
+
+
+
+
+
                 uiWindows.Add(newwindow);
             }
         }
@@ -115,15 +143,16 @@ namespace The_Mark
                 for (int i = 0; i < uiCharacterBubbles.Count;++i)
                 {
                     if (mouse.leftMouseClickPosition.Intersects(getUIPosition(uiCharacterBubbles[i].bubblePosition, offset)) == true &&
+                        uiCharacterBubbles[i].isActive == true &&
                         uiWindows.Count==0)
                     {
                         if (i == 0)
                         {
-                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, true, 0);
+                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, true, 0,party);
                         }
                         else
                         {
-                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, false, i);
+                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, false, i,party);
                         }
                     }
 
@@ -159,7 +188,7 @@ namespace The_Mark
             //UI Windows
             for (int i = 0; i < uiWindows.Count;++i)
             {
-                uiWindows[i].Draw(spriteBatch, uiWindowSprites, getUIPosition(uiWindows[i].uiWindowPosition, offset),titleFont);
+                uiWindows[i].Draw(spriteBatch, uiWindowSprites, getUIPosition(uiWindows[i].uiWindowPosition, offset),titleFont,mainFont);
 
             }
             //character bubbles

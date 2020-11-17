@@ -24,7 +24,6 @@ namespace The_Mark
 		//home
 		public string placeIDHome;
 
-		//TODO: Sexuality
 
 		//TODO: appearance attributes
 

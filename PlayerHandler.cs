@@ -8,7 +8,7 @@ namespace The_Mark
 {
     class PlayerHandler
     {
-        Person theMark;
+        public Person theMark;
 
         public List<Person> partyMembers = new List<Person>();
 
