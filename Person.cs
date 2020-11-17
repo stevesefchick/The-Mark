@@ -51,7 +51,100 @@ namespace The_Mark
 		public int currentStamina;
 		public int maxStress;
 		public int currentStress;
-		
+
+        #region stat string returns
+        public String returnHealthString()
+        {
+			if (currentHealth==maxHealth)
+            {
+				return "Unharmed";
+            }
+			else if ((float)currentHealth/(float)maxHealth >= 0.9f)
+            {
+				return "Stable";
+            }
+			else if ((float)currentHealth / (float)maxHealth >= 0.8f)
+			{
+				return "Sore";
+			}
+			else if ((float)currentHealth / (float)maxHealth >= 0.6f)
+			{
+				return "Bruised";
+			}
+			else if ((float)currentHealth / (float)maxHealth >= 0.3f)
+			{
+				return "Injured";
+			}
+			else if ((float)currentHealth / (float)maxHealth >= 0.1f)
+			{
+				return "Maimed";
+			}
+			else
+            {
+				return "Dying";
+            }
+
+        }
+
+		public String returnStaminaString()
+		{
+			if (currentStamina == maxStamina)
+			{
+				return "Well Rested";
+			}
+			else if ((float)currentStamina / (float)maxStamina >= 0.8f)
+			{
+				return "Energetic";
+			}
+			else if ((float)currentStamina / (float)maxStamina >= 0.6f)
+			{
+				return "Winded";
+			}
+			else if ((float)currentStamina / (float)maxStamina >= 0.4f)
+			{
+				return "Tired";
+			}
+			else if ((float)currentStamina / (float)maxStamina >= 0.1f)
+			{
+				return "Exhausted";
+			}
+			else
+			{
+				return "Collapsing";
+			}
+
+		}
+
+		public String returnStressString()
+		{
+			if ((float)currentStress / (float)maxStress >= 0.9f)
+			{
+				return "Panicking";
+			}
+			else if ((float)currentStress / (float)maxStress >= 0.8f)
+			{
+				return "Distressed";
+			}
+			else if ((float)currentStress / (float)maxStress >= 0.6f)
+			{
+				return "Pressured";
+			}
+			else if ((float)currentStress / (float)maxStress >= 0.4f)
+			{
+				return "Tense";
+			}
+			else if ((float)currentStress / (float)maxStress >= 0.2f)
+			{
+				return "Pensive";
+			}
+			else
+			{
+				return "Calm";
+			}
+
+		}
+
+		#endregion
 
 		public void Update(GameTime gameTime)
 		{

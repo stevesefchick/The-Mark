@@ -100,15 +100,30 @@ namespace The_Mark
                 }
 
                 //health stats
+                String health;
+                String stamina;
+                String stress;
+                if (isMark==true)
+                {
+                    health = playerhandler.theMark.returnHealthString();
+                    stamina = playerhandler.theMark.returnStaminaString();
+                    stress = playerhandler.theMark.returnStressString();
+                }
+                else
+                {
+                    health = playerhandler.partyMembers[associatedChar].returnHealthString();
+                    stamina = playerhandler.partyMembers[associatedChar].returnStaminaString();
+                    stress = playerhandler.partyMembers[associatedChar].returnStressString();
+                }
                 //health
                 newwindow.AssignTextBody("Health", new Vector2(0, 75), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
-                newwindow.AssignTextBody("Fine", new Vector2(100, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(health, new Vector2(100, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 //stamina
                 newwindow.AssignTextBody("Stamina", new Vector2(0, 100), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
-                newwindow.AssignTextBody("Fine", new Vector2(100, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(stamina, new Vector2(100, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 //stress
                 newwindow.AssignTextBody("Stress", new Vector2(0, 125), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
-                newwindow.AssignTextBody("Fine", new Vector2(100, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(stress, new Vector2(100, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
 
 
                 //equipment stats
