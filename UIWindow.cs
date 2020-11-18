@@ -15,6 +15,9 @@ namespace The_Mark
         Rectangle xButtonPosition;
         public Rectangle publicxButtonPosition;
 
+        //collisions
+        public Dictionary<Rectangle, UIHoverCard> hoverCardCollision = new Dictionary<Rectangle, UIHoverCard>();
+
         //foreground rects
         Rectangle uiWindowForegroundFill = new Rectangle(40, 10, 10, 10);
         Rectangle uiWindowForegroundTopLeft = new Rectangle(30, 0, 10, 10);

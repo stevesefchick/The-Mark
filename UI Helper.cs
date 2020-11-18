@@ -68,6 +68,10 @@ namespace The_Mark
         {
             hoverCards.Add(new UIHoverCard(position, title, body,mainFont,titleFont));
         }
+        public void createHoverCard(UIHoverCard existingcard)
+        {
+            hoverCards.Add(existingcard);
+        }
 
         public void createUIWindow(Rectangle position)
         {
@@ -118,12 +122,15 @@ namespace The_Mark
                 //health
                 newwindow.AssignTextBody("Health", new Vector2(0, 75), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
                 newwindow.AssignTextBody(health, new Vector2(100, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X+0, newwindow.uiWindowPosition.Y + 75, 150, 25), new UIHoverCard(new Vector2(50, 75), "Health", "Health is a character's overall well being, and is reduced by painful activities or by taking damage in combat. If this value reaches rock bottom, the character will die.", mainFont, titleFont));
                 //stamina
                 newwindow.AssignTextBody("Stamina", new Vector2(0, 100), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
                 newwindow.AssignTextBody(stamina, new Vector2(100, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 0, newwindow.uiWindowPosition.Y + 100, 150, 25), new UIHoverCard(new Vector2(50, 75), "Stamina", "Stamina is a character's physical fatigue. Sleeping recovers Stamina, while this is depleted through physical activities. If this falls low enough, a character's Health will be affected.", mainFont, titleFont));
                 //stress
                 newwindow.AssignTextBody("Stress", new Vector2(0, 125), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
                 newwindow.AssignTextBody(stress, new Vector2(100, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 0, newwindow.uiWindowPosition.Y + 125, 150, 25), new UIHoverCard(new Vector2(50, 75), "Stress", "Stress is a character's mental fatigue. Low Stress is considered good, while high Stress will cause negative effects to themselves and the party.", mainFont, titleFont));
 
 
                 //equipment stats
@@ -191,10 +198,21 @@ namespace The_Mark
                 //UI Windows
                 for (int i = 0; i < uiWindows.Count;++i)
                 {
+                    foreach (KeyValuePair<Rectangle, UIHoverCard> r in uiWindows[i].hoverCardCollision)
+                    {
+                        if (mouse.leftMouseClickPosition.Intersects(getUIPosition(r.Key, offset)))
+                        {
+                            createHoverCard(r.Value);
+                        }
+
+
+                    }
+
                     if (mouse.leftMouseClickPosition.Intersects(uiWindows[i].publicxButtonPosition) == true && hoverCards.Count==0)
                     {
                         uiWindows.RemoveAt(i);
                     }
+
                 }
 
                 //Character Bubbles

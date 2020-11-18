@@ -36,14 +36,14 @@ namespace The_Mark
 
         int getCardWidth(SpriteFont titlefont, String title)
         {
-            int buffer = 100;
+            int buffer = 125;
 
             return ((int)titlefont.MeasureString(title).X + buffer);
         }
 
         int getCardHeight(int lines)
         {
-            int buffer = 120;
+            int buffer = 140;
 
             return (buffer + lines * 25);
 
@@ -60,7 +60,7 @@ namespace The_Mark
             while (currentpointer < maxlength)
             {
                 if ((basetext.Substring(currentpointer, 1) == " " &&
-                    littlefont.MeasureString(basetext.Substring(lastline,currentpointer-lastline)).X > (hovercardPosition.Width-55)) ||
+                    littlefont.MeasureString(basetext.Substring(lastline,currentpointer-lastline)).X > (hovercardPosition.Width-70)) ||
                     currentpointer == (maxlength-1))
                 {
 
