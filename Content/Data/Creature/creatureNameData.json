@@ -36,6 +36,8 @@
   "Captain": { "creaturenametype": "krabname" },
   "Crabcake": { "creaturenametype": "krabname" },
   "Claw": { "creaturenametype": "krabname" },
+  "Good Boy": { "creaturenametype": "doggoname" },
+  "Lassie": { "creaturenametype": "doggoname" },
   "Merlin": { "creaturenametype": "normalcreaturename" },
   "Spectre": { "creaturenametype": "normalcreaturename" },
   "Arthur": { "creaturenametype": "normalcreaturename" },
@@ -103,6 +105,8 @@
   "the Bane of Man": { "creaturenametype": "creaturetitle" },
   "the Tremendous Jerk": { "creaturenametype": "creaturetitle" },
   "the Absolute Disaster": { "creaturenametype": "creaturetitle" },
+  "the Absolute Worst": { "creaturenametype": "creaturetitle" },
+  "the Buzzkill": { "creaturenametype": "creaturetitle" },
   "the Drama Queen": { "creaturenametype": "creaturetitle" },
   "the Trash Creature": { "creaturenametype": "creaturetitle" },
   "the Destroyer of Worlds": { "creaturenametype": "creaturetitle" },
@@ -117,5 +121,6 @@
   "the Abomination": { "creaturenametype": "creaturetitle" },
   "the Mistake": { "creaturenametype": "creaturetitle" },
   "the Flat One": { "creaturenametype": "creaturetitle" },
-  "the Thick One": { "creaturenametype": "creaturetitle" }
+  "the Thick One": { "creaturenametype": "creaturetitle" },
+  "the Rude One": { "creaturenametype": "creaturetitle" }
 }

@@ -106,5 +106,23 @@
     "dropRate": 20,
     "maxDropQuantity": 3,
     "rareDescription": "Quality"
+  },
+  "Doggo Paw": {
+    "itemName": "Doggo Paw",
+    "itemDescription": "You can't shake it anymore",
+    "itemValue": 40,
+    "canStack": true,
+    "dropRate": 30,
+    "maxDropQuantity": 4,
+    "rareDescription": "Intact"
+  },
+  "Doggo Fang": {
+    "itemName": "Doggo Fang",
+    "itemDescription": "Surprisingly sharp",
+    "itemValue": 60,
+    "canStack": true,
+    "dropRate": 15,
+    "maxDropQuantity": 4,
+    "rareDescription": "Shiny"
   }
 }
