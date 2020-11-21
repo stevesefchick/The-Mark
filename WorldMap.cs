@@ -35,6 +35,7 @@ namespace The_Mark
 		protected Texture2D grassTerrainTiles;
 		protected Texture2D forestTerrainTiles;
 		protected Texture2D beachTerrainTiles;
+		protected Texture2D swampTerrainTiles;
 		//doodads
 		protected Texture2D treeTerrainTiles;
 		protected Texture2D hillTerrainTiles;
@@ -66,6 +67,7 @@ namespace The_Mark
 			hillTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/hills_grid_1");
 			beachTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/beach_grid_1");
 			beachDoodadTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/beach_doodad_grid");
+			swampTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/swamp_grid_1");
 			cloudTiles = gamedeets.Content.Load<Texture2D>("Sprites/World/cloud_grid");
 		}
 
@@ -583,6 +585,104 @@ namespace The_Mark
 		}
 
 
+		protected void assignTileToSwamp()
+		{
+			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
+			{
+				if (g.Value.thisTerrainType == GridTile.GridTerrain.Swamp)
+				{
+					Point thisForestLoc = g.Key;
+					Vector2 thisLoc = new Vector2(thisForestLoc.X, thisForestLoc.Y);
+					thisLoc = multiplyBy64(thisLoc);
+
+					for (int i = 0; i < terrains.Count; ++i)
+					{
+						if (terrains[i].thisTerrainType == Terrain.TerrainType.Swamp &&
+							terrains[i].returnTerrainLocation() == thisLoc)
+						{
+							Boolean above = false;
+							Boolean below = false;
+							Boolean left = false;
+							Boolean right = false;
+
+							//check above
+							if (gridTiles[new Point(thisForestLoc.X, thisForestLoc.Y - 1)].thisTerrainType == GridTile.GridTerrain.Swamp)
+							{
+								above = true;
+							}
+							//check below
+							if (gridTiles[new Point(thisForestLoc.X, thisForestLoc.Y + 1)].thisTerrainType == GridTile.GridTerrain.Swamp)
+							{
+								below = true;
+							}
+							//check left
+							if (gridTiles[new Point(thisForestLoc.X - 1, thisForestLoc.Y)].thisTerrainType == GridTile.GridTerrain.Swamp)
+							{
+								left = true;
+							}
+							//check right
+							if (gridTiles[new Point(thisForestLoc.X + 1, thisForestLoc.Y)].thisTerrainType == GridTile.GridTerrain.Swamp)
+							{
+								right = true;
+							}
+
+
+							//left side
+							if (above == true && below == true && left == false && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(64, 64));
+							}
+							//right side
+							if (above == true && below == true && left == true && right == false)
+							{
+								terrains[i].AssignForestTile(new Vector2(192, 64));
+							}
+							//top side
+							if (above == false && below == true && left == true && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(128, 0));
+							}
+							//bottom side
+							if (above == true && below == false && left == true && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(128, 128));
+							}
+							//top left
+							if (above == false && below == true && left == false && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(64, 0));
+							}
+							//top right
+							if (above == false && below == true && left == true && right == false)
+							{
+								terrains[i].AssignForestTile(new Vector2(192, 0));
+							}
+							//bottom left
+							if (above == true && below == false && left == false && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(64, 128));
+							}
+							//bottom right
+							if (above == true && below == false && left == true && right == false)
+							{
+								terrains[i].AssignForestTile(new Vector2(192, 128));
+							}
+
+							//all dirs
+							if (above == true && below == true && left == true && right == true)
+							{
+								terrains[i].AssignForestTile(new Vector2(0, 0));
+							}
+
+						}
+					}
+
+
+				}
+			}
+		}
+
+
 		protected void assignTileToBeach()
 		{
 			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
@@ -832,6 +932,57 @@ namespace The_Mark
 		}
 
 
+		protected void createSwamps(DataManager datamanager, Random rando)
+		{
+			int numberofswamps = rando.Next(1, 3);
+
+			for (int i = 0; i < numberofswamps; ++i)
+			{
+				int swampsize = rando.Next(3, 6);
+				Vector2 startingArea;
+				startingArea.X = rando.Next(8, (int)gridSize.X - 8);
+				startingArea.Y = rando.Next(8, (int)gridSize.Y - 8);
+
+				startingArea = new Vector2(startingArea.X - swampsize, startingArea.Y - swampsize);
+
+				if (terrainGridCollidesWith(GridTile.GridTerrain.Beach, new Point((int)startingArea.X, (int)startingArea.Y), swampsize) == false &&
+					terrainGridCollidesWith(GridTile.GridTerrain.Forest, new Point((int)startingArea.X, (int)startingArea.Y), swampsize) == false &&
+					terrainGridCollidesWith(GridTile.GridTerrain.Hills, new Point((int)startingArea.X, (int)startingArea.Y), swampsize) == false)
+				{
+
+					for (int x = (int)startingArea.X; x < (int)(startingArea.X + swampsize); ++x)
+					{
+						for (int y = (int)startingArea.Y; y < (int)(startingArea.Y + swampsize); ++y)
+						{
+
+							//find existing terrain
+							for (int t = 0; t < terrains.Count; ++t)
+							{
+								if (terrains[t].returnTerrainLocation() == multiplyBy64(new Vector2(x, y)))
+								{
+									Boolean isWaterOrRoads = true;
+									if (gridTiles[new Point(x, y)].thisWaterType == GridTile.WaterType.None && gridTiles[new Point(x, y)].thisRoadType == GridTile.RoadType.None)
+									{
+										isWaterOrRoads = false;
+									}
+
+									terrains[t].createNewTerrain(Terrain.TerrainType.Swamp, multiplyBy64(new Vector2(x, y)), rando, isWaterOrRoads);
+									gridTiles[new Point(x, y)].thisTerrainType = GridTile.GridTerrain.Swamp;
+									break;
+								}
+							}
+
+
+						}
+					}
+				}
+			}
+
+			assignTileToSwamp();
+
+		}
+
+
 		protected void createLakes(DataManager datamanager, Random rando)
         {
 			int numberoflakes = rando.Next(1, 4);
@@ -958,7 +1109,8 @@ namespace The_Mark
             createForests(datamanager, rando);
 			//Add Hills
 			createHills(datamanager, rando);
-
+			//Add Swamps
+			createSwamps(datamanager, rando);
 
 
             #endregion
@@ -1044,6 +1196,7 @@ namespace The_Mark
 			Boolean isBeachAvailable = false;
 			Boolean isHillsAvailable = false;
 			Boolean isForestAvailable = false;
+			Boolean isSwampAvailable = false;
 
 			//terrain availability
 			for (int i=0;i<terrains.Count;++i)
@@ -1059,6 +1212,10 @@ namespace The_Mark
 				else if (terrains[i].thisTerrainType == Terrain.TerrainType.Hills)
 				{
 					isHillsAvailable = true;
+				}
+				else if (terrains[i].thisTerrainType == Terrain.TerrainType.Swamp)
+				{
+					isSwampAvailable = true;
 				}
 			}
 
@@ -1163,7 +1320,7 @@ namespace The_Mark
 			//create and assign creatures
 			for (int i = 0; i < max; ++i)
 			{
-				int randTerrainOrPlaceCheck = rando.Next(1, 3);
+				int randTerrainOrPlaceCheck = rando.Next(1, 4);
 				if (randTerrainOrPlaceCheck == 1)
 				{
 					Creature newCreature = new Creature(Creature.ThisCreatureType.Leggy, datamanager, rando);
@@ -1172,8 +1329,14 @@ namespace The_Mark
 				}
 				else if (randTerrainOrPlaceCheck == 2 && isForestAvailable==true)
 				{
-					Creature newCreature = new Creature(Creature.ThisCreatureType.Birb, datamanager, rando);
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Leggy, datamanager, rando);
 					newCreature.terrainTypeHome = Terrain.TerrainType.Forest;
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 3 && isSwampAvailable == true)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Leggy, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Swamp;
 					creatures.Add(newCreature);
 				}
 			}
@@ -1224,13 +1387,19 @@ namespace The_Mark
 			//create and assign creatures
 			for (int i = 0; i < max; ++i)
 			{
-				int randTerrainOrPlaceCheck = 1;
+				int randTerrainOrPlaceCheck = rando.Next(1, 3);
 
 
 				if (randTerrainOrPlaceCheck == 1 && isBeachAvailable == true)
 				{
 					Creature newCreature = new Creature(Creature.ThisCreatureType.Krab, datamanager, rando);
 					newCreature.terrainTypeHome = Terrain.TerrainType.Beach;
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 2 && isSwampAvailable == true)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Krab, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Swamp;
 					creatures.Add(newCreature);
 				}
 			}
@@ -1962,7 +2131,7 @@ namespace The_Mark
 			//draw terrain
 			for (int i = 0; i < terrains.Count;++i)
             {
-				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles,beachTerrainTiles);
+				terrains[i].Draw(spriteBatch,grassTerrainTiles,forestTerrainTiles,beachTerrainTiles, swampTerrainTiles);
 			}
 			//draw terrain doodads
 			for (int i = 0; i < terrains.Count; ++i)

@@ -8,7 +8,7 @@ namespace The_Mark
     class Terrain
     {
 		//main variables
-		public enum TerrainType { Grass, Forest, Hills, Mountain, Beach}
+		public enum TerrainType { Grass, Forest, Hills, Mountain, Beach, Swamp}
 		public TerrainType thisTerrainType;
 		public Rectangle terrainLocation;
 		public Rectangle textureRect;
@@ -82,6 +82,11 @@ namespace The_Mark
 					}
 				}
 			}
+			else if (thisTerrainType == TerrainType.Swamp)
+			{
+				textureRect = new Rectangle(0, 0, 64, 64);
+
+			}
 		}
 
 		public void AssignForestTile(Vector2 vect)
@@ -97,7 +102,7 @@ namespace The_Mark
 			return loc;
         }
 
-		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain,Texture2D beachTerrain)
+		public void Draw(SpriteBatch spriteBatch, Texture2D grassTerrain,Texture2D forestTerrain,Texture2D beachTerrain,Texture2D swampTerrain)
 		{
 			if (thisTerrainType == TerrainType.Forest)
 			{
@@ -122,7 +127,13 @@ namespace The_Mark
 			{
 				spriteBatch.Draw(grassTerrain, terrainLocation, textureRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.1f);
 			}
+			else if (thisTerrainType == TerrainType.Swamp)
+			{
+				//grass under
+				spriteBatch.Draw(grassTerrain, terrainLocation, new Rectangle(0, 0, 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.1f);
 
+				spriteBatch.Draw(swampTerrain, terrainLocation, textureRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.15f);
+			}
 		}
 
 		public void DrawDoodads(SpriteBatch spriteBatch,Texture2D thisTerrain)
