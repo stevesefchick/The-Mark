@@ -38,6 +38,7 @@ namespace The_Mark
 		protected Texture2D swampTerrainTiles;
 		//doodads
 		protected Texture2D treeTerrainTiles;
+		protected Texture2D swampTreeTerrainTiles;
 		protected Texture2D hillTerrainTiles;
 		protected Texture2D beachDoodadTerrainTiles;
 		//world elements
@@ -68,6 +69,7 @@ namespace The_Mark
 			beachTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/beach_grid_1");
 			beachDoodadTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/beach_doodad_grid");
 			swampTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/swamp_grid_1");
+			swampTreeTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/tree_grid_2");
 			cloudTiles = gamedeets.Content.Load<Texture2D>("Sprites/World/cloud_grid");
 		}
 
@@ -2119,6 +2121,10 @@ namespace The_Mark
 			else if (thistype == Terrain.TerrainType.Beach)
             {
 				return beachDoodadTerrainTiles;
+            }
+			else if (thistype == Terrain.TerrainType.Swamp)
+            {
+				return swampTreeTerrainTiles;
             }
 			else
             {

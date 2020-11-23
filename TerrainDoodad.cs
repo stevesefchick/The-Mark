@@ -7,7 +7,7 @@ namespace The_Mark
     class TerrainDoodad
     {
         //enum
-        public enum TerrainDoodadType { NormalTree1, Hill1,Beach1 }
+        public enum TerrainDoodadType { NormalTree1, Hill1,Beach1, SwampTree1 }
         public TerrainDoodadType thisDoodadType;
 
         public Rectangle Location;
@@ -37,6 +37,12 @@ namespace The_Mark
                 rect = new Rectangle(rando.Next(0, 5) * 32, 0, 32, 32);
                 offset = new Vector2(16, 32);
 
+            }
+            if (thisDoodadType == TerrainDoodadType.SwampTree1)
+            {
+                Location = new Rectangle((int)thisLoc.X, (int)thisLoc.Y, 16, 32);
+                rect = new Rectangle(rando.Next(0, 3) * 16, 0, 16, 32);
+                offset = new Vector2(8, 32);
             }
 
             doodadDepth = 0.3f + (thisLoc.Y * 0.00001f);

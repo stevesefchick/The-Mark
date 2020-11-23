@@ -86,6 +86,15 @@ namespace The_Mark
 			{
 				textureRect = new Rectangle(0, 0, 64, 64);
 
+				//add doodads
+				if (isOnWaterorRoad == false)
+				{
+					int randTree = rando.Next(1, 4);
+					for (int i = 0; i < randTree; ++i)
+					{
+						terrainDoodads.Add(new TerrainDoodad(TerrainDoodad.TerrainDoodadType.SwampTree1, new Vector2(location.X + rando.Next(3, 63), location.Y + rando.Next(3, 63)), rando));
+					}
+				}
 			}
 		}
 
