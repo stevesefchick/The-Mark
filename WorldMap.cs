@@ -1465,9 +1465,36 @@ namespace The_Mark
 
 
 			#endregion
+
+
+			//SWAMPUS
+			#region swampus
+
+			max = rando.Next(3, 10);
+
+			//create and assign creatures
+			for (int i = 0; i < max; ++i)
+			{
+				//int randTerrainOrPlaceCheck = rando.Next(1, 3);
+				int randTerrainOrPlaceCheck = 1;
+
+				if (randTerrainOrPlaceCheck == 1 && isSwampAvailable == true)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Swampus, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Swamp;
+					creatures.Add(newCreature);
+				}
+			}
+
+
+			max = 0;
+			availableLocationIDs.Clear();
+
+			#endregion
+
 		}
 
-        void createTileAssignmentsforRiversandLakes()
+		void createTileAssignmentsforRiversandLakes()
 		{
 			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
 			{

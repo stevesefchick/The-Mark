@@ -38,6 +38,8 @@
   "Claw": { "creaturenametype": "krabname" },
   "Good Boy": { "creaturenametype": "doggoname" },
   "Lassie": { "creaturenametype": "doggoname" },
+  "Faafo": { "creaturenametype": "swampusname" },
+  "Flat Frank": { "creaturenametype": "swampusname" },
   "Merlin": { "creaturenametype": "normalcreaturename" },
   "Spectre": { "creaturenametype": "normalcreaturename" },
   "Arthur": { "creaturenametype": "normalcreaturename" },

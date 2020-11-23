@@ -124,5 +124,23 @@
     "dropRate": 15,
     "maxDropQuantity": 4,
     "rareDescription": "Shiny"
+  },
+  "Swampus Tail": {
+    "itemName": "Swampus Tail",
+    "itemDescription": "Long and nasty",
+    "itemValue": 60,
+    "canStack": true,
+    "dropRate": 20,
+    "maxDropQuantity": 1,
+    "rareDescription": "Giant"
+  },
+  "Swampus Eye": {
+    "itemName": "Swampus Eye",
+    "itemDescription": "Constantly bloodshot",
+    "itemValue": 30,
+    "canStack": true,
+    "dropRate": 40,
+    "maxDropQuantity": 2,
+    "rareDescription": "Pristine"
   }
 }

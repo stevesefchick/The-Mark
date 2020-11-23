@@ -12,7 +12,7 @@ namespace The_Mark
 
         //enums
         public enum AggressionType { Friendly, Neutral, Cautious, Defensive, Aggressive}
-        public enum ThisCreatureType { Birb, FlapFlap, Leggy, Stinkhorn, Krab, Doggo}
+        public enum ThisCreatureType { Birb, FlapFlap, Leggy, Stinkhorn, Krab, Doggo, Swampus}
         public enum ActiveTime { Daytime, Nighttime, Both}
 
         //properties
@@ -82,7 +82,11 @@ namespace The_Mark
                 possibleLoot.Add(dataManager.itemLootData["Doggo Paw"]);
                 possibleLoot.Add(dataManager.itemLootData["Doggo Fang"]);
             }
-
+            else if (thisCreatureType == ThisCreatureType.Swampus)
+            {
+                possibleLoot.Add(dataManager.itemLootData["Swampus Tail"]);
+                possibleLoot.Add(dataManager.itemLootData["Swampus Eye"]);
+            }
             for (int i = 0; i < possibleLoot.Count;++i)
             {
                 int rand = rando.Next(1, 101);
@@ -144,6 +148,12 @@ namespace The_Mark
             {
                 thisAggressionType = AggressionType.Friendly;
                 thisCreatureType = ThisCreatureType.Doggo;
+                thisCreatureActiveTime = ActiveTime.Both;
+            }
+            else if (thisType == ThisCreatureType.Swampus)
+            {
+                thisAggressionType = AggressionType.Neutral;
+                thisCreatureType = ThisCreatureType.Swampus;
                 thisCreatureActiveTime = ActiveTime.Both;
             }
         }
@@ -607,6 +617,53 @@ namespace The_Mark
                         }
                     }
                     thename = candidatesdoggoname[rando.Next(0, candidatesdoggoname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+            }
+            #endregion
+
+            #region swampus
+            if (thisCreatureType == ThisCreatureType.Swampus)
+            {
+                thischoice = rando.Next(1, 3);
+                //type 1 - name + the Swampus
+                if (thischoice == 1)
+                {
+                    string ending = " the Swampus";
+
+
+                    List<string> candidatesswampusname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "swampusname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesswampusname.Add(entry.Key);
+                        }
+                    }
+
+                    thename = candidatesswampusname[rando.Next(0, candidatesswampusname.Count)].ToString() + ending;
+
+                }
+                //type 2 - name + title
+                else if (thischoice == 2)
+                {
+                    List<string> candidatestitlename = new List<string>();
+                    List<string> candidatesswampusname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "swampusname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesswampusname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturetitle")
+                        {
+                            candidatestitlename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesswampusname[rando.Next(0, candidatesswampusname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
 
                 }
             }
