@@ -1466,7 +1466,6 @@ namespace The_Mark
 
 			#endregion
 
-
 			//SWAMPUS
 			#region swampus
 
@@ -1492,9 +1491,70 @@ namespace The_Mark
 
 			#endregion
 
+			//RATRAT
+			#region ratrat
+			for (int i = 0; i < places.Count; ++i)
+			{
+				if (places[i].thisPlaceType == Place.PlaceType.Farm ||
+					places[i].thisPlaceType == Place.PlaceType.Graveyard ||
+					places[i].thisPlaceType == Place.PlaceType.Ruins || 
+					places[i].thisPlaceType == Place.PlaceType.Cave)
+				{
+					availableLocationIDs.Add(places[i].placeID);
+				}
+			}
+
+			if (availableLocationIDs.Count > 0)
+			{
+				max = rando.Next(0, availableLocationIDs.Count * 15);
+			}
+
+			//create and assign creatures
+			for (int i = 0; i < max; ++i)
+			{
+				int randTerrainOrPlaceCheck = rando.Next(1, 6);
+				if (randTerrainOrPlaceCheck == 1)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.RatRat, datamanager, rando);
+					newCreature.placeIDHome = availableLocationIDs[rando.Next(0, availableLocationIDs.Count)];
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 2)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.RatRat, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Grass;
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 3 && isForestAvailable == true)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.RatRat, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Forest;
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 4 && isBeachAvailable == true)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.RatRat, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Hills;
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 5 && isBeachAvailable == true)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.RatRat, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Swamp;
+					creatures.Add(newCreature);
+				}
+			}
+
+			max = 0;
+			availableLocationIDs.Clear();
+
+
+
+			#endregion
+
 		}
 
-		void createTileAssignmentsforRiversandLakes()
+        void createTileAssignmentsforRiversandLakes()
 		{
 			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
 			{

@@ -142,5 +142,23 @@
     "dropRate": 40,
     "maxDropQuantity": 2,
     "rareDescription": "Pristine"
+  },
+  "RatRat Tail": {
+    "itemName": "RatRat Tail",
+    "itemDescription": "Wirey and long",
+    "itemValue": 25,
+    "canStack": true,
+    "dropRate": 50,
+    "maxDropQuantity": 1,
+    "rareDescription": "Flawless"
+  },
+  "RatRat Meat": {
+    "itemName": "RatRat Meat",
+    "itemDescription": "A nugget of lean RatRat meat",
+    "itemValue": 35,
+    "canStack": true,
+    "dropRate": 30,
+    "maxDropQuantity": 2,
+    "rareDescription": "Quality"
   }
 }

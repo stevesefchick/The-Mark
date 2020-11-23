@@ -12,7 +12,7 @@ namespace The_Mark
 
         //enums
         public enum AggressionType { Friendly, Neutral, Cautious, Defensive, Aggressive}
-        public enum ThisCreatureType { Birb, FlapFlap, Leggy, Stinkhorn, Krab, Doggo, Swampus}
+        public enum ThisCreatureType { Birb, FlapFlap, Leggy, Stinkhorn, Krab, Doggo, Swampus, RatRat}
         public enum ActiveTime { Daytime, Nighttime, Both}
 
         //properties
@@ -87,6 +87,11 @@ namespace The_Mark
                 possibleLoot.Add(dataManager.itemLootData["Swampus Tail"]);
                 possibleLoot.Add(dataManager.itemLootData["Swampus Eye"]);
             }
+            else if (thisCreatureType == ThisCreatureType.RatRat)
+            {
+                possibleLoot.Add(dataManager.itemLootData["RatRat Tail"]);
+                possibleLoot.Add(dataManager.itemLootData["RatRat Meat"]);
+            }
             for (int i = 0; i < possibleLoot.Count;++i)
             {
                 int rand = rando.Next(1, 101);
@@ -155,6 +160,12 @@ namespace The_Mark
                 thisAggressionType = AggressionType.Neutral;
                 thisCreatureType = ThisCreatureType.Swampus;
                 thisCreatureActiveTime = ActiveTime.Both;
+            }
+            else if (thisType == ThisCreatureType.RatRat)
+            {
+                thisAggressionType = AggressionType.Neutral;
+                thisCreatureType = ThisCreatureType.RatRat;
+                thisCreatureActiveTime = ActiveTime.Nighttime;
             }
         }
 
@@ -622,6 +633,7 @@ namespace The_Mark
             }
             #endregion
 
+            //swampus
             #region swampus
             if (thisCreatureType == ThisCreatureType.Swampus)
             {
@@ -668,6 +680,55 @@ namespace The_Mark
                 }
             }
             #endregion
+
+            //ratrat
+            #region ratrat
+            if (thisCreatureType == ThisCreatureType.RatRat)
+            {
+                thischoice = rando.Next(1, 3);
+                //type 1 - name + the RatRat
+                if (thischoice == 1)
+                {
+                    string ending = " the RatRat";
+
+
+                    List<string> candidatesratratname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "ratratname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesratratname.Add(entry.Key);
+                        }
+                    }
+
+                    thename = candidatesratratname[rando.Next(0, candidatesratratname.Count)].ToString() + ending;
+
+                }
+                //type 2 - name + title
+                else if (thischoice == 2)
+                {
+                    List<string> candidatestitlename = new List<string>();
+                    List<string> candidatesratratname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "ratratname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesratratname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturetitle")
+                        {
+                            candidatestitlename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesratratname[rando.Next(0, candidatesratratname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+            }
+#endregion
+
 
             //capitalize first letter
             thename = thename.Substring(0, 1).ToUpper() + thename.Substring(1);
