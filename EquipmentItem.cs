@@ -13,7 +13,7 @@ namespace The_Mark
             itemName = name;
             itemValue = value;
             canStack = stackable;
-
+            thisItemType = ItemType.Equipment;
         }
 
     }

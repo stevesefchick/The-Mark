@@ -8,15 +8,128 @@ namespace The_Mark
 {
     class PlayerHandler
     {
+        //party information
         public Person theMark;
-
         public List<Person> partyMembers = new List<Person>();
+        //inventory
+        List<Item> partyInventory = new List<Item>();
 
         public PlayerHandler()
         {
 
 
+
+
+
+
+            //save this - this is how you access items within the inventory list
+            /*
+            List<Item> yeahitems = new List<Item>();
+            ConsumableItem yeahayummyboi = new ConsumableItem("horse", 50, true);
+            yeahitems.Add(yeahayummyboi);
+
+            if (yeahitems[0] is ConsumableItem item)
+            {
+                int ok = item.prance;
+            }
+            */
         }
+
+        #region Inventory Methods
+
+        //LOOT ITEMS
+        public void addLootItemToInventory(Item item)
+        {
+            Boolean isInInventory = false;
+
+            for (int i =0;i < partyInventory.Count;++i)
+            {
+                if (partyInventory[i].itemName == item.itemName && partyInventory[i].thisRarityType == item.thisRarityType)
+                {
+                    partyInventory[i].currentQuantity += 1;
+                    isInInventory = true;
+                    break;
+                }
+            }
+
+            if (isInInventory == false)
+            {
+                item.currentQuantity = 1;
+                partyInventory.Add(item);
+            }
+        }
+
+        public void removeLootItemFromInventory(String name, int quantity, Item.RarityType rarity)
+        {
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].itemName == name && partyInventory[i].thisRarityType == rarity)
+                {
+                    partyInventory[i].currentQuantity -= quantity;
+                    if (partyInventory[i].currentQuantity==0)
+                    {
+                        partyInventory.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        public int getItemQuantity(String name, Item.RarityType rarity)
+        {
+            int quantity = 0;
+
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].itemName == name && partyInventory[i].thisRarityType == rarity)
+                {
+                    return partyInventory[i].currentQuantity;
+                }
+            }
+
+            return quantity;
+        }
+
+        public List<Item> getAllLootItems()
+        {
+            List<Item> items = new List<Item>();
+
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].thisItemType == Item.ItemType.Loot)
+                {
+                    items.Add(partyInventory[i]);
+                }
+            }
+
+            return items;
+        }
+
+        public Item getLootItemDetails(String name, Item.RarityType rarity)
+        {
+
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].itemName == name && partyInventory[i].thisRarityType == rarity)
+                {
+                    return partyInventory[i];
+                }
+            }
+
+            return null;
+        }
+
+
+        //CONSUMABLE ITEMS
+
+
+
+
+        //EQUIPMENT ITEMS
+
+
+        #endregion
 
         public void CreateTheMark(WorldMap world, Random rando)
         {

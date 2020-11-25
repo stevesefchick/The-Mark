@@ -7,7 +7,7 @@ namespace The_Mark
 {
     class Item
     {
-        //main item variables
+        //main item properties
         public String itemName;
         public String itemDescription;
         public int itemValue;
@@ -19,10 +19,13 @@ namespace The_Mark
         public int maxDropQuantity;
 
         //enums
-        public enum ItemType { Loot }
+        public enum ItemType { Loot, Consumable, Equipment }
         public ItemType thisItemType;
         public enum RarityType { Normal, Rare}
         public RarityType thisRarityType;
+
+        //inventory variables
+        public int currentQuantity;
 
         public Item(String itemname,int value, Boolean stackable)
         {
@@ -30,6 +33,7 @@ namespace The_Mark
             itemValue = value;
             canStack = stackable;
             thisRarityType = RarityType.Normal;
+            thisItemType = ItemType.Loot;
         }
 
         public void MakeItemRare()

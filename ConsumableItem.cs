@@ -7,13 +7,14 @@ namespace The_Mark
 {
     class ConsumableItem : Item
     {
+        public int prance;
 
         public ConsumableItem(string name,int value, Boolean stackable) : base (name,value,stackable)
         {
             itemName = name;
             itemValue = value;
             canStack = stackable;
-
+            thisItemType = ItemType.Consumable;
         }
 
     }
