@@ -122,7 +122,86 @@ namespace The_Mark
 
 
         //CONSUMABLE ITEMS
+        public void AddConsumableItemToInventory(ConsumableItem item)
+        {
+            Boolean isInInventory = false;
 
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].itemName == item.itemName)
+                {
+                    partyInventory[i].currentQuantity += 1;
+                    isInInventory = true;
+                    break;
+                }
+            }
+
+            if (isInInventory == false)
+            {
+                item.currentQuantity = 1;
+                partyInventory.Add(item);
+            }
+        }
+
+        public void removeConsumableItemFromInventory(String name, int quantity)
+        {
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].itemName == name)
+                {
+                    partyInventory[i].currentQuantity -= quantity;
+                    if (partyInventory[i].currentQuantity == 0)
+                    {
+                        partyInventory.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public int getConsumableItemQuantity(String name)
+        {
+            int quantity = 0;
+
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].itemName == name)
+                {
+                    return partyInventory[i].currentQuantity;
+                }
+            }
+
+            return quantity;
+        }
+
+        public List<ConsumableItem> getAllConsumableItemsItems()
+        {
+            List<ConsumableItem> items = new List<ConsumableItem>();
+
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].thisItemType == Item.ItemType.Consumable)
+                {
+                    items.Add((ConsumableItem)partyInventory[i]);
+                }
+            }
+
+            return items;
+        }
+
+        public ConsumableItem getConsumableItemDetails(String name)
+        {
+
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].itemName == name)
+                {
+                    return (ConsumableItem)partyInventory[i];
+                }
+            }
+
+            return null;
+        }
 
 
 
