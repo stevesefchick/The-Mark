@@ -7,8 +7,11 @@ namespace The_Mark
 {
     class EquipmentItem : Item
     {
+        //enum
+        public enum EquipmentItemStatus { Stock, Equipped }
+        public EquipmentItemStatus thisItemStatus;
 
-        public EquipmentItem(string name, int value, Boolean stackable) : base(name, value, stackable)
+        public EquipmentItem(string name, int value, Boolean stackable, EquipmentItemStatus itemStatus) : base(name, value, stackable)
         {
             itemName = name;
             itemValue = value;

@@ -206,6 +206,61 @@ namespace The_Mark
 
 
         //EQUIPMENT ITEMS
+        public void AddEquipmentItemToInventory(EquipmentItem item)
+        {
+                item.currentQuantity = 1;
+                partyInventory.Add(item);
+        }
+
+        public void removeEquipmentItemFromInventory(String name)
+        {
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].itemName == name)
+                {
+                        partyInventory.RemoveAt(i);
+                        break;
+                    
+                }
+            }
+
+        }
+
+        public List<EquipmentItem> getAllEquipmentItems()
+        {
+            List<EquipmentItem> items = new List<EquipmentItem>();
+
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].thisItemType == Item.ItemType.Equipment)
+                {
+                    items.Add((EquipmentItem)partyInventory[i]);
+                }
+            }
+
+            return items;
+        }
+
+        public EquipmentItem getEquipmentItemDetails(String name)
+        {
+
+            for (int i = 0; i < partyInventory.Count; ++i)
+            {
+                if (partyInventory[i].itemName == name)
+                {
+                    return (EquipmentItem)partyInventory[i];
+                }
+            }
+
+            return null;
+        }
+
+
+
+
+
+
+
 
 
         #endregion
