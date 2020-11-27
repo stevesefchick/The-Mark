@@ -1552,9 +1552,50 @@ namespace The_Mark
 
 			#endregion
 
+			//HOARS
+			#region hoars
+			for (int i = 0; i < places.Count; ++i)
+			{
+				if (places[i].thisPlaceType == Place.PlaceType.Graveyard)
+				{
+					availableLocationIDs.Add(places[i].placeID);
+				}
+			}
+
+			if (availableLocationIDs.Count > 0)
+			{
+				max = rando.Next(0, availableLocationIDs.Count * 8);
+			}
+
+			//create and assign creatures
+			for (int i = 0; i < max; ++i)
+			{
+				int randTerrainOrPlaceCheck = rando.Next(1, 3);
+				if (randTerrainOrPlaceCheck == 1)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Hoars, datamanager, rando);
+					newCreature.placeIDHome = availableLocationIDs[rando.Next(0, availableLocationIDs.Count)];
+					creatures.Add(newCreature);
+				}
+				else if (randTerrainOrPlaceCheck == 2)
+				{
+					Creature newCreature = new Creature(Creature.ThisCreatureType.Hoars, datamanager, rando);
+					newCreature.terrainTypeHome = Terrain.TerrainType.Swamp;
+					creatures.Add(newCreature);
+				}
+			}
+
+			max = 0;
+			availableLocationIDs.Clear();
+
+
+
+			#endregion
+
+
 		}
 
-        void createTileAssignmentsforRiversandLakes()
+		void createTileAssignmentsforRiversandLakes()
 		{
 			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
 			{

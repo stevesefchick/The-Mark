@@ -43,6 +43,8 @@
   "Cheese": { "creaturenametype": "ratratname" },
   "Meese": { "creaturenametype": "ratratname" },
   "Ratatat": { "creaturenametype": "ratratname" },
+  "M'lyargothun": { "creaturenametype": "hoarsname" },
+  "Ch'ayumthmn": { "creaturenametype": "hoarsname" },
   "Merlin": { "creaturenametype": "normalcreaturename" },
   "Spectre": { "creaturenametype": "normalcreaturename" },
   "Arthur": { "creaturenametype": "normalcreaturename" },

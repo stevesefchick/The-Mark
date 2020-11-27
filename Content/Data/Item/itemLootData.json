@@ -160,5 +160,23 @@
     "dropRate": 30,
     "maxDropQuantity": 2,
     "rareDescription": "Quality"
+  },
+  "Hoars Meat": {
+    "itemName": "Hoars Meat",
+    "itemDescription": "It's still twitching",
+    "itemValue": 45,
+    "canStack": true,
+    "dropRate": 25,
+    "maxDropQuantity": 3,
+    "rareDescription": "Prime"
+  },
+  "Hoars Blood": {
+    "itemName": "Hoars Blood",
+    "itemDescription": "A vial of poisonous Hoars blood",
+    "itemValue": 85,
+    "canStack": true,
+    "dropRate": 15,
+    "maxDropQuantity": 3,
+    "rareDescription": "Frothing"
   }
 }
