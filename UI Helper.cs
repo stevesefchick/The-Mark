@@ -8,7 +8,7 @@ namespace The_Mark
     class UI_Helper
     {
         //enums
-        public enum UIWindowCreationTypes { CharacterStatWindow }
+        public enum UIWindowCreationTypes { CharacterStatWindow, CharacterEquipmentWindow }
 
 
         //fonts
@@ -84,16 +84,19 @@ namespace The_Mark
             if (creationType == UIWindowCreationTypes.CharacterStatWindow)
             {
                 UIWindow newwindow = new UIWindow(new Rectangle(returnLocationBasedonBackBuffer(0.5f,true,-250,0), returnLocationBasedonBackBuffer(0.25f,false,0,-100), 500, 400));
+                
 
                 //character name / title
                 String charname;
                 if (isMark == true)
                 {
                     charname = playerhandler.theMark.personFirstName + " " + playerhandler.theMark.personLastName;
+                    newwindow.isTheMark = true;
                 }
                 else
                 {
                     charname = playerhandler.partyMembers[associatedChar].personFirstName + " " + playerhandler.partyMembers[associatedChar].personLastName;
+                    newwindow.partymember = associatedChar;
                 }
                 newwindow.AssignTitle(charname, titleFont);
 
@@ -122,15 +125,15 @@ namespace The_Mark
                 //health
                 newwindow.AssignTextBody("Health", new Vector2(0, 75), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
                 newwindow.AssignTextBody(health, new Vector2(100, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X+0, newwindow.uiWindowPosition.Y + 75, 150, 25), new UIHoverCard(new Vector2(50, 75), "Health", "Health is a character's overall well being, and is reduced by painful activities or by taking damage in combat. If this value reaches rock bottom, the character will die.", mainFont, titleFont));
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X+0, newwindow.uiWindowPosition.Y + 75, 175, 25), new UIHoverCard(new Vector2(50, 75), "Health", "Health is a character's overall well being, and is reduced by painful activities or by taking damage in combat. If this value reaches rock bottom, the character will die.", mainFont, titleFont));
                 //stamina
                 newwindow.AssignTextBody("Stamina", new Vector2(0, 100), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
                 newwindow.AssignTextBody(stamina, new Vector2(100, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 0, newwindow.uiWindowPosition.Y + 100, 150, 25), new UIHoverCard(new Vector2(50, 75), "Stamina", "Stamina is a character's physical fatigue. Sleeping recovers Stamina, while this is depleted through physical activities. If this falls low enough, a character's Health will be affected.", mainFont, titleFont));
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 0, newwindow.uiWindowPosition.Y + 100, 175, 25), new UIHoverCard(new Vector2(50, 75), "Stamina", "Stamina is a character's physical fatigue. Sleeping recovers Stamina, while this is depleted through physical activities. If this falls low enough, a character's Health will be affected.", mainFont, titleFont));
                 //stress
                 newwindow.AssignTextBody("Stress", new Vector2(0, 125), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
                 newwindow.AssignTextBody(stress, new Vector2(100, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 0, newwindow.uiWindowPosition.Y + 125, 150, 25), new UIHoverCard(new Vector2(50, 75), "Stress", "Stress is a character's mental fatigue. Low Stress is considered good, while high Stress will cause negative effects to themselves and the party.", mainFont, titleFont));
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 0, newwindow.uiWindowPosition.Y + 125, 175, 25), new UIHoverCard(new Vector2(50, 75), "Stress", "Stress is a character's mental fatigue. Low Stress is considered good, while high Stress will cause negative effects to themselves and the party.", mainFont, titleFont));
 
 
                 //equipment stats
@@ -169,9 +172,47 @@ namespace The_Mark
 
 
 
+                //tabs
+                newwindow.CreateTab(0, "Health & Stats",true, UIWindowCreationTypes.CharacterStatWindow);
+                newwindow.CreateTab(180, "Equipment",false, UIWindowCreationTypes.CharacterEquipmentWindow);
+                newwindow.CreateTab(360, "Skills & Traits",false, UIWindowCreationTypes.CharacterEquipmentWindow);
+
+
+
+                newwindow.switchForegroundBackground(true);
 
                 uiWindows.Add(newwindow);
             }
+            else if (creationType == UIWindowCreationTypes.CharacterEquipmentWindow)
+            {
+                UIWindow newwindow = new UIWindow(new Rectangle(returnLocationBasedonBackBuffer(0.5f, true, -250, 0), returnLocationBasedonBackBuffer(0.25f, false, 0, -100), 500, 400));
+
+                //character name / title
+                String charname;
+                if (isMark == true)
+                {
+                    charname = playerhandler.theMark.personFirstName + " " + playerhandler.theMark.personLastName;
+                    newwindow.isTheMark = true;
+                }
+                else
+                {
+                    charname = playerhandler.partyMembers[associatedChar].personFirstName + " " + playerhandler.partyMembers[associatedChar].personLastName;
+                    newwindow.partymember = associatedChar;
+                }
+                newwindow.AssignTitle(charname, titleFont);
+
+                //the mark flag
+                if (isMark == true)
+                {
+                    newwindow.AssignTextBody("The Mark", new Vector2(0, 35), Color.Gold, UIWindow.UIWindowAlignmentType.Center, mainFont);
+                }
+
+
+                newwindow.switchForegroundBackground(true);
+                uiWindows.Add(newwindow);
+
+            }
+
         }
 
         void LoadAllTextures(GameMain thegame)
@@ -181,11 +222,31 @@ namespace The_Mark
 
         }
 
+        //normal
+        //calculates position based on position and camera offset
         public Rectangle getUIPosition(Rectangle position, Vector2 offsetposition)
         {
             Rectangle posish = new Rectangle((int)(position.X + offsetposition.X), (int)(position.Y + offsetposition.Y), position.Width, position.Height);
 
             return posish;
+        }
+
+        //for tabs
+        //gets base + tab + offset position
+        public Rectangle getUIPosition(Rectangle tabposition, Rectangle baseposition, Vector2 offsetposition)
+        {
+            Rectangle posish = new Rectangle((int)(tabposition.X + baseposition.X + offsetposition.X), (int)(tabposition.Y + baseposition.Y + offsetposition.Y), tabposition.Width, tabposition.Height);
+
+            return posish;
+        }
+
+        void ClickTabs(int window, int partymember, Boolean isMark, String nameOfTab,PlayerHandler playerhandler)
+        {
+            if (nameOfTab=="Equipment")
+            {
+                createUIWindow(UIWindowCreationTypes.CharacterEquipmentWindow, isMark, partymember, playerhandler);
+                uiWindows.RemoveAt(window);
+            }
         }
 
         public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset)
@@ -204,8 +265,15 @@ namespace The_Mark
                         {
                             createHoverCard(r.Value);
                         }
+                    }
 
-
+                    for (int t = 0; t < uiWindows[i].uiWindowTabs.Count; ++t)
+                    {
+                            if (mouse.leftMouseClickPosition.Intersects(getUIPosition(uiWindows[i].uiWindowTabs[t], uiWindows[i].uiWindowPosition, offset)))
+                            {
+                                ClickTabs(i, uiWindows[i].partymember, uiWindows[i].isTheMark, uiWindows[i].uiWindowsTabsText[t], party);
+                                break;
+                            }
                     }
 
                     if (mouse.leftMouseClickPosition.Intersects(uiWindows[i].publicxButtonPosition) == true && hoverCards.Count==0)

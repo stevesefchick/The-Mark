@@ -44,6 +44,9 @@ namespace The_Mark
         Rectangle uiWindowxButton= new Rectangle(0, 30, 20, 20);
 
         //CONTENT
+        public int partymember;
+        public Boolean isTheMark;
+
         String title;
         Vector2 titleposition;
 
@@ -51,11 +54,24 @@ namespace The_Mark
         List<Vector2> textBodiesLocations = new List<Vector2>();
         List<Color> textBodiesColors = new List<Color>();
 
+        public List<Rectangle> uiWindowTabs = new List<Rectangle>();
+        public List<String> uiWindowsTabsText = new List<String>();
+        List<Boolean> uiWindowTabsIsForeground = new List<Boolean>();
+        List<UI_Helper.UIWindowCreationTypes> uiWindowTabLinks = new List<UI_Helper.UIWindowCreationTypes>();
+
         public UIWindow(Rectangle location)
         {
             uiWindowPosition = location;
             xButtonPosition = new Rectangle((int)(location.Width - 40), -10, 20, 20);
             isForeground = false;
+        }
+
+        public void CreateTab(int XPosition, String text, Boolean isForeground, UI_Helper.UIWindowCreationTypes creationtypelink)
+        {
+            uiWindowTabs.Add(new Rectangle(XPosition, uiWindowPosition.Y + uiWindowPosition.Height - 40, 140, 25));
+            uiWindowsTabsText.Add(text);
+            uiWindowTabsIsForeground.Add(isForeground);
+            uiWindowTabLinks.Add(creationtypelink);
         }
 
         public void AssignTitle(String titlevalue,SpriteFont font)
@@ -116,6 +132,70 @@ namespace The_Mark
 
 
             return new Vector2(text.X + offset.X+ plusshadow.X, text.Y + offset.Y + plusshadow.Y);
+        }
+
+        public Rectangle returnTabPosition(Rectangle offset, Rectangle tab)
+        {
+            return new Rectangle(offset.X + tab.X, offset.Y + tab.Y, tab.Width, tab.Height);
+        }
+
+        void DrawTabs(SpriteBatch spriteBatch, Texture2D uiWindowSprite, Rectangle offsetposition, SpriteFont normalfont)
+        {
+
+
+            for (int i = 0; i < uiWindowTabs.Count; ++i)
+            {
+                Rectangle tabRect = returnTabPosition(offsetposition, uiWindowTabs[i]);
+
+                spriteBatch.DrawString(normalfont, uiWindowsTabsText[i], returnTextPosition(new Vector2(uiWindowTabs[i].X,uiWindowTabs[i].Y), offsetposition, 0), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.845f);
+                spriteBatch.DrawString(normalfont, uiWindowsTabsText[i], returnTextPosition(new Vector2(uiWindowTabs[i].X, uiWindowTabs[i].Y), offsetposition, 1), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.844f);
+                spriteBatch.DrawString(normalfont, uiWindowsTabsText[i], returnTextPosition(new Vector2(uiWindowTabs[i].X, uiWindowTabs[i].Y), offsetposition, 2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.844f);
+
+                if (uiWindowTabsIsForeground[i] == true)
+                {
+                    spriteBatch.Draw(uiWindowSprite, tabRect, uiWindowForegroundFill, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.842f);
+                    //draw top left
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X - 20, tabRect.Y - 20, 20, 20), uiWindowForegroundTopLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw top right
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X + tabRect.Width, tabRect.Y - 20, 20, 20), uiWindowForegroundTopRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw bottom left
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X - 20, tabRect.Y + tabRect.Height, 20, 20), uiWindowForegroundBottomLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw bottom right
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X + tabRect.Width, tabRect.Y + tabRect.Height, 20, 20), uiWindowForegroundBottomRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw top border
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X, tabRect.Y - 20, tabRect.Width, 20), uiWindowForegroundTopBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw bottom border
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X, tabRect.Y + tabRect.Height, tabRect.Width, 20), uiWindowForegroundBottomBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw left border
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X - 20, tabRect.Y, 20, tabRect.Height), uiWindowForegroundLeftBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw right border
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X + tabRect.Width, tabRect.Y, 20, tabRect.Height), uiWindowForegroundRightBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                }
+                else if (uiWindowTabsIsForeground[i] == false)
+                {
+                    spriteBatch.Draw(uiWindowSprite, tabRect, uiWindowBackgroundFill, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.842f);
+                    //draw top left
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X - 20, tabRect.Y - 20, 20, 20), uiWindowBackgroundTopLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw top right
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X + tabRect.Width, tabRect.Y - 20, 20, 20), uiWindowBackgroundTopRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw bottom left
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X - 20, tabRect.Y + tabRect.Height, 20, 20), uiWindowBackgroundBottomLeft, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw bottom right
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X + tabRect.Width, tabRect.Y + tabRect.Height, 20, 20), uiWindowBackgroundBottomRight, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw top border
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X, tabRect.Y - 20, tabRect.Width, 20), uiWindowBackgroundTopBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw bottom border
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X, tabRect.Y + tabRect.Height, tabRect.Width, 20), uiWindowBackgroundBottomBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw left border
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X - 20, tabRect.Y, 20, tabRect.Height), uiWindowBackgroundLeftBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+                    //draw right border
+                    spriteBatch.Draw(uiWindowSprite, new Rectangle(tabRect.X + tabRect.Width, tabRect.Y, 20, tabRect.Height), uiWindowBackgroundRightBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
+
+                }
+
+            }
+
+
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D uiWindowSprite, Rectangle offsetposition,SpriteFont titlefont, SpriteFont normalfont)
@@ -194,6 +274,10 @@ namespace The_Mark
                 //draw right border
                 spriteBatch.Draw(uiWindowSprite, new Rectangle(offsetposition.X + uiWindowPosition.Width, offsetposition.Y, 20, uiWindowPosition.Height), uiWindowBackgroundRightBorder, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.84f);
             }
+
+
+            //tabs
+            DrawTabs(spriteBatch, uiWindowSprite, offsetposition, normalfont);
         }
 
     }
