@@ -12,7 +12,7 @@ namespace The_Mark
         public enum EquipmentSlot { Head, Hands, Body, Jewelry, Trinket }
 
         EquipmentItemStatus thisItemStatus;
-        EquipmentSlot thisEquipmentSlot;
+        public EquipmentSlot thisEquipmentSlot;
 
         //attributes
         int itemAttack;

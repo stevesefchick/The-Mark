@@ -104,7 +104,12 @@ namespace The_Mark
 					"Age: " + people[i].personAge + "\n" +
 					"Gender: " + people[i].personGender + "\n" +
 					"Home: " + locname + "\n" +
-					"Personality Type: " + people[i].personPersonalityType + "\n");
+					"Personality Type: " + people[i].personPersonalityType + "\n" + 
+					"Head Equipment: " + people[i].headEquipment.itemName + "\n" +
+					"Body Equipment: " + people[i].bodyEquipment.itemName + "\n" +
+					"Hands Equipment: " + people[i].handsEquipment.itemName + "\n" +
+					"Jewelry Equipment: " + people[i].jewelryEquipment.itemName + "\n" +
+					"Trinket Equipment: " + people[i].trinketEquipment.itemName + "\n");
 			}
 
 
@@ -1169,6 +1174,13 @@ namespace The_Mark
 				Person person = new Person();
 				person.CreatePerson(datamanager, rando, Person.CreationType.Created);
 				person.assignPersonToHome(liveablePlaces,rando);
+				//equipment
+				person.EquipHands(getStartingHands(datamanager, rando));
+				person.EquipBody(getStartingBody(datamanager, rando));
+				person.EquipHead(getStartingHead(datamanager, rando));
+				person.EquipJewelry(getStartingJewelry(datamanager, rando));
+				person.EquipTrinket(getStartingTrinket(datamanager, rando));
+
 				people.Add(person);
             }
             #endregion
@@ -1192,6 +1204,44 @@ namespace The_Mark
             debugAnnounceCreation();
 
 		}
+
+        #region Person Starting Equipment
+        EquipmentItem getStartingHands(DataManager dataManager,Random rando)
+        {
+			List<EquipmentItem> possibleStartingWeapons = new List<EquipmentItem>();
+			possibleStartingWeapons.Add(dataManager.itemEquipmentData["Wooden Sword"]);
+
+			return possibleStartingWeapons[rando.Next(0,possibleStartingWeapons.Count)];
+        }
+		EquipmentItem getStartingHead(DataManager dataManager, Random rando)
+		{
+			List<EquipmentItem> possibleStartingGear = new List<EquipmentItem>();
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Cloth Cap"]);
+
+			return possibleStartingGear[rando.Next(0, possibleStartingGear.Count)];
+		}
+		EquipmentItem getStartingBody(DataManager dataManager, Random rando)
+		{
+			List<EquipmentItem> possibleStartingGear = new List<EquipmentItem>();
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Ragged Clothes"]);
+
+			return possibleStartingGear[rando.Next(0, possibleStartingGear.Count)];
+		}
+		EquipmentItem getStartingJewelry(DataManager dataManager, Random rando)
+		{
+			List<EquipmentItem> possibleStartingGear = new List<EquipmentItem>();
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Tarnished Ring"]);
+
+			return possibleStartingGear[rando.Next(0, possibleStartingGear.Count)];
+		}
+		EquipmentItem getStartingTrinket(DataManager dataManager, Random rando)
+		{
+			List<EquipmentItem> possibleStartingGear = new List<EquipmentItem>();
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Tiny Doll"]);
+
+			return possibleStartingGear[rando.Next(0, possibleStartingGear.Count)];
+		}
+		#endregion
 
 		void lookForCreatureAvailability(Random rando,DataManager datamanager)
         {

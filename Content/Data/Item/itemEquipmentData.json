@@ -11,7 +11,7 @@
     "itemDefense": 1,
     "itemAbility": 0
   },
-  "Cloth Cap":{
+  "Cloth Cap": {
     "itemName": "Cloth Cap",
     "itemSlot": "Head",
     "itemDescription": "A small cap",
@@ -23,19 +23,19 @@
     "itemDefense": 1,
     "itemAbility": 0
   },
-  "Cloth Gloves":{
-    "itemName": "Cloth Gloves",
+  "Wooden Sword": {
+    "itemName": "Wooden Sword",
     "itemSlot": "Hands",
-    "itemDescription": "Small cloth gloves",
+    "itemDescription": "A real sword",
     "itemValue": 5,
     "canStack": false,
     "dropRate": 0,
     "maxDropQuantity": 0,
-    "itemAttack": 0,
-    "itemDefense": 1,
+    "itemAttack": 1,
+    "itemDefense": 0,
     "itemAbility": 0
   },
-  "Tarnished Ring":{
+  "Tarnished Ring": {
     "itemName": "Tarnished Ring",
     "itemSlot": "Jewelry",
     "itemDescription": "A damaged ring",
@@ -47,7 +47,7 @@
     "itemDefense": 0,
     "itemAbility": 1
   },
-  "Tiny Doll":{
+  "Tiny Doll": {
     "itemName": "Tiny Doll",
     "itemSlot": "Trinket",
     "itemDescription": "A small, creepy doll",

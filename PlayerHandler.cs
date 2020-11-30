@@ -265,6 +265,79 @@ namespace The_Mark
 
         #endregion
 
+        #region Equipment Methods
+        public void EquipItem(EquipmentItem item, Boolean isMark, int partymember)
+        {
+            //body
+            if (item.thisEquipmentSlot == EquipmentItem.EquipmentSlot.Body)
+            {
+                if (isMark==true)
+                {
+                    AddEquipmentItemToInventory(theMark.bodyEquipment);
+                    theMark.EquipBody(item);
+                }
+                else
+                {
+                    AddEquipmentItemToInventory(partyMembers[partymember].bodyEquipment);
+                    partyMembers[partymember].EquipBody(item);
+                }
+            }
+            else if (item.thisEquipmentSlot == EquipmentItem.EquipmentSlot.Head)
+            {
+                if (isMark == true)
+                {
+                    AddEquipmentItemToInventory(theMark.headEquipment);
+                    theMark.EquipHead(item);
+                }
+                else
+                {
+                    AddEquipmentItemToInventory(partyMembers[partymember].headEquipment);
+                    partyMembers[partymember].EquipHead(item);
+                }
+            }
+            else if (item.thisEquipmentSlot == EquipmentItem.EquipmentSlot.Hands)
+            {
+                if (isMark == true)
+                {
+                    AddEquipmentItemToInventory(theMark.handsEquipment);
+                    theMark.EquipHands(item);
+                }
+                else
+                {
+                    AddEquipmentItemToInventory(partyMembers[partymember].handsEquipment);
+                    partyMembers[partymember].EquipHands(item);
+                }
+            }
+            else if (item.thisEquipmentSlot == EquipmentItem.EquipmentSlot.Jewelry)
+            {
+                if (isMark == true)
+                {
+                    AddEquipmentItemToInventory(theMark.jewelryEquipment);
+                    theMark.EquipJewelry(item);
+                }
+                else
+                {
+                    AddEquipmentItemToInventory(partyMembers[partymember].jewelryEquipment);
+                    partyMembers[partymember].EquipJewelry(item);
+                }
+            }
+            else if (item.thisEquipmentSlot == EquipmentItem.EquipmentSlot.Trinket)
+            {
+                if (isMark == true)
+                {
+                    AddEquipmentItemToInventory(theMark.trinketEquipment);
+                    theMark.EquipTrinket(item);
+                }
+                else
+                {
+                    AddEquipmentItemToInventory(partyMembers[partymember].trinketEquipment);
+                    partyMembers[partymember].EquipTrinket(item);
+                }
+            }
+
+        }
+        #endregion
+
         public void CreateTheMark(WorldMap world, Random rando)
         {
             theMark = selectTheMark(world, rando);

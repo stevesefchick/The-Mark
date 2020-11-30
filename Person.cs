@@ -24,6 +24,13 @@ namespace The_Mark
 		//home
 		public string placeIDHome;
 
+		//inventory
+		public EquipmentItem headEquipment;
+		public EquipmentItem bodyEquipment;
+		public EquipmentItem handsEquipment;
+		public EquipmentItem jewelryEquipment;
+		public EquipmentItem trinketEquipment;
+
 
 		//TODO: appearance attributes
 
@@ -155,8 +162,31 @@ namespace The_Mark
 
 		}
 
-        #region get name info
-        void getFirstName(DataManager datamanager,Random random)
+        #region equipment
+        public void EquipBody(EquipmentItem item)
+        {
+			bodyEquipment = item;
+        }
+		public void EquipHead(EquipmentItem item)
+		{
+			headEquipment = item;
+		}
+		public void EquipHands(EquipmentItem item)
+		{
+			handsEquipment = item;
+		}
+		public void EquipJewelry(EquipmentItem item)
+		{
+			jewelryEquipment = item;
+		}
+		public void EquipTrinket(EquipmentItem item)
+		{
+			trinketEquipment = item;
+		}
+		#endregion
+
+		#region get name info
+		void getFirstName(DataManager datamanager,Random random)
         {
 			//get list of names
 			List<string> candidates = new List<string>();
