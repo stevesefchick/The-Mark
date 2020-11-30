@@ -151,6 +151,89 @@ namespace The_Mark
 
 		}
 
+		public String returnAttackString()
+		{
+			if (attack <= 3)
+			{
+				return "Frail";
+			}
+			else if (attack <= 6)
+			{
+				return "Weak";
+			}
+			else if (attack <= 10)
+			{
+				return "Average";
+			}
+			else if (attack <= 13)
+			{
+				return "Mighty";
+			}
+			else if (attack <= 16) 
+			{
+				return "Powerful";
+			}
+			else
+			{
+				return "Godlike";
+			}
+
+		}
+
+		public String returnDefenseString()
+		{
+			if (defense <= 6)
+			{
+				return "Exposed";
+			}
+			else if (defense <= 10)
+			{
+				return "Guarded";
+			}
+			else if (defense <= 13)
+			{
+				return "Armored";
+			}
+			else if (defense <= 16)
+			{
+				return "Tanklike";
+			}
+			else
+			{
+				return "Chonk";
+			}
+
+		}
+
+		public String returnAbilityString()
+		{
+			if (ability <= 3)
+			{
+				return "Clumsy";
+			}
+			else if (ability <= 6)
+			{
+				return "Adequate";
+			}
+			else if (ability <= 10)
+			{
+				return "Skilled";
+			}
+			else if (ability <= 13)
+			{
+				return "Proficient";
+			}
+			else if (ability <= 16)
+			{
+				return "Master";
+			}
+			else
+			{
+				return "Phenom";
+			}
+
+		}
+
 		#endregion
 
 		public void Update(GameTime gameTime)

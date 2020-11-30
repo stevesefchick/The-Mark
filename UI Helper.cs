@@ -110,17 +110,26 @@ namespace The_Mark
                 String health;
                 String stamina;
                 String stress;
+                String attack;
+                String defense;
+                String ability;
                 if (isMark==true)
                 {
                     health = playerhandler.theMark.returnHealthString();
                     stamina = playerhandler.theMark.returnStaminaString();
                     stress = playerhandler.theMark.returnStressString();
+                    attack = playerhandler.theMark.returnAttackString();
+                    defense = playerhandler.theMark.returnDefenseString();
+                    ability = playerhandler.theMark.returnAbilityString();
                 }
                 else
                 {
                     health = playerhandler.partyMembers[associatedChar].returnHealthString();
                     stamina = playerhandler.partyMembers[associatedChar].returnStaminaString();
                     stress = playerhandler.partyMembers[associatedChar].returnStressString();
+                    attack = playerhandler.partyMembers[associatedChar].returnAttackString();
+                    defense = playerhandler.partyMembers[associatedChar].returnDefenseString();
+                    ability = playerhandler.partyMembers[associatedChar].returnAbilityString();
                 }
                 //health
                 newwindow.AssignTextBody("Health", new Vector2(0, 75), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
@@ -139,13 +148,13 @@ namespace The_Mark
                 //equipment stats
                 //attack
                 newwindow.AssignTextBody("Attack", new Vector2(250, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.AssignTextBody("Fine", new Vector2(400, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(attack, new Vector2(400, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 //defense
                 newwindow.AssignTextBody("Defense", new Vector2(250, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.AssignTextBody("Fine", new Vector2(400, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(defense, new Vector2(400, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 //ability
                 newwindow.AssignTextBody("Ability", new Vector2(250, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.AssignTextBody("Fine", new Vector2(400, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(ability, new Vector2(400, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
 
 
 
@@ -206,6 +215,15 @@ namespace The_Mark
                 {
                     newwindow.AssignTextBody("The Mark", new Vector2(0, 35), Color.Gold, UIWindow.UIWindowAlignmentType.Center, mainFont);
                 }
+
+
+
+
+
+
+
+
+
 
 
 
