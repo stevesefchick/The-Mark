@@ -1,10 +1,62 @@
 {
-  "Botion": {
-    "itemName": "Sward",
-    "itemDescription": "a real sword",
-    "itemValue": 100,
+  "Ragged Clothes": {
+    "itemName": "Ragged Clothes",
+    "itemSlot": "Body",
+    "itemDescription": "Scraps of clothes sewn together",
+    "itemValue": 10,
     "canStack": false,
     "dropRate": 0,
-    "maxDropQuantity": 0
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 1,
+    "itemAbility": 0
+  },
+  "Cloth Cap":{
+    "itemName": "Cloth Cap",
+    "itemSlot": "Head",
+    "itemDescription": "A small cap",
+    "itemValue": 5,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 1,
+    "itemAbility": 0
+  },
+  "Cloth Gloves":{
+    "itemName": "Cloth Gloves",
+    "itemSlot": "Hands",
+    "itemDescription": "Small cloth gloves",
+    "itemValue": 5,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 1,
+    "itemAbility": 0
+  },
+  "Tarnished Ring":{
+    "itemName": "Tarnished Ring",
+    "itemSlot": "Jewelry",
+    "itemDescription": "A damaged ring",
+    "itemValue": 10,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 0,
+    "itemAbility": 1
+  },
+  "Tiny Doll":{
+    "itemName": "Tiny Doll",
+    "itemSlot": "Trinket",
+    "itemDescription": "A small, creepy doll",
+    "itemValue": 10,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 0,
+    "itemAbility": 0
   }
 }

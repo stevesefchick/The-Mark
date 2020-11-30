@@ -8,7 +8,7 @@ namespace The_Mark
     class UI_Helper
     {
         //enums
-        public enum UIWindowCreationTypes { CharacterStatWindow, CharacterEquipmentWindow }
+        public enum UIWindowCreationTypes { CharacterStatWindow, CharacterEquipmentWindow, CharacterSkillsWindow }
 
 
         //fonts
@@ -208,9 +208,51 @@ namespace The_Mark
                 }
 
 
+
+                //tabs
+                newwindow.CreateTab(0, "Health & Stats", false, UIWindowCreationTypes.CharacterStatWindow);
+                newwindow.CreateTab(180, "Equipment", true, UIWindowCreationTypes.CharacterEquipmentWindow);
+                newwindow.CreateTab(360, "Skills & Traits", false, UIWindowCreationTypes.CharacterEquipmentWindow);
+
+
                 newwindow.switchForegroundBackground(true);
                 uiWindows.Add(newwindow);
 
+            }
+            else if (creationType == UIWindowCreationTypes.CharacterSkillsWindow)
+            {
+                UIWindow newwindow = new UIWindow(new Rectangle(returnLocationBasedonBackBuffer(0.5f, true, -250, 0), returnLocationBasedonBackBuffer(0.25f, false, 0, -100), 500, 400));
+
+                //character name / title
+                String charname;
+                if (isMark == true)
+                {
+                    charname = playerhandler.theMark.personFirstName + " " + playerhandler.theMark.personLastName;
+                    newwindow.isTheMark = true;
+                }
+                else
+                {
+                    charname = playerhandler.partyMembers[associatedChar].personFirstName + " " + playerhandler.partyMembers[associatedChar].personLastName;
+                    newwindow.partymember = associatedChar;
+                }
+                newwindow.AssignTitle(charname, titleFont);
+
+                //the mark flag
+                if (isMark == true)
+                {
+                    newwindow.AssignTextBody("The Mark", new Vector2(0, 35), Color.Gold, UIWindow.UIWindowAlignmentType.Center, mainFont);
+                }
+
+
+
+                //tabs
+                newwindow.CreateTab(0, "Health & Stats", false, UIWindowCreationTypes.CharacterStatWindow);
+                newwindow.CreateTab(180, "Equipment", false, UIWindowCreationTypes.CharacterEquipmentWindow);
+                newwindow.CreateTab(360, "Skills & Traits", true, UIWindowCreationTypes.CharacterEquipmentWindow);
+
+
+                newwindow.switchForegroundBackground(true);
+                uiWindows.Add(newwindow);
             }
 
         }
@@ -245,6 +287,16 @@ namespace The_Mark
             if (nameOfTab=="Equipment")
             {
                 createUIWindow(UIWindowCreationTypes.CharacterEquipmentWindow, isMark, partymember, playerhandler);
+                uiWindows.RemoveAt(window);
+            }
+            else if (nameOfTab == "Health & Stats")
+            {
+                createUIWindow(UIWindowCreationTypes.CharacterStatWindow, isMark, partymember, playerhandler);
+                uiWindows.RemoveAt(window);
+            }
+            else if (nameOfTab == "Skills & Traits")
+            {
+                createUIWindow(UIWindowCreationTypes.CharacterSkillsWindow, isMark, partymember, playerhandler);
                 uiWindows.RemoveAt(window);
             }
         }
