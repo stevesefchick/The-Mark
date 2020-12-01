@@ -149,12 +149,15 @@ namespace The_Mark
                 //attack
                 newwindow.AssignTextBody("Attack", new Vector2(250, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.AssignTextBody(attack, new Vector2(400, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 75, 175, 25), new UIHoverCard(new Vector2(50, 75), "Attack", "Attack is a character's overall physical power. This allows them to deal more physical damage during combat.", mainFont, titleFont));
                 //defense
                 newwindow.AssignTextBody("Defense", new Vector2(250, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.AssignTextBody(defense, new Vector2(400, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 100, 175, 25), new UIHoverCard(new Vector2(50, 75), "Defense", "Defense is a character's overall resistance to damage. This reduces the amount of Health lost from being attacked in combat.", mainFont, titleFont));
                 //ability
                 newwindow.AssignTextBody("Ability", new Vector2(250, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.AssignTextBody(ability, new Vector2(400, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 125, 175, 25), new UIHoverCard(new Vector2(50, 75), "Ability", "Ability is a character's prowess in specialized abilities, used during combat.", mainFont, titleFont));
 
 
 
