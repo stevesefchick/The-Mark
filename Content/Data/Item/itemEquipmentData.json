@@ -9,7 +9,9 @@
     "maxDropQuantity": 0,
     "itemAttack": 0,
     "itemDefense": 1,
-    "itemAbility": 0
+    "itemAbility": 0,
+    "spritesheetx": 0,
+    "spritesheety": 0
   },
   "Cloth Cap": {
     "itemName": "Cloth Cap",
@@ -21,7 +23,9 @@
     "maxDropQuantity": 0,
     "itemAttack": 0,
     "itemDefense": 1,
-    "itemAbility": 0
+    "itemAbility": 0,
+    "spritesheetx": 0,
+    "spritesheety": 0
   },
   "Wooden Sword": {
     "itemName": "Wooden Sword",
@@ -33,7 +37,9 @@
     "maxDropQuantity": 0,
     "itemAttack": 1,
     "itemDefense": 0,
-    "itemAbility": 0
+    "itemAbility": 0,
+    "spritesheetx": 0,
+    "spritesheety": 0
   },
   "Tarnished Ring": {
     "itemName": "Tarnished Ring",
@@ -45,7 +51,9 @@
     "maxDropQuantity": 0,
     "itemAttack": 0,
     "itemDefense": 0,
-    "itemAbility": 1
+    "itemAbility": 1,
+    "spritesheetx": 0,
+    "spritesheety": 0
   },
   "Tiny Doll": {
     "itemName": "Tiny Doll",
@@ -57,6 +65,8 @@
     "maxDropQuantity": 0,
     "itemAttack": 0,
     "itemDefense": 0,
-    "itemAbility": 0
+    "itemAbility": 0,
+    "spritesheetx": 0,
+    "spritesheety": 0
   }
 }

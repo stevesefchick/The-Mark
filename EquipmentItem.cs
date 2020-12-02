@@ -18,8 +18,9 @@ namespace The_Mark
         int itemAttack;
         int itemDefense;
         int itemAbility;
+        public Vector2 itemSpriteSheetXY;
 
-        public EquipmentItem(string name, int value, Boolean stackable, EquipmentItemStatus itemStatus, EquipmentSlot itemSlot, int attack, int defense, int ability) : base(name, value, stackable)
+        public EquipmentItem(string name, int value, Boolean stackable, EquipmentItemStatus itemStatus, EquipmentSlot itemSlot, int attack, int defense, int ability, int spritesheetx, int spritesheety) : base(name, value, stackable)
         {
             itemName = name;
             itemValue = value;
@@ -30,6 +31,7 @@ namespace The_Mark
             itemAttack = attack;
             itemDefense = defense;
             itemAbility = ability;
+            itemSpriteSheetXY = new Vector2(spritesheetx,spritesheety);
         }
 
     }

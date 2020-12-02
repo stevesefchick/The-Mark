@@ -9,6 +9,7 @@ namespace The_Mark
     {
         //enums
         public enum UIWindowAlignmentType { Normal, Left, Right, Center }
+        public enum EquipmentSpriteSheet { Loot, Consumable, Hands, Head, Body, Jewelry, Trinket}
 
         Boolean isForeground;
         public Rectangle uiWindowPosition;
@@ -49,21 +50,33 @@ namespace The_Mark
 
         String title;
         Vector2 titleposition;
-
+        //text bodies
         List<String> textBodies = new List<String>();
         List<Vector2> textBodiesLocations = new List<Vector2>();
         List<Color> textBodiesColors = new List<Color>();
-
+        //tabs
         public List<Rectangle> uiWindowTabs = new List<Rectangle>();
         public List<String> uiWindowsTabsText = new List<String>();
         List<Boolean> uiWindowTabsIsForeground = new List<Boolean>();
         List<UI_Helper.UIWindowCreationTypes> uiWindowTabLinks = new List<UI_Helper.UIWindowCreationTypes>();
+        //equipment sprites
+        public List<Rectangle> uiWindowSpritePosition = new List<Rectangle>();
+        public List<Rectangle> uiWindowSpriteRect = new List<Rectangle>();
+        public List<EquipmentSpriteSheet> uiWindowSpriteSheet = new List<EquipmentSpriteSheet>();
+        Vector2 equipmentSpriteSize = new Vector2(30, 30);
 
         public UIWindow(Rectangle location)
         {
             uiWindowPosition = location;
             xButtonPosition = new Rectangle((int)(location.Width - 40), -10, 20, 20);
             isForeground = false;
+        }
+
+        public void CreateEquipmentSprite(Vector2 position, Vector2 rect, EquipmentSpriteSheet sheetused)
+        {
+            uiWindowSpritePosition.Add(new Rectangle((int)position.X,(int)position.Y,(int)equipmentSpriteSize.X,(int)equipmentSpriteSize.Y));
+            uiWindowSpriteRect.Add(new Rectangle((int)rect.X, (int)rect.Y, (int)equipmentSpriteSize.X, (int)equipmentSpriteSize.Y));
+            uiWindowSpriteSheet.Add(sheetused);
         }
 
         public void CreateTab(int XPosition, String text, Boolean isForeground, UI_Helper.UIWindowCreationTypes creationtypelink)
@@ -198,7 +211,8 @@ namespace The_Mark
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, Texture2D uiWindowSprite, Rectangle offsetposition,SpriteFont titlefont, SpriteFont normalfont)
+        public void Draw(SpriteBatch spriteBatch, Texture2D uiWindowSprite, Rectangle offsetposition,SpriteFont titlefont, SpriteFont normalfont, 
+            Texture2D equipmentHandsSpriteSheet, Texture2D equipmentBodySpriteSheet, Texture2D equipmentHeadSpriteSheet, Texture2D equipmentJewelrySpriteSheet, Texture2D equipmentTrinketSpriteSheet)
         {
             //X Button
              spriteBatch.Draw(uiWindowSprite, returnActualXButtonPosition(offsetposition, xButtonPosition), uiWindowxButton, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.845f);
@@ -214,6 +228,31 @@ namespace The_Mark
                 spriteBatch.DrawString(normalfont, textBodies[i], returnTextPosition(textBodiesLocations[i], offsetposition, 0), textBodiesColors[i], 0, Vector2.Zero, 1, SpriteEffects.None, 0.845f);
                 spriteBatch.DrawString(normalfont, textBodies[i], returnTextPosition(textBodiesLocations[i], offsetposition, 1), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.844f);
                 spriteBatch.DrawString(normalfont, textBodies[i], returnTextPosition(textBodiesLocations[i], offsetposition, 2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.844f);
+            }
+
+            for (int i = 0; i < uiWindowSpritePosition.Count; ++i)
+            {
+                if (uiWindowSpriteSheet[i] == EquipmentSpriteSheet.Hands)
+                {
+                    spriteBatch.Draw(equipmentHandsSpriteSheet, returnTabPosition(offsetposition, uiWindowSpritePosition[i]), uiWindowSpriteRect[i], Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.845f);
+                }
+                else if (uiWindowSpriteSheet[i] == EquipmentSpriteSheet.Body)
+                {
+                    spriteBatch.Draw(equipmentBodySpriteSheet, returnTabPosition(offsetposition, uiWindowSpritePosition[i]), uiWindowSpriteRect[i], Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.845f);
+                }
+                else if (uiWindowSpriteSheet[i] == EquipmentSpriteSheet.Head)
+                {
+                    spriteBatch.Draw(equipmentHeadSpriteSheet, returnTabPosition(offsetposition, uiWindowSpritePosition[i]), uiWindowSpriteRect[i], Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.845f);
+                }
+                else if (uiWindowSpriteSheet[i] == EquipmentSpriteSheet.Jewelry)
+                {
+                    spriteBatch.Draw(equipmentJewelrySpriteSheet, returnTabPosition(offsetposition, uiWindowSpritePosition[i]), uiWindowSpriteRect[i], Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.845f);
+                }
+                else if (uiWindowSpriteSheet[i] == EquipmentSpriteSheet.Trinket)
+                {
+                    spriteBatch.Draw(equipmentTrinketSpriteSheet, returnTabPosition(offsetposition, uiWindowSpritePosition[i]), uiWindowSpriteRect[i], Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.845f);
+                }
+
             }
 
             if (isForeground == true)

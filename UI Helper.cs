@@ -20,6 +20,11 @@ namespace The_Mark
         //Sprites
         Texture2D uiWindowSprites;
         Texture2D healtbarSprites;
+        Texture2D equipmentHandsSpriteSheet;
+        Texture2D equipmentHeadSpriteSheet;
+        Texture2D equipmentBodySpriteSheet;
+        Texture2D equipmentJewelrySpriteSheet;
+        Texture2D equipmentTrinketSpriteSheet;
         //hover cards
         List<UIHoverCard> hoverCards = new List<UIHoverCard>();
         //ui windows
@@ -110,6 +115,7 @@ namespace The_Mark
                 String health;
                 String stamina;
                 String stress;
+                //equipment stats
                 String attack;
                 String defense;
                 String ability;
@@ -220,15 +226,89 @@ namespace The_Mark
                 }
 
 
+                //equipment stats
+                String attack;
+                String defense;
+                String ability;
+                String hands;
+                Vector2 handsheet;
+                String body;
+                Vector2 bodysheet;
+                String head;
+                Vector2 headsheet;
+                String jewelry;
+                Vector2 jewelrysheet;
+                String trinket;
+                Vector2 trinketsheet;
+
+                if (isMark == true)
+                {
+                    attack = playerhandler.theMark.returnAttackString();
+                    defense = playerhandler.theMark.returnDefenseString();
+                    ability = playerhandler.theMark.returnAbilityString();
+                    hands = playerhandler.theMark.handsEquipment.itemName;
+                    handsheet = playerhandler.theMark.handsEquipment.itemSpriteSheetXY;
+                    head = playerhandler.theMark.headEquipment.itemName;
+                    headsheet = playerhandler.theMark.headEquipment.itemSpriteSheetXY;
+                    body = playerhandler.theMark.bodyEquipment.itemName;
+                    bodysheet = playerhandler.theMark.bodyEquipment.itemSpriteSheetXY;
+                    jewelry = playerhandler.theMark.jewelryEquipment.itemName;
+                    jewelrysheet = playerhandler.theMark.jewelryEquipment.itemSpriteSheetXY;
+                    trinket = playerhandler.theMark.trinketEquipment.itemName;
+                    trinketsheet = playerhandler.theMark.trinketEquipment.itemSpriteSheetXY;
+
+                }
+                else
+                {
+                    attack = playerhandler.partyMembers[associatedChar].returnAttackString();
+                    defense = playerhandler.partyMembers[associatedChar].returnDefenseString();
+                    ability = playerhandler.partyMembers[associatedChar].returnAbilityString();
+                    hands = playerhandler.partyMembers[associatedChar].handsEquipment.itemName;
+                    handsheet = playerhandler.partyMembers[associatedChar].handsEquipment.itemSpriteSheetXY;
+                    head = playerhandler.partyMembers[associatedChar].headEquipment.itemName;
+                    headsheet = playerhandler.partyMembers[associatedChar].headEquipment.itemSpriteSheetXY;
+                    body = playerhandler.partyMembers[associatedChar].bodyEquipment.itemName;
+                    bodysheet = playerhandler.partyMembers[associatedChar].bodyEquipment.itemSpriteSheetXY;
+                    jewelry = playerhandler.partyMembers[associatedChar].jewelryEquipment.itemName;
+                    jewelrysheet = playerhandler.partyMembers[associatedChar].jewelryEquipment.itemSpriteSheetXY;
+                    trinket = playerhandler.partyMembers[associatedChar].trinketEquipment.itemName;
+                    trinketsheet = playerhandler.partyMembers[associatedChar].trinketEquipment.itemSpriteSheetXY;
+
+                }
+                //attack
+                newwindow.AssignTextBody("Attack", new Vector2(250, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(attack, new Vector2(400, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 75, 175, 25), new UIHoverCard(new Vector2(50, 75), "Attack", "Attack is a character's overall physical power. This allows them to deal more physical damage during combat.", mainFont, titleFont));
+                //defense
+                newwindow.AssignTextBody("Defense", new Vector2(250, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(defense, new Vector2(400, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 100, 175, 25), new UIHoverCard(new Vector2(50, 75), "Defense", "Defense is a character's overall resistance to damage. This reduces the amount of Health lost from being attacked in combat.", mainFont, titleFont));
+                //ability
+                newwindow.AssignTextBody("Ability", new Vector2(250, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(ability, new Vector2(400, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 125, 175, 25), new UIHoverCard(new Vector2(50, 75), "Ability", "Ability is a character's prowess in specialized abilities, used during combat.", mainFont, titleFont));
 
 
+                //equipment
+                newwindow.AssignTextBody("Hands", new Vector2(0, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(hands, new Vector2(35, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.CreateEquipmentSprite(new Vector2(0, 95), handsheet, UIWindow.EquipmentSpriteSheet.Hands);
 
+                newwindow.AssignTextBody("Head", new Vector2(0, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(head, new Vector2(35, 150), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.CreateEquipmentSprite(new Vector2(0, 145), headsheet, UIWindow.EquipmentSpriteSheet.Head);
 
+                newwindow.AssignTextBody("Body", new Vector2(0, 175), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(body, new Vector2(35, 200), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.CreateEquipmentSprite(new Vector2(0, 195), bodysheet, UIWindow.EquipmentSpriteSheet.Body);
 
+                newwindow.AssignTextBody("Jewelry", new Vector2(0, 225), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(jewelry, new Vector2(35, 250), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.CreateEquipmentSprite(new Vector2(0, 245), jewelrysheet, UIWindow.EquipmentSpriteSheet.Jewelry);
 
-
-
-
+                newwindow.AssignTextBody("Trinket", new Vector2(0, 275), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(trinket, new Vector2(35, 300), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.CreateEquipmentSprite(new Vector2(0, 295), trinketsheet, UIWindow.EquipmentSpriteSheet.Trinket);
 
                 //tabs
                 newwindow.CreateTab(0, "Health & Stats", false, UIWindowCreationTypes.CharacterStatWindow);
@@ -282,6 +362,11 @@ namespace The_Mark
         {
             uiWindowSprites = thegame.Content.Load<Texture2D>("Sprites/UI/uiWindow");
             healtbarSprites = thegame.Content.Load<Texture2D>("Sprites/UI/uiHealthBars");
+            equipmentHandsSpriteSheet = thegame.Content.Load<Texture2D>("Sprites/UI/equipmentHandsIcons");
+            equipmentHeadSpriteSheet = thegame.Content.Load<Texture2D>("Sprites/UI/equipmentHeadIcons");
+            equipmentBodySpriteSheet = thegame.Content.Load<Texture2D>("Sprites/UI/equipmentBodyIcons");
+            equipmentJewelrySpriteSheet = thegame.Content.Load<Texture2D>("Sprites/UI/equipmentJewelryIcons");
+            equipmentTrinketSpriteSheet = thegame.Content.Load<Texture2D>("Sprites/UI/equipmentTrinketIcons");
 
         }
 
@@ -405,7 +490,8 @@ namespace The_Mark
             //UI Windows
             for (int i = 0; i < uiWindows.Count;++i)
             {
-                uiWindows[i].Draw(spriteBatch, uiWindowSprites, getUIPosition(uiWindows[i].uiWindowPosition, offset),titleFont,mainFont);
+                uiWindows[i].Draw(spriteBatch, uiWindowSprites, getUIPosition(uiWindows[i].uiWindowPosition, offset),titleFont,mainFont,
+                    equipmentHandsSpriteSheet,equipmentBodySpriteSheet,equipmentHeadSpriteSheet,equipmentJewelrySpriteSheet,equipmentTrinketSpriteSheet);
 
             }
             //character bubbles
