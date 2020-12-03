@@ -278,14 +278,22 @@ namespace The_Mark
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 baseposition)
         {
-            spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(baseposition.X+10, baseposition.Y+30), Color.White,0,Vector2.Zero,1, SpriteEffects.None,0.8f);
-            spriteBatch.DrawString(spriteFont, dayString + " day of " + calendarMonths[CurrentMonth], new Vector2(baseposition.X + 200, baseposition.Y+30), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
+            spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(baseposition.X + 10, baseposition.Y + 30), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.81f);
+            spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(baseposition.X + 11, baseposition.Y + 31), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
+            spriteBatch.DrawString(spriteFont, hourMinutesToString, new Vector2(baseposition.X + 12, baseposition.Y + 32), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
+
+            spriteBatch.DrawString(spriteFont, dayString + " day of " + calendarMonths[CurrentMonth], new Vector2(baseposition.X + 200, baseposition.Y + 30), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.81f);
+            spriteBatch.DrawString(spriteFont, dayString + " day of " + calendarMonths[CurrentMonth], new Vector2(baseposition.X + 201, baseposition.Y + 31), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
+            spriteBatch.DrawString(spriteFont, dayString + " day of " + calendarMonths[CurrentMonth], new Vector2(baseposition.X + 202, baseposition.Y + 32), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
+
             DrawRemainingTime(spriteBatch, spriteFont,baseposition);
         }
 
         void DrawRemainingTime(SpriteBatch spriteBatch, SpriteFont spriteFont, Vector2 baseposition)
         {
-            spriteBatch.DrawString(spriteFont,daysRemaining + " days " + hoursRemaining + " hours " + minutesRemaining + " minutes remain", baseposition, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
+            spriteBatch.DrawString(spriteFont, daysRemaining + " days " + hoursRemaining + " hours " + minutesRemaining + " minutes remain", baseposition, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.81f);
+            spriteBatch.DrawString(spriteFont, daysRemaining + " days " + hoursRemaining + " hours " + minutesRemaining + " minutes remain", new Vector2(baseposition.X+1,baseposition.Y+1), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
+            spriteBatch.DrawString(spriteFont, daysRemaining + " days " + hoursRemaining + " hours " + minutesRemaining + " minutes remain", new Vector2(baseposition.X + 2, baseposition.Y + 2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
         }
 
     }

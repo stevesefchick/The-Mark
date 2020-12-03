@@ -288,7 +288,6 @@ namespace The_Mark
                 newwindow.AssignTextBody(ability, new Vector2(400, 125), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 125, 175, 25), new UIHoverCard(new Vector2(50, 75), "Ability", "Ability is a character's prowess in specialized abilities, used during combat.", mainFont, titleFont));
 
-
                 //equipment
                 newwindow.AssignTextBody("Hands", new Vector2(0, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.AssignTextBody(hands, new Vector2(35, 100), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
@@ -314,7 +313,6 @@ namespace The_Mark
                 newwindow.CreateTab(0, "Health & Stats", false, UIWindowCreationTypes.CharacterStatWindow);
                 newwindow.CreateTab(180, "Equipment", true, UIWindowCreationTypes.CharacterEquipmentWindow);
                 newwindow.CreateTab(360, "Skills & Traits", false, UIWindowCreationTypes.CharacterEquipmentWindow);
-
 
                 newwindow.switchForegroundBackground(true);
                 uiWindows.Add(newwindow);
