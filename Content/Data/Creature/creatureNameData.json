@@ -45,6 +45,8 @@
   "Ratatat": { "creaturenametype": "ratratname" },
   "M'lyargothun": { "creaturenametype": "hoarsname" },
   "Ch'ayumthmn": { "creaturenametype": "hoarsname" },
+  "Mittens": { "creaturenametype": "furballname" },
+  "Angel": { "creaturenametype": "furballname" },
   "Merlin": { "creaturenametype": "normalcreaturename" },
   "Spectre": { "creaturenametype": "normalcreaturename" },
   "Arthur": { "creaturenametype": "normalcreaturename" },

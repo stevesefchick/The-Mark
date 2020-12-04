@@ -178,5 +178,23 @@
     "dropRate": 15,
     "maxDropQuantity": 3,
     "rareDescription": "Frothing"
+  },
+  "Furball Fang": {
+    "itemName": "Furball Fang",
+    "itemDescription": "A very sharp fang from a Furball",
+    "itemValue": 65,
+    "canStack": true,
+    "dropRate": 25,
+    "maxDropQuantity": 2,
+    "rareDescription": "Pristine"
+  },
+  "Furball Fluff": {
+    "itemName": "Furball Fluff",
+    "itemDescription": "A clump of very soft Furball fur",
+    "itemValue": 45,
+    "canStack": true,
+    "dropRate": 45,
+    "maxDropQuantity": 3,
+    "rareDescription": "Quality"
   }
 }

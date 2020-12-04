@@ -12,7 +12,7 @@ namespace The_Mark
 
         //enums
         public enum AggressionType { Friendly, Neutral, Cautious, Defensive, Aggressive}
-        public enum ThisCreatureType { Birb, FlapFlap, Leggy, Stinkhorn, Krab, Doggo, Swampus, RatRat, Hoars}
+        public enum ThisCreatureType { Birb, FlapFlap, Leggy, Stinkhorn, Krab, Doggo, Swampus, RatRat, Hoars, Furball}
         public enum ActiveTime { Daytime, Nighttime, Both}
 
         //properties
@@ -95,6 +95,12 @@ namespace The_Mark
             else if (thisCreatureType == ThisCreatureType.Hoars)
             {
                 possibleLoot.Add(dataManager.itemLootData["Hoars Meat"]);
+                possibleLoot.Add(dataManager.itemLootData["Hoars Blood"]);
+            }
+            else if (thisCreatureType == ThisCreatureType.Furball)
+            {
+                possibleLoot.Add(dataManager.itemLootData["Furball Fluff"]);
+                possibleLoot.Add(dataManager.itemLootData["Furball Fang"]);
             }
             for (int i = 0; i < possibleLoot.Count;++i)
             {
@@ -175,6 +181,12 @@ namespace The_Mark
             {
                 thisAggressionType = AggressionType.Aggressive;
                 thisCreatureType = ThisCreatureType.Hoars;
+                thisCreatureActiveTime = ActiveTime.Nighttime;
+            }
+            else if (thisType == ThisCreatureType.Furball)
+            {
+                thisAggressionType = AggressionType.Aggressive;
+                thisCreatureType = ThisCreatureType.Furball;
                 thisCreatureActiveTime = ActiveTime.Nighttime;
             }
         }
@@ -744,7 +756,7 @@ namespace The_Mark
             if (thisCreatureType == ThisCreatureType.Hoars)
             {
                 thischoice = rando.Next(1, 3);
-                //type 1 - name + the RatRat
+                //type 1 - name + the Hoars
                 if (thischoice == 1)
                 {
                     string ending = " the Hoars";
@@ -782,6 +794,58 @@ namespace The_Mark
                         }
                     }
                     thename = candidateshoarsname[rando.Next(0, candidateshoarsname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+            }
+
+
+
+            #endregion
+
+
+            //furball
+            #region furball
+            if (thisCreatureType == ThisCreatureType.Furball)
+            {
+                thischoice = rando.Next(1, 3);
+                //type 1 - name + the Furball
+                if (thischoice == 1)
+                {
+                    string ending = " the Furball";
+
+
+                    List<string> candidatesfurballname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "furballname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesfurballname.Add(entry.Key);
+                        }
+                    }
+
+                    thename = candidatesfurballname[rando.Next(0, candidatesfurballname.Count)].ToString() + ending;
+
+                }
+                //type 2 - name + title
+                else if (thischoice == 2)
+                {
+                    List<string> candidatestitlename = new List<string>();
+                    List<string> candidatesfurballname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "furballname" || entry.Value.creaturenametype == "normalcreaturename")
+                        {
+                            candidatesfurballname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturetitle")
+                        {
+                            candidatestitlename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesfurballname[rando.Next(0, candidatesfurballname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
 
                 }
             }
