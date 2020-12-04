@@ -14,7 +14,7 @@ namespace The_Mark
 		public enum Gender { Male, Female, Whocares }
 		public enum PersonalityType { Friendly, Grumpy, Brash, Calm, Aloof}
 		public enum TraitType { Mischevious,Shy, ShortTempered, Anxious, Talkative, Kind, Studious, Curious, Brave, Oblivious, Athletic, Arrogant, Lazy, Spiritual, Loyal, HardWorking, Tidy, 
-		Dramatic, Energetic, Creative, Comedic}
+		Dramatic, Energetic, Creative}
 
 		//person attributes
 		public string personFirstName;
@@ -487,14 +487,67 @@ namespace The_Mark
 			ability = 1;
         }
 
+		Boolean isDupeTrait(TraitType newTrait)
+        {
+			for (int i =0;i < personTraits.Count;++i)
+            {
+				if (personTraits[i] == newTrait)
+                {
+					return true;
+                }
+            }
+
+			return false;
+        }
+
+		Boolean isConflictingTrait(TraitType newTrait)
+        {
+			for (int i = 0; i < personTraits.Count; ++i)
+			{
+				if (newTrait == TraitType.Anxious && (personTraits[i] == TraitType.Arrogant || personTraits[i] == TraitType.Brave || personTraits[i] == TraitType.Oblivious))
+					return true;
+				else if (newTrait == TraitType.Arrogant && (personTraits[i] == TraitType.Anxious || personTraits[i] == TraitType.Kind || personTraits[i] == TraitType.Shy))
+					return true;
+				else if (newTrait == TraitType.Athletic && (personTraits[i] == TraitType.Lazy))
+					return true;
+				else if (newTrait == TraitType.Brave && (personTraits[i] == TraitType.Anxious))
+					return true;
+				else if (newTrait == TraitType.Curious && (personTraits[i] == TraitType.Oblivious))
+					return true;
+				else if (newTrait == TraitType.Kind && (personTraits[i] == TraitType.Arrogant))
+					return true;
+				else if (newTrait == TraitType.Lazy && (personTraits[i] == TraitType.Athletic))
+					return true;
+				else if (newTrait == TraitType.Oblivious && (personTraits[i] == TraitType.Curious || personTraits[i] == TraitType.Anxious))
+					return true;
+				else if (newTrait == TraitType.Shy && (personTraits[i] == TraitType.Arrogant))
+					return true;
+
+			}
+
+			return false;
+
+		}
+
 		void AddRandomTrait(Random rando, CreationType creationType,int numberofnewtraits)
         {
 			if (creationType == CreationType.Created)
 			{
 				for (int i = 0; i < numberofnewtraits; ++i)
 				{
+					Boolean isgood = false;
 					Array values = Enum.GetValues(typeof(TraitType));
-					TraitType randomTrait = (TraitType)values.GetValue(rando.Next(values.Length));
+					TraitType randomTrait = new TraitType();
+					while (isgood==false)
+                    {
+						randomTrait = (TraitType)values.GetValue(rando.Next(values.Length));
+
+						if (isDupeTrait(randomTrait) == false)
+						{
+							isgood = true;
+						}
+					}		
+
 					personTraits.Add(randomTrait);
 				}
 			}

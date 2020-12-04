@@ -105,11 +105,17 @@ namespace The_Mark
 					"Gender: " + people[i].personGender + "\n" +
 					"Home: " + locname + "\n" +
 					"Personality Type: " + people[i].personPersonalityType + "\n" + 
-					"Head Equipment: " + people[i].headEquipment.itemName + "\n" +
-					"Body Equipment: " + people[i].bodyEquipment.itemName + "\n" +
-					"Hands Equipment: " + people[i].handsEquipment.itemName + "\n" +
-					"Jewelry Equipment: " + people[i].jewelryEquipment.itemName + "\n" +
-					"Trinket Equipment: " + people[i].trinketEquipment.itemName + "\n");
+					"Traits: \n" + 
+					people[i].personTraits[0] + "\n" +
+					people[i].personTraits[1] + "\n" +
+					people[i].personTraits[2] + "\n" +
+					people[i].personTraits[3] + "\n" +
+					"Equipment: \n" + 
+					"Head: " + people[i].headEquipment.itemName + "\n" +
+					"Body: " + people[i].bodyEquipment.itemName + "\n" +
+					"Hands: " + people[i].handsEquipment.itemName + "\n" +
+					"Jewelry: " + people[i].jewelryEquipment.itemName + "\n" +
+					"Trinket: " + people[i].trinketEquipment.itemName + "\n");
 			}
 
 
