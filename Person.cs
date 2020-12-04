@@ -12,7 +12,9 @@ namespace The_Mark
 		//enums
 		public enum CreationType { Birthed, Created }
 		public enum Gender { Male, Female, Whocares }
-		public enum PersonalityType { Calm, Grumpy, Cheerful, Curious, Sly, Guarded}
+		public enum PersonalityType { Friendly, Grumpy, Brash, Calm, Aloof}
+		public enum TraitType { Mischevious,Shy, ShortTempered, Anxious, Talkative, Kind, Studious, Curious, Brave, Oblivious, Athletic, Arrogant, Lazy, Spiritual, Loyal, HardWorking, Tidy, 
+		Dramatic, Energetic, Creative, Comedic}
 
 		//person attributes
 		public string personFirstName;
@@ -20,6 +22,7 @@ namespace The_Mark
 		public int personAge;
 		public Gender personGender;
 		public PersonalityType personPersonalityType;
+		public List<TraitType> personTraits = new List<TraitType>();
 
 		//home
 		public string placeIDHome;
@@ -484,6 +487,20 @@ namespace The_Mark
 			ability = 1;
         }
 
+		void AddRandomTrait(Random rando, CreationType creationType,int numberofnewtraits)
+        {
+			if (creationType == CreationType.Created)
+			{
+				for (int i = 0; i < numberofnewtraits; ++i)
+				{
+					Array values = Enum.GetValues(typeof(TraitType));
+					TraitType randomTrait = (TraitType)values.GetValue(rando.Next(values.Length));
+					personTraits.Add(randomTrait);
+				}
+			}
+
+		}
+
         public void CreatePerson(DataManager datamanager, Random random, CreationType creationType)
 		{
 			personID = datamanager.getRandomID(random);
@@ -506,7 +523,8 @@ namespace The_Mark
 			getAge(creationType, random);
 			//get personality
 			getPersonality(creationType, random);
-			//TODO: Get Traits
+			//add random traits
+			AddRandomTrait(random,creationType,4);
 
 			//TODO:Get Skills
 
