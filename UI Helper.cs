@@ -171,23 +171,27 @@ namespace The_Mark
                 //endurance
                 newwindow.AssignTextBody("Endurance", new Vector2(250, 175), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.AssignTextBody("Good", new Vector2(400, 175), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 175, 175, 25), new UIHoverCard(new Vector2(50, 75), "Endurance", "Endurance is a character's capability of enduring actions or actitivities that are physically difficult. A higher Endurance will affect Stamina and a their overall ability to withstand physical activities.", mainFont, titleFont));
                 //strength
                 newwindow.AssignTextBody("Strength", new Vector2(250, 200), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.AssignTextBody("Good", new Vector2(400, 200), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 200, 175, 25), new UIHoverCard(new Vector2(50, 75), "Strength", "Strength affects fighting power as well as capability of withstanding demanding physical activities.", mainFont, titleFont));
                 //dexterity
                 newwindow.AssignTextBody("Dexterity", new Vector2(250, 225), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.AssignTextBody("Good", new Vector2(400, 225), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 225, 175, 25), new UIHoverCard(new Vector2(50, 75), "Dexterity", "Dexterity is a measure of a character's speed, deftness, and agility. Higher Dexterity can help a character become stealthier, or avoid certain hazardous situations entirely.", mainFont, titleFont));
                 //wit
                 newwindow.AssignTextBody("Wit", new Vector2(250, 250), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.AssignTextBody("Good", new Vector2(400, 250), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 250, 175, 25), new UIHoverCard(new Vector2(50, 75), "Wit", "Wit is a character's street smarts. Higher Wit allows characters to talk themselves into and out of situations, as well as providing themselves with a keen awareness of their surroundings.", mainFont, titleFont));
                 //wisdom
                 newwindow.AssignTextBody("Wisdom", new Vector2(250, 275), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.AssignTextBody("Good", new Vector2(400, 275), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 275, 175, 25), new UIHoverCard(new Vector2(50, 75), "Wisdom", "Wisdom is a character's deep knowledge and understanding of the world. Higher Wisdom allows for insight of items and artifacts, as well as unique talents.", mainFont, titleFont));
                 //charisma
                 newwindow.AssignTextBody("Charisma", new Vector2(250, 300), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.AssignTextBody("Good", new Vector2(400, 300), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-
-
+                newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 300, 175, 25), new UIHoverCard(new Vector2(50, 75), "Charisma", "Charisma is a measure of a character's charm and presence. Higher Charisma helps them avoid rough situations and enables them to influence others.", mainFont, titleFont));
 
 
                 //tabs

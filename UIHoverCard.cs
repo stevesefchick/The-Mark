@@ -38,6 +38,11 @@ namespace The_Mark
         {
             int buffer = 125;
 
+            if ((int)titlefont.MeasureString(title).X < 100)
+            {
+                buffer += 75;
+            }
+
             return ((int)titlefont.MeasureString(title).X + buffer);
         }
 
@@ -60,7 +65,7 @@ namespace The_Mark
             while (currentpointer < maxlength)
             {
                 if ((basetext.Substring(currentpointer, 1) == " " &&
-                    littlefont.MeasureString(basetext.Substring(lastline,currentpointer-lastline)).X > (hovercardPosition.Width-70)) ||
+                    littlefont.MeasureString(basetext.Substring(lastline,currentpointer-lastline)).X > (hovercardPosition.Width-80)) ||
                     currentpointer == (maxlength-1))
                 {
 
