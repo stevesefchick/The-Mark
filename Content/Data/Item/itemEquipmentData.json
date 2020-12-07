@@ -13,6 +13,34 @@
     "spritesheetx": 0,
     "spritesheety": 0
   },
+  "Casual Clothes": {
+    "itemName": "Casual Clothes",
+    "itemSlot": "Body",
+    "itemDescription": "Some everday wear",
+    "itemValue": 20,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 1,
+    "itemAbility": 0,
+    "spritesheetx": 1,
+    "spritesheety": 0
+  },
+  "Plain Robe": {
+    "itemName": "Plain Robe",
+    "itemSlot": "Body",
+    "itemDescription": "An ordinary cloth robe",
+    "itemValue": 15,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 1,
+    "itemAbility": 0,
+    "spritesheetx": 2,
+    "spritesheety": 0
+  },
   "Cloth Cap": {
     "itemName": "Cloth Cap",
     "itemSlot": "Head",
@@ -25,6 +53,34 @@
     "itemDefense": 1,
     "itemAbility": 0,
     "spritesheetx": 0,
+    "spritesheety": 0
+  },
+  "Plain Scarf": {
+    "itemName": "Plain Scarf",
+    "itemSlot": "Head",
+    "itemDescription": "An unexciting scarf",
+    "itemValue": 5,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 1,
+    "itemAbility": 0,
+    "spritesheetx": 1,
+    "spritesheety": 0
+  },
+  "Plain Hat": {
+    "itemName": "Plain Hat",
+    "itemSlot": "Head",
+    "itemDescription": "For everyday activities",
+    "itemValue": 10,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 1,
+    "itemAbility": 0,
+    "spritesheetx": 2,
     "spritesheety": 0
   },
   "Wooden Sword": {
@@ -53,6 +109,34 @@
     "itemDefense": 0,
     "itemAbility": 1,
     "spritesheetx": 0,
+    "spritesheety": 0
+  },
+  "Worn Necklace": {
+    "itemName": "Worn Necklace",
+    "itemSlot": "Jewelry",
+    "itemDescription": "An old necklace",
+    "itemValue": 10,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 0,
+    "itemAbility": 1,
+    "spritesheetx": 1,
+    "spritesheety": 0
+  },
+  "Plain Earrings": {
+    "itemName": "Plain Earrings",
+    "itemSlot": "Jewelry",
+    "itemDescription": "Several old earrings",
+    "itemValue": 15,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 0,
+    "itemAbility": 1,
+    "spritesheetx": 2,
     "spritesheety": 0
   },
   "Tiny Doll": {

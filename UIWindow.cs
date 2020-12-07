@@ -75,7 +75,7 @@ namespace The_Mark
         public void CreateEquipmentSprite(Vector2 position, Vector2 rect, EquipmentSpriteSheet sheetused)
         {
             uiWindowSpritePosition.Add(new Rectangle((int)position.X,(int)position.Y,(int)equipmentSpriteSize.X,(int)equipmentSpriteSize.Y));
-            uiWindowSpriteRect.Add(new Rectangle((int)rect.X, (int)rect.Y, (int)equipmentSpriteSize.X, (int)equipmentSpriteSize.Y));
+            uiWindowSpriteRect.Add(new Rectangle((int)(rect.X * equipmentSpriteSize.X), (int)(rect.Y * equipmentSpriteSize.Y), (int)equipmentSpriteSize.X, (int)equipmentSpriteSize.Y));
             uiWindowSpriteSheet.Add(sheetused);
         }
 

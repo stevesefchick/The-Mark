@@ -1223,6 +1223,8 @@ namespace The_Mark
 		{
 			List<EquipmentItem> possibleStartingGear = new List<EquipmentItem>();
 			possibleStartingGear.Add(dataManager.itemEquipmentData["Cloth Cap"]);
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Plain Scarf"]);
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Plain Hat"]);
 
 			return possibleStartingGear[rando.Next(0, possibleStartingGear.Count)];
 		}
@@ -1230,6 +1232,8 @@ namespace The_Mark
 		{
 			List<EquipmentItem> possibleStartingGear = new List<EquipmentItem>();
 			possibleStartingGear.Add(dataManager.itemEquipmentData["Ragged Clothes"]);
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Casual Clothes"]);
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Plain Robe"]);
 
 			return possibleStartingGear[rando.Next(0, possibleStartingGear.Count)];
 		}
@@ -1237,6 +1241,8 @@ namespace The_Mark
 		{
 			List<EquipmentItem> possibleStartingGear = new List<EquipmentItem>();
 			possibleStartingGear.Add(dataManager.itemEquipmentData["Tarnished Ring"]);
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Worn Necklace"]);
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Plain Earrings"]);
 
 			return possibleStartingGear[rando.Next(0, possibleStartingGear.Count)];
 		}
