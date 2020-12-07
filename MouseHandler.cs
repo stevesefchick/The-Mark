@@ -106,11 +106,14 @@ namespace The_Mark
             return thisposishactually;
         }
 
-        public void Draw(SpriteBatch spriteBatch,Vector2 cameraposition,Vector2 backbuffer,SpriteFont font)
+        public void Draw(SpriteBatch spriteBatch,Vector2 cameraposition,Vector2 backbuffer,SpriteFont font, Boolean dontShowText)
         {
-            spriteBatch.DrawString(font, mouseHoverFont, fontPosition, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.73f);
-            spriteBatch.DrawString(font, mouseHoverFont, getTextOffset(fontPosition,1), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
-            spriteBatch.DrawString(font, mouseHoverFont, getTextOffset(fontPosition,2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
+            if (dontShowText == false)
+            {
+                spriteBatch.DrawString(font, mouseHoverFont, fontPosition, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.73f);
+                spriteBatch.DrawString(font, mouseHoverFont, getTextOffset(fontPosition, 1), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
+                spriteBatch.DrawString(font, mouseHoverFont, getTextOffset(fontPosition, 2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
+            }
 
             spriteBatch.Draw(mouseTexture, positionFromVectorToRect(getMousePosition(cameraposition,backbuffer)),null, Color.White,0,Vector2.Zero, SpriteEffects.None,0.9f);
 

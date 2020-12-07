@@ -52,6 +52,17 @@ namespace The_Mark
             //createUIWindow(new Rectangle(600, 200, 200, 300));
         }
 
+        public Boolean areThereUIElementsOpen()
+        {
+            if (uiWindows.Count >0 ||  hoverCards.Count>0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public void assignMarkToPartyWindow(String id)
         {
             uiCharacterBubbles[0].associatedCharacter = id;
@@ -119,6 +130,14 @@ namespace The_Mark
                 String attack;
                 String defense;
                 String ability;
+                //character stats
+                String endurance;
+                String strength;
+                String dexterity;
+                String wisdom;
+                String wit;
+                String charisma;
+
                 if (isMark==true)
                 {
                     health = playerhandler.theMark.returnHealthString();
@@ -127,6 +146,12 @@ namespace The_Mark
                     attack = playerhandler.theMark.returnAttackString();
                     defense = playerhandler.theMark.returnDefenseString();
                     ability = playerhandler.theMark.returnAbilityString();
+                    endurance = playerhandler.theMark.returnEnduranceString();
+                    strength = playerhandler.theMark.returnStrengthString();
+                    dexterity = playerhandler.theMark.returnDexterityString();
+                    wisdom = playerhandler.theMark.returnWisdomString();
+                    wit = playerhandler.theMark.returnWitString();
+                    charisma = playerhandler.theMark.returnCharismaString();
                 }
                 else
                 {
@@ -136,6 +161,13 @@ namespace The_Mark
                     attack = playerhandler.partyMembers[associatedChar].returnAttackString();
                     defense = playerhandler.partyMembers[associatedChar].returnDefenseString();
                     ability = playerhandler.partyMembers[associatedChar].returnAbilityString();
+                    endurance = playerhandler.partyMembers[associatedChar].returnEnduranceString();
+                    strength = playerhandler.partyMembers[associatedChar].returnStrengthString();
+                    dexterity = playerhandler.partyMembers[associatedChar].returnDexterityString();
+                    wisdom = playerhandler.partyMembers[associatedChar].returnWisdomString();
+                    wit = playerhandler.partyMembers[associatedChar].returnWitString();
+                    charisma = playerhandler.partyMembers[associatedChar].returnCharismaString();
+
                 }
                 //health
                 newwindow.AssignTextBody("Health", new Vector2(0, 75), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
@@ -170,27 +202,27 @@ namespace The_Mark
                 //personal stats
                 //endurance
                 newwindow.AssignTextBody("Endurance", new Vector2(250, 175), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.AssignTextBody("Good", new Vector2(400, 175), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(endurance, new Vector2(400, 175), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 175, 175, 25), new UIHoverCard(new Vector2(50, 75), "Endurance", "Endurance is a character's capability of enduring actions or actitivities that are physically difficult. A higher Endurance will affect Stamina and a their overall ability to withstand physical activities.", mainFont, titleFont));
                 //strength
                 newwindow.AssignTextBody("Strength", new Vector2(250, 200), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.AssignTextBody("Good", new Vector2(400, 200), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(strength, new Vector2(400, 200), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 200, 175, 25), new UIHoverCard(new Vector2(50, 75), "Strength", "Strength affects fighting power as well as capability of withstanding demanding physical activities.", mainFont, titleFont));
                 //dexterity
                 newwindow.AssignTextBody("Dexterity", new Vector2(250, 225), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.AssignTextBody("Good", new Vector2(400, 225), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(dexterity, new Vector2(400, 225), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 225, 175, 25), new UIHoverCard(new Vector2(50, 75), "Dexterity", "Dexterity is a measure of a character's speed, deftness, and agility. Higher Dexterity can help a character become stealthier, or avoid certain hazardous situations entirely.", mainFont, titleFont));
                 //wit
                 newwindow.AssignTextBody("Wit", new Vector2(250, 250), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.AssignTextBody("Good", new Vector2(400, 250), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(wit, new Vector2(400, 250), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 250, 175, 25), new UIHoverCard(new Vector2(50, 75), "Wit", "Wit is a character's street smarts. Higher Wit allows characters to talk themselves into and out of situations, as well as providing themselves with a keen awareness of their surroundings.", mainFont, titleFont));
                 //wisdom
                 newwindow.AssignTextBody("Wisdom", new Vector2(250, 275), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.AssignTextBody("Good", new Vector2(400, 275), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(wisdom, new Vector2(400, 275), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 275, 175, 25), new UIHoverCard(new Vector2(50, 75), "Wisdom", "Wisdom is a character's deep knowledge and understanding of the world. Higher Wisdom allows for insight of items and artifacts, as well as unique talents.", mainFont, titleFont));
                 //charisma
                 newwindow.AssignTextBody("Charisma", new Vector2(250, 300), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
-                newwindow.AssignTextBody("Good", new Vector2(400, 300), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                newwindow.AssignTextBody(charisma, new Vector2(400, 300), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
                 newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 300, 175, 25), new UIHoverCard(new Vector2(50, 75), "Charisma", "Charisma is a measure of a character's charm and presence. Higher Charisma helps them avoid rough situations and enables them to influence others.", mainFont, titleFont));
 
 

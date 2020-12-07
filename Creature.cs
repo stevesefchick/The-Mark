@@ -562,7 +562,7 @@ namespace The_Mark
             #region krab
             if (thisCreatureType == ThisCreatureType.Krab)
             {
-                thischoice = rando.Next(1, 3);
+                thischoice = rando.Next(1, 4);
                 //type 1 - name + the Krab
                 if (thischoice == 1)
                 {
@@ -601,6 +601,28 @@ namespace The_Mark
                         }
                     }
                     thename = candidateskrabname[rando.Next(0, candidateskrabname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+                //type 3 = water + scratch
+                else if (thischoice == 3)
+                {
+                    List<string> candidateswatername = new List<string>();
+                    List<string> candidatesscratchname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturewatername")
+                        {
+                            candidateswatername.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturescratchname")
+                        {
+                            candidatesscratchname.Add(entry.Key);
+                        }
+                    }
+                    thename = candidateswatername[rando.Next(0, candidateswatername.Count)].ToString() + candidatesscratchname[rando.Next(0, candidatesscratchname.Count)].ToString();
 
                 }
             }

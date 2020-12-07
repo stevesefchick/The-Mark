@@ -318,7 +318,7 @@ class GameMain : Game
 	null,
 	null,
 	camera.get_transformation(gdm));
-		mouse.Draw(spriteBatch, camera.cameraPosition, backbufferJamz, worldFont);
+		mouse.Draw(spriteBatch, camera.cameraPosition, backbufferJamz, worldFont,uiHelper.areThereUIElementsOpen());
 		time.Draw(spriteBatch, worldFont, returnPositionCameraOffset(timeUIPosition));
 		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero));
 		spriteBatch.End();

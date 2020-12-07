@@ -62,8 +62,164 @@ namespace The_Mark
 		public int maxStress;
 		public int currentStress;
 
-        #region stat string returns
-        public String returnHealthString()
+		#region stat string returns
+		public String returnEnduranceString()
+		{
+			if (endurance <= 3)
+			{
+				return "Tired";
+			}
+			else if (endurance <= 6)
+			{
+				return "Weak";
+			}
+			else if (endurance <= 10)
+			{
+				return "Average";
+			}
+			else if (endurance <= 13)
+			{
+				return "Fortified";
+			}
+			else
+			{
+				return "Godlike";
+			}
+
+		}
+		public String returnStrengthString()
+		{
+			if (strength <= 3)
+			{
+				return "Puny";
+			}
+			else if (strength <= 6)
+			{
+				return "Wimpy";
+			}
+			else if (strength <= 10)
+			{
+				return "Average";
+			}
+			else if (strength <= 13)
+			{
+				return "Muscular";
+			}
+			else if (strength <= 16)
+			{
+				return "Buff";
+			}
+			else
+			{
+				return "Massive";
+			}
+
+		}
+		public String returnDexterityString()
+		{
+			if (dexterity <= 3)
+			{
+				return "Clumsy";
+			}
+			else if (dexterity <= 6)
+			{
+				return "Slow";
+			}
+			else if (dexterity <= 10)
+			{
+				return "Average";
+			}
+			else if (dexterity <= 13)
+			{
+				return "Deft";
+			}
+			else if (dexterity <= 16)
+			{
+				return "Nimble";
+			}
+			else
+			{
+				return "Catlike";
+			}
+
+		}
+		public String returnWisdomString()
+		{
+			if (wisdom <= 3)
+			{
+				return "Dumb";
+			}
+			else if (wisdom <= 6)
+			{
+				return "Dim";
+			}
+			else if (wisdom <= 11)
+			{
+				return "Average";
+			}
+			else if (wisdom <= 14)
+			{
+				return "Insightful";
+			}
+			else if (wisdom <= 18)
+			{
+				return "Wise";
+			}
+			else
+			{
+				return "Enlightened";
+			}
+
+		}
+		public String returnWitString()
+		{
+			if (wit <= 6)
+			{
+				return "Gullible";
+			}
+			else if (wit <= 9)
+			{
+				return "Dull";
+			}
+			else if (wit <= 12)
+			{
+				return "Average";
+			}
+			else if (wit <= 14)
+			{
+				return "Slick";
+			}
+			else 
+			{
+				return "Crafty";
+			}
+
+		}
+		public String returnCharismaString()
+		{
+			if (charisma <= 3)
+			{
+				return "Grotesque";
+			}
+			else if (charisma <= 7)
+			{
+				return "Grimy";
+			}
+			else if (charisma <= 11)
+			{
+				return "Average";
+			}
+			else if (charisma <= 14)
+			{
+				return "Charming";
+			}
+			else
+			{
+				return "Sweet Talking";
+			}
+
+		}
+		public String returnHealthString()
         {
 			if (currentHealth==maxHealth)
             {
@@ -210,25 +366,21 @@ namespace The_Mark
 
 		public String returnAbilityString()
 		{
-			if (ability <= 3)
+			if (ability <= 5)
 			{
-				return "Clumsy";
+				return "Novice";
 			}
-			else if (ability <= 6)
+			else if (ability <= 9)
 			{
 				return "Adequate";
 			}
-			else if (ability <= 10)
+			else if (ability <= 14)
 			{
 				return "Skilled";
 			}
-			else if (ability <= 13)
+			else if (ability <= 18)
 			{
-				return "Proficient";
-			}
-			else if (ability <= 16)
-			{
-				return "Master";
+				return "Masterful";
 			}
 			else
 			{
