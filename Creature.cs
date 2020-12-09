@@ -633,7 +633,7 @@ namespace The_Mark
             #region doggo
             if (thisCreatureType == ThisCreatureType.Doggo)
             {
-                thischoice = rando.Next(1, 3);
+                thischoice = rando.Next(1, 5);
                 //type 1 - name + the Doggo
                 if (thischoice == 1)
                 {
@@ -674,6 +674,52 @@ namespace The_Mark
                     thename = candidatesdoggoname[rando.Next(0, candidatesdoggoname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
 
                 }
+                //type 3 = cute + bite
+                else if (thischoice == 3)
+                {
+                    List<string> candidatescutename = new List<string>();
+                    List<string> candidatesbitename = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturecutename")
+                        {
+                            candidatescutename.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturebitename")
+                        {
+                            candidatesbitename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatescutename[rando.Next(0, candidatescutename.Count)].ToString() + candidatesbitename[rando.Next(0, candidatesbitename.Count)].ToString();
+
+                }
+                //type 4 = yelling + cute
+                else if (thischoice == 4)
+                {
+                    List<string> candidatescutename = new List<string>();
+                    List<string> candidatesyellingname = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creatureyellingname")
+                        {
+                            candidatesyellingname.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturecutename")
+                        {
+                            candidatescutename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesyellingname[rando.Next(0, candidatesyellingname.Count)].ToString() + candidatescutename[rando.Next(0, candidatescutename.Count)].ToString();
+
+                }
+
+
             }
             #endregion
 

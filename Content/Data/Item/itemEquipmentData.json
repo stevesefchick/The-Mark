@@ -87,6 +87,20 @@
     "itemName": "Wooden Sword",
     "itemSlot": "Hands",
     "itemDescription": "A real sword",
+    "itemValue": 20,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 3,
+    "itemDefense": 0,
+    "itemAbility": 0,
+    "spritesheetx": 0,
+    "spritesheety": 0
+  },
+  "Wooden Twig": {
+    "itemName": "Wooden Twig",
+    "itemSlot": "Hands",
+    "itemDescription": "From a tree",
     "itemValue": 5,
     "canStack": false,
     "dropRate": 0,
@@ -94,7 +108,35 @@
     "itemAttack": 1,
     "itemDefense": 0,
     "itemAbility": 0,
-    "spritesheetx": 0,
+    "spritesheetx": 1,
+    "spritesheety": 0
+  },
+  "Wooden Club": {
+    "itemName": "Wooden Club",
+    "itemSlot": "Hands",
+    "itemDescription": "For beating things with",
+    "itemValue": 10,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 2,
+    "itemDefense": 0,
+    "itemAbility": 0,
+    "spritesheetx": 2,
+    "spritesheety": 0
+  },
+  "Old Dagger": {
+    "itemName": "Old Dagger",
+    "itemSlot": "Hands",
+    "itemDescription": "Very sharp, but more of a tool than a weapon",
+    "itemValue": 15,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 2,
+    "itemDefense": 0,
+    "itemAbility": 0,
+    "spritesheetx": 3,
     "spritesheety": 0
   },
   "Tarnished Ring": {
@@ -151,6 +193,34 @@
     "itemDefense": 0,
     "itemAbility": 0,
     "spritesheetx": 0,
+    "spritesheety": 0
+  },
+  "Set of Dice": {
+    "itemName": "Set of Dice",
+    "itemSlot": "Trinket",
+    "itemDescription": "Good for playing games",
+    "itemValue": 15,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 0,
+    "itemAbility": 0,
+    "spritesheetx": 1,
+    "spritesheety": 0
+  },
+  "Lucky Feather": {
+    "itemName": "Lucky Feather",
+    "itemSlot": "Trinket",
+    "itemDescription": "Found from a colorful Birb",
+    "itemValue": 20,
+    "canStack": false,
+    "dropRate": 0,
+    "maxDropQuantity": 0,
+    "itemAttack": 0,
+    "itemDefense": 0,
+    "itemAbility": 1,
+    "spritesheetx": 2,
     "spritesheety": 0
   }
 }

@@ -1216,6 +1216,9 @@ namespace The_Mark
         {
 			List<EquipmentItem> possibleStartingWeapons = new List<EquipmentItem>();
 			possibleStartingWeapons.Add(dataManager.itemEquipmentData["Wooden Sword"]);
+			possibleStartingWeapons.Add(dataManager.itemEquipmentData["Wooden Club"]);
+			possibleStartingWeapons.Add(dataManager.itemEquipmentData["Wooden Twig"]);
+			possibleStartingWeapons.Add(dataManager.itemEquipmentData["Old Dagger"]);
 
 			return possibleStartingWeapons[rando.Next(0,possibleStartingWeapons.Count)];
         }
@@ -1250,6 +1253,8 @@ namespace The_Mark
 		{
 			List<EquipmentItem> possibleStartingGear = new List<EquipmentItem>();
 			possibleStartingGear.Add(dataManager.itemEquipmentData["Tiny Doll"]);
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Set of Dice"]);
+			possibleStartingGear.Add(dataManager.itemEquipmentData["Lucky Feather"]);
 
 			return possibleStartingGear[rando.Next(0, possibleStartingGear.Count)];
 		}
