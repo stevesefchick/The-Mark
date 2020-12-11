@@ -1,0 +1,82 @@
+{
+  "Mischevious": {
+    "description": "A mischevious person loves pranks, even if it gets them in trouble. "
+
+  },
+  "Shy": {
+    "description": "Shy people avoid social situations, although this helps them avoid certain confrontations."
+
+  },
+  "ShortTempered": {
+    "description": "Short Tempered people are more likely to blow their lid, and are driven to violence very quickly."
+
+  },
+  "Anxious": {
+    "description": "Anxious people get stressed more easily, however their anxiety can cause them to be aware of hazards that others would ignore."
+
+  },
+  "Talkative": {
+    "description": "Talkative people have a lot to say. This can help boost morale, but stressed talkative party members can bring the whole party down."
+
+  },
+  "Kind": {
+    "description": "Kind people lift the spirits of others and are always willing to lend a helping hand."
+
+  },
+  "Studious": {
+    "description": "A studious person has an obsession with learning, and will take the time to understand the teachings of others."
+
+  },
+  "Curious": {
+    "description": "Those who are curious seek to understand things they don't understand, although this can often land them in trouble."
+
+  },
+  "Brave": {
+    "description": "Brave individuals show less fear than others, and are willing to take challenges that put themselves at great risk."
+
+  },
+  "Oblivious": {
+    "description": "Oblivious people tend to miss warnings, signs, and traps in clear view. Although this could land them in trouble, this also helps them avoid stressful or scary situations."
+
+  },
+  "Athletic": {
+    "description": "Athletic people are driven to compete and better themselves physically."
+
+  },
+  "Arrogant": {
+    "description": "A person who is arrogant has an inflated view of themselves and their abilities."
+
+  },
+  "Lazy": {
+    "description": "People who are lazy have a tendancy to work less or avoid stamina-consuming activities altogether."
+
+  },
+  "Spiritual": {
+    "description": "Spiritual people believe in a power greater than themselves, and dedicate themselves to this belief."
+
+  },
+  "Loyal": {
+    "description": "Loyal individuals dedicate themselves to another person, entity, greater power, or government to a fault. They are willing to sacrifice anything for what they believe in."
+
+  },
+  "HardWorking": {
+    "description": "Hardworking people love to dedicate their energy towards getting the job done right."
+
+  },
+  "Tidy": {
+    "description": "A tidy person will take the time to make sure that everything is clean and in order, even if it sacrifices resources or time."
+
+  },
+  "Dramatic": {
+    "description": "Dramatic people tend to overexaggerate their situation, and cause unneeded tension between others for person entertainment."
+
+  },
+  "Energetic": {
+    "description": "Energetic people are full of life, and seem to have more stamina than others. They are more likely to overexcert themselves."
+
+  },
+  "Creative": {
+    "description": "Creative people are driven to make art or practical tools. They often think outside of the box, and can produce unusual or surprising ideas."
+
+  }
+}

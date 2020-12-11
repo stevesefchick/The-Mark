@@ -17,6 +17,9 @@ namespace The_Mark
         public Dictionary<string, WaterNameData> waterNames = new Dictionary<string, WaterNameData>();
         public Dictionary<string, CreatureNameData> creatureNames = new Dictionary<string, CreatureNameData>();
 
+        //person data
+        public Dictionary<string, TraitData> traitData = new Dictionary<string, TraitData>();
+
         //item data
         public Dictionary<string, Item> itemLootData = new Dictionary<string, Item>();
         public Dictionary<string, ConsumableItem> itemConsumableData = new Dictionary<string, ConsumableItem>();
@@ -31,6 +34,7 @@ namespace The_Mark
 
             loadNames();
             loadItems();
+            loadPersonData();
             loadRandomGenData();
             System.Console.WriteLine("\n\nDataManager info loaded! \nfirstNames: " + firstNames.Count + ". \nlastNames: " + lastNames.Count + ". \ntownNames: " + townNames.Count + ". \nrandomGenData: " +
                 randomGenData.Count + ".\nroadNames: " + roadNames.Count + ".\nwaterNames: " + waterNames.Count + ".\ncreatureNames: " + creatureNames.Count + ".\n\n\n\n");
@@ -45,6 +49,11 @@ namespace The_Mark
             waterNames = JsonConvert.DeserializeObject<Dictionary<string, WaterNameData>>(File.ReadAllText(@"Content/Data/Terrain/waterNameData.json"));
             creatureNames = JsonConvert.DeserializeObject<Dictionary<string, CreatureNameData>>(File.ReadAllText(@"Content/Data/Creature/creatureNameData.json"));
 
+        }
+
+        private void loadPersonData()
+        {
+            traitData = JsonConvert.DeserializeObject<Dictionary<string, TraitData>>(File.ReadAllText(@"Content/Data/Person/traitData.json"));
         }
 
         private void loadItems()
@@ -136,6 +145,16 @@ namespace The_Mark
         public CreatureNameData(string thetype)
         {
             creaturenametype = thetype;
+        }
+    }
+
+    class TraitData
+    {
+        public string description;
+
+        public TraitData(string thedesc)
+        {
+            description = thedesc;
         }
     }
 }
