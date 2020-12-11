@@ -34,7 +34,6 @@ namespace The_Mark
 		public EquipmentItem jewelryEquipment;
 		public EquipmentItem trinketEquipment;
 
-
 		//TODO: appearance attributes
 
 		//TODO: personality trait attributes
