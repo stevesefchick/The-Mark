@@ -12,7 +12,7 @@ namespace The_Mark
 		//enums
 		public enum CreationType { Birthed, Created }
 		public enum Gender { Male, Female, Whocares }
-		public enum PersonalityType { Friendly, Grumpy, Brash, Calm, Aloof}
+		//public enum PersonalityType { Friendly, Grumpy, Brash, Calm, Aloof}
 		public enum TraitType { Mischevious,Shy, ShortTempered, Anxious, Talkative, Kind, Studious, Curious, Brave, Oblivious, Athletic, Arrogant, Lazy, Spiritual, Loyal, HardWorking, Tidy, 
 		Dramatic, Energetic, Creative}
 
@@ -21,7 +21,7 @@ namespace The_Mark
 		public string personLastName;
 		public int personAge;
 		public Gender personGender;
-		public PersonalityType personPersonalityType;
+		//public PersonalityType personPersonalityType;
 		public List<TraitType> personTraits = new List<TraitType>();
 
 		//home
@@ -602,6 +602,7 @@ namespace The_Mark
 			}
 		}
 
+		/*
 		void getPersonality(CreationType creationType,Random rando)
         {
 			if (creationType == CreationType.Created)
@@ -611,6 +612,7 @@ namespace The_Mark
 				personPersonalityType = randomPersonality;
 			}
         }
+		*/
 
 		void GetHealthStats()
         {
@@ -726,7 +728,7 @@ namespace The_Mark
 			//get person's age
 			getAge(creationType, random);
 			//get personality
-			getPersonality(creationType, random);
+			//getPersonality(creationType, random);
 			//add random traits
 			AddRandomTrait(random,creationType,4);
 

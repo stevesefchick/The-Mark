@@ -104,7 +104,7 @@ namespace The_Mark
 					"Age: " + people[i].personAge + "\n" +
 					"Gender: " + people[i].personGender + "\n" +
 					"Home: " + locname + "\n" +
-					"Personality Type: " + people[i].personPersonalityType + "\n" + 
+					//"Personality Type: " + people[i].personPersonalityType + "\n" + 
 					"Traits: \n" + 
 					people[i].personTraits[0] + "\n" +
 					people[i].personTraits[1] + "\n" +
