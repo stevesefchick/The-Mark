@@ -19,6 +19,7 @@ namespace The_Mark
 
         //person data
         public Dictionary<string, TraitData> traitData = new Dictionary<string, TraitData>();
+        public Dictionary<string, SkillData> skillData = new Dictionary<string, SkillData>();
 
         //item data
         public Dictionary<string, Item> itemLootData = new Dictionary<string, Item>();
@@ -54,6 +55,7 @@ namespace The_Mark
         private void loadPersonData()
         {
             traitData = JsonConvert.DeserializeObject<Dictionary<string, TraitData>>(File.ReadAllText(@"Content/Data/Person/traitData.json"));
+            skillData = JsonConvert.DeserializeObject<Dictionary<string, SkillData>>(File.ReadAllText(@"Content/Data/Person/skillData.json"));
         }
 
         private void loadItems()
@@ -151,10 +153,56 @@ namespace The_Mark
     class TraitData
     {
         public string description;
+        public int endurance;
+        public int strength;
+        public int charisma;
+        public int dexterity;
+        public int wit;
+        public int wisdom;
+        public int health;
+        public int stamina;
+        public int stress;
 
-        public TraitData(string thedesc)
+        public TraitData(string thedesc, int end, int dex, int str, int wt, int wis, int cha, int hlth, int stm, int strss)
         {
             description = thedesc;
+            endurance = end;
+            dexterity = dex;
+            strength = str;
+            wit = wt;
+            wisdom = wis;
+            charisma = cha;
+            health = hlth;
+            stamina = stm;
+            stress = strss;
+        }
+    }
+
+    class SkillData
+    {
+        public string description;
+        public int endurance;
+        public int strength;
+        public int charisma;
+        public int dexterity;
+        public int wit;
+        public int wisdom;
+        public int health;
+        public int stamina;
+        public int stress;
+
+        public SkillData(string thedesc, int end, int dex, int str, int wt, int wis, int cha, int hlth, int stm, int strss)
+        {
+            description = thedesc;
+            endurance = end;
+            dexterity = dex;
+            strength = str;
+            wit = wt;
+            wisdom = wis;
+            charisma = cha;
+            health = hlth;
+            stamina = stm;
+            stress = strss;
         }
     }
 }

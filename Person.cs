@@ -611,11 +611,24 @@ namespace The_Mark
         }
 		*/
 
-		void GetHealthStats()
-        {
-			maxHealth = 100;
-			maxStamina = 100;
-			maxStress = 100;
+		void GetHealthStats(Random rando, DataManager data)
+		{
+			maxHealth = rando.Next(75, 101);
+			maxStamina = rando.Next(75, 101);
+			maxStress = rando.Next(75, 101);
+
+			for (int i = 0; i < personTraits.Count; ++i)
+			{
+				maxHealth += data.traitData[personTraits[i].ToString()].health;
+				maxStamina += data.traitData[personTraits[i].ToString()].stamina;
+				maxStress += data.traitData[personTraits[i].ToString()].stress;
+			}
+			for (int i = 0; i < personSkills.Count; ++i)
+			{
+				maxHealth += data.skillData[personSkills[i].skillType.ToString()].health;
+				maxStamina += data.skillData[personSkills[i].skillType.ToString()].stamina;
+				maxStress += data.skillData[personSkills[i].skillType.ToString()].stress;
+			}
 
 			currentHealth = maxHealth;
 			currentStamina = maxStamina;
@@ -623,14 +636,33 @@ namespace The_Mark
 
         }
 
-		void GetAttributeStats()
+		void GetAttributeStats(Random rando,DataManager data)
         {
-			endurance = 1;
-			strength = 1;
-			dexterity = 1;
-			wit = 1;
-			wisdom = 1;
-			charisma = 1;
+			endurance = rando.Next(1,4);
+			strength = rando.Next(1, 4);
+			dexterity = rando.Next(1, 4);
+			wit = rando.Next(1, 4);
+			wisdom = rando.Next(1, 4);
+			charisma = rando.Next(1, 4);
+
+			for (int i =0; i < personTraits.Count;++i)
+            {
+				endurance += data.traitData[personTraits[i].ToString()].endurance;
+				strength += data.traitData[personTraits[i].ToString()].strength;
+				dexterity += data.traitData[personTraits[i].ToString()].dexterity;
+				wit += data.traitData[personTraits[i].ToString()].wit;
+				wisdom += data.traitData[personTraits[i].ToString()].wisdom;
+				charisma += data.traitData[personTraits[i].ToString()].charisma;
+			}
+			for (int i = 0; i < personSkills.Count; ++i)
+			{
+				endurance += data.skillData[personSkills[i].skillType.ToString()].endurance;
+				strength += data.skillData[personSkills[i].skillType.ToString()].strength;
+				dexterity += data.skillData[personSkills[i].skillType.ToString()].dexterity;
+				wit += data.skillData[personSkills[i].skillType.ToString()].wit;
+				wisdom += data.skillData[personSkills[i].skillType.ToString()].wisdom;
+				charisma += data.skillData[personSkills[i].skillType.ToString()].charisma;
+			}
 
 			attack = 1;
 			defense = 1;
@@ -649,6 +681,19 @@ namespace The_Mark
 
 			return false;
         }
+
+		Boolean isDupeSkill(PersonSkill.SkillType newType)
+        {
+			for (int i = 0; i < personSkills.Count; ++i)
+			{
+				if (personSkills[i].skillType == newType)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
 
 		Boolean isConflictingTrait(TraitType newTrait)
         {
@@ -717,10 +762,10 @@ namespace The_Mark
 					{
 						randomSkill = (PersonSkill.SkillType)values.GetValue(rando.Next(values.Length));
 
-						//if (isDupeTrait(randomTrait) == false && isConflictingTrait(randomTrait) == false)
-						//{
+						if (isDupeSkill(randomSkill) == false)
+						{
 							isgood = true;
-						//}
+						}
 					}
 					//todo, get random ranking
 					personSkills.Add(new PersonSkill(randomSkill, PersonSkill.SkillRanking.Novice));
@@ -756,9 +801,9 @@ namespace The_Mark
 			//add random skills
 			AddRandomSkill(random, creationType, 2);
 			//get Stat Attributes
-			GetAttributeStats();
+			GetAttributeStats(random,datamanager);
 			//get Health Stats
-			GetHealthStats();
+			GetHealthStats(random,datamanager);
 
 
         }

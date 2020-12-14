@@ -11,8 +11,8 @@ namespace The_Mark
         public enum SkillType { Blacksmithing, FirstAid, Singing }
         public enum SkillRanking { Novice, Apprentice, Professional, Master }
 
-        SkillType skillType;
-        SkillRanking skillRanking;
+        public SkillType skillType;
+        public SkillRanking skillRanking;
 
         public PersonSkill(SkillType type, SkillRanking ranking)
         {
