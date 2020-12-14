@@ -20,6 +20,19 @@ namespace The_Mark
         int itemAbility;
         public Vector2 itemSpriteSheetXY;
 
+        public int getAttack()
+        {
+            return itemAttack;
+        }
+        public int getDefense()
+        {
+            return itemDefense;
+        }
+        public int getAbility()
+        {
+            return itemAbility;
+        }
+
         public EquipmentItem(string name, int value, Boolean stackable, EquipmentItemStatus itemStatus, EquipmentSlot itemSlot, int attack, int defense, int ability, int spritesheetx, int spritesheety) : base(name, value, stackable)
         {
             itemName = name;

@@ -400,22 +400,31 @@ namespace The_Mark
         public void EquipBody(EquipmentItem item)
         {
 			bodyEquipment = item;
+			calculateCombatStats();
         }
 		public void EquipHead(EquipmentItem item)
 		{
 			headEquipment = item;
+			calculateCombatStats();
+
 		}
 		public void EquipHands(EquipmentItem item)
 		{
 			handsEquipment = item;
+			calculateCombatStats();
+
 		}
 		public void EquipJewelry(EquipmentItem item)
 		{
 			jewelryEquipment = item;
+			calculateCombatStats();
+
 		}
 		public void EquipTrinket(EquipmentItem item)
 		{
 			trinketEquipment = item;
+			calculateCombatStats();
+
 		}
 		#endregion
 
@@ -664,9 +673,6 @@ namespace The_Mark
 				charisma += data.skillData[personSkills[i].skillType.ToString()].charisma;
 			}
 
-			attack = 1;
-			defense = 1;
-			ability = 1;
         }
 
 		Boolean isDupeTrait(TraitType newTrait)
@@ -748,6 +754,58 @@ namespace The_Mark
 			}
 
 		}
+
+		//calculates attack, defense, and ability based on equipment, skills, and stats
+		//should be run after every equipment update
+		void calculateCombatStats()
+        {
+			if (handsEquipment != null &&
+				headEquipment != null &&
+				bodyEquipment != null &&
+				trinketEquipment != null &&
+				jewelryEquipment != null)
+			{
+				//attack
+				int newattack = 1;
+				newattack += handsEquipment.getAttack();
+				newattack += headEquipment.getAttack();
+				newattack += bodyEquipment.getAttack();
+				newattack += jewelryEquipment.getAttack();
+				newattack += trinketEquipment.getAttack();
+				newattack += (int)(strength/2);
+				
+				//defense
+				int newdefense = 1;
+				newdefense += handsEquipment.getDefense();
+				newdefense += headEquipment.getDefense();
+				newdefense += bodyEquipment.getDefense();
+				newdefense += jewelryEquipment.getDefense();
+				newdefense += trinketEquipment.getDefense();
+				newdefense += (int)(endurance/2);
+
+				//ability
+				int newability = 1;
+				newability += handsEquipment.getAbility();
+				newability += headEquipment.getAbility();
+				newability += bodyEquipment.getAbility();
+				newability += jewelryEquipment.getAbility();
+				newability += trinketEquipment.getAbility();
+				newability += (int)(dexterity / 2);
+
+				//skill influence
+				for (int i =0;i < personSkills.Count;++i)
+                {
+					newattack += personSkills[i].getAttackInfluence();
+					newdefense += personSkills[i].getDefenseInfluence();
+					newability += personSkills[i].getAbilityInfluence();
+				}
+
+				attack = newattack;
+				defense = newdefense;
+				ability = newability;
+			}
+        }
+
 
 		void AddRandomSkill(Random rando, CreationType creationType, int numberofnewskills)
         {
