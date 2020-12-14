@@ -23,6 +23,7 @@ namespace The_Mark
 		public Gender personGender;
 		//public PersonalityType personPersonalityType;
 		public List<TraitType> personTraits = new List<TraitType>();
+		public List<PersonSkill> personSkills = new List<PersonSkill>();
 
 		//home
 		public string placeIDHome;
@@ -35,10 +36,6 @@ namespace The_Mark
 		public EquipmentItem trinketEquipment;
 
 		//TODO: appearance attributes
-
-		//TODO: personality trait attributes
-
-		//TODO: skills
 
 		//Stat Attributes
 		public int endurance;
@@ -695,13 +692,38 @@ namespace The_Mark
                     {
 						randomTrait = (TraitType)values.GetValue(rando.Next(values.Length));
 
-						if (isDupeTrait(randomTrait) == false)
+						if (isDupeTrait(randomTrait) == false && isConflictingTrait(randomTrait) ==false)
 						{
 							isgood = true;
 						}
 					}		
 
 					personTraits.Add(randomTrait);
+				}
+			}
+
+		}
+
+		void AddRandomSkill(Random rando, CreationType creationType, int numberofnewskills)
+        {
+			if (creationType == CreationType.Created)
+			{
+				for (int i = 0; i < numberofnewskills; ++i)
+				{
+					Boolean isgood = false;
+					Array values = Enum.GetValues(typeof(PersonSkill.SkillType));
+					PersonSkill.SkillType randomSkill = new PersonSkill.SkillType();
+					while (isgood == false)
+					{
+						randomSkill = (PersonSkill.SkillType)values.GetValue(rando.Next(values.Length));
+
+						//if (isDupeTrait(randomTrait) == false && isConflictingTrait(randomTrait) == false)
+						//{
+							isgood = true;
+						//}
+					}
+					//todo, get random ranking
+					personSkills.Add(new PersonSkill(randomSkill, PersonSkill.SkillRanking.Novice));
 				}
 			}
 
@@ -731,9 +753,8 @@ namespace The_Mark
 			//getPersonality(creationType, random);
 			//add random traits
 			AddRandomTrait(random,creationType,4);
-
-			//TODO:Get Skills
-
+			//add random skills
+			AddRandomSkill(random, creationType, 2);
 			//get Stat Attributes
 			GetAttributeStats();
 			//get Health Stats
