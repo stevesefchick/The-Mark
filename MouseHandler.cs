@@ -28,28 +28,43 @@ namespace The_Mark
 
         }
 
-        public void Update(Vector2 cameraposition,Vector2 backbufferposition,SpriteFont spritefont)
+        Vector2 getMouseFontPosition(SpriteFont spritefont, Vector2 backbufferposition, Vector2 cameraposition, int offset)
         {
-            mouseState = Mouse.GetState();
-            mousePosition.X = mouseState.X;
-            mousePosition.Y = mouseState.Y;
+            Vector2 position = mousePosition - backbufferposition / 2 + cameraposition;
 
-            fontPosition = mousePosition - backbufferposition / 2 + cameraposition;
-
-            if (mousePosition.Y>240)
+            if (mousePosition.Y > 240)
             {
-                fontPosition.Y -= 50;
+                position.Y -= 50;
 
             }
             else
             {
-                fontPosition.Y += 50;
+                position.Y += 50;
             }
 
-            fontPosition.X -= spritefont.MeasureString(mouseHoverFont).X / 2;
+            position.X -= spritefont.MeasureString(mouseHoverFont).X / 2;
 
-            mouseHoverFont = prioritizeText();
+            position.X += offset;
+            position.Y += offset;
 
+            return position;
+        }
+
+        public void Update(Vector2 cameraposition,Vector2 backbufferposition,SpriteFont spritefont)
+        {
+            mouseState = Mouse.GetState();
+
+            //mouse moved
+            if (mousePosition.X != mouseState.X ||
+                mousePosition.Y != mouseState.Y)
+            {
+                mousePosition.X = mouseState.X;
+                mousePosition.Y = mouseState.Y;
+                mouseHoverFont = prioritizeText();
+
+            }
+
+            //left mouse pressed
             if (mouseState.LeftButton == ButtonState.Pressed)
             {
                 isLeftClickDown = true;
@@ -94,10 +109,6 @@ namespace The_Mark
             return posish;
         }
 
-        public Vector2 getTextOffset(Vector2 boyyyy, int size)
-        {
-            return new Vector2(boyyyy.X + size, boyyyy.Y + size);
-        }
 
         Rectangle positionFromVectorToRect(Vector2 yeahboi)
         {
@@ -110,9 +121,10 @@ namespace The_Mark
         {
             if (dontShowText == false)
             {
-                spriteBatch.DrawString(font, mouseHoverFont, fontPosition, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.73f);
-                spriteBatch.DrawString(font, mouseHoverFont, getTextOffset(fontPosition, 1), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
-                spriteBatch.DrawString(font, mouseHoverFont, getTextOffset(fontPosition, 2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
+                spriteBatch.DrawString(font, mouseHoverFont, getMouseFontPosition(font,backbuffer,cameraposition,0), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.73f);
+                spriteBatch.DrawString(font, mouseHoverFont, getMouseFontPosition(font, backbuffer, cameraposition, 1), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
+                spriteBatch.DrawString(font, mouseHoverFont, getMouseFontPosition(font, backbuffer, cameraposition, 2), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.71f);
+
             }
 
             spriteBatch.Draw(mouseTexture, positionFromVectorToRect(getMousePosition(cameraposition,backbuffer)),null, Color.White,0,Vector2.Zero, SpriteEffects.None,0.9f);
