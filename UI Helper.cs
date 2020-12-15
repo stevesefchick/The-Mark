@@ -95,7 +95,7 @@ namespace The_Mark
         }
 
         //Create Window for player stats
-        public void createUIWindow(UIWindowCreationTypes creationType, Boolean isMark,int associatedChar, PlayerHandler playerhandler)
+        public void createUIWindow(UIWindowCreationTypes creationType, Boolean isMark,int associatedChar, PlayerHandler playerhandler, DataManager datamanager)
         {
             if (creationType == UIWindowCreationTypes.CharacterStatWindow)
             {
@@ -380,6 +380,58 @@ namespace The_Mark
 
 
 
+                //traits
+                newwindow.AssignTextBody("Traits", new Vector2(0, 75), Color.White, UIWindow.UIWindowAlignmentType.Left, mainFont);
+                
+                if (isMark==true)
+                {
+                    for (int i = 0; i < playerhandler.theMark.personTraits.Count;++i)
+                    {
+                        newwindow.AssignTextBody(playerhandler.theMark.personTraits[i].ToString(), new Vector2(25, 100 + (i*25)), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                        newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 25, newwindow.uiWindowPosition.Y + 100 + (i * 25), 175, 25), new UIHoverCard(new Vector2(50, 75), playerhandler.theMark.personTraits[i].ToString(), datamanager.traitData[playerhandler.theMark.personTraits[i].ToString()].description, mainFont, titleFont));
+
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < playerhandler.partyMembers[associatedChar].personTraits.Count; ++i)
+                    {
+                        newwindow.AssignTextBody(playerhandler.partyMembers[associatedChar].personTraits[i].ToString(), new Vector2(25, 100 + (i * 25)), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                        newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 25, newwindow.uiWindowPosition.Y + 100 + (i * 25), 175, 25), new UIHoverCard(new Vector2(50, 75), playerhandler.partyMembers[associatedChar].personTraits[i].ToString(), datamanager.traitData[playerhandler.partyMembers[associatedChar].personTraits[i].ToString()].description, mainFont, titleFont));
+                    }
+                }
+
+                //skills
+                newwindow.AssignTextBody("Skills", new Vector2(250, 75), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                if (isMark == true)
+                {
+                    for (int i = 0; i < playerhandler.theMark.personSkills.Count;++i)
+                    {
+                        newwindow.AssignTextBody(playerhandler.theMark.personSkills[i].skillType.ToString(), new Vector2(275, 100 + (i * 50)), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                        newwindow.AssignTextBody(playerhandler.theMark.personSkills[i].skillRanking.ToString(), new Vector2(300, 125 + (i * 50)), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                        newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 100 + (i * 50), 175, 50), new UIHoverCard(new Vector2(50, 75), playerhandler.theMark.personSkills[i].skillType.ToString(), datamanager.skillData[playerhandler.theMark.personSkills[i].skillType.ToString()].description, mainFont, titleFont));
+
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < playerhandler.partyMembers[associatedChar].personSkills.Count; ++i)
+                    {
+                        newwindow.AssignTextBody(playerhandler.partyMembers[associatedChar].personSkills[i].skillType.ToString(), new Vector2(275, 100 + (i * 50)), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                        newwindow.AssignTextBody(playerhandler.partyMembers[associatedChar].personSkills[i].skillRanking.ToString(), new Vector2(300, 125 + (i * 50)), Color.White, UIWindow.UIWindowAlignmentType.Normal, mainFont);
+                        newwindow.hoverCardCollision.Add(new Rectangle(newwindow.uiWindowPosition.X + 250, newwindow.uiWindowPosition.Y + 100 + (i * 50), 175, 50), new UIHoverCard(new Vector2(50, 75), playerhandler.partyMembers[associatedChar].personSkills[i].skillType.ToString(), datamanager.skillData[playerhandler.partyMembers[associatedChar].personSkills[i].skillType.ToString()].description, mainFont, titleFont));
+
+                    }
+                }
+
+
+
+
+
+
+
+
+
                 //tabs
                 newwindow.CreateTab(0, "Health & Stats", false, UIWindowCreationTypes.CharacterStatWindow);
                 newwindow.CreateTab(180, "Equipment", false, UIWindowCreationTypes.CharacterEquipmentWindow);
@@ -422,26 +474,26 @@ namespace The_Mark
             return posish;
         }
 
-        void ClickTabs(int window, int partymember, Boolean isMark, String nameOfTab,PlayerHandler playerhandler)
+        void ClickTabs(int window, int partymember, Boolean isMark, String nameOfTab,PlayerHandler playerhandler, DataManager datamanager)
         {
             if (nameOfTab=="Equipment")
             {
-                createUIWindow(UIWindowCreationTypes.CharacterEquipmentWindow, isMark, partymember, playerhandler);
+                createUIWindow(UIWindowCreationTypes.CharacterEquipmentWindow, isMark, partymember, playerhandler, datamanager);
                 uiWindows.RemoveAt(window);
             }
             else if (nameOfTab == "Health & Stats")
             {
-                createUIWindow(UIWindowCreationTypes.CharacterStatWindow, isMark, partymember, playerhandler);
+                createUIWindow(UIWindowCreationTypes.CharacterStatWindow, isMark, partymember, playerhandler, datamanager);
                 uiWindows.RemoveAt(window);
             }
             else if (nameOfTab == "Skills & Traits")
             {
-                createUIWindow(UIWindowCreationTypes.CharacterSkillsWindow, isMark, partymember, playerhandler);
+                createUIWindow(UIWindowCreationTypes.CharacterSkillsWindow, isMark, partymember, playerhandler, datamanager);
                 uiWindows.RemoveAt(window);
             }
         }
 
-        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset)
+        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset,DataManager datamanager)
         {
             if (mouse.isLeftClickDown == true)
             {
@@ -463,7 +515,7 @@ namespace The_Mark
                     {
                             if (mouse.leftMouseClickPosition.Intersects(getUIPosition(uiWindows[i].uiWindowTabs[t], uiWindows[i].uiWindowPosition, offset)))
                             {
-                                ClickTabs(i, uiWindows[i].partymember, uiWindows[i].isTheMark, uiWindows[i].uiWindowsTabsText[t], party);
+                                ClickTabs(i, uiWindows[i].partymember, uiWindows[i].isTheMark, uiWindows[i].uiWindowsTabsText[t], party, datamanager);
                                 break;
                             }
                     }
@@ -484,11 +536,11 @@ namespace The_Mark
                     {
                         if (i == 0)
                         {
-                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, true, 0,party);
+                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, true, 0,party, datamanager);
                         }
                         else
                         {
-                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, false, i,party);
+                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, false, i,party, datamanager);
                         }
                     }
 
