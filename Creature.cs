@@ -870,7 +870,6 @@ namespace The_Mark
 
             #endregion
 
-
             //furball
             #region furball
             if (thisCreatureType == ThisCreatureType.Furball)
