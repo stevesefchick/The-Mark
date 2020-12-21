@@ -20,6 +20,7 @@ namespace The_Mark
         //person data
         public Dictionary<string, TraitData> traitData = new Dictionary<string, TraitData>();
         public Dictionary<string, SkillData> skillData = new Dictionary<string, SkillData>();
+        public Dictionary<string, TorsoSpriteData> torsoSpriteData = new Dictionary<string, TorsoSpriteData>();
 
         //item data
         public Dictionary<string, Item> itemLootData = new Dictionary<string, Item>();
@@ -56,6 +57,7 @@ namespace The_Mark
         {
             traitData = JsonConvert.DeserializeObject<Dictionary<string, TraitData>>(File.ReadAllText(@"Content/Data/Person/traitData.json"));
             skillData = JsonConvert.DeserializeObject<Dictionary<string, SkillData>>(File.ReadAllText(@"Content/Data/Person/skillData.json"));
+            torsoSpriteData = JsonConvert.DeserializeObject<Dictionary<string, TorsoSpriteData>>(File.ReadAllText(@"Content/Data/Person/torsoSpriteData.json"));
         }
 
         private void loadItems()
@@ -203,6 +205,21 @@ namespace The_Mark
             health = hlth;
             stamina = stm;
             stress = strss;
+        }
+    }
+
+    class TorsoSpriteData
+    {
+        public Vector2 spriteLoc;
+        public Vector2 spriteCenter;
+        public Vector2 spriteHeadConnector;
+
+        public TorsoSpriteData(int sheetx, int sheety, int centerx, int centery,int headx, int heady)
+        {
+            spriteLoc = new Vector2(sheetx, sheety);
+            spriteCenter = new Vector2(centerx, centery);
+            spriteHeadConnector = new Vector2(headx, heady);
+
         }
     }
 }

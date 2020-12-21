@@ -29,6 +29,7 @@ namespace The_Mark
 
 		
 		//assets
+		//road/rivers
 		protected Texture2D roadTiles;
 		protected Texture2D riverTiles;
 		//terrains
@@ -43,6 +44,8 @@ namespace The_Mark
 		protected Texture2D beachDoodadTerrainTiles;
 		//world elements
 		protected Texture2D cloudTiles;
+		//people
+		protected Texture2D torsoTiles;
 
 
 		//checks
@@ -71,6 +74,7 @@ namespace The_Mark
 			swampTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/swamp_grid_1");
 			swampTreeTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/tree_grid_2");
 			cloudTiles = gamedeets.Content.Load<Texture2D>("Sprites/World/cloud_grid");
+			torsoTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/torsoSheet");
 		}
 
 		//debug - announce creations
