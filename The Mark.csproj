@@ -99,6 +99,7 @@
     <Compile Include="MouseHandler.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonSkill.cs" />
+    <Compile Include="PersonSpriteConstruct.cs" />
     <Compile Include="Place.cs" />
     <Compile Include="PlayerHandler.cs" />
     <Compile Include="Road.cs" />
