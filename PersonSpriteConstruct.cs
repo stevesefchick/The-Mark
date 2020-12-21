@@ -16,7 +16,7 @@ namespace The_Mark
         //Face Part
 
 
-        public PersonSpriteConstruct()
+        public PersonSpriteConstruct(DataManager datamanager)
         {
 
         }
@@ -24,7 +24,12 @@ namespace The_Mark
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            //Torso Part
+            //Feet Part
+            //Hands Part
+            //Head Part
+            //Hair Part
+            //Face Part
 
 
         }
