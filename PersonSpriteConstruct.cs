@@ -14,10 +14,12 @@ namespace The_Mark
         //Head Part
         HeadSpriteData headPart;
         //Hair Part
+        HairSpriteData hairPart;
         //Face Part
 
         int torsosize = 50;
         int headsize = 50;
+        int hairsize = 50;
 
         public PersonSpriteConstruct(DataManager datamanager,Random rando)
         {
@@ -42,10 +44,21 @@ namespace The_Mark
             headPart = datamanager.headSpriteData[candidates[rando.Next(0, candidates.Count)].ToString()];
             candidates.Clear();
 
+
+            //hairs
+            foreach (KeyValuePair<string, HairSpriteData> entry in datamanager.hairSpriteData)
+            {
+                candidates.Add(entry.Key);
+
+            }
+            //assign hair
+            hairPart = datamanager.hairSpriteData[candidates[rando.Next(0, candidates.Count)].ToString()];
+            candidates.Clear();
+
         }
 
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, Texture2D torso,Texture2D head)
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, Texture2D torso,Texture2D head,Texture2D hair)
         {
             //TODO: Get depth draworder
 
@@ -58,6 +71,8 @@ namespace The_Mark
             spriteBatch.Draw(head, new Rectangle((int)location.X, (int)location.Y, headsize, headsize), new Rectangle((int)headPart.spriteLoc.X, (int)headPart.spriteLoc.Y, headsize, headsize), Color.White, 0, headPart.spriteCenter, SpriteEffects.None, 1);
 
             //Hair Part
+            spriteBatch.Draw(hair, new Rectangle((int)location.X, (int)location.Y, hairsize, hairsize), new Rectangle((int)hairPart.spriteLoc.X, (int)hairPart.spriteLoc.Y, hairsize, hairsize), Color.White, 0, new Vector2(hairsize/2,hairsize/2), SpriteEffects.None, 1);
+
             //Face Part
 
 

@@ -22,6 +22,7 @@ namespace The_Mark
         public Dictionary<string, SkillData> skillData = new Dictionary<string, SkillData>();
         public Dictionary<string, TorsoSpriteData> torsoSpriteData = new Dictionary<string, TorsoSpriteData>();
         public Dictionary<string, HeadSpriteData> headSpriteData = new Dictionary<string, HeadSpriteData>();
+        public Dictionary<string, HairSpriteData> hairSpriteData = new Dictionary<string, HairSpriteData>();
 
         //item data
         public Dictionary<string, Item> itemLootData = new Dictionary<string, Item>();
@@ -61,6 +62,7 @@ namespace The_Mark
             //sprite data
             torsoSpriteData = JsonConvert.DeserializeObject<Dictionary<string, TorsoSpriteData>>(File.ReadAllText(@"Content/Data/Person/torsoSpriteData.json"));
             headSpriteData = JsonConvert.DeserializeObject<Dictionary<string, HeadSpriteData>>(File.ReadAllText(@"Content/Data/Person/headSpriteData.json"));
+            hairSpriteData = JsonConvert.DeserializeObject<Dictionary<string, HairSpriteData>>(File.ReadAllText(@"Content/Data/Person/hairSpriteData.json"));
         }
 
         private void loadItems()
@@ -231,13 +233,26 @@ namespace The_Mark
         public Vector2 spriteLoc;
         public Vector2 spriteCenter;
         public Vector2 spriteBodyConnector;
+        public Vector2 spriteHairConnector;
 
-        public HeadSpriteData(int sheetx, int sheety, int centerx, int centery, int bodyx, int bodyy)
+        public HeadSpriteData(int sheetx, int sheety, int centerx, int centery, int bodyx, int bodyy,int hairx,int hairy)
         {
             spriteLoc = new Vector2(sheetx, sheety);
             spriteCenter = new Vector2(centerx, centery);
             spriteBodyConnector = new Vector2(bodyx, bodyy);
+            spriteHairConnector = new Vector2(hairx, hairy);
+        }
+    }
 
+    class HairSpriteData
+    {
+        public Vector2 spriteLoc;
+        public Vector2 spriteHeadConnector;
+
+        public HairSpriteData(int sheetx, int sheety, int headx,int heady)
+        {
+            spriteLoc = new Vector2(sheetx, sheety);
+            spriteHeadConnector = new Vector2(headx, heady);
         }
     }
 }
