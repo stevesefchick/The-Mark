@@ -46,6 +46,7 @@ namespace The_Mark
 		protected Texture2D cloudTiles;
 		//people
 		protected Texture2D torsoTiles;
+		protected Texture2D headTiles;
 
 
 		//checks
@@ -75,6 +76,7 @@ namespace The_Mark
 			swampTreeTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/tree_grid_2");
 			cloudTiles = gamedeets.Content.Load<Texture2D>("Sprites/World/cloud_grid");
 			torsoTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/torsoSheet");
+			headTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/headSheet");
 		}
 
 		//debug - announce creations
