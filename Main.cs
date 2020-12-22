@@ -293,6 +293,7 @@ class GameMain : Game
 		//2 - water
 		//2.5 - roads
 		//3 - places and doodads
+		//5 - people
 		//6 - clouds
 		//7 - text
 		//8 - ui

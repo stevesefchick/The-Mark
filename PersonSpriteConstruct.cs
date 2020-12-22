@@ -16,10 +16,12 @@ namespace The_Mark
         //Hair Part
         HairSpriteData hairPart;
         //Face Part
+        FaceSpriteData facePart;
 
         int torsosize = 50;
         int headsize = 50;
         int hairsize = 50;
+        int facesize = 25;
 
         public PersonSpriteConstruct(DataManager datamanager,Random rando)
         {
@@ -55,27 +57,38 @@ namespace The_Mark
             hairPart = datamanager.hairSpriteData[candidates[rando.Next(0, candidates.Count)].ToString()];
             candidates.Clear();
 
+
+            //faces
+            foreach (KeyValuePair<string, FaceSpriteData> entry in datamanager.faceSpriteData)
+            {
+                candidates.Add(entry.Key);
+
+            }
+            //assign face
+            facePart = datamanager.faceSpriteData[candidates[rando.Next(0, candidates.Count)].ToString()];
+            candidates.Clear();
+
+
+
+
+
+
         }
 
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, Texture2D torso,Texture2D head,Texture2D hair)
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, Texture2D torso,Texture2D head,Texture2D hair,Texture2D face)
         {
-            //TODO: Get depth draworder
-
             //Torso Part
-            spriteBatch.Draw(torso, new Rectangle((int)location.X, (int)location.Y, torsosize, torsosize), new Rectangle((int)torsoPart.spriteLoc.X, (int)torsoPart.spriteLoc.Y, torsosize, torsosize), Color.White, 0, torsoPart.spriteCenter, SpriteEffects.None, 1);
+            spriteBatch.Draw(torso, new Rectangle((int)location.X, (int)location.Y, torsosize, torsosize), new Rectangle((int)torsoPart.spriteLoc.X, (int)torsoPart.spriteLoc.Y, torsosize, torsosize), Color.White, 0, torsoPart.spriteCenter, SpriteEffects.None, 0.55f);
+            //Head Part
+            spriteBatch.Draw(head, new Rectangle((int)location.X, (int)location.Y, headsize, headsize), new Rectangle((int)headPart.spriteLoc.X, (int)headPart.spriteLoc.Y, headsize, headsize), Color.White, 0, headPart.spriteCenter, SpriteEffects.None, 0.56f);
+            //Hair Part
+            spriteBatch.Draw(hair, new Rectangle((int)location.X, (int)location.Y, hairsize, hairsize), new Rectangle((int)hairPart.spriteLoc.X, (int)hairPart.spriteLoc.Y, hairsize, hairsize), Color.White, 0, new Vector2(hairsize/2,hairsize/2), SpriteEffects.None, 0.57f);
+            //Face Part
+            spriteBatch.Draw(face, new Rectangle((int)location.X, (int)location.Y, facesize, facesize), new Rectangle((int)facePart.spriteLoc.X, (int)facePart.spriteLoc.Y, facesize, facesize), Color.White, 0, facePart.spriteCenter, SpriteEffects.None, 0.57f);
 
             //Feet Part
             //Hands Part
-            //Head Part
-            spriteBatch.Draw(head, new Rectangle((int)location.X, (int)location.Y, headsize, headsize), new Rectangle((int)headPart.spriteLoc.X, (int)headPart.spriteLoc.Y, headsize, headsize), Color.White, 0, headPart.spriteCenter, SpriteEffects.None, 1);
-
-            //Hair Part
-            spriteBatch.Draw(hair, new Rectangle((int)location.X, (int)location.Y, hairsize, hairsize), new Rectangle((int)hairPart.spriteLoc.X, (int)hairPart.spriteLoc.Y, hairsize, hairsize), Color.White, 0, new Vector2(hairsize/2,hairsize/2), SpriteEffects.None, 1);
-
-            //Face Part
-
-
         }
 
     }
