@@ -24,6 +24,7 @@ namespace The_Mark
         public Dictionary<string, HeadSpriteData> headSpriteData = new Dictionary<string, HeadSpriteData>();
         public Dictionary<string, HairSpriteData> hairSpriteData = new Dictionary<string, HairSpriteData>();
         public Dictionary<string, FaceSpriteData> faceSpriteData = new Dictionary<string, FaceSpriteData>();
+        public Dictionary<string, LegSpriteData> legSpriteData = new Dictionary<string, LegSpriteData>();
 
         //item data
         public Dictionary<string, Item> itemLootData = new Dictionary<string, Item>();
@@ -65,6 +66,7 @@ namespace The_Mark
             headSpriteData = JsonConvert.DeserializeObject<Dictionary<string, HeadSpriteData>>(File.ReadAllText(@"Content/Data/Person/headSpriteData.json"));
             hairSpriteData = JsonConvert.DeserializeObject<Dictionary<string, HairSpriteData>>(File.ReadAllText(@"Content/Data/Person/hairSpriteData.json"));
             faceSpriteData = JsonConvert.DeserializeObject<Dictionary<string, FaceSpriteData>>(File.ReadAllText(@"Content/Data/Person/faceSpriteData.json"));
+            legSpriteData = JsonConvert.DeserializeObject<Dictionary<string, LegSpriteData>>(File.ReadAllText(@"Content/Data/Person/legSpriteData.json"));
         }
 
         private void loadItems()
@@ -267,6 +269,18 @@ namespace The_Mark
         {
             spriteLoc = new Vector2(sheetx, sheety);
             spriteCenter = new Vector2(centerx, centery);
+        }
+    }
+
+    class LegSpriteData
+    {
+        public Vector2 spriteLoc;
+        public Vector2 spriteBodyConnector;
+
+        public LegSpriteData(int sheetx, int sheety, int bodyx, int bodyy)
+        {
+            spriteLoc = new Vector2(sheetx, sheety);
+            spriteBodyConnector = new Vector2(bodyx, bodyy);
         }
     }
 }

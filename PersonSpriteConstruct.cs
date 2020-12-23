@@ -9,7 +9,8 @@ namespace The_Mark
     {
         //Torso Part
         TorsoSpriteData torsoPart;
-        //Feet Part
+        //Leg Part
+        LegSpriteData legPart;
         //Hands Part
         //Head Part
         HeadSpriteData headPart;
@@ -22,6 +23,7 @@ namespace The_Mark
         int headsize = 50;
         int hairsize = 50;
         int facesize = 25;
+        int legsize = 50;
 
         public PersonSpriteConstruct(DataManager datamanager,Random rando)
         {
@@ -69,14 +71,22 @@ namespace The_Mark
             candidates.Clear();
 
 
+            //legs
+            foreach (KeyValuePair<string, LegSpriteData> entry in datamanager.legSpriteData)
+            {
+                candidates.Add(entry.Key);
 
+            }
+            //assign leg
+            legPart = datamanager.legSpriteData[candidates[rando.Next(0, candidates.Count)].ToString()];
+            candidates.Clear();
 
 
 
         }
 
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, Texture2D torso,Texture2D head,Texture2D hair,Texture2D face)
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, Texture2D torso,Texture2D head,Texture2D hair,Texture2D face,Texture2D leg)
         {
             //Torso Part
             spriteBatch.Draw(torso, new Rectangle((int)location.X, (int)location.Y, torsosize, torsosize), new Rectangle((int)torsoPart.spriteLoc.X, (int)torsoPart.spriteLoc.Y, torsosize, torsosize), Color.White, 0, torsoPart.spriteCenter, SpriteEffects.None, 0.55f);
@@ -87,7 +97,10 @@ namespace The_Mark
             //Face Part
             spriteBatch.Draw(face, new Rectangle((int)location.X, (int)location.Y, facesize, facesize), new Rectangle((int)facePart.spriteLoc.X, (int)facePart.spriteLoc.Y, facesize, facesize), Color.White, 0, facePart.spriteCenter, SpriteEffects.None, 0.57f);
 
-            //Feet Part
+            //Legs
+            spriteBatch.Draw(leg, new Rectangle((int)location.X, (int)location.Y, legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.White, 0, legPart.spriteBodyConnector, SpriteEffects.None, 0.56f);
+            spriteBatch.Draw(leg, new Rectangle((int)location.X, (int)location.Y, legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.White, 0, legPart.spriteBodyConnector, SpriteEffects.None, 0.56f);
+
             //Hands Part
         }
 
