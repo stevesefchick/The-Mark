@@ -50,6 +50,9 @@
     <None Include="Content\Data\Person\faceSpriteData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\Data\Person\armSpriteData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Data\Person\legSpriteData.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -138,6 +141,9 @@
     <Folder Include="Content\Sprites\Creature\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Sprites\Person\armSheet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Sprites\Person\faceSheet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

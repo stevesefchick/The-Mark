@@ -50,6 +50,7 @@ namespace The_Mark
 		protected Texture2D hairTiles;
 		protected Texture2D faceTiles;
 		protected Texture2D legTiles;
+		protected Texture2D armTiles;
 
 
 		//checks
@@ -83,6 +84,7 @@ namespace The_Mark
 			hairTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/hairSheet");
 			faceTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/faceSheet");
 			legTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/legSheet");
+			armTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/armSheet");
 		}
 
 		//debug - announce creations

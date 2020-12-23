@@ -11,7 +11,8 @@ namespace The_Mark
         TorsoSpriteData torsoPart;
         //Leg Part
         LegSpriteData legPart;
-        //Hands Part
+        //Arm Part
+        ArmSpriteData armPart;
         //Head Part
         HeadSpriteData headPart;
         //Hair Part
@@ -24,6 +25,7 @@ namespace The_Mark
         int hairsize = 50;
         int facesize = 25;
         int legsize = 50;
+        int armsize = 50;
 
         public PersonSpriteConstruct(DataManager datamanager,Random rando)
         {
@@ -82,11 +84,19 @@ namespace The_Mark
             candidates.Clear();
 
 
+            //arms
+            foreach (KeyValuePair<string, ArmSpriteData> entry in datamanager.armSpriteData)
+            {
+                candidates.Add(entry.Key);
 
+            }
+            //assign arm
+            armPart = datamanager.armSpriteData[candidates[rando.Next(0, candidates.Count)].ToString()];
+            candidates.Clear();
         }
 
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, Texture2D torso,Texture2D head,Texture2D hair,Texture2D face,Texture2D leg)
+        public void Draw(SpriteBatch spriteBatch, Vector2 location, Texture2D torso,Texture2D head,Texture2D hair,Texture2D face,Texture2D leg,Texture2D arm)
         {
             //Torso Part
             spriteBatch.Draw(torso, new Rectangle((int)location.X, (int)location.Y, torsosize, torsosize), new Rectangle((int)torsoPart.spriteLoc.X, (int)torsoPart.spriteLoc.Y, torsosize, torsosize), Color.White, 0, torsoPart.spriteCenter, SpriteEffects.None, 0.55f);
@@ -102,6 +112,9 @@ namespace The_Mark
             spriteBatch.Draw(leg, new Rectangle((int)location.X, (int)location.Y, legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.White, 0, legPart.spriteBodyConnector, SpriteEffects.None, 0.56f);
 
             //Hands Part
+            spriteBatch.Draw(arm, new Rectangle((int)location.X, (int)location.Y, armsize, armsize), new Rectangle((int)armPart.spriteLoc.X, (int)armPart.spriteLoc.Y, armsize, armsize), Color.White, 0, armPart.spriteBodyConnector, SpriteEffects.None, 0.56f);
+            spriteBatch.Draw(arm, new Rectangle((int)location.X, (int)location.Y, armsize, armsize), new Rectangle((int)armPart.spriteLoc.X, (int)armPart.spriteLoc.Y, armsize, armsize), Color.White, 0, armPart.spriteBodyConnector, SpriteEffects.None, 0.56f);
+
         }
 
     }
