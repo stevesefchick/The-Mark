@@ -44,13 +44,7 @@ namespace The_Mark
 		protected Texture2D beachDoodadTerrainTiles;
 		//world elements
 		protected Texture2D cloudTiles;
-		//people
-		protected Texture2D torsoTiles;
-		protected Texture2D headTiles;
-		protected Texture2D hairTiles;
-		protected Texture2D faceTiles;
-		protected Texture2D legTiles;
-		protected Texture2D armTiles;
+
 
 
 		//checks
@@ -79,12 +73,7 @@ namespace The_Mark
 			swampTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/swamp_grid_1");
 			swampTreeTerrainTiles = gamedeets.Content.Load<Texture2D>("Sprites/Terrain/tree_grid_2");
 			cloudTiles = gamedeets.Content.Load<Texture2D>("Sprites/World/cloud_grid");
-			torsoTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/torsoSheet");
-			headTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/headSheet");
-			hairTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/hairSheet");
-			faceTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/faceSheet");
-			legTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/legSheet");
-			armTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/armSheet");
+
 		}
 
 		//debug - announce creations

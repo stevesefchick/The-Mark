@@ -35,7 +35,8 @@ namespace The_Mark
 		public EquipmentItem jewelryEquipment;
 		public EquipmentItem trinketEquipment;
 
-		//TODO: appearance attributes
+		//Appearance
+		public PersonSpriteConstruct personAppearance;
 
 		//Stat Attributes
 		public int endurance;
@@ -385,9 +386,10 @@ namespace The_Mark
 
 		}
 
-		#endregion
+        #endregion
 
-		public void Update(GameTime gameTime)
+
+        public void Update(GameTime gameTime)
 		{
 		}
 
@@ -832,6 +834,12 @@ namespace The_Mark
 
 		}
 
+		void createPersonConstruct(DataManager datamanager, Random rando)
+        {
+			personAppearance = new PersonSpriteConstruct(datamanager, rando);
+
+        }
+
         public void CreatePerson(DataManager datamanager, Random random, CreationType creationType)
 		{
 			personID = datamanager.getRandomID(random);
@@ -862,8 +870,8 @@ namespace The_Mark
 			GetAttributeStats(random,datamanager);
 			//get Health Stats
 			GetHealthStats(random,datamanager);
-
-
+			//get appearance
+			createPersonConstruct(datamanager, random);
         }
 
 		public void assignPersonToHome(List<string> placeOptions,Random rando)

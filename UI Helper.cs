@@ -32,6 +32,10 @@ namespace The_Mark
         //character bubbles
         List<UICharacterBubble> uiCharacterBubbles = new List<UICharacterBubble>();
 
+        Vector2 fullcharacterposition = Vector2.Zero;
+        Boolean drawCharacterisMark = false;
+        int drawCharacterValueNonMark = 0;
+
         public UI_Helper(GameMain thegame,SpriteFont bigfont, SpriteFont babyfont)
         {
             titleFont = bigfont;
@@ -97,6 +101,8 @@ namespace The_Mark
         //Create Window for player stats
         public void createUIWindow(UIWindowCreationTypes creationType, Boolean isMark,int associatedChar, PlayerHandler playerhandler, DataManager datamanager)
         {
+            fullcharacterposition = Vector2.Zero;
+
             if (creationType == UIWindowCreationTypes.CharacterStatWindow)
             {
                 UIWindow newwindow = new UIWindow(new Rectangle(returnLocationBasedonBackBuffer(0.5f,true,-250,0), returnLocationBasedonBackBuffer(0.25f,false,0,-100), 500, 400));
@@ -231,6 +237,9 @@ namespace The_Mark
                 newwindow.CreateTab(180, "Equipment",false, UIWindowCreationTypes.CharacterEquipmentWindow);
                 newwindow.CreateTab(360, "Skills & Traits",false, UIWindowCreationTypes.CharacterEquipmentWindow);
 
+                //draw character
+                drawCharacterisMark = true;
+                fullcharacterposition = new Vector2(newwindow.uiWindowPosition.X+150, newwindow.uiWindowPosition.Y + 250);
 
 
                 newwindow.switchForegroundBackground(true);
@@ -464,6 +473,13 @@ namespace The_Mark
 
             return posish;
         }
+        //calculates position based on position and camera offset, used for drawing characters
+        public Vector2 getUIPosition(Vector2 position, Vector2 offsetposition)
+        {
+            Vector2 posish = new Vector2((int)(position.X + offsetposition.X), (int)(position.Y + offsetposition.Y));
+
+            return posish;
+        }
 
         //for tabs
         //gets base + tab + offset position
@@ -565,7 +581,7 @@ namespace The_Mark
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 offset)
+        public void Draw(SpriteBatch spriteBatch, Vector2 offset,PlayerHandler playerhandler)
         {
             //Hovercards
             for (int i =0; i < hoverCards.Count;++i)
@@ -584,6 +600,12 @@ namespace The_Mark
             for (int i = 0; i < uiCharacterBubbles.Count;++i)
             {
                 uiCharacterBubbles[i].Draw(spriteBatch, uiWindowSprites, healtbarSprites, getUIPosition(uiCharacterBubbles[i].bubblePosition, offset));
+            }
+
+            if (fullcharacterposition != Vector2.Zero)
+            {
+                playerhandler.theMark.personAppearance.DrawFullCharacter(spriteBatch, getUIPosition(fullcharacterposition,offset),
+                    playerhandler.torsoTiles, playerhandler.headTiles, playerhandler.hairTiles, playerhandler.faceTiles, playerhandler.legTiles, playerhandler.armTiles);
             }
 
         }

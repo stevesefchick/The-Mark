@@ -14,9 +14,17 @@ namespace The_Mark
         //inventory
         List<Item> partyInventory = new List<Item>();
 
-        public PlayerHandler()
-        {
+        //people textures
+        public  Texture2D torsoTiles;
+        public Texture2D headTiles;
+        public Texture2D hairTiles;
+        public Texture2D faceTiles;
+        public Texture2D legTiles;
+        public Texture2D armTiles;
 
+        public PlayerHandler(GameMain gamedeets)
+        {
+            LoadTextures(gamedeets);
 
 
 
@@ -33,6 +41,16 @@ namespace The_Mark
                 int ok = item.prance;
             }
             */
+        }
+
+        void LoadTextures(GameMain gamedeets)
+        {
+            torsoTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/torsoSheet");
+            headTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/headSheet");
+            hairTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/hairSheet");
+            faceTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/faceSheet");
+            legTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/legSheet");
+            armTiles = gamedeets.Content.Load<Texture2D>("Sprites/Person/armSheet");
         }
 
         #region Inventory Methods

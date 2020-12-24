@@ -96,24 +96,24 @@ namespace The_Mark
         }
 
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location, Texture2D torso,Texture2D head,Texture2D hair,Texture2D face,Texture2D leg,Texture2D arm)
+        public void DrawFullCharacter(SpriteBatch spriteBatch, Vector2 location, Texture2D torso,Texture2D head,Texture2D hair,Texture2D face,Texture2D leg,Texture2D arm)
         {
             //Torso Part
-            spriteBatch.Draw(torso, new Rectangle((int)location.X, (int)location.Y, torsosize, torsosize), new Rectangle((int)torsoPart.spriteLoc.X, (int)torsoPart.spriteLoc.Y, torsosize, torsosize), Color.White, 0, torsoPart.spriteCenter, SpriteEffects.None, 0.55f);
+            spriteBatch.Draw(torso, new Rectangle((int)location.X, (int)location.Y, torsosize, torsosize), new Rectangle((int)torsoPart.spriteLoc.X, (int)torsoPart.spriteLoc.Y, torsosize, torsosize), Color.White, 0, torsoPart.spriteCenter, SpriteEffects.None, 0.85f);
             //Head Part
-            spriteBatch.Draw(head, new Rectangle((int)location.X, (int)location.Y, headsize, headsize), new Rectangle((int)headPart.spriteLoc.X, (int)headPart.spriteLoc.Y, headsize, headsize), Color.White, 0, headPart.spriteCenter, SpriteEffects.None, 0.56f);
+            spriteBatch.Draw(head, new Rectangle((int)location.X, (int)location.Y, headsize, headsize), new Rectangle((int)headPart.spriteLoc.X, (int)headPart.spriteLoc.Y, headsize, headsize), Color.White, 0, headPart.spriteCenter, SpriteEffects.None, 0.86f);
             //Hair Part
-            spriteBatch.Draw(hair, new Rectangle((int)location.X, (int)location.Y, hairsize, hairsize), new Rectangle((int)hairPart.spriteLoc.X, (int)hairPart.spriteLoc.Y, hairsize, hairsize), Color.White, 0, new Vector2(hairsize/2,hairsize/2), SpriteEffects.None, 0.57f);
+            spriteBatch.Draw(hair, new Rectangle((int)location.X, (int)location.Y, hairsize, hairsize), new Rectangle((int)hairPart.spriteLoc.X, (int)hairPart.spriteLoc.Y, hairsize, hairsize), Color.White, 0, new Vector2(hairsize/2,hairsize/2), SpriteEffects.None, 0.87f);
             //Face Part
-            spriteBatch.Draw(face, new Rectangle((int)location.X, (int)location.Y, facesize, facesize), new Rectangle((int)facePart.spriteLoc.X, (int)facePart.spriteLoc.Y, facesize, facesize), Color.White, 0, facePart.spriteCenter, SpriteEffects.None, 0.57f);
+            spriteBatch.Draw(face, new Rectangle((int)location.X, (int)location.Y, facesize, facesize), new Rectangle((int)facePart.spriteLoc.X, (int)facePart.spriteLoc.Y, facesize, facesize), Color.White, 0, facePart.spriteCenter, SpriteEffects.None, 0.87f);
 
             //Legs
-            spriteBatch.Draw(leg, new Rectangle((int)location.X, (int)location.Y, legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.White, 0, legPart.spriteBodyConnector, SpriteEffects.None, 0.56f);
-            spriteBatch.Draw(leg, new Rectangle((int)location.X, (int)location.Y, legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.White, 0, legPart.spriteBodyConnector, SpriteEffects.None, 0.56f);
+            spriteBatch.Draw(leg, new Rectangle((int)location.X, (int)location.Y, legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.White, 0, legPart.spriteBodyConnector, SpriteEffects.None, 0.86f);
+            spriteBatch.Draw(leg, new Rectangle((int)location.X, (int)location.Y, legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.White, 0, legPart.spriteBodyConnector, SpriteEffects.None, 0.86f);
 
             //Hands Part
-            spriteBatch.Draw(arm, new Rectangle((int)location.X, (int)location.Y, armsize, armsize), new Rectangle((int)armPart.spriteLoc.X, (int)armPart.spriteLoc.Y, armsize, armsize), Color.White, 0, armPart.spriteBodyConnector, SpriteEffects.None, 0.56f);
-            spriteBatch.Draw(arm, new Rectangle((int)location.X, (int)location.Y, armsize, armsize), new Rectangle((int)armPart.spriteLoc.X, (int)armPart.spriteLoc.Y, armsize, armsize), Color.White, 0, armPart.spriteBodyConnector, SpriteEffects.None, 0.56f);
+            spriteBatch.Draw(arm, new Rectangle((int)location.X, (int)location.Y, armsize, armsize), new Rectangle((int)armPart.spriteLoc.X, (int)armPart.spriteLoc.Y, armsize, armsize), Color.White, 0, armPart.spriteBodyConnector, SpriteEffects.None, 0.86f);
+            spriteBatch.Draw(arm, new Rectangle((int)location.X, (int)location.Y, armsize, armsize), new Rectangle((int)armPart.spriteLoc.X, (int)armPart.spriteLoc.Y, armsize, armsize), Color.White, 0, armPart.spriteBodyConnector, SpriteEffects.None, 0.86f);
 
         }
 

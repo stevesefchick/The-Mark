@@ -124,7 +124,7 @@ class GameMain : Game
 		mouse = new MouseHandler(this);
 		camera = new Camera();
 		time = new TimeManager();
-		playerHandler = new PlayerHandler();
+		playerHandler = new PlayerHandler(this);
 		uiHelper = new UI_Helper(this,bigWorldFont,textFont);
 
     }
@@ -321,7 +321,7 @@ class GameMain : Game
 	camera.get_transformation(gdm));
 		mouse.Draw(spriteBatch, camera.cameraPosition, backbufferJamz, worldFont,uiHelper.areThereUIElementsOpen());
 		time.Draw(spriteBatch, worldFont, returnPositionCameraOffset(timeUIPosition));
-		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero));
+		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero),playerHandler);
 		spriteBatch.End();
 
 		base.Draw(gameTime);
