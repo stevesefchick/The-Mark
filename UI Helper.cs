@@ -492,6 +492,8 @@ namespace The_Mark
 
         void ClickTabs(int window, int partymember, Boolean isMark, String nameOfTab,PlayerHandler playerhandler, DataManager datamanager)
         {
+            fullcharacterposition = Vector2.Zero;
+
             if (nameOfTab=="Equipment")
             {
                 createUIWindow(UIWindowCreationTypes.CharacterEquipmentWindow, isMark, partymember, playerhandler, datamanager);
@@ -501,11 +503,13 @@ namespace The_Mark
             {
                 createUIWindow(UIWindowCreationTypes.CharacterStatWindow, isMark, partymember, playerhandler, datamanager);
                 uiWindows.RemoveAt(window);
+
             }
             else if (nameOfTab == "Skills & Traits")
             {
                 createUIWindow(UIWindowCreationTypes.CharacterSkillsWindow, isMark, partymember, playerhandler, datamanager);
                 uiWindows.RemoveAt(window);
+
             }
         }
 
@@ -539,6 +543,8 @@ namespace The_Mark
                     if (mouse.leftMouseClickPosition.Intersects(uiWindows[i].publicxButtonPosition) == true && hoverCards.Count==0)
                     {
                         uiWindows.RemoveAt(i);
+                        fullcharacterposition = Vector2.Zero;
+
                     }
 
                 }
@@ -605,7 +611,8 @@ namespace The_Mark
             if (fullcharacterposition != Vector2.Zero)
             {
                 playerhandler.theMark.personAppearance.DrawFullCharacter(spriteBatch, getUIPosition(fullcharacterposition,offset),
-                    playerhandler.torsoTiles, playerhandler.headTiles, playerhandler.hairTiles, playerhandler.faceTiles, playerhandler.legTiles, playerhandler.armTiles);
+                    playerhandler.torsoTiles, playerhandler.headTiles, playerhandler.hairTiles, playerhandler.faceTiles, playerhandler.legTiles, playerhandler.armTiles,
+                    0.85f);
             }
 
         }
