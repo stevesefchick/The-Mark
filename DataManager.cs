@@ -232,7 +232,7 @@ namespace The_Mark
         public TorsoSpriteData(int sheetx, int sheety, int centerx, int centery,int headx, int heady, int leftarmx, int leftarmy,
             int rightarmx, int rightarmy, int leftlegx, int leftlegy, int rightlegx, int rightlegy)
         {
-            spriteLoc = new Vector2(sheetx, sheety);
+            spriteLoc = new Vector2(sheetx * 50, sheety * 50);
             spriteCenter = new Vector2(centerx, centery);
             spriteHeadConnector = new Vector2(headx, heady);
             spriteHeadConnector -= spriteCenter;
@@ -307,7 +307,7 @@ namespace The_Mark
 
         public ArmSpriteData(int sheetx, int sheety, int bodyx, int bodyy)
         {
-            spriteLoc = new Vector2(sheetx, sheety);
+            spriteLoc = new Vector2(sheetx*50, sheety*50);
             spriteBodyConnector = new Vector2(bodyx, bodyy);
         }
     }
