@@ -8,5 +8,55 @@
     "bodyy": 42,
     "hairx": 21,
     "hairy": 20
+  },
+  "Standard2": {
+    "sheetx": 1,
+    "sheety": 0,
+    "centerx": 23,
+    "centery": 29,
+    "bodyx": 23,
+    "bodyy": 42,
+    "hairx": 23,
+    "hairy": 16
+  },
+  "HeyArnold": {
+    "sheetx": 2,
+    "sheety": 0,
+    "centerx": 26,
+    "centery": 37,
+    "bodyx": 26,
+    "bodyy": 44,
+    "hairx": 27,
+    "hairy": 27
+  },
+  "Standard3": {
+    "sheetx": 3,
+    "sheety": 0,
+    "centerx": 25,
+    "centery": 34,
+    "bodyx": 26,
+    "bodyy": 46,
+    "hairx": 25,
+    "hairy": 20
+  },
+  "BigHead1": {
+    "sheetx": 4,
+    "sheety": 0,
+    "centerx": 21,
+    "centery": 34,
+    "bodyx": 22,
+    "bodyy": 43,
+    "hairx": 22,
+    "hairy": 18
+  },
+  "TallHead1": {
+    "sheetx": 5,
+    "sheety": 0,
+    "centerx": 23,
+    "centery": 32,
+    "bodyx": 24,
+    "bodyy": 46,
+    "hairx": 22,
+    "hairy": 15
   }
 }

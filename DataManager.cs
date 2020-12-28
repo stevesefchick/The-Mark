@@ -256,7 +256,7 @@ namespace The_Mark
 
         public HeadSpriteData(int sheetx, int sheety, int centerx, int centery, int bodyx, int bodyy,int hairx,int hairy)
         {
-            spriteLoc = new Vector2(sheetx, sheety);
+            spriteLoc = new Vector2(sheetx*50, sheety*50);
             spriteCenter = new Vector2(centerx, centery);
             spriteBodyConnector = new Vector2(bodyx, bodyy);
             spriteHairConnector = new Vector2(hairx, hairy);
