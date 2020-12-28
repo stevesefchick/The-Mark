@@ -271,7 +271,10 @@ class GameMain : Game
 		if (isEnterPressed == true)
 		{
 			worldMap = null;
+			playerHandler = null;
 			createNewWorld();
+			playerHandler = new PlayerHandler(this);
+			playerHandler.CreateTheMark(worldMap, rando);
 		}
 	}
 
