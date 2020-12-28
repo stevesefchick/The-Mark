@@ -239,7 +239,7 @@ namespace The_Mark
 
                 //draw character
                 drawCharacterisMark = true;
-                fullcharacterposition = new Vector2(newwindow.uiWindowPosition.X+150, newwindow.uiWindowPosition.Y + 250);
+                fullcharacterposition = new Vector2(newwindow.uiWindowPosition.X+100, newwindow.uiWindowPosition.Y + 275);
 
 
                 newwindow.switchForegroundBackground(true);

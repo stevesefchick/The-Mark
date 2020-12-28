@@ -271,7 +271,7 @@ namespace The_Mark
 
         public HairSpriteData(int sheetx, int sheety, int headx,int heady)
         {
-            spriteLoc = new Vector2(sheetx, sheety);
+            spriteLoc = new Vector2(sheetx*50, sheety*50);
             spriteHeadConnector = new Vector2(headx, heady);
         }
     }

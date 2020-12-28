@@ -3,6 +3,42 @@
     "sheetx": 0,
     "sheety": 0,
     "headx": 19,
-    "heady": 30
+    "heady": 34
+  },
+  "Block1": {
+    "sheetx": 1,
+    "sheety": 0,
+    "headx": 24,
+    "heady": 34
+  },
+  "Mohawk1": {
+    "sheetx": 2,
+    "sheety": 0,
+    "headx": 24,
+    "heady": 33
+  },
+  "Flat1": {
+    "sheetx": 3,
+    "sheety": 0,
+    "headx": 23,
+    "heady": 35
+  },
+  "Spikey2": {
+    "sheetx": 4,
+    "sheety": 0,
+    "headx": 25,
+    "heady": 32
+  },
+  "PomPom1": {
+    "sheetx": 5,
+    "sheety": 0,
+    "headx": 25,
+    "heady": 26
+  },
+  "Ponytail1": {
+    "sheetx": 6,
+    "sheety": 0,
+    "headx": 24,
+    "heady": 24
   }
 }
