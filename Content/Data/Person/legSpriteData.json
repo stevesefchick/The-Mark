@@ -1,8 +1,32 @@
 {
-  "Thatsaleg1": {
+  "CurvedLeg1": {
     "sheetx": 0,
     "sheety": 0,
     "bodyx": 25,
     "bodyy": 7
+  },
+  "BootLeg1": {
+    "sheetx": 1,
+    "sheety": 0,
+    "bodyx": 25,
+    "bodyy": 11
+  },
+  "SquigglyLeg1": {
+    "sheetx": 2,
+    "sheety": 0,
+    "bodyx": 24,
+    "bodyy": 8
+  },
+  "Heels1": {
+    "sheetx": 3,
+    "sheety": 0,
+    "bodyx": 31,
+    "bodyy": 8
+  },
+  "SquigglyLeg2": {
+    "sheetx": 4,
+    "sheety": 0,
+    "bodyx": 32,
+    "bodyy": 5
   }
 }

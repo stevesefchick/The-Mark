@@ -108,12 +108,12 @@ namespace The_Mark
             //spriteBatch.Draw(face, new Rectangle((int)(location.X + torsoPart.spriteHeadConnector.X), (int)(location.Y + torsoPart.spriteHeadConnector.Y), facesize, facesize), new Rectangle((int)facePart.spriteLoc.X, (int)facePart.spriteLoc.Y, facesize, facesize), Color.Black, 0, facePart.spriteCenter, SpriteEffects.None, depth + 0.03f);
 
             //Left Leg
-            spriteBatch.Draw(leg, new Rectangle((int)(location.X + torsoPart.leftLegConnector.X), (int)(location.Y + torsoPart.leftLegConnector.Y), legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.Black, 0, legPart.spriteBodyConnector, SpriteEffects.FlipHorizontally, depth + 0.01f);
+            spriteBatch.Draw(leg, new Rectangle((int)(location.X + torsoPart.leftLegConnector.X), (int)(location.Y + torsoPart.leftLegConnector.Y), legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.Black, 0, new Vector2(50 - legPart.spriteBodyConnector.X, legPart.spriteBodyConnector.Y), SpriteEffects.FlipHorizontally, depth + 0.01f);
             //Right Leg
             spriteBatch.Draw(leg, new Rectangle((int)(location.X + torsoPart.rightLegConnector.X), (int)(location.Y + torsoPart.rightLegConnector.Y), legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.Black, 0, legPart.spriteBodyConnector, SpriteEffects.None, depth + 0.01f);
 
             //Left Arm
-            spriteBatch.Draw(arm, new Rectangle((int)(location.X + torsoPart.leftArmConnector.X), (int)(location.Y + torsoPart.leftArmConnector.Y), armsize, armsize), new Rectangle((int)armPart.spriteLoc.X, (int)armPart.spriteLoc.Y, armsize, armsize), Color.Black, 0, armPart.spriteBodyConnector, SpriteEffects.FlipHorizontally, depth + 0.01f);
+            spriteBatch.Draw(arm, new Rectangle((int)(location.X + torsoPart.leftArmConnector.X), (int)(location.Y + torsoPart.leftArmConnector.Y), armsize, armsize), new Rectangle((int)armPart.spriteLoc.X, (int)armPart.spriteLoc.Y, armsize, armsize), Color.Black, 0, new Vector2(50-armPart.spriteBodyConnector.X,armPart.spriteBodyConnector.Y), SpriteEffects.FlipHorizontally, depth + 0.01f);
             //Right Arm
             spriteBatch.Draw(arm, new Rectangle((int)(location.X + torsoPart.rightArmConnector.X), (int)(location.Y + torsoPart.rightArmConnector.Y), armsize, armsize), new Rectangle((int)armPart.spriteLoc.X, (int)armPart.spriteLoc.Y, armsize, armsize), Color.Black, 0, armPart.spriteBodyConnector, SpriteEffects.None, depth + 0.01f);
 

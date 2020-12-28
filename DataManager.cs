@@ -295,7 +295,7 @@ namespace The_Mark
 
         public LegSpriteData(int sheetx, int sheety, int bodyx, int bodyy)
         {
-            spriteLoc = new Vector2(sheetx, sheety);
+            spriteLoc = new Vector2(sheetx*50, sheety*50);
             spriteBodyConnector = new Vector2(bodyx, bodyy);
         }
     }
