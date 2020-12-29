@@ -727,7 +727,7 @@ namespace The_Mark
             #region swampus
             if (thisCreatureType == ThisCreatureType.Swampus)
             {
-                thischoice = rando.Next(1, 3);
+                thischoice = rando.Next(1, 4);
                 //type 1 - name + the Swampus
                 if (thischoice == 1)
                 {
@@ -766,6 +766,28 @@ namespace The_Mark
                         }
                     }
                     thename = candidatesswampusname[rando.Next(0, candidatesswampusname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+                //type 3 = water + bite
+                else if (thischoice == 3)
+                {
+                    List<string> candidateswatername = new List<string>();
+                    List<string> candidatesbitename = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "createwatername")
+                        {
+                            candidateswatername.Add(entry.Key);
+                        }
+                    }
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "creaturebitename")
+                        {
+                            candidatesbitename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidateswatername[rando.Next(0, candidateswatername.Count)].ToString() + candidatesbitename[rando.Next(0, candidatesbitename.Count)].ToString();
 
                 }
             }
