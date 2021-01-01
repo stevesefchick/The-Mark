@@ -73,9 +73,64 @@ namespace The_Mark
 			return Point.Zero;
         }
 
-		public String returnCurrentLocName(Point gridLoc)
+		//returns name and description
+		public (String,String) returnCurrentLocNameDescription(Point gridLoc)
         {
-			return "";
+			GridTile thisTile = gridTiles[gridLoc];
+
+			//castle
+			if (thisTile.thisNodeType == GridTile.GridNode.Castle)
+            {
+				for (int i=0;i<places.Count;++i)
+                {
+					if (places[i].thisPlaceLocationType == Place.PlaceLocationType.Castle)
+                    {
+						return (places[i].placeName,"Castle");
+                    }
+                }
+            }
+			//town
+			else if (thisTile.thisNodeType != GridTile.GridNode.Castle)
+			{
+				for (int i = 0; i < places.Count; ++i)
+				{
+					Vector2 divideloc = divideBy64(places[i].placeLocation);
+
+					if (new Point((int)divideloc.X,(int)divideloc.Y) == gridLoc)
+                    {
+						return (places[i].placeName, places[i].thisPlaceType.ToString());
+
+					}
+
+				}
+			}
+			//roads
+			else if (thisTile.thisRoadType == GridTile.RoadType.Road)
+            {
+
+            }
+			//water
+			else if (thisTile.thisWaterType != GridTile.WaterType.None)
+            {
+				if (thisTile.thisWaterType == GridTile.WaterType.Lake)
+                {
+
+                }
+				else if (thisTile.thisWaterType == GridTile.WaterType.River)
+				{
+
+                }
+            }
+			//terrain
+			else
+            {
+
+            }
+
+
+
+
+			return ("","");
         }
 
 		void LoadTextures(GameMain gamedeets)

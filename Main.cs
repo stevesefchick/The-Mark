@@ -92,7 +92,7 @@ class GameMain : Game
 	void CreateStartingLocation()
     {
 		playerHandler.currentGridLocation = worldMap.returnPlaceLocation(playerHandler.theMark.placeIDHome);
-		playerHandler.currentLocationText = worldMap.returnCurrentLocName()
+		playerHandler.currentLocationText = worldMap.returnCurrentLocNameDescription(playerHandler.currentGridLocation).Item1;
     }
 
 	protected override void Initialize()
