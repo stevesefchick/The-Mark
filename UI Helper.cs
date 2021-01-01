@@ -158,6 +158,12 @@ namespace The_Mark
                     wisdom = playerhandler.theMark.returnWisdomString();
                     wit = playerhandler.theMark.returnWitString();
                     charisma = playerhandler.theMark.returnCharismaString();
+
+                    //draw character
+                    drawCharacterisMark = true;
+                    drawCharacterValueNonMark = associatedChar;
+                    fullcharacterposition = new Vector2(newwindow.uiWindowPosition.X + 100, newwindow.uiWindowPosition.Y + 275);
+
                 }
                 else
                 {
@@ -173,6 +179,11 @@ namespace The_Mark
                     wisdom = playerhandler.partyMembers[associatedChar].returnWisdomString();
                     wit = playerhandler.partyMembers[associatedChar].returnWitString();
                     charisma = playerhandler.partyMembers[associatedChar].returnCharismaString();
+
+                    //draw character
+                    drawCharacterisMark = false;
+                    fullcharacterposition = new Vector2(newwindow.uiWindowPosition.X + 100, newwindow.uiWindowPosition.Y + 275);
+
 
                 }
                 //health
@@ -237,9 +248,6 @@ namespace The_Mark
                 newwindow.CreateTab(180, "Equipment",false, UIWindowCreationTypes.CharacterEquipmentWindow);
                 newwindow.CreateTab(360, "Skills & Traits",false, UIWindowCreationTypes.CharacterEquipmentWindow);
 
-                //draw character
-                drawCharacterisMark = true;
-                fullcharacterposition = new Vector2(newwindow.uiWindowPosition.X+100, newwindow.uiWindowPosition.Y + 275);
 
 
                 newwindow.switchForegroundBackground(true);
@@ -610,9 +618,18 @@ namespace The_Mark
 
             if (fullcharacterposition != Vector2.Zero)
             {
-                playerhandler.theMark.personAppearance.DrawFullCharacter(spriteBatch, getUIPosition(fullcharacterposition,offset),
-                    playerhandler.torsoTiles, playerhandler.headTiles, playerhandler.hairTiles, playerhandler.faceTiles, playerhandler.legTiles, playerhandler.armTiles,
-                    0.85f);
+                if (drawCharacterisMark == true)
+                {
+                    playerhandler.theMark.personAppearance.DrawFullCharacter(spriteBatch, getUIPosition(fullcharacterposition, offset),
+                        playerhandler.torsoTiles, playerhandler.headTiles, playerhandler.hairTiles, playerhandler.faceTiles, playerhandler.legTiles, playerhandler.armTiles,
+                        0.85f);
+                }
+                else
+                {
+                    playerhandler.partyMembers[drawCharacterValueNonMark].personAppearance.DrawFullCharacter(spriteBatch, getUIPosition(fullcharacterposition, offset),
+    playerhandler.torsoTiles, playerhandler.headTiles, playerhandler.hairTiles, playerhandler.faceTiles, playerhandler.legTiles, playerhandler.armTiles,
+    0.85f);
+                }
             }
 
         }

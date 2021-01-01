@@ -60,6 +60,24 @@ namespace The_Mark
 			LoadTextures(gamedeets);
         }
 
+		public Point returnPlaceLocation(String id)
+        {
+			for (int i =0;i<places.Count;++i)
+            {
+				if (places[i].placeID == id)
+                {
+					return new Point((int)places[i].placeLocation.X/64,(int)places[i].placeLocation.Y/64);
+                }
+            }
+
+			return Point.Zero;
+        }
+
+		public String returnCurrentLocName(Point gridLoc)
+        {
+			return "";
+        }
+
 		void LoadTextures(GameMain gamedeets)
         {
 			roadTiles = gamedeets.Content.Load<Texture2D>("Sprites/Road/road_tiles");

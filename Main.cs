@@ -89,6 +89,12 @@ class GameMain : Game
 
     }
 
+	void CreateStartingLocation()
+    {
+		playerHandler.currentGridLocation = worldMap.returnPlaceLocation(playerHandler.theMark.placeIDHome);
+		playerHandler.currentLocationText = worldMap.returnCurrentLocName()
+    }
+
 	protected override void Initialize()
 	{
 		//Create necessary helpers
@@ -101,6 +107,8 @@ class GameMain : Game
 		createNewWorld();
 		//Set up player character
 		playerHandler.CreateTheMark(worldMap, rando);
+		//Set up starting location
+		CreateStartingLocation();
 		//Start the timer
 		time.StartTimer();
 

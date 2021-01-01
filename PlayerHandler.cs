@@ -22,6 +22,10 @@ namespace The_Mark
         public Texture2D legTiles;
         public Texture2D armTiles;
 
+        //location and travel
+        public Point currentGridLocation;
+        public String currentLocationText;
+
         public PlayerHandler(GameMain gamedeets)
         {
             LoadTextures(gamedeets);
@@ -360,6 +364,7 @@ namespace The_Mark
         {
             theMark = selectTheMark(world, rando);
         }
+
 
         public void AddPartyMembers(Person person,WorldMap world)
         {
