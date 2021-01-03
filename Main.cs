@@ -113,7 +113,8 @@ class GameMain : Game
 		CreateStartingLocation();
 		//Start the timer
 		time.StartTimer();
-
+		//instantly center on location
+		camera.InstantCenterOnLocation(new Vector2(playerHandler.currentGridLocation.X,playerHandler.currentGridLocation.Y));
 
 		base.Initialize();
 	}

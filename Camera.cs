@@ -16,6 +16,11 @@ namespace The_Mark
             cameraZoom = 1;
         }
 
+        public void InstantCenterOnLocation(Vector2 gridLocation)
+        {
+            cameraPosition = new Vector2(gridLocation.X * 64, gridLocation.Y * 64);
+        }
+
 		public void Update(Boolean up,Boolean down,Boolean left, Boolean right,Boolean pagedown,Boolean pageup)
 		{
             if (up==true)
