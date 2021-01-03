@@ -29,6 +29,7 @@ class GameMain : Game
 
 	//UI Element positions
 	Vector2 timeUIPosition;
+	Vector2 locationUIPosition;
 
 	//content
 	protected WorldMap worldMap;
@@ -86,14 +87,15 @@ class GameMain : Game
 	private void GetUIElementPositions()
     {
 		timeUIPosition = new Vector2(backbufferJamz.X - 475, 50);
-
+		locationUIPosition = new Vector2(100, 25);
     }
 
 	void CreateStartingLocation()
     {
 		playerHandler.currentGridLocation = worldMap.returnPlaceLocation(playerHandler.theMark.placeIDHome);
 		playerHandler.currentLocationText = worldMap.returnCurrentLocNameDescription(playerHandler.currentGridLocation).Item1;
-    }
+		playerHandler.currentLocationDescription = worldMap.returnCurrentLocNameDescription(playerHandler.currentGridLocation).Item2;
+	}
 
 	protected override void Initialize()
 	{
@@ -332,6 +334,7 @@ class GameMain : Game
 	camera.get_transformation(gdm));
 		mouse.Draw(spriteBatch, camera.cameraPosition, backbufferJamz, worldFont,uiHelper.areThereUIElementsOpen());
 		time.Draw(spriteBatch, worldFont, returnPositionCameraOffset(timeUIPosition));
+		playerHandler.DrawLocationUI(spriteBatch, worldFont, returnPositionCameraOffset(locationUIPosition));
 		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero),playerHandler);
 		spriteBatch.End();
 

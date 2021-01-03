@@ -616,6 +616,7 @@ namespace The_Mark
                 uiCharacterBubbles[i].Draw(spriteBatch, uiWindowSprites, healtbarSprites, getUIPosition(uiCharacterBubbles[i].bubblePosition, offset));
             }
 
+
             if (fullcharacterposition != Vector2.Zero)
             {
                 if (drawCharacterisMark == true)
