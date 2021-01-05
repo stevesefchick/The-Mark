@@ -431,8 +431,10 @@ namespace The_Mark
             return thisPerson;
         }
 
-        public void DrawLocationUI(SpriteBatch spriteBatch,SpriteFont worldfont,Vector2 baseposition)
+        public void DrawLocationUI(SpriteBatch spriteBatch,SpriteFont worldfont,Vector2 baseposition,Texture2D currentLocIcon)
         {
+            spriteBatch.Draw(currentLocIcon, new Rectangle((int)baseposition.X - 40, (int)baseposition.Y+30, 50, 50), new Rectangle(0,0,100,100), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.81f);
+
             //location
             spriteBatch.DrawString(worldfont, currentLocationText, new Vector2(baseposition.X + 10, baseposition.Y + 30), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.81f);
             spriteBatch.DrawString(worldfont, currentLocationText, new Vector2(baseposition.X + 11, baseposition.Y + 31), Color.Black, 0, Vector2.Zero, 1, SpriteEffects.None, 0.8f);
