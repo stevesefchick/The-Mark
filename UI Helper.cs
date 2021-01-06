@@ -26,6 +26,7 @@ namespace The_Mark
         Texture2D equipmentJewelrySpriteSheet;
         Texture2D equipmentTrinketSpriteSheet;
         public Texture2D currentLocationIcon;
+        public Texture2D destinationIcon;
         //hover cards
         List<UIHoverCard> hoverCards = new List<UIHoverCard>();
         //ui windows
@@ -472,6 +473,7 @@ namespace The_Mark
             equipmentJewelrySpriteSheet = thegame.Content.Load<Texture2D>("Sprites/UI/equipmentJewelryIcons");
             equipmentTrinketSpriteSheet = thegame.Content.Load<Texture2D>("Sprites/UI/equipmentTrinketIcons");
             currentLocationIcon = thegame.Content.Load<Texture2D>("Sprites/UI/uiCurrentLocation");
+            destinationIcon = thegame.Content.Load<Texture2D>("Sprites/UI/uiDestination");
         }
 
         //normal

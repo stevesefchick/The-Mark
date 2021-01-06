@@ -335,7 +335,7 @@ class GameMain : Game
 	camera.get_transformation(gdm));
 		mouse.Draw(spriteBatch, camera.cameraPosition, backbufferJamz, worldFont,uiHelper.areThereUIElementsOpen());
 		time.Draw(spriteBatch, worldFont, returnPositionCameraOffset(timeUIPosition));
-		playerHandler.DrawLocationUI(spriteBatch, worldFont, returnPositionCameraOffset(locationUIPosition),uiHelper.currentLocationIcon);
+		playerHandler.DrawLocationUI(spriteBatch, worldFont, returnPositionCameraOffset(locationUIPosition),uiHelper.currentLocationIcon,uiHelper.destinationIcon);
 		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero),playerHandler);
 		spriteBatch.End();
 
