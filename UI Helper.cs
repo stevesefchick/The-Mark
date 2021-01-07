@@ -16,6 +16,7 @@ namespace The_Mark
         SpriteFont mainFont;
 
         Vector2 backbuffersize;
+        int mapIconOffset = -32;
 
         //Sprites
         Texture2D uiWindowSprites;
@@ -27,6 +28,8 @@ namespace The_Mark
         Texture2D equipmentTrinketSpriteSheet;
         public Texture2D currentLocationIcon;
         public Texture2D destinationIcon;
+        Texture2D mapLocationIcon;
+
         //hover cards
         List<UIHoverCard> hoverCards = new List<UIHoverCard>();
         //ui windows
@@ -474,6 +477,7 @@ namespace The_Mark
             equipmentTrinketSpriteSheet = thegame.Content.Load<Texture2D>("Sprites/UI/equipmentTrinketIcons");
             currentLocationIcon = thegame.Content.Load<Texture2D>("Sprites/UI/uiCurrentLocation");
             destinationIcon = thegame.Content.Load<Texture2D>("Sprites/UI/uiDestination");
+            mapLocationIcon = thegame.Content.Load<Texture2D>("Sprites/UI/uiMapArrow");
         }
 
         //normal
@@ -597,6 +601,13 @@ namespace The_Mark
 
 
         }
+
+        public void DrawMapUI(SpriteBatch spriteBatch,Vector2 location)
+        {
+            spriteBatch.Draw(mapLocationIcon, new Rectangle((int)location.X, (int)location.Y + mapIconOffset, 64, 64), new Rectangle(0, 0, 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.71f);
+
+        }
+
 
         public void Draw(SpriteBatch spriteBatch, Vector2 offset,PlayerHandler playerhandler)
         {

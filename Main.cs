@@ -286,6 +286,8 @@ class GameMain : Game
 			createNewWorld();
 			playerHandler = new PlayerHandler(this);
 			playerHandler.CreateTheMark(worldMap, rando);
+			CreateStartingLocation();
+			
 		}
 	}
 
@@ -337,6 +339,7 @@ class GameMain : Game
 		time.Draw(spriteBatch, worldFont, returnPositionCameraOffset(timeUIPosition));
 		playerHandler.DrawLocationUI(spriteBatch, worldFont, returnPositionCameraOffset(locationUIPosition),uiHelper.currentLocationIcon,uiHelper.destinationIcon);
 		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero),playerHandler);
+		uiHelper.DrawMapUI(spriteBatch, new Vector2(playerHandler.currentGridLocation.X*64,playerHandler.currentGridLocation.Y*64));
 		spriteBatch.End();
 
 		base.Draw(gameTime);
