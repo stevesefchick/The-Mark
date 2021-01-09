@@ -14,6 +14,12 @@ using System.IO;
 
 class GameMain : Game
 {
+	//enums
+	public enum GameState { Idle, Traveling, Resting, Combat}
+
+	//game state
+	public GameState currentGameState = GameState.Idle;
+
 	//basic stuff
 	protected SpriteBatch spriteBatch;
 	protected GraphicsDeviceManager gdm;

@@ -8,7 +8,7 @@ namespace The_Mark
     class UI_Helper
     {
         //enums
-        public enum UIWindowCreationTypes { CharacterStatWindow, CharacterEquipmentWindow, CharacterSkillsWindow }
+        public enum UIWindowCreationTypes { CharacterStatWindow, CharacterEquipmentWindow, CharacterSkillsWindow, MapSelection }
 
 
         //fonts
@@ -36,6 +36,9 @@ namespace The_Mark
         List<UIWindow> uiWindows = new List<UIWindow>();
         //character bubbles
         List<UICharacterBubble> uiCharacterBubbles = new List<UICharacterBubble>();
+        //map selections
+        List<UIMapSelection> uiMapSelections = new List<UIMapSelection>();
+        
 
         Vector2 fullcharacterposition = Vector2.Zero;
         Boolean drawCharacterisMark = false;

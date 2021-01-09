@@ -127,6 +127,7 @@
     <Compile Include="UI Helper.cs" />
     <Compile Include="UICharacterBubble.cs" />
     <Compile Include="UIHoverCard.cs" />
+    <Compile Include="UIMapSelection.cs" />
     <Compile Include="UIWindow.cs" />
     <Compile Include="Water.cs" />
     <Compile Include="WorldMap.cs" />
