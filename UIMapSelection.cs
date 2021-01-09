@@ -21,5 +21,15 @@ namespace The_Mark
 
         //add text selections
 
+        //positions
+        Vector2 uiMapSelectionPosition;
+        Vector2 locationOffset = new Vector2(0, -50);
+
+        public UIMapSelection(Vector2 position)
+        {
+
+
+            uiMapSelectionPosition = position + locationOffset;
+        }
     }
 }

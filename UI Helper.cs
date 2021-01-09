@@ -609,6 +609,12 @@ namespace The_Mark
         {
             spriteBatch.Draw(mapLocationIcon, new Rectangle((int)location.X, (int)location.Y + mapIconOffset, 64, 64), new Rectangle(0, 0, 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.71f);
 
+            //Map Selections
+            for (int i = 0; i < uiMapSelections.Count; ++i)
+            {
+
+
+            }
         }
 
 
