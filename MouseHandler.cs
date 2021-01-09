@@ -13,6 +13,8 @@ namespace The_Mark
 
         public Boolean isLeftClickDown;
         public Rectangle leftMouseClickPosition;
+        public Boolean isRightClickDown;
+        public Rectangle rightMouseClickPosition;
 
         //font
         public String mouseHoverFont = "";
@@ -20,7 +22,6 @@ namespace The_Mark
         public String roadText = "";
         public String waterText = "";
         public String terrainText = "";
-        Vector2 fontPosition;
 
         public MouseHandler(GameMain gamedeets)
         {
@@ -73,6 +74,17 @@ namespace The_Mark
             else
             {
                 isLeftClickDown = false;
+            }
+
+            //right mouse pressed
+            if (mouseState.RightButton == ButtonState.Pressed)
+            {
+                isRightClickDown = true;
+                rightMouseClickPosition = new Rectangle((int)getMousePosition(cameraposition, backbufferposition).X, (int)getMousePosition(cameraposition, backbufferposition).Y, 1, 1);
+            }
+            else
+            {
+                isRightClickDown = false;
             }
         }
 

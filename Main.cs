@@ -243,6 +243,13 @@ class GameMain : Game
 		{
 			isSpacePressed = false;
 		}
+
+
+
+		if (mouse.isRightClickDown==true)
+        {
+			camera.CreateDestination(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y));
+        }
 	}
 
 	void getShaderColors()

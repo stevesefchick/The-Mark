@@ -9,6 +9,8 @@ namespace The_Mark
 		public Vector2 cameraPosition;
         public float cameraZoom;
 
+        Vector2 cameraDestination;
+
 		public Camera()
         {
             //cameraPosition = Vector2.Zero;
@@ -21,31 +23,54 @@ namespace The_Mark
             cameraPosition = new Vector2(gridLocation.X * 64, gridLocation.Y * 64);
         }
 
+        public void CreateDestination(Vector2 dest)
+        {
+            if (cameraDestination == Vector2.Zero)
+            {
+                cameraDestination = dest;
+            }
+        }
+
 		public void Update(Boolean up,Boolean down,Boolean left, Boolean right,Boolean pagedown,Boolean pageup)
 		{
-            if (up==true)
+            if (cameraDestination != Vector2.Zero)
             {
-                cameraPosition.Y -= 3;
+                Vector2 distance = new Vector2((cameraDestination.X - cameraPosition.X)/10, (cameraDestination.Y - cameraPosition.Y)/10);
+
+                cameraPosition += distance;
+
+                if ((distance.X > -1 && distance.X < 1) && (distance.Y > -1 &&distance.Y < 1))
+                {
+                    cameraDestination = Vector2.Zero;
+                }
+
             }
-            if (down==true)
+            else
             {
-                cameraPosition.Y += 3;
-            }
-            if (left==true)
-            {
-                cameraPosition.X -= 3;
-            }
-            if (right==true)
-            {
-                cameraPosition.X += 3;
-            }
-            if (pagedown==true)
-            {
-                cameraZoom -= 0.01f;
-            }
-            if (pageup==true)
-            {
-                cameraZoom += 0.01f;
+                if (up == true)
+                {
+                    cameraPosition.Y -= 3;
+                }
+                if (down == true)
+                {
+                    cameraPosition.Y += 3;
+                }
+                if (left == true)
+                {
+                    cameraPosition.X -= 3;
+                }
+                if (right == true)
+                {
+                    cameraPosition.X += 3;
+                }
+                if (pagedown == true)
+                {
+                    cameraZoom -= 0.01f;
+                }
+                if (pageup == true)
+                {
+                    cameraZoom += 0.01f;
+                }
             }
 		}
 
