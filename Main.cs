@@ -255,6 +255,7 @@ class GameMain : Game
 		if (mouse.isRightClickDown==true)
         {
 			camera.CreateDestination(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y));
+			uiHelper.createMapUISelection(mouse.rightMouseClickPosition);
         }
 	}
 

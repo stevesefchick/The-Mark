@@ -96,6 +96,15 @@ namespace The_Mark
         {
             hoverCards.Add(new UIHoverCard(position, title, body,mainFont,titleFont));
         }
+
+        public void createMapUISelection(Rectangle position)
+        {
+            if (uiMapSelections.Count == 0)
+            {
+                uiMapSelections.Add(new UIMapSelection(position));
+            }
+        }
+
         public void createHoverCard(UIHoverCard existingcard)
         {
             hoverCards.Add(existingcard);
@@ -612,7 +621,7 @@ namespace The_Mark
             //Map Selections
             for (int i = 0; i < uiMapSelections.Count; ++i)
             {
-
+                uiMapSelections[i].Draw(spriteBatch, mainFont, uiWindowSprites);
 
             }
         }
