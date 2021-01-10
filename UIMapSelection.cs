@@ -7,8 +7,13 @@ namespace The_Mark
 {
     class UIMapSelection
     {
+        //enum
+        public enum MapSelectionType { TravelLoc}
 
+        //type
+        MapSelectionType thisMapSelectionType;
 
+        //rect
         Rectangle uiMapFillRect = new Rectangle(40, 40, 10, 10);
         Rectangle uiMapTopLeft = new Rectangle(30, 30, 10, 10);
         Rectangle uiMapTopRight = new Rectangle(50, 30, 10, 10);
@@ -20,21 +25,51 @@ namespace The_Mark
         Rectangle uiMapRightBorder = new Rectangle(50, 40, 10, 10);
 
         //add text selections
+        public Rectangle travelCollision;
+        public Rectangle infoCollision;
 
         //positions
         Rectangle uiMapSelectionPosition;
         Vector2 locationOffset = new Vector2(0, -50);
 
-        public UIMapSelection(Rectangle position)
+        public UIMapSelection(Vector2 position, MapSelectionType thisType)
+        {
+            Vector2 size = Vector2.Zero;
+            if (thisType == MapSelectionType.TravelLoc)
+            {
+                size = new Vector2(100, 100);
+                travelCollision = new Rectangle((int)(position.X + locationOffset.X), (int)(position.Y + locationOffset.Y), 100, 25);
+                infoCollision = new Rectangle((int)(position.X + locationOffset.X), (int)(position.Y + 25 + locationOffset.Y), 100, 25);
+            }
+            thisMapSelectionType = thisType;
+
+            uiMapSelectionPosition = new Rectangle((int)(position.X + locationOffset.X), (int)(position.Y + locationOffset.Y), (int)size.X, (int)size.Y);
+
+            
+
+        }
+
+        public void Update()
         {
 
 
-            uiMapSelectionPosition = new Rectangle((int)(position.X + locationOffset.X), (int)(position.Y + locationOffset.Y), position.Width, position.Height);
         }
-
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont font, Texture2D uiWindowSprite)
         {
+            if (thisMapSelectionType == MapSelectionType.TravelLoc)
+            {
+                //text
+                spriteBatch.DrawString(font, "Travel", new Vector2(uiMapSelectionPosition.X + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y), Color.White, 0, new Vector2(font.MeasureString("Travel").X / 2, 0), 1, SpriteEffects.None, 0.75f);
+                spriteBatch.DrawString(font, "Travel", new Vector2(uiMapSelectionPosition.X + 1 + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 1), Color.Black, 0, new Vector2(font.MeasureString("Travel").X / 2, 0), 1, SpriteEffects.None, 0.745f);
+                spriteBatch.DrawString(font, "Travel", new Vector2(uiMapSelectionPosition.X + 2 + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 2), Color.Black, 0, new Vector2(font.MeasureString("Travel").X / 2, 0), 1, SpriteEffects.None, 0.745f);
+
+
+                spriteBatch.DrawString(font, "Info", new Vector2(uiMapSelectionPosition.X + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 25), Color.White, 0, new Vector2(font.MeasureString("Info").X / 2, 0), 1, SpriteEffects.None, 0.75f);
+                spriteBatch.DrawString(font, "Info", new Vector2(uiMapSelectionPosition.X + 1 + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 26), Color.Black, 0, new Vector2(font.MeasureString("Info").X / 2, 0), 1, SpriteEffects.None, 0.745f);
+                spriteBatch.DrawString(font, "Info", new Vector2(uiMapSelectionPosition.X + 2 + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 27), Color.Black, 0, new Vector2(font.MeasureString("Info").X / 2, 0), 1, SpriteEffects.None, 0.745f);
+            }
+
             //draw fill
             spriteBatch.Draw(uiWindowSprite, uiMapSelectionPosition, uiMapFillRect, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.72f);
             //draw top left

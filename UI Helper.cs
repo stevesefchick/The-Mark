@@ -97,11 +97,11 @@ namespace The_Mark
             hoverCards.Add(new UIHoverCard(position, title, body,mainFont,titleFont));
         }
 
-        public void createMapUISelection(Rectangle position)
+        public void createMapUISelection(Vector2 position)
         {
             if (uiMapSelections.Count == 0)
             {
-                uiMapSelections.Add(new UIMapSelection(position));
+                uiMapSelections.Add(new UIMapSelection(position, UIMapSelection.MapSelectionType.TravelLoc));
             }
         }
 
@@ -546,6 +546,24 @@ namespace The_Mark
             {
                 //Hovercards
                 hoverCards.Clear();
+
+                //UI Map Selections
+                for (int i =0;i < uiMapSelections.Count;++i)
+                {
+                    if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].travelCollision))
+                    {
+                        //do a travel thing
+                    }
+                    else if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].infoCollision))
+                    {
+                        //do an info thing
+                    }
+                    else
+                    {
+                        uiMapSelections.Clear();
+                    }
+
+                }
 
                 //UI Windows
                 for (int i = 0; i < uiWindows.Count;++i)
