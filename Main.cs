@@ -47,6 +47,7 @@ class GameMain : Game
 	public UI_Helper uiHelper;
 	public Camera camera;
 	public MouseHandler mouse;
+	public TravelHandler travelHandler;
 
 	//controls
 	protected Boolean isRightPressed;
@@ -143,6 +144,7 @@ class GameMain : Game
 		time = new TimeManager();
 		playerHandler = new PlayerHandler(this);
 		uiHelper = new UI_Helper(this,bigWorldFont,textFont);
+		travelHandler = new TravelHandler();
 
     }
 
@@ -275,7 +277,7 @@ class GameMain : Game
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
 		mouse.Update(camera.cameraPosition,backbufferJamz,worldFont);
 		worldMap.Update(this,rando);
-		uiHelper.Update(mouse,playerHandler, returnPositionCameraOffset(Vector2.Zero),dataManager);
+		uiHelper.Update(mouse,playerHandler, returnPositionCameraOffset(Vector2.Zero),dataManager,travelHandler);
 
 		//debug
 		checkForEnterPressed();

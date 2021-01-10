@@ -540,7 +540,7 @@ namespace The_Mark
             }
         }
 
-        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset,DataManager datamanager)
+        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset,DataManager datamanager, TravelHandler travel)
         {
             if (mouse.isLeftClickDown == true)
             {
