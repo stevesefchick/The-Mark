@@ -29,6 +29,7 @@ namespace The_Mark
         public Texture2D currentLocationIcon;
         public Texture2D destinationIcon;
         Texture2D mapLocationIcon;
+        Texture2D mapPathingSheet;
 
         //hover cards
         List<UIHoverCard> hoverCards = new List<UIHoverCard>();
@@ -490,6 +491,7 @@ namespace The_Mark
             currentLocationIcon = thegame.Content.Load<Texture2D>("Sprites/UI/uiCurrentLocation");
             destinationIcon = thegame.Content.Load<Texture2D>("Sprites/UI/uiDestination");
             mapLocationIcon = thegame.Content.Load<Texture2D>("Sprites/UI/uiMapArrow");
+            mapPathingSheet = thegame.Content.Load<Texture2D>("Sprites/UI/travelpathtiles");
         }
 
         //normal

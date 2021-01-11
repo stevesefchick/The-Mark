@@ -99,9 +99,9 @@ class GameMain : Game
 
 	void CreateStartingLocation()
     {
-		playerHandler.currentGridLocation = worldMap.returnPlaceLocation(playerHandler.theMark.placeIDHome);
-		playerHandler.currentLocationText = worldMap.returnCurrentLocNameDescription(playerHandler.currentGridLocation).Item1;
-		playerHandler.currentLocationDescription = worldMap.returnCurrentLocNameDescription(playerHandler.currentGridLocation).Item2;
+		travelHandler.currentGridLocation = worldMap.returnPlaceLocation(playerHandler.theMark.placeIDHome);
+		travelHandler.currentLocationText = worldMap.returnCurrentLocNameDescription(travelHandler.currentGridLocation).Item1;
+		travelHandler.currentLocationDescription = worldMap.returnCurrentLocNameDescription(travelHandler.currentGridLocation).Item2;
 	}
 
 	protected override void Initialize()
@@ -121,7 +121,7 @@ class GameMain : Game
 		//Start the timer
 		time.StartTimer();
 		//instantly center on location
-		camera.InstantCenterOnLocation(new Vector2(playerHandler.currentGridLocation.X,playerHandler.currentGridLocation.Y));
+		camera.InstantCenterOnLocation(new Vector2(travelHandler.currentGridLocation.X, travelHandler.currentGridLocation.Y));
 
 		base.Initialize();
 	}
@@ -353,9 +353,9 @@ class GameMain : Game
 	camera.get_transformation(gdm));
 		mouse.Draw(spriteBatch, camera.cameraPosition, backbufferJamz, worldFont,uiHelper.areThereUIElementsOpen());
 		time.Draw(spriteBatch, worldFont, returnPositionCameraOffset(timeUIPosition));
-		playerHandler.DrawLocationUI(spriteBatch, worldFont, returnPositionCameraOffset(locationUIPosition),uiHelper.currentLocationIcon,uiHelper.destinationIcon);
+		travelHandler.DrawLocationUI(spriteBatch, worldFont, returnPositionCameraOffset(locationUIPosition),uiHelper.currentLocationIcon,uiHelper.destinationIcon);
 		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero),playerHandler);
-		uiHelper.DrawMapUI(spriteBatch, new Vector2(playerHandler.currentGridLocation.X*64,playerHandler.currentGridLocation.Y*64));
+		uiHelper.DrawMapUI(spriteBatch, new Vector2(travelHandler.currentGridLocation.X*64, travelHandler.currentGridLocation.Y*64));
 		spriteBatch.End();
 
 		base.Draw(gameTime);
