@@ -542,7 +542,7 @@ namespace The_Mark
             }
         }
 
-        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset,DataManager datamanager, TravelHandler travel)
+        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset,DataManager datamanager, TravelHandler travel, WorldMap world)
         {
             if (mouse.isLeftClickDown == true)
             {
@@ -554,7 +554,7 @@ namespace The_Mark
                 {
                     if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].travelCollision))
                     {
-                        //do a travel thing
+                        //travel.TravelToDestination(travel.currentGridLocation, new Point(0, 0), world);
                     }
                     else if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].infoCollision))
                     {

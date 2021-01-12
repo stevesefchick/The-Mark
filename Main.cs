@@ -277,7 +277,7 @@ class GameMain : Game
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
 		mouse.Update(camera.cameraPosition,backbufferJamz,worldFont);
 		worldMap.Update(this,rando);
-		uiHelper.Update(mouse,playerHandler, returnPositionCameraOffset(Vector2.Zero),dataManager,travelHandler);
+		uiHelper.Update(mouse,playerHandler, returnPositionCameraOffset(Vector2.Zero),dataManager,travelHandler,worldMap);
 
 		//debug
 		checkForEnterPressed();

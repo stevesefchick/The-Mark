@@ -25,12 +25,18 @@ namespace The_Mark
 
         }
 
-        public void createTravelCoords(Point start, Point destination, WorldMap world)
+        public void TravelToDestination(Point start, Point destination, WorldMap world)
+        {
+            createTravelCoords(start, destination);
+            createDestinationStrings(world);
+
+        }
+
+        void createTravelCoords(Point start, Point destination)
         {
             travelStartingLocation = start;
             destinationLocation = destination;
             displayDestination = true;
-            createDestinationStrings(world);
 
         }
 

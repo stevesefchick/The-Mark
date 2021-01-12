@@ -32,6 +32,9 @@ namespace The_Mark
         Rectangle uiMapSelectionPosition;
         Vector2 locationOffset = new Vector2(0, -50);
 
+        //this grid selected
+        public Point thisGridLocation;
+
         public UIMapSelection(Vector2 position, MapSelectionType thisType)
         {
             Vector2 size = Vector2.Zero;
