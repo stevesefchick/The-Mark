@@ -67,7 +67,7 @@ namespace The_Mark
 
         public Boolean areThereUIElementsOpen()
         {
-            if (uiWindows.Count >0 ||  hoverCards.Count>0)
+            if (uiWindows.Count >0 ||  hoverCards.Count>0 || uiMapSelections.Count>0)
             {
                 return true;
             }
@@ -554,7 +554,8 @@ namespace The_Mark
                 {
                     if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].travelCollision))
                     {
-                        //travel.TravelToDestination(travel.currentGridLocation, new Point(0, 0), world);
+                        travel.TravelToDestination(travel.currentGridLocation, uiMapSelections[i].thisGridLocation, world);
+                        uiMapSelections.Clear();
                     }
                     else if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].infoCollision))
                     {

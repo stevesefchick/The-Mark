@@ -46,6 +46,8 @@ namespace The_Mark
             }
             thisMapSelectionType = thisType;
 
+            thisGridLocation = new Point((int)(position.X / 64), (int)(position.Y / 64));
+
             uiMapSelectionPosition = new Rectangle((int)(position.X + locationOffset.X), (int)(position.Y + locationOffset.Y), (int)size.X, (int)size.Y);
 
             
