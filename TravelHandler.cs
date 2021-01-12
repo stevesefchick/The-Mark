@@ -18,6 +18,9 @@ namespace The_Mark
         public String currentDestinationDescription;
         public Point travelStartingLocation;
 
+        //paths
+        public List<Point> travelPath = new List<Point>();
+
 
         public TravelHandler()
         {
@@ -25,11 +28,51 @@ namespace The_Mark
 
         }
 
-        public void TravelToDestination(Point start, Point destination, WorldMap world)
+        public void createTravelPath(Point destination,Random rando)
+        {
+            Point up = new Point(0, -1);
+            Point down = new Point(0, 1);
+            Point right = new Point(1, 0);
+            Point left = new Point(-1, 0);
+
+            Point start = currentGridLocation;
+            travelPath.Add(start);
+
+            while (start != destination)
+            {
+                
+                List<Point> possibleDirections = new List<Point>();
+                if (destination.X > start.X)
+                {
+                    possibleDirections.Add(right);
+                }
+                if (destination.X < start.X)
+                {
+                    possibleDirections.Add(left);
+                }
+                if (destination.Y > start.Y)
+                {
+                    possibleDirections.Add(down);
+                }
+                if (destination.Y < start.Y)
+                {
+                    possibleDirections.Add(up);
+                }
+
+                start += possibleDirections[rando.Next(0, possibleDirections.Count)];
+
+                travelPath.Add(start);
+            }
+
+
+        }
+
+        public void TravelToDestination(Point start, Point destination, WorldMap world,Random rando)
         {
             createTravelCoords(start, destination);
             createDestinationStrings(world);
 
+            createTravelPath(destination, rando);
         }
 
         void createTravelCoords(Point start, Point destination)

@@ -542,7 +542,7 @@ namespace The_Mark
             }
         }
 
-        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset,DataManager datamanager, TravelHandler travel, WorldMap world)
+        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset,DataManager datamanager, TravelHandler travel, WorldMap world, Random rando)
         {
             if (mouse.isLeftClickDown == true)
             {
@@ -554,7 +554,7 @@ namespace The_Mark
                 {
                     if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].travelCollision))
                     {
-                        travel.TravelToDestination(travel.currentGridLocation, uiMapSelections[i].thisGridLocation, world);
+                        travel.TravelToDestination(travel.currentGridLocation, uiMapSelections[i].thisGridLocation, world, rando);
                         uiMapSelections.Clear();
                     }
                     else if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].infoCollision))

@@ -130,7 +130,7 @@ namespace The_Mark
         public Vector3 returnColorInfluencesBasedOnTime()
         {
             //deep night
-            if ((Hour>=1 && Hour <5))
+            if ((Hour>=0 && Hour <5))
             {
                 red = -0.5f;
                 green = -0.3f;
@@ -151,28 +151,28 @@ namespace The_Mark
                 blue = -0.1f;
             }
             //midday
-            else if (Hour >= 7 && Hour < 19)
+            else if (Hour >= 7 && Hour < 12)
             {
                 red =0;
                 green = 0;
                 blue = 0;
             }
             //late day
-            else if (Hour >= 19 && Hour < 20)
+            else if (Hour >= 12 && Hour < 17)
             {
                 red = 0.1f;
                 green = 0;
                 blue = 0.1f;
             }
             //sunset
-            else if (Hour >= 20 && Hour < 21)
+            else if (Hour >= 17 && Hour < 18)
             {
                 red = 0.2f;
                 green = -0.1f;
                 blue = -0.1f;
             }
             //night
-            if ((Hour >= 0 && Hour < 1) || (Hour >= 21 && Hour < 24))
+            if (Hour >= 18 && Hour < 24)
             {
                 red = -0.4f;
                 green = -0.2f;
