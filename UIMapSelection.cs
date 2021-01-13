@@ -30,7 +30,7 @@ namespace The_Mark
 
         //positions
         Rectangle uiMapSelectionPosition;
-        Vector2 locationOffset = new Vector2(0, -50);
+        Vector2 locationOffset = new Vector2(0, -150);
 
         //this grid selected
         public Point thisGridLocation;

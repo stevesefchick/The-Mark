@@ -19,7 +19,7 @@ namespace The_Mark
         public Point travelStartingLocation;
 
         //paths
-        public List<Point> travelPath = new List<Point>();
+        public List<TravelRoute> travelPath = new List<TravelRoute>();
 
 
         public TravelHandler()
@@ -41,7 +41,7 @@ namespace The_Mark
             Point left = new Point(-1, 0);
 
             Point start = currentGridLocation;
-            travelPath.Add(start);
+            travelPath.Add(new TravelRoute(start));
 
             while (start != destination)
             {
@@ -66,9 +66,81 @@ namespace The_Mark
 
                 start += possibleDirections[rando.Next(0, possibleDirections.Count)];
 
-                travelPath.Add(start);
+                travelPath.Add(new TravelRoute(start));
             }
 
+            determineTravelRouteSpriteMap();
+
+        }
+
+        void determineTravelRouteSpriteMap()
+        {
+            for (int i =0;i < travelPath.Count;++i)
+            {
+                if (i==0)
+                {
+                    if (travelPath[i+1].routeLocation.X < travelPath[i].routeLocation.X)
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(1, 0);
+                    }
+                    else if (travelPath[i + 1].routeLocation.X > travelPath[i].routeLocation.X)
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(0, 0);
+                    }
+                    else if (travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y)
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(1, 1);
+                    }
+                    else if (travelPath[i + 1].routeLocation.Y > travelPath[i].routeLocation.Y)
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(0, 1);
+                    }
+                }
+                else if (i==travelPath.Count-1)
+                {
+                    if (travelPath[i - 1].routeLocation.X < travelPath[i].routeLocation.X)
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(1, 0);
+                    }
+                    else if (travelPath[i - 1].routeLocation.X > travelPath[i].routeLocation.X)
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(0, 0);
+                    }
+                    else if (travelPath[i - 1].routeLocation.Y < travelPath[i].routeLocation.Y)
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(1, 1);
+                    }
+                    else if (travelPath[i - 1].routeLocation.Y > travelPath[i].routeLocation.Y)
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(0, 1);
+                    }
+                }
+                else
+                {
+                    if ((travelPath[i - 1].routeLocation.X < travelPath[i].routeLocation.X &&
+    travelPath[i + 1].routeLocation.X > travelPath[i].routeLocation.X) ||
+    (travelPath[i - 1].routeLocation.X > travelPath[i].routeLocation.X &&
+    travelPath[i + 1].routeLocation.X < travelPath[i].routeLocation.X))
+
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(4, 0);
+                    }
+                    else if ((travelPath[i - 1].routeLocation.Y < travelPath[i].routeLocation.Y &&
+travelPath[i + 1].routeLocation.Y > travelPath[i].routeLocation.Y) ||
+(travelPath[i - 1].routeLocation.Y > travelPath[i].routeLocation.Y &&
+travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y))
+
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(4, 1);
+                    }
+
+                    //TODO 2,0
+                    //TODO 2,1
+                    //TODO 3,0
+                    //TODO 3,1
+                }
+
+            }
 
         }
 
@@ -97,7 +169,7 @@ namespace The_Mark
         {
             for (int i =0; i < travelPath.Count;++i)
             {
-                spriteBatch.Draw(pathTexture, new Rectangle(travelPath[i].X * 64, travelPath[i].Y * 64, 64, 64), new Rectangle(0, 0, 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.75f);
+                spriteBatch.Draw(pathTexture, new Rectangle(travelPath[i].routeLocation.X * 64, travelPath[i].routeLocation.Y * 64, 64, 64), new Rectangle((int)(travelPath[i].routeSpriteSheet.X*64), (int)(travelPath[i].routeSpriteSheet.Y * 64), 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.71f);
 
             }
 
