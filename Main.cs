@@ -254,7 +254,7 @@ class GameMain : Game
 
 
 
-		if (mouse.isRightClickDown==true)
+		if (mouse.isRightClickDown==true && uiHelper.areThereUIElementsOpen() ==false)
         {
 			camera.CreateDestination(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y));
 			travelHandler.createTravelPath(new Point(mouse.rightMouseClickPosition.X/64, mouse.rightMouseClickPosition.Y/64),rando);
@@ -355,6 +355,7 @@ class GameMain : Game
 		mouse.Draw(spriteBatch, camera.cameraPosition, backbufferJamz, worldFont,uiHelper.areThereUIElementsOpen());
 		time.Draw(spriteBatch, worldFont, returnPositionCameraOffset(timeUIPosition));
 		travelHandler.DrawLocationUI(spriteBatch, worldFont, returnPositionCameraOffset(locationUIPosition),uiHelper.currentLocationIcon,uiHelper.destinationIcon);
+		travelHandler.DrawPathOnMap(spriteBatch, uiHelper.mapPathingSheet);
 		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero),playerHandler);
 		uiHelper.DrawMapUI(spriteBatch, new Vector2(travelHandler.currentGridLocation.X*64, travelHandler.currentGridLocation.Y*64));
 		spriteBatch.End();

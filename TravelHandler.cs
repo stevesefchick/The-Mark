@@ -28,6 +28,11 @@ namespace The_Mark
 
         }
 
+        public void clearTravelPath()
+        {
+            travelPath.Clear();
+        }
+
         public void createTravelPath(Point destination,Random rando)
         {
             Point up = new Point(0, -1);
@@ -88,6 +93,15 @@ namespace The_Mark
             currentDestinationDescription = world.returnCurrentLocNameDescription(destinationLocation).Item2;
         }
 
+        public void DrawPathOnMap(SpriteBatch spriteBatch, Texture2D pathTexture)
+        {
+            for (int i =0; i < travelPath.Count;++i)
+            {
+                spriteBatch.Draw(pathTexture, new Rectangle(travelPath[i].X * 64, travelPath[i].Y * 64, 64, 64), new Rectangle(0, 0, 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.75f);
+
+            }
+
+        }
 
         public void DrawLocationUI(SpriteBatch spriteBatch, SpriteFont worldfont, Vector2 baseposition, Texture2D currentLocIcon, Texture2D destinationIcon)
         {

@@ -29,7 +29,7 @@ namespace The_Mark
         public Texture2D currentLocationIcon;
         public Texture2D destinationIcon;
         Texture2D mapLocationIcon;
-        Texture2D mapPathingSheet;
+        public Texture2D mapPathingSheet;
 
         //hover cards
         List<UIHoverCard> hoverCards = new List<UIHoverCard>();
@@ -564,6 +564,7 @@ namespace The_Mark
                     else
                     {
                         uiMapSelections.Clear();
+                        travel.clearTravelPath();
                     }
 
                 }
