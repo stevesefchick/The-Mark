@@ -71,8 +71,6 @@ namespace The_Mark
         {
             createTravelCoords(start, destination);
             createDestinationStrings(world);
-
-            createTravelPath(destination, rando);
         }
 
         void createTravelCoords(Point start, Point destination)
