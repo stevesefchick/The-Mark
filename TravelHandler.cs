@@ -33,7 +33,7 @@ namespace The_Mark
             travelPath.Clear();
         }
 
-        public void createTravelPath(Point destination,Random rando)
+        public void createTravelPath(Point destination,Random rando,WorldMap world)
         {
             Point up = new Point(0, -1);
             Point down = new Point(0, 1);
@@ -70,7 +70,62 @@ namespace The_Mark
             }
 
             determineTravelRouteSpriteMap();
+            GetEstimationsForTravel(world);
 
+        }
+
+        public void GetEstimationsForTravel(WorldMap world)
+        {
+            for (int i =0;i<travelPath.Count;++i)
+            {
+                //road
+                if (world.IsGridRoad(travelPath[i].routeLocation))
+                {
+                    AssignEstimateValueToPath(5, i);
+                }
+                //water
+                else if (world.IsGridLakeOrWater(travelPath[i].routeLocation))
+                {
+                    AssignEstimateValueToPath(30, i);
+                }
+                //node
+                else if (world.IsGridNodeType(travelPath[i].routeLocation) != GridTile.GridNode.None)
+                {
+                    AssignEstimateValueToPath(10, i);
+                }
+                //terrains
+                else
+                {
+                    GridTile.GridTerrain terraintype = world.GridNodeTerrainType(travelPath[i].routeLocation);
+
+                    if (terraintype == GridTile.GridTerrain.Beach)
+                    {
+                        AssignEstimateValueToPath(15, i);
+                    }
+                    else if (terraintype == GridTile.GridTerrain.Forest)
+                    {
+                        AssignEstimateValueToPath(20, i);
+                    }
+                    else if (terraintype == GridTile.GridTerrain.Grass)
+                    {
+                        AssignEstimateValueToPath(10, i);
+                    }
+                    else if (terraintype == GridTile.GridTerrain.Hills)
+                    {
+                        AssignEstimateValueToPath(20, i);
+                    }
+                    else if (terraintype == GridTile.GridTerrain.Swamp)
+                    {
+                        AssignEstimateValueToPath(25, i);
+                    }
+                }
+            }
+            
+        }
+
+        void AssignEstimateValueToPath(int minutes, int pathid)
+        {
+            travelPath[pathid].AssignEstimate(minutes);
         }
 
         //used to determine which area on the spritesheet to use

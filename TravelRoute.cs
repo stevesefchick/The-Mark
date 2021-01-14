@@ -13,11 +13,16 @@ namespace The_Mark
         public Vector2 routeSpriteSheet;
 
         //estimations-tbd
-
+        int estimate;
 
         public TravelRoute(Point loc)
         {
             routeLocation = loc;
+        }
+
+        public void AssignEstimate(int value)
+        {
+            estimate = value;
         }
 
     }

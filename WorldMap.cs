@@ -73,6 +73,43 @@ namespace The_Mark
 			return Point.Zero;
         }
 
+		public Boolean IsGridRoad(Point loc)
+        {
+			if (gridTiles[loc].thisRoadType == GridTile.RoadType.Road)
+            {
+				return true;
+            }
+			else
+            {
+				return false;
+            }
+
+        }
+
+		public Boolean IsGridLakeOrWater(Point loc)
+        {
+			if (gridTiles[loc].thisWaterType != GridTile.WaterType.None)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+
+		public GridTile.GridNode IsGridNodeType(Point loc)
+        {
+			return gridTiles[loc].thisNodeType;
+        }
+
+		public GridTile.GridTerrain GridNodeTerrainType(Point loc)
+        {
+			return gridTiles[loc].thisTerrainType;
+        }
+
+
 		//returns name and description
 		public (String,String) returnCurrentLocNameDescription(Point gridLoc)
         {

@@ -257,7 +257,7 @@ class GameMain : Game
 		if (mouse.isRightClickDown==true && uiHelper.areThereUIElementsOpen() ==false)
         {
 			camera.CreateDestination(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y));
-			travelHandler.createTravelPath(new Point(mouse.rightMouseClickPosition.X/64, mouse.rightMouseClickPosition.Y/64),rando);
+			travelHandler.createTravelPath(new Point(mouse.rightMouseClickPosition.X/64, mouse.rightMouseClickPosition.Y/64),rando,worldMap);
 			uiHelper.createMapUISelection(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y));
         }
 	}
