@@ -21,6 +21,12 @@ namespace The_Mark
         //paths
         public List<TravelRoute> travelPath = new List<TravelRoute>();
 
+        //travelling animation
+        Vector2 travelDistance;
+
+        //icon
+        int mapIconOffset = -32;
+
 
         public TravelHandler()
         {
@@ -258,6 +264,12 @@ travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y))
                 spriteBatch.Draw(pathTexture, new Rectangle(travelPath[i].routeLocation.X * 64, travelPath[i].routeLocation.Y * 64, 64, 64), new Rectangle((int)(travelPath[i].routeSpriteSheet.X*64), (int)(travelPath[i].routeSpriteSheet.Y * 64), 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.71f);
 
             }
+
+        }
+
+        public void DrawIconOnMap(SpriteBatch spriteBatch, Texture2D mapLocationIcon)
+        {
+            spriteBatch.Draw(mapLocationIcon, new Rectangle((currentGridLocation.X * 64), (currentGridLocation.Y * 64) + mapIconOffset, 64, 64), new Rectangle(0, 0, 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.71f);
 
         }
 

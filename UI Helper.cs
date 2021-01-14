@@ -16,7 +16,6 @@ namespace The_Mark
         SpriteFont mainFont;
 
         Vector2 backbuffersize;
-        int mapIconOffset = -32;
 
         //Sprites
         Texture2D uiWindowSprites;
@@ -28,7 +27,7 @@ namespace The_Mark
         Texture2D equipmentTrinketSpriteSheet;
         public Texture2D currentLocationIcon;
         public Texture2D destinationIcon;
-        Texture2D mapLocationIcon;
+        public Texture2D mapLocationIcon;
         public Texture2D mapPathingSheet;
 
         //hover cards
@@ -542,7 +541,7 @@ namespace The_Mark
             }
         }
 
-        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset,DataManager datamanager, TravelHandler travel, WorldMap world, Random rando)
+        public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset,DataManager datamanager, TravelHandler travel, WorldMap world, Random rando, GameMain game)
         {
             if (mouse.isLeftClickDown == true)
             {
@@ -556,6 +555,8 @@ namespace The_Mark
                     {
                         travel.TravelToDestination(travel.currentGridLocation, uiMapSelections[i].thisGridLocation, world, rando);
                         uiMapSelections.Clear();
+                        game.ChangeGameState(GameMain.GameState.Traveling);
+                        
                     }
                     else if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].infoCollision))
                     {
@@ -638,7 +639,6 @@ namespace The_Mark
 
         public void DrawMapUI(SpriteBatch spriteBatch,Vector2 location)
         {
-            spriteBatch.Draw(mapLocationIcon, new Rectangle((int)location.X, (int)location.Y + mapIconOffset, 64, 64), new Rectangle(0, 0, 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.71f);
 
             //Map Selections
             for (int i = 0; i < uiMapSelections.Count; ++i)

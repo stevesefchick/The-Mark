@@ -15,7 +15,7 @@ using System.IO;
 class GameMain : Game
 {
 	//enums
-	public enum GameState { Idle, Traveling, Resting, Combat}
+	public enum GameState { Idle, Traveling, Resting, Combat }
 
 	//game state
 	public GameState currentGameState = GameState.Idle;
@@ -63,8 +63,8 @@ class GameMain : Game
 	Random rando = new Random();
 
 
-	
-	
+
+
 
 	//run the game
 	static void Main(string[] args)
@@ -92,13 +92,13 @@ class GameMain : Game
 	}
 
 	private void GetUIElementPositions()
-    {
+	{
 		timeUIPosition = new Vector2(backbufferJamz.X - 475, 50);
 		locationUIPosition = new Vector2(100, 25);
-    }
+	}
 
 	void CreateStartingLocation()
-    {
+	{
 		travelHandler.currentGridLocation = worldMap.returnPlaceLocation(playerHandler.theMark.placeIDHome);
 		travelHandler.currentLocationText = worldMap.returnCurrentLocNameDescription(travelHandler.currentGridLocation).Item1;
 		travelHandler.currentLocationDescription = worldMap.returnCurrentLocNameDescription(travelHandler.currentGridLocation).Item2;
@@ -127,7 +127,7 @@ class GameMain : Game
 	}
 
 	void LoadFonts()
-    {
+	{
 		//todo: create new project to load fonts from
 		worldFont = Content.Load<SpriteFont>(@"Fonts/PaperJohnny");
 		bigWorldFont = Content.Load<SpriteFont>(@"Fonts/PaperJohnnyBig");
@@ -135,7 +135,7 @@ class GameMain : Game
 	}
 
 	private void createHelpers()
-    {
+	{
 		LoadFonts();
 
 		dataManager = new DataManager();
@@ -143,17 +143,17 @@ class GameMain : Game
 		camera = new Camera();
 		time = new TimeManager();
 		playerHandler = new PlayerHandler(this);
-		uiHelper = new UI_Helper(this,bigWorldFont,textFont);
+		uiHelper = new UI_Helper(this, bigWorldFont, textFont);
 		travelHandler = new TravelHandler();
 
-    }
+	}
 
 
 	//Creates a new world and all relevant items within should the player choose New Game
 	void createNewWorld()
-    {
-		worldMap = new WorldMap(this,rando,dataManager);
-    }
+	{
+		worldMap = new WorldMap(this, rando, dataManager);
+	}
 
 	protected override void LoadContent()
 	{
@@ -169,18 +169,18 @@ class GameMain : Game
 	}
 
 	protected void getInput()
-    {
+	{
 		KeyboardState kbState = Keyboard.GetState();
 
 		//right
-		if (kbState.IsKeyDown(Keys.Right)==true)
-        {
+		if (kbState.IsKeyDown(Keys.Right) == true)
+		{
 			isRightPressed = true;
-        }
+		}
 		else
-        {
+		{
 			isRightPressed = false;
-        }
+		}
 
 		//left
 		if (kbState.IsKeyDown(Keys.Left) == true)
@@ -214,13 +214,13 @@ class GameMain : Game
 
 		//pagedown
 		if (kbState.IsKeyDown(Keys.PageDown) == true)
-        {
+		{
 			isPageDownPressed = true;
-        }
+		}
 		else
-        {
+		{
 			isPageDownPressed = false;
-        }
+		}
 
 		//pageup
 		if (kbState.IsKeyDown(Keys.PageUp) == true)
@@ -254,22 +254,28 @@ class GameMain : Game
 
 
 
-		if (mouse.isRightClickDown==true && uiHelper.areThereUIElementsOpen() ==false)
-        {
+		if (mouse.isRightClickDown == true && uiHelper.areThereUIElementsOpen() == false)
+		{
 			camera.CreateDestination(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y));
-			travelHandler.createTravelPath(new Point(mouse.rightMouseClickPosition.X/64, mouse.rightMouseClickPosition.Y/64),rando,worldMap);
+			travelHandler.createTravelPath(new Point(mouse.rightMouseClickPosition.X / 64, mouse.rightMouseClickPosition.Y / 64), rando, worldMap);
 			uiHelper.createMapUISelection(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y));
-        }
+		}
 	}
 
 	void getShaderColors()
-    {
+	{
 		Vector3 influences = time.returnColorInfluencesBasedOnTime();
 		dayNightEffect.Parameters["redinfluence"].SetValue(influences.X);
 		dayNightEffect.Parameters["greeninfluence"].SetValue(influences.Y);
 		dayNightEffect.Parameters["blueinfluence"].SetValue(influences.Z);
 
 	}
+
+	public void ChangeGameState(GameState thisstate)
+    {
+		currentGameState = thisstate;
+
+    }
 
 	protected override void Update(GameTime gameTime)
 	{
@@ -278,7 +284,14 @@ class GameMain : Game
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
 		mouse.Update(camera.cameraPosition,backbufferJamz,worldFont);
 		worldMap.Update(this,rando);
-		uiHelper.Update(mouse,playerHandler, returnPositionCameraOffset(Vector2.Zero),dataManager,travelHandler,worldMap,rando);
+		uiHelper.Update(mouse,playerHandler, returnPositionCameraOffset(Vector2.Zero),dataManager,travelHandler,worldMap,rando,this);
+
+		//GameState
+		//Travelling
+		if (currentGameState == GameState.Traveling)
+        {
+
+        }
 
 		//debug
 		checkForEnterPressed();
@@ -352,12 +365,19 @@ class GameMain : Game
 	null,
 	null,
 	camera.get_transformation(gdm));
+
 		mouse.Draw(spriteBatch, camera.cameraPosition, backbufferJamz, worldFont,uiHelper.areThereUIElementsOpen());
 		time.Draw(spriteBatch, worldFont, returnPositionCameraOffset(timeUIPosition));
+
+
 		travelHandler.DrawLocationUI(spriteBatch, worldFont, returnPositionCameraOffset(locationUIPosition),uiHelper.currentLocationIcon,uiHelper.destinationIcon);
 		travelHandler.DrawPathOnMap(spriteBatch, uiHelper.mapPathingSheet);
+		travelHandler.DrawIconOnMap(spriteBatch, uiHelper.mapLocationIcon);
+
 		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero),playerHandler);
 		uiHelper.DrawMapUI(spriteBatch, new Vector2(travelHandler.currentGridLocation.X*64, travelHandler.currentGridLocation.Y*64));
+
+
 		spriteBatch.End();
 
 		base.Draw(gameTime);
