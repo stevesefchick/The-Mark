@@ -73,10 +73,12 @@ namespace The_Mark
 
         }
 
+        //used to determine which area on the spritesheet to use
         void determineTravelRouteSpriteMap()
         {
             for (int i =0;i < travelPath.Count;++i)
             {
+                //first spot, only check for nearby and create endpoint
                 if (i==0)
                 {
                     if (travelPath[i+1].routeLocation.X < travelPath[i].routeLocation.X)
@@ -96,6 +98,7 @@ namespace The_Mark
                         travelPath[i].routeSpriteSheet = new Vector2(0, 1);
                     }
                 }
+                //last spot, only check for last nearby and create endpoint
                 else if (i==travelPath.Count-1)
                 {
                     if (travelPath[i - 1].routeLocation.X < travelPath[i].routeLocation.X)
@@ -115,6 +118,7 @@ namespace The_Mark
                         travelPath[i].routeSpriteSheet = new Vector2(0, 1);
                     }
                 }
+                //middle, check for both before and after positions and create spritesheet accordingly
                 else
                 {
                     if ((travelPath[i - 1].routeLocation.X < travelPath[i].routeLocation.X &&
@@ -133,11 +137,38 @@ travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y))
                     {
                         travelPath[i].routeSpriteSheet = new Vector2(4, 1);
                     }
+                    else if ((travelPath[i - 1].routeLocation.Y > travelPath[i].routeLocation.Y &&
+travelPath[i + 1].routeLocation.X > travelPath[i].routeLocation.X) ||
+(travelPath[i - 1].routeLocation.X > travelPath[i].routeLocation.X &&
+travelPath[i + 1].routeLocation.Y > travelPath[i].routeLocation.Y))
 
-                    //TODO 2,0
-                    //TODO 2,1
-                    //TODO 3,0
-                    //TODO 3,1
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(2, 0);
+                    }
+                    else if ((travelPath[i - 1].routeLocation.Y > travelPath[i].routeLocation.Y &&
+travelPath[i + 1].routeLocation.X < travelPath[i].routeLocation.X) ||
+(travelPath[i - 1].routeLocation.X < travelPath[i].routeLocation.X &&
+travelPath[i + 1].routeLocation.Y > travelPath[i].routeLocation.Y))
+
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(3,0);
+                    }
+                    else if ((travelPath[i - 1].routeLocation.Y < travelPath[i].routeLocation.Y &&
+travelPath[i + 1].routeLocation.X > travelPath[i].routeLocation.X) ||
+(travelPath[i - 1].routeLocation.X > travelPath[i].routeLocation.X &&
+travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y))
+
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(2, 1);
+                    }
+                    else if ((travelPath[i - 1].routeLocation.Y < travelPath[i].routeLocation.Y &&
+travelPath[i + 1].routeLocation.X < travelPath[i].routeLocation.X) ||
+(travelPath[i - 1].routeLocation.X < travelPath[i].routeLocation.X &&
+travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y))
+
+                    {
+                        travelPath[i].routeSpriteSheet = new Vector2(3, 1);
+                    }
                 }
 
             }
