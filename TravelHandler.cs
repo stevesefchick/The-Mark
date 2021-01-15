@@ -35,6 +35,18 @@ namespace The_Mark
 
         }
 
+        void UpdateCurrentLocation(WorldMap world)
+        {
+            currentLocationText = world.returnCurrentLocNameDescription(currentGridLocation).Item1;
+            currentLocationDescription = world.returnCurrentLocNameDescription(currentGridLocation).Item2;
+        }
+
+        void createDestinationStrings(WorldMap world)
+        {
+            currentDestinationText = world.returnCurrentLocNameDescription(destinationLocation).Item1;
+            currentDestinationDescription = world.returnCurrentLocNameDescription(destinationLocation).Item2;
+        }
+
         //returns minutes to tick down
         public int TravelTick()
         {
@@ -77,6 +89,7 @@ namespace The_Mark
         public void TravelCleanup(WorldMap world)
         {
             travelPath.Clear();
+            UpdateCurrentLocation(world);
             currentTravelDistance = Vector2.Zero;
             totalTravelDistance = Vector2.Zero;
             displayDestination = false;
@@ -340,11 +353,7 @@ travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y))
 
         }
 
-        void createDestinationStrings(WorldMap world)
-        {
-            currentDestinationText = world.returnCurrentLocNameDescription(destinationLocation).Item1;
-            currentDestinationDescription = world.returnCurrentLocNameDescription(destinationLocation).Item2;
-        }
+
 
         public void DrawPathOnMap(SpriteBatch spriteBatch, Texture2D pathTexture)
         {
