@@ -289,7 +289,17 @@ class GameMain : Game
 		//GameState
 		//Travelling
 		if (currentGameState == GameState.Traveling)
-        {
+		{
+			int minutes = travelHandler.TravelTick();
+			if (minutes == -1)
+			{
+				ChangeGameState(GameState.Idle);
+				travelHandler.TravelCleanup(worldMap);
+			}
+			else
+			{
+				time.timeTick(minutes);
+			}
 
         }
 

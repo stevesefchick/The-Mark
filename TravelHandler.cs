@@ -22,7 +22,8 @@ namespace The_Mark
         public List<TravelRoute> travelPath = new List<TravelRoute>();
 
         //travelling animation
-        Vector2 travelDistance;
+        Vector2 currentTravelDistance = Vector2.Zero;
+        Vector2 totalTravelDistance = Vector2.Zero;
 
         //icon
         int mapIconOffset = -32;
@@ -33,6 +34,57 @@ namespace The_Mark
 
 
         }
+
+        //returns minutes to tick down
+        public int TravelTick()
+        {
+            int value = 0;
+
+            //if at destination
+            if (currentTravelDistance == totalTravelDistance) 
+            {
+                //get next distance
+                currentGridLocation += new Point((int)(totalTravelDistance.X / 64), (int)(totalTravelDistance.Y / 64));
+                for (int i=0;i < travelPath.Count;++i)
+                {
+                    if (travelPath[i].routeLocation == currentGridLocation)
+                    {
+                        totalTravelDistance = travelPath[i].getDirection();
+                        currentTravelDistance = Vector2.Zero;
+                        if (totalTravelDistance == Vector2.Zero)
+                        {
+                            value = -1;
+
+                        }
+                        else
+                        {
+                            value = travelPath[i].GetTravelEstimate();
+                        }
+                        break;
+                    }
+                }
+            }
+
+            //move
+            currentTravelDistance.X += totalTravelDistance.X / 64;
+            currentTravelDistance.Y += totalTravelDistance.Y / 64;
+
+
+
+            return value;
+        }
+
+        public void TravelCleanup(WorldMap world)
+        {
+            travelPath.Clear();
+            currentTravelDistance = Vector2.Zero;
+            totalTravelDistance = Vector2.Zero;
+            displayDestination = false;
+            destinationLocation = Point.Zero;
+            currentDestinationText = "";
+            currentDestinationDescription = "";
+            travelStartingLocation = Point.Zero;
+    }
 
         public void clearTravelPath()
         {
@@ -75,7 +127,7 @@ namespace The_Mark
                 travelPath.Add(new TravelRoute(start));
             }
 
-            determineTravelRouteSpriteMap();
+            determineTravelRouteSpriteMapAndDirections();
             GetEstimationsForTravel(world);
 
         }
@@ -129,13 +181,15 @@ namespace The_Mark
             
         }
 
+
+
         void AssignEstimateValueToPath(int minutes, int pathid)
         {
             travelPath[pathid].AssignEstimate(minutes);
         }
 
         //used to determine which area on the spritesheet to use
-        void determineTravelRouteSpriteMap()
+        void determineTravelRouteSpriteMapAndDirections()
         {
             for (int i =0;i < travelPath.Count;++i)
             {
@@ -145,18 +199,25 @@ namespace The_Mark
                     if (travelPath[i+1].routeLocation.X < travelPath[i].routeLocation.X)
                     {
                         travelPath[i].routeSpriteSheet = new Vector2(1, 0);
+                        travelPath[i].AssignNextDirection(new Vector2(-64, 0));
                     }
                     else if (travelPath[i + 1].routeLocation.X > travelPath[i].routeLocation.X)
                     {
                         travelPath[i].routeSpriteSheet = new Vector2(0, 0);
+                        travelPath[i].AssignNextDirection(new Vector2(64, 0));
+
                     }
                     else if (travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y)
                     {
                         travelPath[i].routeSpriteSheet = new Vector2(1, 1);
+                        travelPath[i].AssignNextDirection(new Vector2(0, -64));
+
                     }
                     else if (travelPath[i + 1].routeLocation.Y > travelPath[i].routeLocation.Y)
                     {
                         travelPath[i].routeSpriteSheet = new Vector2(0, 1);
+                        travelPath[i].AssignNextDirection(new Vector2(0, 64));
+
                     }
                 }
                 //last spot, only check for last nearby and create endpoint
@@ -178,10 +239,13 @@ namespace The_Mark
                     {
                         travelPath[i].routeSpriteSheet = new Vector2(0, 1);
                     }
+
+                    travelPath[i].AssignNextDirection(Vector2.Zero);
                 }
                 //middle, check for both before and after positions and create spritesheet accordingly
                 else
                 {
+                    //sheet
                     if ((travelPath[i - 1].routeLocation.X < travelPath[i].routeLocation.X &&
     travelPath[i + 1].routeLocation.X > travelPath[i].routeLocation.X) ||
     (travelPath[i - 1].routeLocation.X > travelPath[i].routeLocation.X &&
@@ -230,6 +294,31 @@ travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y))
                     {
                         travelPath[i].routeSpriteSheet = new Vector2(3, 1);
                     }
+
+                    //travelling
+                    //left
+                    if (travelPath[i + 1].routeLocation.X < travelPath[i].routeLocation.X )
+                    {
+                        travelPath[i].AssignNextDirection(new Vector2(-64, 0));
+                    }
+                    //right
+                    else if (travelPath[i + 1].routeLocation.X > travelPath[i].routeLocation.X)
+                    {
+                        travelPath[i].AssignNextDirection(new Vector2(64, 0));
+
+                    }
+                    //up
+                    else if (travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y)
+                    {
+                        travelPath[i].AssignNextDirection(new Vector2(0, -64));
+
+                    }
+                    //down
+                    else if (travelPath[i + 1].routeLocation.Y > travelPath[i].routeLocation.Y)
+                    {
+                        travelPath[i].AssignNextDirection(new Vector2(0, 64));
+
+                    }
                 }
 
             }
@@ -269,7 +358,7 @@ travelPath[i + 1].routeLocation.Y < travelPath[i].routeLocation.Y))
 
         public void DrawIconOnMap(SpriteBatch spriteBatch, Texture2D mapLocationIcon)
         {
-            spriteBatch.Draw(mapLocationIcon, new Rectangle((currentGridLocation.X * 64), (currentGridLocation.Y * 64) + mapIconOffset, 64, 64), new Rectangle(0, 0, 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.71f);
+            spriteBatch.Draw(mapLocationIcon, new Rectangle((int)((currentGridLocation.X * 64) + currentTravelDistance.X), (int)((currentGridLocation.Y * 64) + currentTravelDistance.Y + mapIconOffset), 64, 64), new Rectangle(0, 0, 64, 64), Color.White, 0, Vector2.Zero, SpriteEffects.None, 0.71f);
 
         }
 

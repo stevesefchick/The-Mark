@@ -14,6 +14,7 @@ namespace The_Mark
 
         //estimations-tbd
         int estimate;
+        Vector2 direction;
 
         public TravelRoute(Point loc)
         {
@@ -23,6 +24,20 @@ namespace The_Mark
         public void AssignEstimate(int value)
         {
             estimate = value;
+        }
+        public void AssignNextDirection(Vector2 next)
+        {
+            direction = next;
+        }
+
+        public Vector2 getDirection()
+        {
+            return direction;
+        }
+
+        public int GetTravelEstimate()
+        {
+            return estimate;
         }
 
     }
