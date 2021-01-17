@@ -487,7 +487,7 @@ namespace The_Mark
             }
             #endregion
 
-            //leggy
+            //stinkhorn
             #region stinkhorn
             if (thisCreatureType == ThisCreatureType.Stinkhorn)
             {
@@ -797,7 +797,7 @@ namespace The_Mark
             #region ratrat
             if (thisCreatureType == ThisCreatureType.RatRat)
             {
-                thischoice = rando.Next(1, 3);
+                thischoice = rando.Next(1, 4);
                 //type 1 - name + the RatRat
                 if (thischoice == 1)
                 {
@@ -836,6 +836,20 @@ namespace The_Mark
                         }
                     }
                     thename = candidatesratratname[rando.Next(0, candidatesratratname.Count)].ToString() + " " + candidatestitlename[rando.Next(0, candidatestitlename.Count)].ToString();
+
+                }
+                //type 3- bite + bite
+                else if (thischoice == 3)
+                {
+                    List<string> candidatesbitename = new List<string>();
+                    foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
+                    {
+                        if (entry.Value.creaturenametype == "createbitename")
+                        {
+                            candidatesbitename.Add(entry.Key);
+                        }
+                    }
+                    thename = candidatesbitename[rando.Next(0, candidatesbitename.Count)].ToString() + " " + candidatesbitename[rando.Next(0, candidatesbitename.Count)].ToString();
 
                 }
             }
