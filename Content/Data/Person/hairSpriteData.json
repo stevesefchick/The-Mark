@@ -40,5 +40,83 @@
     "sheety": 0,
     "headx": 24,
     "heady": 24
+  },
+  "Longhair1": {
+    "sheetx": 7,
+    "sheety": 0,
+    "headx": 23,
+    "heady": 15
+  },
+  "Longhair2": {
+    "sheetx": 8,
+    "sheety": 0,
+    "headx": 22,
+    "heady": 7
+  },
+  "Longhair3": {
+    "sheetx": 9,
+    "sheety": 0,
+    "headx": 22,
+    "heady": 6
+  },
+  "Wild1": {
+    "sheetx": 0,
+    "sheety": 1,
+    "headx": 24,
+    "heady": 27
+  },
+  "Flat2": {
+    "sheetx": 1,
+    "sheety": 1,
+    "headx": 23,
+    "heady": 34
+  },
+  "Spikey3": {
+    "sheetx": 2,
+    "sheety": 1,
+    "headx": 24,
+    "heady": 22
+  },
+  "Spikey4": {
+    "sheetx": 3,
+    "sheety": 1,
+    "headx": 22,
+    "heady": 39
+  },
+  "Ponytail2": {
+    "sheetx": 4,
+    "sheety": 1,
+    "headx": 23,
+    "heady": 35
+  },
+  "PomPom2": {
+    "sheetx": 5,
+    "sheety": 1,
+    "headx": 23,
+    "heady": 41
+  },
+  "Ponytail3": {
+    "sheetx": 6,
+    "sheety": 1,
+    "headx": 18,
+    "heady": 33
+  },
+  "Combover1": {
+    "sheetx": 7,
+    "sheety": 1,
+    "headx": 24,
+    "heady": 35
+  },
+  "Combover2": {
+    "sheetx": 8,
+    "sheety": 1,
+    "headx": 23,
+    "heady": 31
+  },
+  "Spikey5": {
+    "sheetx": 9,
+    "sheety": 1,
+    "headx": 27,
+    "heady": 25
   }
 }

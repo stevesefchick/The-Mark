@@ -844,7 +844,7 @@ namespace The_Mark
                     List<string> candidatesbitename = new List<string>();
                     foreach (KeyValuePair<string, CreatureNameData> entry in datamanager.creatureNames)
                     {
-                        if (entry.Value.creaturenametype == "createbitename")
+                        if (entry.Value.creaturenametype == "creaturebitename")
                         {
                             candidatesbitename.Add(entry.Key);
                         }
