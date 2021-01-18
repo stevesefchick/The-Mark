@@ -266,6 +266,15 @@ namespace The_Mark
 					Console.Write("It's unique! Name is " + creatures[i].uniqueCreatureName + "!\n");
 				}
 			}
+
+			Console.WriteLine("creating flora!");
+			for (int i=0;i< flora.Count;++i)
+            {
+				//console debug
+				Console.Write("a plant is here! it is a " + flora[i].ReturnSpecies().ToString() + "!\n");
+            }
+			
+
 		}
 
 		int getPopulationOfPlace(string placeID)
@@ -1829,10 +1838,83 @@ namespace The_Mark
 
 		void LookForFloraAvailability(Random rando)
         {
-			for (int i=0;i<gridTiles.Count;++i)
-            {
+			int randchance = 5;
 
-            }
+			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
+			{
+				List<Flora.FloraSpecies> possibleSpecies = new List<Flora.FloraSpecies>();
+
+				//is lake
+				if (g.Value.thisWaterType == GridTile.WaterType.Lake)
+                {
+
+                }
+				//is river
+				else if (g.Value.thisWaterType == GridTile.WaterType.River)
+                {
+
+                }
+				//is normal land
+				else
+                {
+					//is road
+					if (g.Value.thisRoadType == GridTile.RoadType.Road)
+                    {
+
+                    }
+					//is not road
+					else
+                    {
+						//terrains
+						//beach
+						if (g.Value.thisTerrainType == GridTile.GridTerrain.Beach)
+                        {
+
+                        }
+						//forest
+						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Forest)
+						{
+							possibleSpecies.Add(Flora.FloraSpecies.MoonTree);
+						}
+						//grass
+						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Grass)
+						{
+
+						}
+						//hills
+						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Hills)
+						{
+
+						}
+						//swamp
+						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Swamp)
+						{
+
+						}
+
+
+					}
+                }
+
+
+				if (possibleSpecies.Count>0)
+                {
+					for (int i=0;i<possibleSpecies.Count;++i)
+                    {
+						if (rando.Next(1,randchance) == 1)
+                        {
+							flora.Add(new Flora(possibleSpecies[i], g.Key));
+                        }
+						else
+                        {
+
+                        }
+                    }
+                }
+
+
+			}
+
 			
 		}
 
