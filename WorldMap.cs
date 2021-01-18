@@ -19,6 +19,7 @@ namespace The_Mark
 		protected List<Road> roads = new List<Road>();
 		protected List<Water> waterbodies = new List<Water>();
 		protected List<Creature> creatures = new List<Creature>();
+		protected List<Flora> flora = new List<Flora>();
 
 		//clouds
 		protected List<Cloud> clouds = new List<Cloud>();
@@ -1306,7 +1307,7 @@ namespace The_Mark
 
             //create a bunch of creatures based on terrains and places
             #region creatures
-            lookForCreatureAvailability(rando,datamanager);
+            LookForCreatureAvailability(rando,datamanager);
 
             #endregion
 
@@ -1317,10 +1318,17 @@ namespace The_Mark
 			cleanupOrbitalRoadCollision();
 			//assign tile graphics to roads
 			createTileAssignmentsForRoads();
-            #endregion
+			#endregion
 
-            //finalization
-            debugAnnounceCreation();
+			//flora
+			#region flora
+
+			LookForFloraAvailability(rando);
+
+			#endregion
+
+			//finalization
+			debugAnnounceCreation();
 
 		}
 
@@ -1373,7 +1381,7 @@ namespace The_Mark
 		}
 		#endregion
 
-		void lookForCreatureAvailability(Random rando,DataManager datamanager)
+		void LookForCreatureAvailability(Random rando,DataManager datamanager)
         {
 			Boolean isBeachAvailable = false;
 			Boolean isHillsAvailable = false;
@@ -1817,6 +1825,15 @@ namespace The_Mark
 
 			#endregion
 
+		}
+
+		void LookForFloraAvailability(Random rando)
+        {
+			for (int i=0;i<gridTiles.Count;++i)
+            {
+
+            }
+			
 		}
 
         void createTileAssignmentsforRiversandLakes()
