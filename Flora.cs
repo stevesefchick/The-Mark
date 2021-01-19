@@ -12,21 +12,21 @@ namespace The_Mark
         public enum FloraSpecies { 
         //trees
         MoonTree,
-        DarkPine,
-        SurfPalm,
+        //DarkPine,
+        //SurfPalm,
         //bushes
-        FiremelonBush,
-        Bramblebush,
+        //FiremelonBush,
+        //Bramblebush,
         Tishelbush,
         //fungus
         Bloomshroom,
-        Chillcap,
-        Stinkmoss,
+        //Chillcap,
+        //Stinkmoss,
         //flowers
-        BloodOrchid,
-        FlameLily,
+        //BloodOrchid,
+        //FlameLily,
         //algae
-        LakeWeed
+        //LakeWeed
         }
 
         //properties
@@ -37,15 +37,61 @@ namespace The_Mark
         List<int> hoursAvailable = new List<int>();
 
 
+
         public Flora(FloraSpecies thisSpecies, Point location)
         {
             AssignProperties(thisSpecies, location);
 
         }
 
+        public List<ConsumableItem> GetLootItemDrops(Random rando, DataManager dataManager)
+        {
+            List<ConsumableItem> possibleLoot = new List<ConsumableItem>();
+            List<ConsumableItem> actualLoot = new List<ConsumableItem>();
+
+            if (thisFloraSpecies == FloraSpecies.MoonTree)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Moon Fruit"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.Tishelbush)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Tishelberry"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.Bloomshroom)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Bloomshroom Dust"]);
+            }
+
+            for (int i = 0; i < possibleLoot.Count; ++i)
+            {
+                int rand = rando.Next(1, 101);
+
+                if (rand <= possibleLoot[i].dropRate)
+                {
+                    actualLoot.Add(possibleLoot[i]);
+                }
+
+            }
+
+
+            return possibleLoot;
+        }
+
         public FloraSpecies ReturnSpecies()
         {
             return thisFloraSpecies;
+        }
+
+        public Boolean IsAtLocation(Point loc)
+        {
+            if (gridLocation == loc)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
 
@@ -75,7 +121,38 @@ namespace The_Mark
                 hoursAvailable.Add(2);
                 hoursAvailable.Add(3);
             }
+            else if (thisSpecies == FloraSpecies.Tishelbush)
+            {
+                thisFloraType = FloraType.Bush;
+                thisFloraSpecies = thisSpecies;
 
+                monthsAvailable.Add("Flame");
+                monthsAvailable.Add("Storm");
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Dew");
+                monthsAvailable.Add("Light");
+
+                for (int i =0;i<24;++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.Bloomshroom)
+            {
+                thisFloraType = FloraType.Fungus;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Storm");
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Dew");
+
+                for (int i = 6; i < 18; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
         }
 
 

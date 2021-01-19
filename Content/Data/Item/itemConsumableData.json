@@ -1,10 +1,26 @@
 {
-  "Botion": {
-    "itemName": "Botion",
-    "itemDescription": "Gotta get the botion for my dad",
-    "itemValue": 50,
+  "Moon Fruit": {
+    "itemName": "Moon Fruit",
+    "itemDescription": "Fruit from the Moon Tree. It's delicious!",
+    "itemValue": 20,
     "canStack": true,
-    "dropRate": 0,
-    "maxDropQuantity": 0
+    "dropRate": 15,
+    "maxDropQuantity": 3
+  },
+  "Tishelberry": {
+    "itemName": "Tishelberry",
+    "itemDescription": "Berry picked from a Tishelbush",
+    "itemValue": 5,
+    "canStack": true,
+    "dropRate": 30,
+    "maxDropQuantity": 5
+  },
+  "Bloomshroom Dust": {
+    "itemName": "Bloomshroom Dust",
+    "itemDescription": "A small pile of dust from a Bloomshroom",
+    "itemValue": 20,
+    "canStack": true,
+    "dropRate": 20,
+    "maxDropQuantity": 3
   }
 }

@@ -1861,7 +1861,7 @@ namespace The_Mark
 					if (g.Value.thisRoadType == GridTile.RoadType.Road)
                     {
 
-                    }
+					}
 					//is not road
 					else
                     {
@@ -1875,15 +1875,20 @@ namespace The_Mark
 						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Forest)
 						{
 							possibleSpecies.Add(Flora.FloraSpecies.MoonTree);
+							possibleSpecies.Add(Flora.FloraSpecies.Tishelbush);
+							possibleSpecies.Add(Flora.FloraSpecies.Bloomshroom);
+
 						}
 						//grass
 						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Grass)
 						{
+							possibleSpecies.Add(Flora.FloraSpecies.Tishelbush);
 
 						}
 						//hills
 						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Hills)
 						{
+							possibleSpecies.Add(Flora.FloraSpecies.Tishelbush);
 
 						}
 						//swamp
