@@ -22,5 +22,69 @@
     "canStack": true,
     "dropRate": 20,
     "maxDropQuantity": 3
+  },
+  "Lake Weed Clump": {
+    "itemName": "Lake Weed Clump",
+    "itemDescription": "A handful of Lake Weed",
+    "itemValue": 5,
+    "canStack": true,
+    "dropRate": 50,
+    "maxDropQuantity": 2
+  },
+  "Surf Coconut": {
+    "itemName": "Surf Coconut",
+    "itemDescription": "A huge coconut from a Surf Palm.",
+    "itemValue": 20,
+    "canStack": true,
+    "dropRate": 10,
+    "maxDropQuantity": 1
+  },
+  "Darkpine Cone": {
+    "itemName": "Darkpine Cone",
+    "itemDescription": "An oddly shaped seed from a Darkpine Tree",
+    "itemValue": 5,
+    "canStack": true,
+    "dropRate": 10,
+    "maxDropQuantity": 3
+  },
+  "Firemelon": {
+    "itemName": "Firemelon",
+    "itemDescription": "A huge, bright-red melon",
+    "itemValue": 20,
+    "canStack": true,
+    "dropRate": 15,
+    "maxDropQuantity": 1
+  },
+  "Chillcap": {
+    "itemName": "Chillcap",
+    "itemDescription": "A blue mushroom, cold to the touch",
+    "itemValue": 20,
+    "canStack": true,
+    "dropRate": 20,
+    "maxDropQuantity": 1
+  },
+  "Clump of Stinkmoss": {
+    "itemName": "Clump of Stinkmoss",
+    "itemDescription": "A damp, smelly wad of Stinkmoss",
+    "itemValue": 10,
+    "canStack": true,
+    "dropRate": 10,
+    "maxDropQuantity": 3
+  },
+  "Brambleberry": {
+    "itemName": "Brambleberry",
+    "itemDescription": "A berry from a Bramblebush",
+    "itemValue": 5,
+    "canStack": true,
+    "dropRate": 20,
+    "maxDropQuantity": 6
+  },
+  "Flame Lily Petal": {
+    "itemName": "Flame Lily Petal",
+    "itemDescription": "A petal from the Flame Lily",
+    "itemValue": 15,
+    "canStack": true,
+    "dropRate": 10,
+    "maxDropQuantity": 2
   }
 }

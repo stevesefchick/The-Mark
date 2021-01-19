@@ -12,21 +12,21 @@ namespace The_Mark
         public enum FloraSpecies { 
         //trees
         MoonTree,
-        //DarkPine,
-        //SurfPalm,
+        Darkpine,
+        SurfPalm,
         //bushes
-        //FiremelonBush,
-        //Bramblebush,
+        FiremelonBush,
+        Bramblebush,
         Tishelbush,
         //fungus
         Bloomshroom,
-        //Chillcap,
-        //Stinkmoss,
+        Chillcap,
         //flowers
-        //BloodOrchid,
-        //FlameLily,
+        FlameLily,
         //algae
-        //LakeWeed
+        LakeWeed,
+        Stinkmoss,
+
         }
 
         //properties
@@ -61,6 +61,40 @@ namespace The_Mark
             {
                 possibleLoot.Add(dataManager.itemConsumableData["Bloomshroom Dust"]);
             }
+            else if (thisFloraSpecies == FloraSpecies.LakeWeed)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Lake Weed Clump"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.SurfPalm)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Surf Coconut"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.Darkpine)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Darkpine Cone"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.FiremelonBush)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Firemelon"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.Chillcap)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Chillcap"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.Stinkmoss)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Clump of Stinkmoss"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.Bramblebush)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Brambleberry"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.FlameLily)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Flame Lily Petal"]);
+            }
+
+
 
             for (int i = 0; i < possibleLoot.Count; ++i)
             {
@@ -148,6 +182,141 @@ namespace The_Mark
                 monthsAvailable.Add("Dew");
 
                 for (int i = 6; i < 18; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.LakeWeed)
+            {
+                thisFloraType = FloraType.Algae;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Flame");
+                monthsAvailable.Add("Frost");
+                monthsAvailable.Add("Storm");
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Dew");
+                monthsAvailable.Add("Light");
+
+                for (int i = 0; i < 24; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.SurfPalm)
+            {
+                thisFloraType = FloraType.Tree;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Flame");
+                monthsAvailable.Add("Storm");
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Light");
+
+                for (int i = 0; i < 24; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.Darkpine)
+            {
+                thisFloraType = FloraType.Tree;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Frost");
+                monthsAvailable.Add("Storm");
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Spirit");
+
+                hoursAvailable.Add(20);
+                hoursAvailable.Add(21);
+                hoursAvailable.Add(22);
+                hoursAvailable.Add(23);
+                hoursAvailable.Add(0);
+                hoursAvailable.Add(1);
+                hoursAvailable.Add(2);
+                hoursAvailable.Add(3);
+
+            }
+            else if (thisSpecies == FloraSpecies.FiremelonBush)
+            {
+                thisFloraType = FloraType.Bush;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Flame");
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Dew");
+                monthsAvailable.Add("Light");
+
+                for (int i = 10; i < 20; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.Chillcap)
+            {
+                thisFloraType = FloraType.Fungus;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Frost");
+                monthsAvailable.Add("Dew");
+
+                for (int i = 0; i < 24; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.Stinkmoss)
+            {
+                thisFloraType = FloraType.Algae;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Dew");
+                monthsAvailable.Add("Light");
+
+                for (int i = 10; i < 20; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.Bramblebush)
+            {
+                thisFloraType = FloraType.Bush;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Flame");
+                monthsAvailable.Add("Frost");
+                monthsAvailable.Add("Storm");
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Dew");
+                monthsAvailable.Add("Light");
+
+                for (int i = 4; i < 12; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.FlameLily)
+            {
+                thisFloraType = FloraType.Flower;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Flame");
+                monthsAvailable.Add("Light");
+
+                for (int i = 7; i < 17; ++i)
                 {
                     hoursAvailable.Add(i);
                 }

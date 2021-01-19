@@ -1838,7 +1838,7 @@ namespace The_Mark
 
 		void LookForFloraAvailability(Random rando)
         {
-			int randchance = 5;
+			int randchance = 6;
 
 			foreach (KeyValuePair<Point, GridTile> g in gridTiles)
 			{
@@ -1847,8 +1847,9 @@ namespace The_Mark
 				//is lake
 				if (g.Value.thisWaterType == GridTile.WaterType.Lake)
                 {
+					possibleSpecies.Add(Flora.FloraSpecies.LakeWeed);
 
-                }
+				}
 				//is river
 				else if (g.Value.thisWaterType == GridTile.WaterType.River)
                 {
@@ -1869,31 +1870,39 @@ namespace The_Mark
 						//beach
 						if (g.Value.thisTerrainType == GridTile.GridTerrain.Beach)
                         {
+							possibleSpecies.Add(Flora.FloraSpecies.SurfPalm);
 
-                        }
+						}
 						//forest
 						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Forest)
 						{
 							possibleSpecies.Add(Flora.FloraSpecies.MoonTree);
 							possibleSpecies.Add(Flora.FloraSpecies.Tishelbush);
 							possibleSpecies.Add(Flora.FloraSpecies.Bloomshroom);
+							possibleSpecies.Add(Flora.FloraSpecies.Darkpine);
+							possibleSpecies.Add(Flora.FloraSpecies.Stinkmoss);
+							possibleSpecies.Add(Flora.FloraSpecies.FlameLily);
 
 						}
 						//grass
 						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Grass)
 						{
 							possibleSpecies.Add(Flora.FloraSpecies.Tishelbush);
+							possibleSpecies.Add(Flora.FloraSpecies.FiremelonBush);
+							possibleSpecies.Add(Flora.FloraSpecies.FlameLily);
 
 						}
 						//hills
 						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Hills)
 						{
-							possibleSpecies.Add(Flora.FloraSpecies.Tishelbush);
+							possibleSpecies.Add(Flora.FloraSpecies.Chillcap);
+							possibleSpecies.Add(Flora.FloraSpecies.FlameLily);
 
 						}
 						//swamp
 						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Swamp)
 						{
+							possibleSpecies.Add(Flora.FloraSpecies.Bramblebush);
 
 						}
 
