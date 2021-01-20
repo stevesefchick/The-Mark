@@ -58,5 +58,145 @@
     "bodyy": 46,
     "hairx": 22,
     "hairy": 15
+  },
+  "Standard4": {
+    "sheetx": 6,
+    "sheety": 0,
+    "centerx": 24,
+    "centery": 29,
+    "bodyx": 25,
+    "bodyy": 43,
+    "hairx": 24,
+    "hairy": 13
+  },
+  "Moon1": {
+    "sheetx": 7,
+    "sheety": 0,
+    "centerx": 24,
+    "centery": 32,
+    "bodyx": 21,
+    "bodyy": 48,
+    "hairx": 16,
+    "hairy": 10
+  },
+  "BigHead2": {
+    "sheetx": 8,
+    "sheety": 0,
+    "centerx": 26,
+    "centery": 33,
+    "bodyx": 26,
+    "bodyy": 44,
+    "hairx": 27,
+    "hairy": 17
+  },
+  "TallHead2": {
+    "sheetx": 9,
+    "sheety": 0,
+    "centerx": 26,
+    "centery": 29,
+    "bodyx": 24,
+    "bodyy": 50,
+    "hairx": 25,
+    "hairy": 8
+  },
+  "TallHead3": {
+    "sheetx": 0,
+    "sheety": 1,
+    "centerx": 24,
+    "centery": 28,
+    "bodyx": 23,
+    "bodyy": 49,
+    "hairx": 23,
+    "hairy": 6
+  },
+  "BigHead3": {
+    "sheetx": 1,
+    "sheety": 1,
+    "centerx": 22,
+    "centery": 20,
+    "bodyx": 24,
+    "bodyy": 41,
+    "hairx": 20,
+    "hairy": 8
+  },
+  "SmallHead1": {
+    "sheetx": 2,
+    "sheety": 1,
+    "centerx": 24,
+    "centery": 25,
+    "bodyx": 25,
+    "bodyy": 37,
+    "hairx": 21,
+    "hairy": 12
+  },
+  "Standard5": {
+    "sheetx": 3,
+    "sheety": 1,
+    "centerx": 25,
+    "centery": 25,
+    "bodyx": 24,
+    "bodyy": 41,
+    "hairx": 24,
+    "hairy": 8
+  },
+  "Standard6": {
+    "sheetx": 4,
+    "sheety": 1,
+    "centerx": 24,
+    "centery": 25,
+    "bodyx": 24,
+    "bodyy": 44,
+    "hairx": 20,
+    "hairy": 13
+  },
+  "BigHead4": {
+    "sheetx": 5,
+    "sheety": 1,
+    "centerx": 25,
+    "centery": 23,
+    "bodyx": 24,
+    "bodyy": 41,
+    "hairx": 23,
+    "hairy": 2
+  },
+  "BigHead5": {
+    "sheetx": 6,
+    "sheety": 1,
+    "centerx": 25,
+    "centery": 23,
+    "bodyx": 25,
+    "bodyy": 42,
+    "hairx": 23,
+    "hairy": 5
+  },
+  "BigHead6": {
+    "sheetx": 7,
+    "sheety": 1,
+    "centerx": 25,
+    "centery": 23,
+    "bodyx": 23,
+    "bodyy": 41,
+    "hairx": 27,
+    "hairy": 7
+  },
+  "BigHead7": {
+    "sheetx": 8,
+    "sheety": 1,
+    "centerx": 24,
+    "centery": 28,
+    "bodyx": 24,
+    "bodyy": 42,
+    "hairx": 24,
+    "hairy": 9
+  },
+  "Standard7": {
+    "sheetx": 9,
+    "sheety": 1,
+    "centerx": 23,
+    "centery": 26,
+    "bodyx": 24,
+    "bodyy": 39,
+    "hairx": 21,
+    "hairy": 14
   }
 }
