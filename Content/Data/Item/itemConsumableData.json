@@ -82,9 +82,33 @@
   "Flame Lily Petal": {
     "itemName": "Flame Lily Petal",
     "itemDescription": "A petal from the Flame Lily",
+    "itemValue": 10,
+    "canStack": true,
+    "dropRate": 10,
+    "maxDropQuantity": 2
+  },
+  "Aqua Lily Petal": {
+    "itemName": "Aqua Lily Petal",
+    "itemDescription": "A petal from a Floating Aqua Lily",
     "itemValue": 15,
     "canStack": true,
     "dropRate": 10,
     "maxDropQuantity": 2
+  },
+  "Dandytiger Puff": {
+    "itemName": "Dandytiger Puff",
+    "itemDescription": "A big puff of seeds from a Dandytiger",
+    "itemValue": 5,
+    "canStack": true,
+    "dropRate": 15,
+    "maxDropQuantity": 3
+  },
+  "Dingushroom Cap": {
+    "itemName": "Dingushroom Cap",
+    "itemDescription": "A long mushroom cap from a Dingushroom",
+    "itemValue": 20,
+    "canStack": true,
+    "dropRate": 10,
+    "maxDropQuantity": 1
   }
 }

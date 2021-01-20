@@ -1848,19 +1848,22 @@ namespace The_Mark
 				if (g.Value.thisWaterType == GridTile.WaterType.Lake)
                 {
 					possibleSpecies.Add(Flora.FloraSpecies.LakeWeed);
+					possibleSpecies.Add(Flora.FloraSpecies.FloatingAqualily);
 
 				}
 				//is river
 				else if (g.Value.thisWaterType == GridTile.WaterType.River)
                 {
+					possibleSpecies.Add(Flora.FloraSpecies.FloatingAqualily);
 
-                }
+				}
 				//is normal land
 				else
                 {
 					//is road
 					if (g.Value.thisRoadType == GridTile.RoadType.Road)
                     {
+						possibleSpecies.Add(Flora.FloraSpecies.Dandytiger);
 
 					}
 					//is not road
@@ -1903,6 +1906,7 @@ namespace The_Mark
 						else if (g.Value.thisTerrainType == GridTile.GridTerrain.Swamp)
 						{
 							possibleSpecies.Add(Flora.FloraSpecies.Bramblebush);
+							possibleSpecies.Add(Flora.FloraSpecies.Dingushroom);
 
 						}
 

@@ -21,8 +21,11 @@ namespace The_Mark
         //fungus
         Bloomshroom,
         Chillcap,
+        Dingushroom,
         //flowers
         FlameLily,
+        FloatingAqualily,
+        Dandytiger,
         //algae
         LakeWeed,
         Stinkmoss,
@@ -93,9 +96,18 @@ namespace The_Mark
             {
                 possibleLoot.Add(dataManager.itemConsumableData["Flame Lily Petal"]);
             }
-
-
-
+            else if (thisFloraSpecies == FloraSpecies.FloatingAqualily)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Aqua Lily Petal"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.Dandytiger)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Dandytiger Puff"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.Dingushroom)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Dingushroom Cap"]);
+            }
             for (int i = 0; i < possibleLoot.Count; ++i)
             {
                 int rand = rando.Next(1, 101);
@@ -317,6 +329,53 @@ namespace The_Mark
                 monthsAvailable.Add("Light");
 
                 for (int i = 7; i < 17; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.FloatingAqualily)
+            {
+                thisFloraType = FloraType.Flower;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Flame");
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Dew");
+                monthsAvailable.Add("Light");
+
+                for (int i = 7; i < 17; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.Dandytiger)
+            {
+                thisFloraType = FloraType.Flower;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Dew");
+                monthsAvailable.Add("Light");
+
+                for (int i = 0; i < 24; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+
+            }
+            else if (thisSpecies == FloraSpecies.Dingushroom)
+            {
+                thisFloraType = FloraType.Fungus;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Dew");
+
+                for (int i = 16; i < 22; ++i)
                 {
                     hoursAvailable.Add(i);
                 }
