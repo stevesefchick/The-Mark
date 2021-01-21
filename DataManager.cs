@@ -23,7 +23,6 @@ namespace The_Mark
         public Dictionary<string, TorsoSpriteData> torsoSpriteData = new Dictionary<string, TorsoSpriteData>();
         public Dictionary<string, HeadSpriteData> headSpriteData = new Dictionary<string, HeadSpriteData>();
         public Dictionary<string, HairSpriteData> hairSpriteData = new Dictionary<string, HairSpriteData>();
-        public Dictionary<string, FaceSpriteData> faceSpriteData = new Dictionary<string, FaceSpriteData>();
         public Dictionary<string, LegSpriteData> legSpriteData = new Dictionary<string, LegSpriteData>();
         public Dictionary<string, ArmSpriteData> armSpriteData = new Dictionary<string, ArmSpriteData>();
 
@@ -66,7 +65,6 @@ namespace The_Mark
             torsoSpriteData = JsonConvert.DeserializeObject<Dictionary<string, TorsoSpriteData>>(File.ReadAllText(@"Content/Data/Person/torsoSpriteData.json"));
             headSpriteData = JsonConvert.DeserializeObject<Dictionary<string, HeadSpriteData>>(File.ReadAllText(@"Content/Data/Person/headSpriteData.json"));
             hairSpriteData = JsonConvert.DeserializeObject<Dictionary<string, HairSpriteData>>(File.ReadAllText(@"Content/Data/Person/hairSpriteData.json"));
-            faceSpriteData = JsonConvert.DeserializeObject<Dictionary<string, FaceSpriteData>>(File.ReadAllText(@"Content/Data/Person/faceSpriteData.json"));
             legSpriteData = JsonConvert.DeserializeObject<Dictionary<string, LegSpriteData>>(File.ReadAllText(@"Content/Data/Person/legSpriteData.json"));
             armSpriteData = JsonConvert.DeserializeObject<Dictionary<string, ArmSpriteData>>(File.ReadAllText(@"Content/Data/Person/armSpriteData.json"));
         }

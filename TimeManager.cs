@@ -14,6 +14,11 @@ namespace The_Mark
         public int Minute;
         public int Day;
         public int CurrentMonth;
+        //time to detriment
+        int minutesToDetriment;
+        int detrimentDelay = 0;
+        const int detrimentDelayMax = 5;
+
         //strings
         string hourMinutesToString;
         string dayString;
@@ -24,7 +29,7 @@ namespace The_Mark
         public int minutesRemaining;
 
         //const
-        int daysPerMonth = 30;
+        const int daysPerMonth = 30;
         List<string> calendarMonths = new List<string>();
 
         //color values/adjustments
@@ -34,7 +39,7 @@ namespace The_Mark
         float actualblue;
         float actualred;
         float actualgreen;
-        float colormoveamount = 0.001f;
+        const float colormoveamount = 0.001f;
 
 
         public TimeManager()
@@ -124,7 +129,83 @@ namespace The_Mark
 
         public void Update()
         {
+            if (minutesToDetriment>0 && detrimentDelay<=0)
+            {
+                    #region time calculation
+                    Minute += 1;
 
+                    if (Minute == 60)
+                    {
+                        Minute = 0;
+                        Hour += 1;
+                        if (Hour == 24)
+                        {
+                            Hour = 0;
+                            Day += 1;
+                        }
+                    }
+
+                    if (Day > daysPerMonth)
+                    {
+                        Day = 1;
+                        CurrentMonth += 1;
+                        if (CurrentMonth == calendarMonths.Count)
+                        {
+                            Year += 1;
+                            CurrentMonth = 0;
+                        }
+                    }
+                    #endregion
+
+                    #region countdown time calculation
+                    if (minutesRemaining > 0)
+                    {
+                        minutesRemaining -= 1;
+                    }
+                    else
+                    {
+                        minutesRemaining = 59;
+                        if (hoursRemaining > 0)
+                        {
+                            hoursRemaining -= 1;
+                        }
+                        else
+                        {
+                            hoursRemaining = 23;
+                            if (daysRemaining > 0)
+                            {
+                                daysRemaining -= 1;
+                            }
+                        }
+
+                    }
+
+
+                    #endregion
+                
+
+                hourMinutesToString = Hourminuteformat();
+                dayString = Daystringformat();
+
+
+                minutesToDetriment -= 1;
+                detrimentDelay = detrimentDelayMax;
+            }
+            else if (minutesToDetriment>0 && detrimentDelay>0)
+            {
+                if (minutesToDetriment >= 20)
+                {
+                    detrimentDelay -= 5;
+                }
+                else if (minutesToDetriment >= 10)
+                {
+                    detrimentDelay -= 3;
+                }
+                else
+                {
+                    detrimentDelay -= 1;
+                }
+            }
         }
 
         public Vector3 returnColorInfluencesBasedOnTime()
@@ -213,66 +294,10 @@ namespace The_Mark
 
         public void timeTick(int minutes)
         {
-            int minutesleft = minutes;
-            while (minutesleft>0)
-            {
-                #region time calculation
-                Minute += 1;
-                minutesleft -= 1;
+            minutesToDetriment += minutes;
 
-                if (Minute==60)
-                {
-                    Minute = 0;
-                    Hour += 1;
-                    if (Hour==24)
-                    {
-                        Hour = 0;
-                        Day += 1;
-                    }
-                }
-
-                if (Day>daysPerMonth)
-                {
-                    Day = 1;
-                    CurrentMonth += 1;
-                    if (CurrentMonth==calendarMonths.Count)
-                    {
-                        Year += 1;
-                        CurrentMonth = 0;
-                    }
-                }
-                #endregion
-
-                #region countdown time calculation
-                if (minutesRemaining>0)
-                {
-                    minutesRemaining -= 1;
-                }
-                else
-                {
-                    minutesRemaining = 59;
-                    if (hoursRemaining>0)
-                    {
-                        hoursRemaining -= 1;
-                    }
-                    else
-                    {
-                        hoursRemaining = 23;
-                        if (daysRemaining>0)
-                        {
-                            daysRemaining -= 1;
-                        }
-                    }
-
-                }
-
-
-                #endregion
-            }
-
-            hourMinutesToString = Hourminuteformat();
-            dayString = Daystringformat();
         }
+
 
 
 

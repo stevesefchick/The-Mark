@@ -17,13 +17,10 @@ namespace The_Mark
         HeadSpriteData headPart;
         //Hair Part
         HairSpriteData hairPart;
-        //Face Part
-        FaceSpriteData facePart;
 
         int torsosize = 50;
         int headsize = 50;
         int hairsize = 50;
-        int facesize = 25;
         int legsize = 50;
         int armsize = 50;
 
@@ -61,18 +58,6 @@ namespace The_Mark
             hairPart = datamanager.hairSpriteData[candidates[rando.Next(0, candidates.Count)].ToString()];
             candidates.Clear();
 
-
-            //faces
-            foreach (KeyValuePair<string, FaceSpriteData> entry in datamanager.faceSpriteData)
-            {
-                candidates.Add(entry.Key);
-
-            }
-            //assign face
-            facePart = datamanager.faceSpriteData[candidates[rando.Next(0, candidates.Count)].ToString()];
-            candidates.Clear();
-
-
             //legs
             foreach (KeyValuePair<string, LegSpriteData> entry in datamanager.legSpriteData)
             {
@@ -104,8 +89,6 @@ namespace The_Mark
             spriteBatch.Draw(head, new Rectangle((int)(location.X + torsoPart.spriteHeadConnector.X), (int)(location.Y + torsoPart.spriteHeadConnector.Y), headsize, headsize), new Rectangle((int)headPart.spriteLoc.X, (int)headPart.spriteLoc.Y, headsize, headsize), Color.Black, 0, headPart.spriteBodyConnector, SpriteEffects.None, depth +0.01f);
             //Hair Part
             spriteBatch.Draw(hair, new Rectangle((int)(location.X + torsoPart.spriteHeadConnector.X + headPart.spriteHairConnector.X), (int)(location.Y + torsoPart.spriteHeadConnector.Y + headPart.spriteHairConnector.Y), hairsize, hairsize), new Rectangle((int)hairPart.spriteLoc.X, (int)hairPart.spriteLoc.Y, hairsize, hairsize), Color.Black, 0, hairPart.spriteHeadConnector, SpriteEffects.None, depth + 0.02f);
-            //Face Part
-            //spriteBatch.Draw(face, new Rectangle((int)(location.X + torsoPart.spriteHeadConnector.X), (int)(location.Y + torsoPart.spriteHeadConnector.Y), facesize, facesize), new Rectangle((int)facePart.spriteLoc.X, (int)facePart.spriteLoc.Y, facesize, facesize), Color.Black, 0, facePart.spriteCenter, SpriteEffects.None, depth + 0.03f);
 
             //Left Leg
             spriteBatch.Draw(leg, new Rectangle((int)(location.X + torsoPart.leftLegConnector.X), (int)(location.Y + torsoPart.leftLegConnector.Y), legsize, legsize), new Rectangle((int)legPart.spriteLoc.X, (int)legPart.spriteLoc.Y, legsize, legsize), Color.Black, 0, new Vector2(50 - legPart.spriteBodyConnector.X, legPart.spriteBodyConnector.Y), SpriteEffects.FlipHorizontally, depth + 0.01f);

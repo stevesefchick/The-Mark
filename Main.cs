@@ -280,6 +280,7 @@ class GameMain : Game
 	protected override void Update(GameTime gameTime)
 	{
 		getInput();
+		time.Update();
 		getShaderColors();
 		camera.Update(isUpPressed, isDownPressed, isLeftPressed, isRightPressed,isPageDownPressed,isPageUpPressed);
 		mouse.Update(camera.cameraPosition,backbufferJamz,worldFont);
