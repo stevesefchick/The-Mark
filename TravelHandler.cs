@@ -48,13 +48,24 @@ namespace The_Mark
         }
 
         //returns minutes to tick down
-        public int TravelTick()
+        public int TravelTick(PlayerHandler player)
         {
             int value = 0;
 
             //if at destination
             if (currentTravelDistance == totalTravelDistance) 
             {
+                //check for event
+
+                //if event
+                //
+                //
+
+                //if no event
+                // 
+                //
+                player.LoseStamina(PlayerHandler.StaminaDrainType.Travel);
+
                 //get next distance
                 currentGridLocation += new Point((int)(totalTravelDistance.X / 64), (int)(totalTravelDistance.Y / 64));
                 for (int i=0;i < travelPath.Count;++i)

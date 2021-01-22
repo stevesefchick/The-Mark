@@ -291,7 +291,7 @@ class GameMain : Game
 		//Travelling
 		if (currentGameState == GameState.Traveling)
 		{
-			int minutes = travelHandler.TravelTick();
+			int minutes = travelHandler.TravelTick(playerHandler);
 			if (minutes == -1)
 			{
 				ChangeGameState(GameState.Idle);

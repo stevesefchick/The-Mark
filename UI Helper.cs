@@ -599,41 +599,49 @@ namespace The_Mark
 
                 }
 
-                //Character Bubbles
-                for (int i = 0; i < uiCharacterBubbles.Count;++i)
-                {
-                    if (mouse.leftMouseClickPosition.Intersects(getUIPosition(uiCharacterBubbles[i].bubblePosition, offset)) == true &&
-                        uiCharacterBubbles[i].isActive == true &&
-                        uiWindows.Count==0)
-                    {
-                        if (i == 0)
-                        {
-                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, true, 0,party, datamanager);
-                        }
-                        else
-                        {
-                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, false, i,party, datamanager);
-                        }
-                    }
 
-                    if (i==0)
-                    {
-                        uiCharacterBubbles[i].HealthScale = party.returnHealthValuesForMark().Item3;
-                        uiCharacterBubbles[i].StaminaScale = party.returnStaminaValuesForMark().Item3;
-                        uiCharacterBubbles[i].StressScale = party.returnStressValuesForMark().Item3;
-                    }
-                    else if (uiCharacterBubbles[i].isActive==true)
-                    {
-                        uiCharacterBubbles[i].HealthScale = party.returnHealthValuesForPartyMember(i).Item3;
-                        uiCharacterBubbles[i].StaminaScale = party.returnStaminaValuesForPartyMember(i).Item3;
-                        uiCharacterBubbles[i].StressScale = party.returnStressValuesForPartyMember(i).Item3;
-                    }
-                }
 
             }
 
-            
 
+            //Character Bubbles
+            for (int i = 0; i < uiCharacterBubbles.Count; ++i)
+            {
+                if (mouse.isLeftClickDown == true)
+                {
+                    if (mouse.leftMouseClickPosition.Intersects(getUIPosition(uiCharacterBubbles[i].bubblePosition, offset)) == true &&
+                    uiCharacterBubbles[i].isActive == true &&
+                    uiWindows.Count == 0)
+                    {
+                        if (i == 0)
+                        {
+                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, true, 0, party, datamanager);
+                        }
+                        else
+                        {
+                            createUIWindow(UIWindowCreationTypes.CharacterStatWindow, false, i, party, datamanager);
+                        }
+                    }
+
+                }
+                if (i == 0)
+                {
+                    uiCharacterBubbles[i].HealthScale = party.returnHealthValuesForMark().Item3;
+                    uiCharacterBubbles[i].StaminaScale = party.returnStaminaValuesForMark().Item3;
+                    uiCharacterBubbles[i].StressScale = party.returnStressValuesForMark().Item3;
+                }
+                else if (uiCharacterBubbles[i].isActive == true)
+                {
+                    uiCharacterBubbles[i].HealthScale = party.returnHealthValuesForPartyMember(i).Item3;
+                    uiCharacterBubbles[i].StaminaScale = party.returnStaminaValuesForPartyMember(i).Item3;
+                    uiCharacterBubbles[i].StressScale = party.returnStressValuesForPartyMember(i).Item3;
+                }
+            }
+
+        }
+
+        void UpdateStatScales(int i)
+        {
 
         }
 

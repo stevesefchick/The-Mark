@@ -8,6 +8,9 @@ namespace The_Mark
 {
     class PlayerHandler
     {
+        //enums
+        public enum StaminaDrainType { Travel }
+
         //party information
         public Person theMark;
         public List<Person> partyMembers = new List<Person>();
@@ -23,6 +26,35 @@ namespace The_Mark
         public Texture2D armTiles;
 
 
+        public void LoseStamina(StaminaDrainType stamtype)
+        {
+            SubtractStaminaFromMark(stamtype);
+            SubtractStaminaFromCharacters(stamtype);
+        }
+
+        void SubtractStaminaFromMark(StaminaDrainType stamtype)
+        {
+            int amount = 0;
+            if (stamtype== StaminaDrainType.Travel)
+            {
+                amount = 1;
+            }
+            theMark.currentStamina -= amount;
+        }
+        void SubtractStaminaFromCharacters(StaminaDrainType stamtype)
+        {
+            int amount = 0;
+
+            for (int i=0;i<partyMembers.Count;++i)
+            {
+                if (stamtype == StaminaDrainType.Travel)
+                {
+                    amount = 1;
+                }
+
+                partyMembers[i].currentStamina -= amount;
+            }
+        }
 
         public PlayerHandler(GameMain gamedeets)
         {
@@ -379,6 +411,7 @@ namespace The_Mark
 
         }
 
+        #region return stat values
         public (int,int,float) returnHealthValuesForMark()
         {
             return (theMark.maxHealth, theMark.currentHealth, (float)theMark.currentHealth/(float)theMark.maxHealth);
@@ -408,6 +441,7 @@ namespace The_Mark
         {
             return (partyMembers[member].maxStress, partyMembers[member].currentStress, (float)partyMembers[member].currentStress / (float)partyMembers[member].maxStress);
         }
+        #endregion
 
         Person selectTheMark(WorldMap world,Random rando)
         {
