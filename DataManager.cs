@@ -31,16 +31,20 @@ namespace The_Mark
         public Dictionary<string, ConsumableItem> itemConsumableData = new Dictionary<string, ConsumableItem>();
         public Dictionary<string, EquipmentItem> itemEquipmentData = new Dictionary<string, EquipmentItem>();
 
+        //event Data
+        public Dictionary<string, Event> passiveEventData = new Dictionary<string, Event>();
+
         //random id data
         public List<string> randomGenData = new List<string>();
 
-        public void LoadAllData(GameMain gameMain)
+        public void LoadAllData()
         {
             //JsonSerializer serializer = new JsonSerializer();
 
             loadNames();
             loadItems();
             loadPersonData();
+            loadEventData();
             loadRandomGenData();
             System.Console.WriteLine("\n\nDataManager info loaded! \nfirstNames: " + firstNames.Count + ". \nlastNames: " + lastNames.Count + ". \ntownNames: " + townNames.Count + ". \nrandomGenData: " +
                 randomGenData.Count + ".\nroadNames: " + roadNames.Count + ".\nwaterNames: " + waterNames.Count + ".\ncreatureNames: " + creatureNames.Count + ".\n\n\n\n");
@@ -54,6 +58,12 @@ namespace The_Mark
             roadNames = JsonConvert.DeserializeObject<Dictionary<string, RoadNameData>>(File.ReadAllText(@"Content/Data/Road/roadNameData.json"));
             waterNames = JsonConvert.DeserializeObject<Dictionary<string, WaterNameData>>(File.ReadAllText(@"Content/Data/Terrain/waterNameData.json"));
             creatureNames = JsonConvert.DeserializeObject<Dictionary<string, CreatureNameData>>(File.ReadAllText(@"Content/Data/Creature/creatureNameData.json"));
+
+        }
+
+        private void loadEventData()
+        {
+            passiveEventData = JsonConvert.DeserializeObject<Dictionary<string, Event>>(File.ReadAllText(@"Content/Data/Events/passiveEventData.json"));
 
         }
 
@@ -105,7 +115,6 @@ namespace The_Mark
     class NameData
     {
         public string gender;
-        public enum lastNameType { Noun }
 
         public NameData(string thegender)
         {

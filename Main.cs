@@ -111,7 +111,7 @@ class GameMain : Game
 		//generate UI Element Positions
 		GetUIElementPositions();
 		//Load all data
-		dataManager.LoadAllData(this);
+		dataManager.LoadAllData();
 		//Set up the world
 		createNewWorld();
 		//Set up player character

@@ -1,0 +1,12 @@
+{
+  "PassiveEvent_FindItem": {
+    "thisEventTypeString": "Passive",
+    "thisEventBaseString": "Find",
+    "percentChance": 10,
+    "eventText": "%char% found a %item%!",
+    "requiredSkillString": "",
+    "requireSkillRankingString": "",
+    "requiredTraitString": ""
+
+  }
+}
