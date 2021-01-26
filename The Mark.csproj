@@ -107,6 +107,7 @@
     <Compile Include="Creature.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="EquipmentItem.cs" />
+    <Compile Include="Event.cs" />
     <Compile Include="Flora.cs" />
     <Compile Include="GridTile.cs" />
     <Compile Include="Item.cs" />
