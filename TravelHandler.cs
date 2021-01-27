@@ -18,6 +18,9 @@ namespace The_Mark
         public String currentDestinationDescription;
         public Point travelStartingLocation;
 
+        //events
+        Event currentEvent;
+
         //paths
         public List<TravelRoute> travelPath = new List<TravelRoute>();
 
@@ -47,8 +50,23 @@ namespace The_Mark
             currentDestinationDescription = world.returnCurrentLocNameDescription(destinationLocation).Item2;
         }
 
+        void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando)
+        {
+            List<Event> possibleEvents = new List<Event>();
+
+            //check for passive events
+            foreach (KeyValuePair<String, Event> e in datamanager.passiveEventData)
+            {
+                if (e.Value.GetEventType() == Event.EventType.Passive)
+                {
+
+                }
+            }
+
+        }
+
         //returns minutes to tick down
-        public int TravelTick(PlayerHandler player)
+        public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando)
         {
             int value = 0;
 
@@ -56,6 +74,7 @@ namespace The_Mark
             if (currentTravelDistance == totalTravelDistance) 
             {
                 //check for event
+                CheckForValidEvents(player, datamanager, rando);
 
                 //if event
                 //
