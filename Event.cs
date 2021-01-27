@@ -29,6 +29,11 @@ namespace The_Mark
             return thisEventType;
         }
 
+        public int ReturnEventChance()
+        {
+            return eventChance;
+        }
+
         //passive event builder
         public Event(String thisEventTypeString, String thisEventBaseString, int percentChance, String eventText, 
             String requiredSkillString, String requireSkillRankingString, String requiredTraitString)

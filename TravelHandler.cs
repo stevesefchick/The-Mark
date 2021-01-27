@@ -59,8 +59,18 @@ namespace The_Mark
             {
                 if (e.Value.GetEventType() == Event.EventType.Passive)
                 {
-
+                    possibleEvents.Add(e.Value);
                 }
+            }
+
+            for (int i =0;i<possibleEvents.Count;++i)
+            {
+                int rand = rando.Next(0, 101);
+                if (rand < possibleEvents[i].ReturnEventChance())
+                {
+                    currentEvent = possibleEvents[i];
+                }
+                break;
             }
 
         }
@@ -74,8 +84,10 @@ namespace The_Mark
             if (currentTravelDistance == totalTravelDistance) 
             {
                 //check for event
-                CheckForValidEvents(player, datamanager, rando);
-
+                if (currentGridLocation != travelStartingLocation)
+                {
+                    CheckForValidEvents(player, datamanager, rando);
+                }
                 //if event
                 //
                 //
