@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
@@ -63,16 +62,27 @@ namespace The_Mark
                 }
             }
 
-            for (int i =0;i<possibleEvents.Count;++i)
+            for (int i=0;i<possibleEvents.Count;++i)
             {
                 int rand = rando.Next(0, 101);
                 if (rand < possibleEvents[i].ReturnEventChance())
                 {
                     currentEvent = possibleEvents[i];
+                    break;
                 }
-                break;
+
             }
 
+        }
+
+        void ConsoleLogEvent()
+        {
+            Console.WriteLine(currentEvent.ReturnEventText());
+        }
+
+        void ClearEvent()
+        {
+            currentEvent = null;
         }
 
         //returns minutes to tick down
@@ -88,9 +98,14 @@ namespace The_Mark
                 {
                     CheckForValidEvents(player, datamanager, rando);
                 }
+
+
                 //if event
-                //
-                //
+                if (currentEvent != null)
+                {
+                    ConsoleLogEvent();
+                    ClearEvent();
+                }
 
                 //if no event
                 // 

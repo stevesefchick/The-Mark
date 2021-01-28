@@ -46,7 +46,7 @@ namespace The_Mark
             loadPersonData();
             loadEventData();
             loadRandomGenData();
-            System.Console.WriteLine("\n\nDataManager info loaded! \nfirstNames: " + firstNames.Count + ". \nlastNames: " + lastNames.Count + ". \ntownNames: " + townNames.Count + ". \nrandomGenData: " +
+            Console.WriteLine("\n\nDataManager info loaded! \nfirstNames: " + firstNames.Count + ". \nlastNames: " + lastNames.Count + ". \ntownNames: " + townNames.Count + ". \nrandomGenData: " +
                 randomGenData.Count + ".\nroadNames: " + roadNames.Count + ".\nwaterNames: " + waterNames.Count + ".\ncreatureNames: " + creatureNames.Count + ".\n\n\n\n");
         }
 
