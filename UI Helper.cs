@@ -60,8 +60,6 @@ namespace The_Mark
 
             }
 
-            //createHoverCard(new Vector2(200,200), "Horse Crimes", "you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine you can dance if you want to you can leave your friends behind but if your friends don't dance and if they don't dance well they ain't friends of mine");
-            //createUIWindow(new Rectangle(600, 200, 200, 300));
         }
 
         public Boolean areThereUIElementsOpen()

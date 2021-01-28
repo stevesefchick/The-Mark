@@ -126,6 +126,7 @@
     <Compile Include="Terrain.cs" />
     <Compile Include="TerrainDoodad.cs" />
     <Compile Include="TimeManager.cs" />
+    <Compile Include="TravelFeed.cs" />
     <Compile Include="TravelHandler.cs" />
     <Compile Include="TravelRoute.cs" />
     <Compile Include="UI Helper.cs" />
