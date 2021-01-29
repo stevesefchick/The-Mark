@@ -95,6 +95,7 @@ namespace The_Mark
                 {
                     currentEvent = possibleEvents[i];
                     currentEvent.GetRandomAssociatedPerson(rando);
+                    currentEvent.UpdateText();
                     break;
                 }
 

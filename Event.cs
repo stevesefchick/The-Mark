@@ -32,6 +32,12 @@ namespace The_Mark
             eligiblePeople.Clear();
         }
 
+        public void UpdateText()
+        {
+            String newtext = thisEventText.Replace("%char%", associatedPerson.personFirstName + " " + associatedPerson.personLastName);
+            thisEventText = newtext;
+        }
+
         public Boolean IsPersonEligible(Person person)
         {
             eligiblePeople.Add(person);
