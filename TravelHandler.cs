@@ -28,7 +28,7 @@ namespace The_Mark
         Vector2 totalTravelDistance = Vector2.Zero;
 
         //icon
-        int mapIconOffset = -32;
+        const int mapIconOffset = -32;
 
 
         public TravelHandler()
@@ -49,6 +49,25 @@ namespace The_Mark
             currentDestinationDescription = world.returnCurrentLocNameDescription(destinationLocation).Item2;
         }
 
+        Event CheckIfPeopleEligible(Event e,PlayerHandler player)
+        {
+
+            //check the mark
+            Boolean markEligible = e.IsPersonEligible(player.theMark);
+
+
+            //check the party
+            if (player.partyMembers.Count > 0)
+            {
+                for (int i = 0; i < player.partyMembers.Count; ++i)
+                {
+                    Boolean personeligible = e.IsPersonEligible(player.partyMembers[i]);
+                }
+            }
+
+            return (e);
+        }
+
         void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando)
         {
             List<Event> possibleEvents = new List<Event>();
@@ -58,7 +77,14 @@ namespace The_Mark
             {
                 if (e.Value.GetEventType() == Event.EventType.Passive)
                 {
-                    possibleEvents.Add(e.Value);
+                    //add any eligible people to event
+                    Event newevent = CheckIfPeopleEligible(e.Value,player);
+                    //if eligible people exist, add to event
+                    if (newevent.IsEligibleExists()==true)
+                    {
+                        possibleEvents.Add(newevent);
+                    }
+
                 }
             }
 
@@ -68,6 +94,7 @@ namespace The_Mark
                 if (rand < possibleEvents[i].ReturnEventChance())
                 {
                     currentEvent = possibleEvents[i];
+                    currentEvent.GetRandomAssociatedPerson(rando);
                     break;
                 }
 

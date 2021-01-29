@@ -23,6 +23,33 @@ namespace The_Mark
         PassiveEventBase thisEventBaseType;
         String thisEventText;
         int eventChance;
+        List<Person> eligiblePeople = new List<Person>();
+        Person associatedPerson;
+
+        public void GetRandomAssociatedPerson(Random rando)
+        {
+            associatedPerson = eligiblePeople[rando.Next(0, eligiblePeople.Count)];
+            eligiblePeople.Clear();
+        }
+
+        public Boolean IsPersonEligible(Person person)
+        {
+            eligiblePeople.Add(person);
+
+            return true;
+        }
+
+        public Boolean IsEligibleExists()
+        {
+            if (eligiblePeople.Count>0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public EventType GetEventType()
         {
