@@ -38,6 +38,8 @@ namespace The_Mark
         List<UICharacterBubble> uiCharacterBubbles = new List<UICharacterBubble>();
         //map selections
         List<UIMapSelection> uiMapSelections = new List<UIMapSelection>();
+        //travel feed
+        TravelFeed travelFeed = new TravelFeed();
         
 
         Vector2 fullcharacterposition = Vector2.Zero;
@@ -539,8 +541,15 @@ namespace The_Mark
             }
         }
 
+        public void CreateTravelFeed(String text)
+        {
+            travelFeed.AddTravelItem(text);
+        }
+
         public void Update(MouseHandler mouse, PlayerHandler party,Vector2 offset,DataManager datamanager, TravelHandler travel, WorldMap world, Random rando, GameMain game)
         {
+            travelFeed.Update();
+
             if (mouse.isLeftClickDown == true)
             {
                 //Hovercards
@@ -638,12 +647,8 @@ namespace The_Mark
 
         }
 
-        void UpdateStatScales(int i)
-        {
 
-        }
-
-        public void DrawMapUI(SpriteBatch spriteBatch,Vector2 location)
+        public void DrawMapUI(SpriteBatch spriteBatch)
         {
 
             //Map Selections
@@ -675,6 +680,9 @@ namespace The_Mark
             {
                 uiCharacterBubbles[i].Draw(spriteBatch, uiWindowSprites, healtbarSprites, getUIPosition(uiCharacterBubbles[i].bubblePosition, offset));
             }
+
+            //travel feed
+            travelFeed.Draw(spriteBatch, offset, mainFont);
 
 
             if (fullcharacterposition != Vector2.Zero)

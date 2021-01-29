@@ -291,7 +291,7 @@ class GameMain : Game
 		//Travelling
 		if (currentGameState == GameState.Traveling)
 		{
-			int minutes = travelHandler.TravelTick(playerHandler,dataManager,rando);
+			int minutes = travelHandler.TravelTick(playerHandler,dataManager,rando,uiHelper);
 			if (minutes == -1)
 			{
 				ChangeGameState(GameState.Idle);
@@ -386,7 +386,7 @@ class GameMain : Game
 		travelHandler.DrawIconOnMap(spriteBatch, uiHelper.mapLocationIcon);
 
 		uiHelper.Draw(spriteBatch, returnPositionCameraOffset(Vector2.Zero),playerHandler);
-		uiHelper.DrawMapUI(spriteBatch, new Vector2(travelHandler.currentGridLocation.X*64, travelHandler.currentGridLocation.Y*64));
+		uiHelper.DrawMapUI(spriteBatch);
 
 
 		spriteBatch.End();

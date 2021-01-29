@@ -75,6 +75,12 @@ namespace The_Mark
 
         }
 
+        void CreateTravelFeed(String text,UI_Helper uihelper)
+        {
+            uihelper.CreateTravelFeed(text);
+
+        }
+
         void ConsoleLogEvent()
         {
             Console.WriteLine(currentEvent.ReturnEventText());
@@ -86,7 +92,7 @@ namespace The_Mark
         }
 
         //returns minutes to tick down
-        public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando)
+        public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando, UI_Helper uihelper)
         {
             int value = 0;
 
@@ -103,6 +109,7 @@ namespace The_Mark
                 //if event
                 if (currentEvent != null)
                 {
+                    CreateTravelFeed(currentEvent.ReturnEventText(),uihelper);
                     ConsoleLogEvent();
                     ClearEvent();
                 }
