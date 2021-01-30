@@ -14,8 +14,10 @@ namespace The_Mark
         public enum PassiveEventSuccess { Success, Fail}
 
         //requirements
+        Boolean requiresSkill = false;
         PersonSkill.SkillType requiredSkill;
         PersonSkill.SkillRanking requiredRanking;
+        Boolean requiresTrait = false;
         Person.TraitType requiredTraitType;
 
         //properties
@@ -38,10 +40,82 @@ namespace The_Mark
             thisEventText = newtext;
         }
 
+        Boolean CheckForTraits(Person person)
+        {
+            if (requiresTrait == true)
+            {
+                for (int i=0;i<person.personTraits.Count;++i)
+                {
+                    if (requiredTraitType == person.personTraits[i])
+                    {
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                return true;
+            }
+
+
+            return false;
+        }
+
+        Boolean isSkillRankingBetterThan(PersonSkill.SkillRanking requirement, PersonSkill.SkillRanking personskillranking)
+        {
+            if (requirement == PersonSkill.SkillRanking.Apprentice)
+            {
+                return true;
+            }
+            else if (requirement == PersonSkill.SkillRanking.Novice
+                && (personskillranking == PersonSkill.SkillRanking.Novice || personskillranking == PersonSkill.SkillRanking.Master || personskillranking == PersonSkill.SkillRanking.Professional))
+            {
+                return true;
+            }
+            else if (requirement == PersonSkill.SkillRanking.Professional
+    && (personskillranking == PersonSkill.SkillRanking.Master || personskillranking == PersonSkill.SkillRanking.Professional))
+            {
+                return true;
+            }
+            else if (requirement == PersonSkill.SkillRanking.Master && personskillranking == PersonSkill.SkillRanking.Master)
+            {
+                return true;
+            }
+            else
+            { 
+                return false; 
+            }    
+        }
+
+        Boolean CheckForSkills(Person person)
+        {
+            if (requiresSkill == true)
+            {
+                for (int i =0;i < person.personSkills.Count;++i)
+                {
+                    if (requiredSkill == person.personSkills[i].skillType &&
+                        isSkillRankingBetterThan(requiredRanking, person.personSkills[i].skillRanking) == true)
+                    {
+
+                        return true;
+                    }
+
+                }
+            }
+            else
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public Boolean IsPersonEligible(Person person)
         {
-            eligiblePeople.Add(person);
-
+            if (CheckForTraits(person) == true && CheckForSkills(person)==true)
+            {
+                eligiblePeople.Add(person);
+            }
             return true;
         }
 
@@ -85,6 +159,7 @@ namespace The_Mark
             //requirements
             if (requiredSkillString != "")
             {
+                requiresSkill = true;
                 requiredSkill = (PersonSkill.SkillType)Enum.Parse(typeof(PersonSkill.SkillType), requiredSkillString);
             }
             if (requireSkillRankingString != "")
@@ -93,6 +168,7 @@ namespace The_Mark
             }
             if (requiredTraitString != "")
             {
+                requiresTrait = true;
                 requiredTraitType = (Person.TraitType)Enum.Parse(typeof(Person.TraitType), requiredTraitString);
             }
 
