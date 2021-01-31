@@ -49,6 +49,8 @@ namespace The_Mark
             currentDestinationDescription = world.returnCurrentLocNameDescription(destinationLocation).Item2;
         }
 
+
+
         Event CheckIfPeopleEligible(Event e,PlayerHandler player)
         {
 
@@ -79,6 +81,7 @@ namespace The_Mark
                 {
                     //add any eligible people to event
                     Event newevent = CheckIfPeopleEligible(e.Value,player);
+                    newevent.DetermineValidItem(datamanager,rando);
                     //if eligible people exist, add to event
                     if (newevent.IsEligibleExists()==true)
                     {
@@ -95,7 +98,8 @@ namespace The_Mark
                 {
                     currentEvent = possibleEvents[i];
                     currentEvent.GetRandomAssociatedPerson(rando);
-                    currentEvent.UpdateText();
+                    currentEvent.UpdateTextForName();
+                    currentEvent.UpdateTextForItem();
                     break;
                 }
 

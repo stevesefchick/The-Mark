@@ -10,7 +10,7 @@ namespace The_Mark
         //enums
         public enum EventType { Passive, Character, World }
         //passive builders
-        public enum PassiveEventBase { Find, Pick, Say, Eat, Injure, Joke, Sing}
+        public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing}
         public enum PassiveEventSuccess { Success, Fail}
 
         //requirements
@@ -19,6 +19,11 @@ namespace The_Mark
         PersonSkill.SkillRanking requiredRanking;
         Boolean requiresTrait = false;
         Person.TraitType requiredTraitType;
+        //item stuff
+        Boolean hasItem = false;
+        Item.ItemType eventItemType;
+        List<String> eventItemPosibilities;
+
 
         //properties
         EventType thisEventType;
@@ -27,6 +32,35 @@ namespace The_Mark
         int eventChance;
         List<Person> eligiblePeople = new List<Person>();
         Person associatedPerson;
+        Item earnedLootItem;
+        ConsumableItem earnedConsumableItem;
+        EquipmentItem earnedEquipmentItem;
+        String earnedItemText;
+
+
+        public void DetermineValidItem(DataManager datamanager,Random rando)
+        {
+            if (hasItem==true)
+            {
+                if (eventItemType == Item.ItemType.Consumable)
+                {
+                    earnedConsumableItem = datamanager.itemConsumableData[eventItemPosibilities[rando.Next(0, eventItemPosibilities.Count)]];
+                    earnedItemText = earnedConsumableItem.itemName;
+                }
+                else if (eventItemType == Item.ItemType.Equipment)
+                {
+                    earnedEquipmentItem = datamanager.itemEquipmentData[eventItemPosibilities[rando.Next(0, eventItemPosibilities.Count)]];
+                    earnedItemText = earnedEquipmentItem.itemName;
+                }
+                else if (eventItemType == Item.ItemType.Loot)
+                {
+                    earnedLootItem = datamanager.itemLootData[eventItemPosibilities[rando.Next(0,eventItemPosibilities.Count)]];
+                    earnedItemText = earnedLootItem.itemName;
+                }
+
+            }
+
+        }
 
         public void GetRandomAssociatedPerson(Random rando)
         {
@@ -34,9 +68,15 @@ namespace The_Mark
             eligiblePeople.Clear();
         }
 
-        public void UpdateText()
+        public void UpdateTextForName()
         {
             String newtext = thisEventText.Replace("%char%", associatedPerson.personFirstName + " " + associatedPerson.personLastName);
+            thisEventText = newtext;
+        }
+
+        public void UpdateTextForItem()
+        {
+            String newtext = thisEventText.Replace("%item%", earnedItemText);
             thisEventText = newtext;
         }
 
@@ -148,13 +188,15 @@ namespace The_Mark
 
         //passive event builder
         public Event(String thisEventTypeString, String thisEventBaseString, int percentChance, String eventText, 
-            String requiredSkillString, String requireSkillRankingString, String requiredTraitString)
+            String requiredSkillString, String requireSkillRankingString, String requiredTraitString,
+            String itemType, String[] listOfItems)
         {
             //properties
             thisEventType = (EventType) Enum.Parse(typeof(EventType), thisEventTypeString);
             thisEventBaseType = (PassiveEventBase) Enum.Parse(typeof(PassiveEventBase), thisEventBaseString);
             eventChance = percentChance;
             thisEventText = eventText;
+
 
             //requirements
             if (requiredSkillString != "")
@@ -170,6 +212,17 @@ namespace The_Mark
             {
                 requiresTrait = true;
                 requiredTraitType = (Person.TraitType)Enum.Parse(typeof(Person.TraitType), requiredTraitString);
+            }
+
+            if (itemType != "")
+            {
+                hasItem = true;
+                eventItemType = (Item.ItemType)Enum.Parse(typeof(Item.ItemType), itemType);
+
+                foreach (String i in listOfItems)
+                {
+                    eventItemPosibilities.Add(i);
+                }
             }
 
         }

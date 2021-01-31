@@ -6,7 +6,9 @@
     "eventText": "%char% found a %item%!",
     "requiredSkillString": "",
     "requireSkillRankingString": "",
-    "requiredTraitString": ""
+    "requiredTraitString": "",
+    "itemType": "Loot",
+    "listOfItems": [ "Steamy Pile" ],
 
   }
 }

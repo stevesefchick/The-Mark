@@ -196,5 +196,14 @@
     "dropRate": 45,
     "maxDropQuantity": 3,
     "rareDescription": "Quality"
+  },
+  "Steamy Pile": {
+    "itemName": "Steamy Pile",
+    "itemDescription": "It nasty",
+    "itemValue": 1,
+    "canStack": true,
+    "dropRate": 1,
+    "maxDropQuantity": 1,
+    "rareDescription": "Copious"
   }
 }
