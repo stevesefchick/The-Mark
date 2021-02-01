@@ -3,7 +3,7 @@
     "thisEventTypeString": "Passive",
     "thisEventBaseString": "Find",
     "percentChance": 10,
-    "eventText": "%char% found a %item%!",
+    "eventText": [ "%char% found a %item%!", "%char% stumbled on a %item%!" ],
     "requiredSkillString": "",
     "requireSkillRankingString": "",
     "requiredTraitString": "",

@@ -82,6 +82,7 @@ namespace The_Mark
                     //add any eligible people to event
                     Event newevent = CheckIfPeopleEligible(e.Value,player);
                     newevent.DetermineValidItem(datamanager,rando);
+                    newevent.DetermineValidText(rando);
                     //if eligible people exist, add to event
                     if (newevent.IsEligibleExists()==true)
                     {
@@ -141,6 +142,7 @@ namespace The_Mark
                 //if event
                 if (currentEvent != null)
                 {
+                    currentEvent.PerformPassiveEventActivity(player, rando);
                     CreateTravelFeed(currentEvent.ReturnEventText(),uihelper);
                     ConsoleLogEvent();
                     ClearEvent();

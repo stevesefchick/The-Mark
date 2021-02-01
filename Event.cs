@@ -22,14 +22,15 @@ namespace The_Mark
         //item stuff
         Boolean hasItem = false;
         Item.ItemType eventItemType;
-        List<String> eventItemPosibilities;
+        List<String> eventItemPosibilities = new List<String>();
+        List<String> thisEventTextPossibilities = new List<String>();
 
 
         //properties
         EventType thisEventType;
         PassiveEventBase thisEventBaseType;
-        String thisEventText;
         int eventChance;
+        String thisEventText;
         List<Person> eligiblePeople = new List<Person>();
         Person associatedPerson;
         Item earnedLootItem;
@@ -60,6 +61,42 @@ namespace The_Mark
 
             }
 
+        }
+
+        public void PerformPassiveEventActivity(PlayerHandler player, Random rando)
+        {
+            switch (thisEventBaseType)
+            {
+                #region find
+                case PassiveEventBase.Find:
+                    if (eventItemType == Item.ItemType.Loot)
+                    {
+                        player.addLootItemToInventory(earnedLootItem);
+                    }
+                    else if (eventItemType == Item.ItemType.Consumable)
+                    {
+                        player.AddConsumableItemToInventory(earnedConsumableItem);
+                    }
+                    else if (eventItemType == Item.ItemType.Equipment)
+                    {
+                        player.AddEquipmentItemToInventory(earnedEquipmentItem);
+                    }
+
+                    break;
+                #endregion
+                
+                    
+               #region Eat
+                case PassiveEventBase.Eat:
+                    Console.WriteLine("Case 2");
+                    break;
+                #endregion
+            }
+
+            if (thisEventBaseType == PassiveEventBase.Find)
+            {
+
+            }
         }
 
         public void GetRandomAssociatedPerson(Random rando)
@@ -181,13 +218,18 @@ namespace The_Mark
             return eventChance;
         }
 
+        public void DetermineValidText(Random rando)
+        {
+            thisEventText = thisEventTextPossibilities[rando.Next(0, thisEventTextPossibilities.Count)];
+        }
+
         public String ReturnEventText()
         {
             return thisEventText;
         }
 
         //passive event builder
-        public Event(String thisEventTypeString, String thisEventBaseString, int percentChance, String eventText, 
+        public Event(String thisEventTypeString, String thisEventBaseString, int percentChance, String[] eventText, 
             String requiredSkillString, String requireSkillRankingString, String requiredTraitString,
             String itemType, String[] listOfItems)
         {
@@ -195,7 +237,11 @@ namespace The_Mark
             thisEventType = (EventType) Enum.Parse(typeof(EventType), thisEventTypeString);
             thisEventBaseType = (PassiveEventBase) Enum.Parse(typeof(PassiveEventBase), thisEventBaseString);
             eventChance = percentChance;
-            thisEventText = eventText;
+
+            foreach (String t in eventText)
+            {
+                thisEventTextPossibilities.Add(t);
+            }
 
 
             //requirements
