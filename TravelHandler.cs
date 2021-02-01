@@ -55,7 +55,7 @@ namespace The_Mark
         {
 
             //check the mark
-            Boolean markEligible = e.IsPersonEligible(player.theMark);
+            e.IsPersonEligible(player.theMark);
 
 
             //check the party
@@ -63,14 +63,14 @@ namespace The_Mark
             {
                 for (int i = 0; i < player.partyMembers.Count; ++i)
                 {
-                    Boolean personeligible = e.IsPersonEligible(player.partyMembers[i]);
+                    e.IsPersonEligible(player.partyMembers[i]);
                 }
             }
 
             return (e);
         }
 
-        void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando)
+        void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype,Boolean isonroad)
         {
             List<Event> possibleEvents = new List<Event>();
 
@@ -81,10 +81,12 @@ namespace The_Mark
                 {
                     //add any eligible people to event
                     Event newevent = CheckIfPeopleEligible(e.Value,player);
+                    //determine the item
                     newevent.DetermineValidItem(datamanager,rando);
+                    //determine the text used
                     newevent.DetermineValidText(rando);
                     //if eligible people exist, add to event
-                    if (newevent.IsEligibleExists()==true)
+                    if (newevent.IsEligibleExists()==true && newevent.CheckForGridRequirements(terraintype,isonroad))
                     {
                         possibleEvents.Add(newevent);
                     }
@@ -125,7 +127,7 @@ namespace The_Mark
         }
 
         //returns minutes to tick down
-        public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando, UI_Helper uihelper)
+        public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando, UI_Helper uihelper,GridTile.GridTerrain gridTerrainType, Boolean isOnRoad)
         {
             int value = 0;
 
@@ -135,7 +137,7 @@ namespace The_Mark
                 //check for event
                 if (currentGridLocation != travelStartingLocation)
                 {
-                    CheckForValidEvents(player, datamanager, rando);
+                    CheckForValidEvents(player, datamanager, rando,gridTerrainType,isOnRoad);
                 }
 
 

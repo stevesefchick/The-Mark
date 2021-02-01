@@ -19,17 +19,25 @@ namespace The_Mark
         PersonSkill.SkillRanking requiredRanking;
         Boolean requiresTrait = false;
         Person.TraitType requiredTraitType;
-        //item stuff
-        Boolean hasItem = false;
-        Item.ItemType eventItemType;
-        List<String> eventItemPosibilities = new List<String>();
-        List<String> thisEventTextPossibilities = new List<String>();
+        Boolean requiresTerrain = false;
+        GridTile.GridTerrain requiredTerrainType;
+        Boolean requiresRoad = false;
+        Boolean isonroadrequirement;
+
         int eventStaminaRequirementMin;
         int eventStaminaRequirementMax;
         int eventStressRequirementMin;
         int eventStressRequirementMax;
         int eventHealthRequirementMin;
         int eventHealthRequirementMax;
+
+
+
+        //item stuff
+        Boolean hasItem = false;
+        Item.ItemType eventItemType;
+        List<String> eventItemPosibilities = new List<String>();
+        List<String> thisEventTextPossibilities = new List<String>();
 
         //properties
         EventType thisEventType;
@@ -206,6 +214,26 @@ namespace The_Mark
             }
         }
 
+        public Boolean CheckForGridRequirements(GridTile.GridTerrain terraintype, Boolean isonroad)
+        {
+            if (requiresRoad==false && requiresTerrain==false)
+            {
+                return true;
+            }
+            else if (requiresRoad==true && isonroadrequirement == isonroad)
+            {
+                return true;
+            }
+            else if (requiresTerrain == true && requiredTerrainType == terraintype)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public Boolean IsPersonEligible(Person person)
         {
             if (CheckForTraits(person) == true && CheckForSkills(person)==true && CheckForStatRequirements(person)==true)
@@ -250,13 +278,14 @@ namespace The_Mark
         //passive event builder
         public Event(String thisEventTypeString, String thisEventBaseString, int percentChance, String[] eventText, 
             String requiredSkillString, String requireSkillRankingString, String requiredTraitString,
-            String itemType, String[] listOfItems, int stammin, int stammax, int stressmin, int stressmax, int healthmin, int healthmax)
+            String itemType, String[] listOfItems, int stammin, int stammax, int stressmin, int stressmax, int healthmin, int healthmax,
+            String requiredTerrain, String requiredRoad)
         {
             //properties
             thisEventType = (EventType) Enum.Parse(typeof(EventType), thisEventTypeString);
             thisEventBaseType = (PassiveEventBase) Enum.Parse(typeof(PassiveEventBase), thisEventBaseString);
             eventChance = percentChance;
-
+            //text
             foreach (String t in eventText)
             {
                 thisEventTextPossibilities.Add(t);
@@ -277,6 +306,24 @@ namespace The_Mark
             {
                 requiresTrait = true;
                 requiredTraitType = (Person.TraitType)Enum.Parse(typeof(Person.TraitType), requiredTraitString);
+            }
+            if (requiredTerrain != "")
+            {
+                requiresTerrain = true;
+                requiredTerrainType = (GridTile.GridTerrain)Enum.Parse(typeof(GridTile.GridTerrain), requiredTerrain);
+            }
+            if (requiredRoad != "")
+            {
+                requiresRoad = true;
+                if (requiredRoad=="true")
+                {
+                    isonroadrequirement = true;
+                }
+                else if (requiredRoad=="false")
+                {
+                    isonroadrequirement = false;
+                }
+
             }
 
             eventStaminaRequirementMin = stammin;

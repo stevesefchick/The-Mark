@@ -3,7 +3,7 @@
     "thisEventTypeString": "Passive",
     "thisEventBaseString": "Find",
     "percentChance": 10,
-    "eventText": [ "%char% found a %item%!", "%char% stumbled on a %item%!" ],
+    "eventText": [ "%char% found a %item%!", "%char% stumbled on a %item%!", "%char discovered a %item%!" ],
     "requiredSkillString": "",
     "requireSkillRankingString": "",
     "requiredTraitString": "",
@@ -14,6 +14,8 @@
     "stressmin": 0,
     "stressmax": 80,
     "healthmin": 10,
-    "healthmax": 100
+    "healthmax": 100,
+    "requiredTerrain": "",
+    "requiredRoad": ""
   }
 }
