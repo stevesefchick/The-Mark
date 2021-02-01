@@ -9,6 +9,11 @@
     "requiredTraitString": "",
     "itemType": "Loot",
     "listOfItems": [ "Steamy Pile" ],
-
+    "stammin": 10,
+    "stammax": 100,
+    "stressmin": 0,
+    "stressmax": 80,
+    "healthmin": 10,
+    "healthmax": 100
   }
 }

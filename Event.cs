@@ -24,7 +24,12 @@ namespace The_Mark
         Item.ItemType eventItemType;
         List<String> eventItemPosibilities = new List<String>();
         List<String> thisEventTextPossibilities = new List<String>();
-
+        int eventStaminaRequirementMin;
+        int eventStaminaRequirementMax;
+        int eventStressRequirementMin;
+        int eventStressRequirementMax;
+        int eventHealthRequirementMin;
+        int eventHealthRequirementMax;
 
         //properties
         EventType thisEventType;
@@ -187,9 +192,23 @@ namespace The_Mark
             return false;
         }
 
+        Boolean CheckForStatRequirements(Person person)
+        {
+            if (person.currentStress > eventStressRequirementMin && person.currentStress < eventStressRequirementMax &&
+                person.currentStamina > eventStaminaRequirementMin && person.currentStamina < eventStaminaRequirementMax &&
+                person.currentHealth > eventHealthRequirementMin && person.currentHealth < eventHealthRequirementMax)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public Boolean IsPersonEligible(Person person)
         {
-            if (CheckForTraits(person) == true && CheckForSkills(person)==true)
+            if (CheckForTraits(person) == true && CheckForSkills(person)==true && CheckForStatRequirements(person)==true)
             {
                 eligiblePeople.Add(person);
             }
@@ -231,7 +250,7 @@ namespace The_Mark
         //passive event builder
         public Event(String thisEventTypeString, String thisEventBaseString, int percentChance, String[] eventText, 
             String requiredSkillString, String requireSkillRankingString, String requiredTraitString,
-            String itemType, String[] listOfItems)
+            String itemType, String[] listOfItems, int stammin, int stammax, int stressmin, int stressmax, int healthmin, int healthmax)
         {
             //properties
             thisEventType = (EventType) Enum.Parse(typeof(EventType), thisEventTypeString);
@@ -260,6 +279,14 @@ namespace The_Mark
                 requiredTraitType = (Person.TraitType)Enum.Parse(typeof(Person.TraitType), requiredTraitString);
             }
 
+            eventStaminaRequirementMin = stammin;
+            eventStaminaRequirementMax = stammax;
+            eventStressRequirementMin = stressmin;
+            eventStressRequirementMax = stressmax;
+            eventHealthRequirementMin = healthmin;
+            eventHealthRequirementMax = healthmax;
+
+            //items
             if (itemType != "")
             {
                 hasItem = true;
@@ -270,6 +297,8 @@ namespace The_Mark
                     eventItemPosibilities.Add(i);
                 }
             }
+
+
 
         }
     }

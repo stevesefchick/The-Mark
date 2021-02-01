@@ -5,7 +5,10 @@
     "itemValue": 20,
     "canStack": true,
     "dropRate": 15,
-    "maxDropQuantity": 3
+    "maxDropQuantity": 3,
+    "recoverytype": "Stamina",
+    "recoveryamount": 6,
+    "amountvariance":3
   },
   "Tishelberry": {
     "itemName": "Tishelberry",
@@ -13,7 +16,10 @@
     "itemValue": 5,
     "canStack": true,
     "dropRate": 30,
-    "maxDropQuantity": 5
+    "maxDropQuantity": 5,
+    "recoverytype": "Health",
+    "recoveryamount": 3,
+    "amountvariance": 1
   },
   "Bloomshroom Dust": {
     "itemName": "Bloomshroom Dust",
@@ -21,7 +27,10 @@
     "itemValue": 20,
     "canStack": true,
     "dropRate": 20,
-    "maxDropQuantity": 3
+    "maxDropQuantity": 3,
+    "recoverytype": "Stress",
+    "recoveryamount": 8,
+    "amountvariance": 3
   },
   "Lake Weed Clump": {
     "itemName": "Lake Weed Clump",
@@ -29,7 +38,10 @@
     "itemValue": 5,
     "canStack": true,
     "dropRate": 50,
-    "maxDropQuantity": 2
+    "maxDropQuantity": 2,
+    "recoverytype": "Stamina",
+    "recoveryamount": 3,
+    "amountvariance": 1
   },
   "Surf Coconut": {
     "itemName": "Surf Coconut",
@@ -37,7 +49,10 @@
     "itemValue": 20,
     "canStack": true,
     "dropRate": 10,
-    "maxDropQuantity": 1
+    "maxDropQuantity": 1,
+    "recoverytype": "Stamina",
+    "recoveryamount": 4,
+    "amountvariance": 1
   },
   "Darkpine Cone": {
     "itemName": "Darkpine Cone",
@@ -45,7 +60,10 @@
     "itemValue": 5,
     "canStack": true,
     "dropRate": 10,
-    "maxDropQuantity": 3
+    "maxDropQuantity": 3,
+    "recoverytype": "Stamina",
+    "recoveryamount": 2,
+    "amountvariance": 1
   },
   "Firemelon": {
     "itemName": "Firemelon",
@@ -53,7 +71,10 @@
     "itemValue": 20,
     "canStack": true,
     "dropRate": 15,
-    "maxDropQuantity": 1
+    "maxDropQuantity": 1,
+    "recoverytype": "Stamina",
+    "recoveryamount": 5,
+    "amountvariance": 2
   },
   "Chillcap": {
     "itemName": "Chillcap",
@@ -61,7 +82,10 @@
     "itemValue": 20,
     "canStack": true,
     "dropRate": 20,
-    "maxDropQuantity": 1
+    "maxDropQuantity": 1,
+    "recoverytype": "Stamina",
+    "recoveryamount": 2,
+    "amountvariance": 1
   },
   "Clump of Stinkmoss": {
     "itemName": "Clump of Stinkmoss",
@@ -69,7 +93,10 @@
     "itemValue": 10,
     "canStack": true,
     "dropRate": 10,
-    "maxDropQuantity": 3
+    "maxDropQuantity": 3,
+    "recoverytype": "Stamina",
+    "recoveryamount": -3,
+    "amountvariance": 1
   },
   "Brambleberry": {
     "itemName": "Brambleberry",
@@ -77,7 +104,10 @@
     "itemValue": 5,
     "canStack": true,
     "dropRate": 20,
-    "maxDropQuantity": 6
+    "maxDropQuantity": 6,
+    "recoverytype": "Stamina",
+    "recoveryamount": 3,
+    "amountvariance": 1
   },
   "Flame Lily Petal": {
     "itemName": "Flame Lily Petal",
@@ -85,7 +115,10 @@
     "itemValue": 10,
     "canStack": true,
     "dropRate": 10,
-    "maxDropQuantity": 2
+    "maxDropQuantity": 2,
+    "recoverytype": "Stamina",
+    "recoveryamount": 2,
+    "amountvariance": 1
   },
   "Aqua Lily Petal": {
     "itemName": "Aqua Lily Petal",
@@ -93,7 +126,10 @@
     "itemValue": 15,
     "canStack": true,
     "dropRate": 10,
-    "maxDropQuantity": 2
+    "maxDropQuantity": 2,
+    "recoverytype": "Stamina",
+    "recoveryamount": 2,
+    "amountvariance": 1
   },
   "Dandytiger Puff": {
     "itemName": "Dandytiger Puff",
@@ -101,7 +137,10 @@
     "itemValue": 5,
     "canStack": true,
     "dropRate": 15,
-    "maxDropQuantity": 3
+    "maxDropQuantity": 3,
+    "recoverytype": "Stamina",
+    "recoveryamount": 2,
+    "amountvariance": 1
   },
   "Dingushroom Cap": {
     "itemName": "Dingushroom Cap",
@@ -109,6 +148,9 @@
     "itemValue": 20,
     "canStack": true,
     "dropRate": 10,
-    "maxDropQuantity": 1
+    "maxDropQuantity": 1,
+    "recoverytype": "Health",
+    "recoveryamount": -5,
+    "amountvariance": 2
   }
 }
