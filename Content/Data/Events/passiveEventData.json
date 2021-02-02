@@ -16,6 +16,9 @@
     "healthmin": 10,
     "healthmax": 100,
     "requiredTerrain": "",
-    "requiredRoad": ""
+    "requiredRoad": "",
+    "staminaeffect": 0,
+    "stresseffect": -3,
+    "healtheffect": 0
   }
 }

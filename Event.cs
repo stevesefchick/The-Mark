@@ -50,6 +50,9 @@ namespace The_Mark
         ConsumableItem earnedConsumableItem;
         EquipmentItem earnedEquipmentItem;
         String earnedItemText;
+        int eventStaminaEffect;
+        int eventStressEffect;
+        int eventHealthEffect;
 
 
         public void DetermineValidItem(DataManager datamanager,Random rando)
@@ -106,10 +109,31 @@ namespace The_Mark
                 #endregion
             }
 
-            if (thisEventBaseType == PassiveEventBase.Find)
-            {
 
+            //stat impacts
+            if (eventHealthEffect != 0 || eventStaminaEffect != 0 || eventStressEffect != 0)
+            {
+                if (player.theMark == associatedPerson)
+                {
+                    player.LoseStaminaSingleMark(PlayerHandler.StaminaDrainType.Event,eventStaminaEffect*-1);
+                    player.GainStressSingleMark(PlayerHandler.StressDrainType.Event, eventStressEffect * -1);
+                    player.LoseHealthSingleMark(PlayerHandler.HealthDrainType.Event, eventHealthEffect * -1);
+                }
+                else
+                {
+                    for (int i=0;i<player.partyMembers.Count;++i)
+                    {
+                        if (player.partyMembers[i] == associatedPerson)
+                        {
+                            player.LoseStaminaSingleCharacter(PlayerHandler.StaminaDrainType.Event, eventStaminaEffect * -1,player.partyMembers[i]);
+                            player.GainStressSingleCharacter(PlayerHandler.StressDrainType.Event, eventStressEffect * -1, player.partyMembers[i]);
+                            player.LoseHealthSingleCharacter(PlayerHandler.HealthDrainType.Event, eventHealthEffect * -1, player.partyMembers[i]);
+
+                        }
+                    }
+                }
             }
+
         }
 
         public void GetRandomAssociatedPerson(Random rando)
@@ -202,9 +226,9 @@ namespace The_Mark
 
         Boolean CheckForStatRequirements(Person person)
         {
-            if (person.currentStress > eventStressRequirementMin && person.currentStress < eventStressRequirementMax &&
-                person.currentStamina > eventStaminaRequirementMin && person.currentStamina < eventStaminaRequirementMax &&
-                person.currentHealth > eventHealthRequirementMin && person.currentHealth < eventHealthRequirementMax)
+            if (person.currentStress >= eventStressRequirementMin && person.currentStress <= eventStressRequirementMax &&
+                person.currentStamina >= eventStaminaRequirementMin && person.currentStamina <= eventStaminaRequirementMax &&
+                person.currentHealth >= eventHealthRequirementMin && person.currentHealth <= eventHealthRequirementMax)
             {
                 return true;
             }
@@ -279,7 +303,7 @@ namespace The_Mark
         public Event(String thisEventTypeString, String thisEventBaseString, int percentChance, String[] eventText, 
             String requiredSkillString, String requireSkillRankingString, String requiredTraitString,
             String itemType, String[] listOfItems, int stammin, int stammax, int stressmin, int stressmax, int healthmin, int healthmax,
-            String requiredTerrain, String requiredRoad)
+            String requiredTerrain, String requiredRoad, int staminaeffect,int stresseffect, int healtheffect)
         {
             //properties
             thisEventType = (EventType) Enum.Parse(typeof(EventType), thisEventTypeString);
@@ -290,6 +314,9 @@ namespace The_Mark
             {
                 thisEventTextPossibilities.Add(t);
             }
+            eventStaminaEffect = staminaeffect;
+            eventStressEffect = stresseffect;
+            eventHealthEffect = healtheffect;
 
 
             //requirements

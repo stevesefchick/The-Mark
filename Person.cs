@@ -610,17 +610,6 @@ namespace The_Mark
 			}
 		}
 
-		/*
-		void getPersonality(CreationType creationType,Random rando)
-        {
-			if (creationType == CreationType.Created)
-            {
-				Array values = Enum.GetValues(typeof(PersonalityType));
-				PersonalityType randomPersonality = (PersonalityType)values.GetValue(rando.Next(values.Length));
-				personPersonalityType = randomPersonality;
-			}
-        }
-		*/
 
 		void GetHealthStats(Random rando, DataManager data)
 		{

@@ -9,7 +9,9 @@ namespace The_Mark
     class PlayerHandler
     {
         //enums
-        public enum StaminaDrainType { Travel }
+        public enum StaminaDrainType { Travel, Event }
+        public enum StressDrainType {  Event }
+        public enum HealthDrainType { Event}
 
         //party information
         public Person theMark;
@@ -26,35 +28,174 @@ namespace The_Mark
         public Texture2D armTiles;
 
 
-        public void LoseStamina(StaminaDrainType stamtype)
+        #region stat gains/loss
+
+        //STRESS
+        public void GainStress(StressDrainType stresstype)
         {
-            SubtractStaminaFromMark(stamtype);
-            SubtractStaminaFromCharacters(stamtype);
+            AddStressToMark(stresstype, 0);
+            AddStressToCharacters(stresstype, 0, true, null);
+        }
+        public void GainStressSingleMark(StressDrainType stresstype, int eventamount)
+        {
+            AddStressToMark(stresstype, eventamount);
+        }
+        public void GainStressSingleCharacter(StressDrainType stresstype, int eventamount, Person person)
+        {
+            AddStressToCharacters(stresstype, eventamount, false, person);
         }
 
-        void SubtractStaminaFromMark(StaminaDrainType stamtype)
+
+        void AddStressToMark(StressDrainType stresstype, int eventAmount)
         {
-            int amount = 0;
+            int amount = eventAmount;
+
+
+            theMark.currentStress += amount;
+        }
+        void AddStressToCharacters(StressDrainType stresstype, int eventAmount, Boolean isAll, Person affectedperson)
+        {
+            int amount = eventAmount;
+
+            if (isAll == true)
+            {
+                for (int i = 0; i < partyMembers.Count; ++i)
+                {
+
+                    partyMembers[i].currentStress += amount;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < partyMembers.Count; ++i)
+                {
+                    if (partyMembers[i] == affectedperson)
+                    {
+
+                        partyMembers[i].currentStress += amount;
+
+                    }
+
+                }
+            }
+        }
+
+
+        //HEALTH
+
+        public void LoseHealth(HealthDrainType healthtype)
+        {
+            SubtractHealthFromMark(healthtype, 0);
+            SubtractHealthFromCharacters(healthtype, 0, true, null);
+        }
+        public void LoseHealthSingleMark(HealthDrainType healthtype, int eventamount)
+        {
+            SubtractHealthFromMark(healthtype, eventamount);
+        }
+        public void LoseHealthSingleCharacter(HealthDrainType healthtype, int eventamount, Person person)
+        {
+            SubtractHealthFromCharacters(healthtype, eventamount, false, person);
+        }
+
+
+        void SubtractHealthFromMark(HealthDrainType healthtype, int eventAmount)
+        {
+            int amount = eventAmount;
+
+            theMark.currentHealth -= amount;
+        }
+        void SubtractHealthFromCharacters(HealthDrainType healthtype, int eventAmount, Boolean isAll, Person affectedperson)
+        {
+            int amount = eventAmount;
+
+            if (isAll == true)
+            {
+                for (int i = 0; i < partyMembers.Count; ++i)
+                {
+                    partyMembers[i].currentHealth -= amount;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < partyMembers.Count; ++i)
+                {
+                    if (partyMembers[i] == affectedperson)
+                    {
+
+                        partyMembers[i].currentHealth -= amount;
+
+                    }
+
+                }
+            }
+        }
+
+
+
+
+
+
+
+        //STAMINA
+        public void LoseStamina(StaminaDrainType stamtype)
+        {
+            SubtractStaminaFromMark(stamtype,0);
+            SubtractStaminaFromCharacters(stamtype,0,true,null);
+        }
+        public void LoseStaminaSingleMark(StaminaDrainType stamtype, int eventamount)
+        {
+            SubtractStaminaFromMark(stamtype,eventamount);
+        }
+        public void LoseStaminaSingleCharacter(StaminaDrainType stamtype, int eventamount,Person person)
+        {
+            SubtractStaminaFromCharacters(stamtype,eventamount,false,person);
+        }
+
+        void SubtractStaminaFromMark(StaminaDrainType stamtype, int eventAmount)
+        {
+            int amount = eventAmount;
             if (stamtype== StaminaDrainType.Travel)
             {
                 amount = 1;
             }
             theMark.currentStamina -= amount;
         }
-        void SubtractStaminaFromCharacters(StaminaDrainType stamtype)
+        void SubtractStaminaFromCharacters(StaminaDrainType stamtype, int eventAmount, Boolean isAll, Person affectedperson)
         {
-            int amount = 0;
+            int amount = eventAmount;
 
-            for (int i=0;i<partyMembers.Count;++i)
+            if (isAll == true)
             {
-                if (stamtype == StaminaDrainType.Travel)
+                for (int i = 0; i < partyMembers.Count; ++i)
                 {
-                    amount = 1;
-                }
+                    if (stamtype == StaminaDrainType.Travel)
+                    {
+                        amount = 1;
+                    }
 
-                partyMembers[i].currentStamina -= amount;
+                    partyMembers[i].currentStamina -= amount;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < partyMembers.Count; ++i)
+                {
+                    if (partyMembers[i] == affectedperson)
+                    {
+                        if (stamtype == StaminaDrainType.Travel)
+                        {
+                            amount = 1;
+                        }
+
+                        partyMembers[i].currentStamina -= amount;
+
+                    }
+
+                }
             }
         }
+
+        #endregion
 
         public PlayerHandler(GameMain gamedeets)
         {
