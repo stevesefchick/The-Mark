@@ -149,12 +149,17 @@ namespace The_Mark
                     ConsoleLogEvent();
                     ClearEvent();
                 }
-
                 //if no event
-                // 
-                //
-                player.LoseStamina(PlayerHandler.StaminaDrainType.Travel);
+                else
+                {
+                    //player basic ticks
+                    player.LoseStamina(PlayerHandler.StaminaDrainType.Travel);
+
+                }
+
                 //player do stuff
+
+
 
                 //get next distance
                 currentGridLocation += new Point((int)(totalTravelDistance.X / 64), (int)(totalTravelDistance.Y / 64));

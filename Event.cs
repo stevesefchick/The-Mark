@@ -226,9 +226,17 @@ namespace The_Mark
 
         Boolean CheckForStatRequirements(Person person)
         {
-            if (person.currentStress >= eventStressRequirementMin && person.currentStress <= eventStressRequirementMax &&
-                person.currentStamina >= eventStaminaRequirementMin && person.currentStamina <= eventStaminaRequirementMax &&
-                person.currentHealth >= eventHealthRequirementMin && person.currentHealth <= eventHealthRequirementMax)
+            int stressMin = (int)(((float)eventStressRequirementMin/100) * person.maxStress);
+            int stressMax = (int)(((float)eventStaminaRequirementMax/100) * person.maxStress);
+            int healthMin = (int)(((float)eventHealthRequirementMin / 100) * person.maxHealth);
+            int healthMax = (int)(((float)eventHealthRequirementMax / 100) * person.maxHealth);
+            int staminaMin = (int)(((float)eventStaminaRequirementMin / 100) * person.maxStamina);
+            int staminaMax = (int)(((float)eventStaminaRequirementMax / 100) * person.maxStamina);
+
+
+            if (person.currentStress >= stressMin && person.currentStress <= stressMax &&
+                person.currentStamina >= staminaMin && person.currentStamina <= staminaMax &&
+                person.currentHealth >= healthMin && person.currentHealth <= healthMax)
             {
                 return true;
             }
