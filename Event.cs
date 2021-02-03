@@ -23,6 +23,7 @@ namespace The_Mark
         GridTile.GridTerrain requiredTerrainType;
         Boolean requiresRoad = false;
         Boolean isonroadrequirement;
+        int eventPartySizeMinimum;
 
         int eventStaminaRequirementMin;
         int eventStaminaRequirementMax;
@@ -224,6 +225,18 @@ namespace The_Mark
             return false;
         }
 
+        public Boolean CheckForPartySizeRequirements(int partysize)
+        {
+            if (partysize >= eventPartySizeMinimum)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         Boolean CheckForStatRequirements(Person person)
         {
             int stressMin = (int)(((float)eventStressRequirementMin/100) * person.maxStress);
@@ -311,7 +324,7 @@ namespace The_Mark
         public Event(String thisEventTypeString, String thisEventBaseString, int percentChance, String[] eventText, 
             String requiredSkillString, String requireSkillRankingString, String requiredTraitString,
             String itemType, String[] listOfItems, int stammin, int stammax, int stressmin, int stressmax, int healthmin, int healthmax,
-            String requiredTerrain, String requiredRoad, int staminaeffect,int stresseffect, int healtheffect)
+            String requiredTerrain, String requiredRoad, int staminaeffect,int stresseffect, int healtheffect, int partysizemin)
         {
             //properties
             thisEventType = (EventType) Enum.Parse(typeof(EventType), thisEventTypeString);
@@ -367,6 +380,8 @@ namespace The_Mark
             eventStressRequirementMax = stressmax;
             eventHealthRequirementMin = healthmin;
             eventHealthRequirementMax = healthmax;
+
+            eventPartySizeMinimum = partysizemin;
 
             //items
             if (itemType != "")

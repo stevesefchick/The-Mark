@@ -19,6 +19,7 @@
     "requiredRoad": "",
     "staminaeffect": 0,
     "stresseffect": -3,
-    "healtheffect": 0
+    "healtheffect": 0,
+    "partysizemin": 0
   }
 }

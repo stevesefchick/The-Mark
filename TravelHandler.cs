@@ -86,7 +86,8 @@ namespace The_Mark
                     //determine the text used
                     newevent.DetermineValidText(rando);
                     //if eligible people exist, add to event
-                    if (newevent.IsEligibleExists()==true && newevent.CheckForGridRequirements(terraintype,isonroad))
+                    if (newevent.IsEligibleExists()==true && newevent.CheckForGridRequirements(terraintype,isonroad) == true &&
+                        newevent.CheckForPartySizeRequirements(player.partyMembers.Count) == true)
                     {
                         possibleEvents.Add(newevent);
                     }
