@@ -12,6 +12,10 @@ namespace The_Mark
         //passive builders
         public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing}
         public enum PassiveEventSuccess { Success, Fail}
+        //world builders
+        public enum WorldEventBase { EnemyEncounter}
+
+
 
         //requirements
         Boolean requiresSkill = false;
@@ -77,6 +81,7 @@ namespace The_Mark
                 }
 
             }
+            
 
         }
 
@@ -214,7 +219,6 @@ namespace The_Mark
 
                         return true;
                     }
-
                 }
             }
             else
@@ -240,7 +244,7 @@ namespace The_Mark
         Boolean CheckForStatRequirements(Person person)
         {
             int stressMin = (int)(((float)eventStressRequirementMin/100) * person.maxStress);
-            int stressMax = (int)(((float)eventStaminaRequirementMax/100) * person.maxStress);
+            int stressMax = (int)(((float)eventStressRequirementMax/100) * person.maxStress);
             int healthMin = (int)(((float)eventHealthRequirementMin / 100) * person.maxHealth);
             int healthMax = (int)(((float)eventHealthRequirementMax / 100) * person.maxHealth);
             int staminaMin = (int)(((float)eventStaminaRequirementMin / 100) * person.maxStamina);
