@@ -59,6 +59,9 @@ namespace The_Mark
         int eventStressEffect;
         int eventHealthEffect;
 
+        //world event properties
+        List<EventOption> eventOptions = new List<EventOption>();
+
 
         public void DetermineValidItem(DataManager datamanager,Random rando)
         {
