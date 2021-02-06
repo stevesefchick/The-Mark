@@ -327,6 +327,17 @@ namespace The_Mark
             return thisEventText;
         }
 
+
+        //world event builder
+        public Event(String thisEventTypeString,String thisEventBaseTypeString, int percentChance,String[] eventText,
+            EventOption[] eventoptions,String requiredterrainString,String requiredroadString)
+        {
+
+
+
+        }
+
+
         //passive event builder
         public Event(String thisEventTypeString, String thisEventBaseString, int percentChance, String[] eventText, 
             String requiredSkillString, String requireSkillRankingString, String requiredTraitString,
