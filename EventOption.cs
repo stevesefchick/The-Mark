@@ -23,17 +23,17 @@ namespace The_Mark
         EventOptionType thisOptionType;
         String optionTextDescription;
 
-        public EventOption(String optionTypeString, String optionTextDescriptionString,String optionRequiredSkill,String optionRequiredSkillRank,
+        public EventOption(String optionTypeString, String optionTextDescriptionString,String optionRequiredSkillString, String optionRequiredSkillRankingString,
             String optionRequiredTraitString, String optionAvoidedTraitString)
         {
             thisOptionType = (EventOptionType)Enum.Parse(typeof(EventOptionType), optionTypeString);
             optionTextDescription = optionTextDescriptionString;
 
-            if (optionRequiredSkill != "")
+            if (optionRequiredSkillString != "")
             {
                 requiresSkill = true;
-                requiredSkill = (PersonSkill.SkillType)Enum.Parse(typeof(PersonSkill.SkillType), optionRequiredSkill);
-                requiredRanking = (PersonSkill.SkillRanking)Enum.Parse(typeof(PersonSkill.SkillRanking), optionRequiredSkillRank);
+                requiredSkill = (PersonSkill.SkillType)Enum.Parse(typeof(PersonSkill.SkillType), optionRequiredSkillString);
+                requiredRanking = (PersonSkill.SkillRanking)Enum.Parse(typeof(PersonSkill.SkillRanking), optionRequiredSkillRankingString);
             }
 
             if (optionRequiredTraitString!="")

@@ -33,7 +33,7 @@ namespace The_Mark
 
         //event Data
         public Dictionary<string, Event> passiveEventData = new Dictionary<string, Event>();
-        public Dictionary<string, Event> worldEventData = new Dictionary<string, Event>();
+        public Dictionary<string, WorldEvent> worldEventData = new Dictionary<string, WorldEvent>();
 
         //random id data
         public List<string> randomGenData = new List<string>();
@@ -65,7 +65,7 @@ namespace The_Mark
         private void loadEventData()
         {
             passiveEventData = JsonConvert.DeserializeObject<Dictionary<string, Event>>(File.ReadAllText(@"Content/Data/Events/passiveEventData.json"));
-            worldEventData = JsonConvert.DeserializeObject<Dictionary<string, Event>>(File.ReadAllText(@"Content/Data/Events/worldEventData.json"));
+            worldEventData = JsonConvert.DeserializeObject<Dictionary<string, WorldEvent>>(File.ReadAllText(@"Content/Data/Events/worldEventData.json"));
 
         }
 

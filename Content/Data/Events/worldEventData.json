@@ -1,12 +1,11 @@
 {
   "WorldEvent_EnemyEncounter": {
-    "thisEventTypeString": "World",
-    "thisEventBaseString": "CreatureEncounter",
+    "thisEventBaseTypeString": "CreatureEncounter",
     "percentChance": 10,
     "eventDescriptionText": [ "You've encountered a wild %enemy%" ],
     "eventOptions": [
       {
-        "optionType": "Fight",
+        "optionTypeString": "Fight",
         "optionTextDescriptionString": "Fight!",
         "optionRequiredSkillString": "",
         "optionRequiredSkillRankingString": "",
@@ -15,7 +14,7 @@
 
       },
       {
-        "optionType": "Approach",
+        "optionTypeString": "Approach",
         "optionTextDescriptionString": "Approach Them",
         "optionRequiredSkillString": "",
         "optionRequiredSkillRankingString": "",
@@ -24,7 +23,7 @@
 
       },
       {
-        "optionType": "Run",
+        "optionTypeString": "Run",
         "optionTextDescriptionString": "Run Away!",
         "optionRequiredSkillString": "",
         "optionRequiredSkillRankingString": "",
@@ -33,7 +32,7 @@
       }
 
     ],
-    "requiredTerrain": "",
-    "requiredRoad": "",
+    "requiredterrainString": "",
+    "requiredroadString": ""
   }
 }

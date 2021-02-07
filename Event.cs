@@ -7,13 +7,10 @@ namespace The_Mark
 {
     class Event
     {
-        //enums
-        public enum EventType { Passive, Character, World }
         //passive builders
         public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing}
         public enum PassiveEventSuccess { Success, Fail}
-        //world builders
-        public enum WorldEventBase { EnemyEncounter}
+
 
 
 
@@ -42,10 +39,9 @@ namespace The_Mark
         Boolean hasItem = false;
         Item.ItemType eventItemType;
         List<String> eventItemPosibilities = new List<String>();
-        List<String> thisEventTextPossibilities = new List<String>();
 
         //properties
-        EventType thisEventType;
+        List<String> thisEventTextPossibilities = new List<String>();
         PassiveEventBase thisEventBaseType;
         int eventChance;
         String thisEventText;
@@ -59,8 +55,7 @@ namespace The_Mark
         int eventStressEffect;
         int eventHealthEffect;
 
-        //world event properties
-        List<EventOption> eventOptions = new List<EventOption>();
+
 
 
         public void DetermineValidItem(DataManager datamanager,Random rando)
@@ -307,10 +302,6 @@ namespace The_Mark
             }
         }
 
-        public EventType GetEventType()
-        {
-            return thisEventType;
-        }
 
         public int ReturnEventChance()
         {
@@ -328,24 +319,16 @@ namespace The_Mark
         }
 
 
-        //world event builder
-        public Event(String thisEventTypeString,String thisEventBaseTypeString, int percentChance,String[] eventText,
-            EventOption[] eventoptions,String requiredterrainString,String requiredroadString)
-        {
-
-
-
-        }
+        
 
 
         //passive event builder
-        public Event(String thisEventTypeString, String thisEventBaseString, int percentChance, String[] eventText, 
+        public Event(String thisEventBaseString, int percentChance, String[] eventText, 
             String requiredSkillString, String requireSkillRankingString, String requiredTraitString,
             String itemType, String[] listOfItems, int stammin, int stammax, int stressmin, int stressmax, int healthmin, int healthmax,
             String requiredTerrain, String requiredRoad, int staminaeffect,int stresseffect, int healtheffect, int partysizemin)
         {
             //properties
-            thisEventType = (EventType) Enum.Parse(typeof(EventType), thisEventTypeString);
             thisEventBaseType = (PassiveEventBase) Enum.Parse(typeof(PassiveEventBase), thisEventBaseString);
             eventChance = percentChance;
             //text

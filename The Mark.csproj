@@ -139,6 +139,7 @@
     <Compile Include="UIMapSelection.cs" />
     <Compile Include="UIWindow.cs" />
     <Compile Include="Water.cs" />
+    <Compile Include="WorldEvent.cs" />
     <Compile Include="WorldMap.cs" />
   </ItemGroup>
   <ItemGroup>

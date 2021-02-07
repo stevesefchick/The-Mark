@@ -1,6 +1,5 @@
 {
   "PassiveEvent_FindItem": {
-    "thisEventTypeString": "Passive",
     "thisEventBaseString": "Find",
     "percentChance": 10,
     "eventText": [ "%char% found a %item%!", "%char% stumbled on a %item%!", "%char discovered a %item%!" ],

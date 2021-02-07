@@ -77,8 +77,6 @@ namespace The_Mark
             //check for passive events
             foreach (KeyValuePair<String, Event> e in datamanager.passiveEventData)
             {
-                if (e.Value.GetEventType() == Event.EventType.Passive)
-                {
                     //add any eligible people to event
                     Event newevent = CheckIfPeopleEligible(e.Value,player);
                     //determine the item
@@ -92,7 +90,6 @@ namespace The_Mark
                         possibleEvents.Add(newevent);
                     }
 
-                }
             }
 
             for (int i=0;i<possibleEvents.Count;++i)
