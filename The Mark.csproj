@@ -135,6 +135,7 @@
     <Compile Include="TravelRoute.cs" />
     <Compile Include="UI Helper.cs" />
     <Compile Include="UICharacterBubble.cs" />
+    <Compile Include="UIEventWindow.cs" />
     <Compile Include="UIHoverCard.cs" />
     <Compile Include="UIMapSelection.cs" />
     <Compile Include="UIWindow.cs" />

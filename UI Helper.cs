@@ -8,7 +8,7 @@ namespace The_Mark
     class UI_Helper
     {
         //enums
-        public enum UIWindowCreationTypes { CharacterStatWindow, CharacterEquipmentWindow, CharacterSkillsWindow, MapSelection }
+        public enum UIWindowCreationTypes { CharacterStatWindow, CharacterEquipmentWindow, CharacterSkillsWindow, MapSelection, EventWindow }
 
 
         //fonts
@@ -38,6 +38,8 @@ namespace The_Mark
         List<UICharacterBubble> uiCharacterBubbles = new List<UICharacterBubble>();
         //map selections
         List<UIMapSelection> uiMapSelections = new List<UIMapSelection>();
+        //event windows
+        List<UIEventWindow> uiEventWindows = new List<UIEventWindow>();
         //travel feed
         TravelFeed travelFeed = new TravelFeed();
         
@@ -103,6 +105,12 @@ namespace The_Mark
             {
                 uiMapSelections.Add(new UIMapSelection(position, UIMapSelection.MapSelectionType.TravelLoc));
             }
+        }
+
+        public void CreateEventUI(Vector2 position)
+        {
+
+
         }
 
         public void createHoverCard(UIHoverCard existingcard)
