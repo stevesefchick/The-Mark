@@ -19,6 +19,7 @@ namespace The_Mark
 
         //events
         Event currentEvent;
+        WorldEvent currentWorldEvent;
 
         //paths
         public List<TravelRoute> travelPath = new List<TravelRoute>();
@@ -73,6 +74,21 @@ namespace The_Mark
         void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype,Boolean isonroad)
         {
             List<Event> possibleEvents = new List<Event>();
+            List<WorldEvent> possibleWorldEvents = new List<WorldEvent>();
+
+            //check for world events
+            foreach (KeyValuePair<String, WorldEvent> e in datamanager.worldEventData)
+            {
+                WorldEvent worldevent = e.Value;
+                //determine the text used
+                worldevent.DetermineValidText(rando);
+                //check grid and other reqs, then add to possible events
+                if (worldevent.CheckForGridRequirements(terraintype,isonroad)==true)
+                {
+                    possibleWorldEvents.Add(worldevent);
+                }
+            }
+
 
             //check for passive events
             foreach (KeyValuePair<String, Event> e in datamanager.passiveEventData)
@@ -89,21 +105,38 @@ namespace The_Mark
                     {
                         possibleEvents.Add(newevent);
                     }
-
             }
 
-            for (int i=0;i<possibleEvents.Count;++i)
+
+            //check against list of posible world events
+            for (int i =0; i < possibleWorldEvents.Count;++i)
             {
                 int rand = rando.Next(0, 101);
-                if (rand < possibleEvents[i].ReturnEventChance())
+                if (rand < possibleWorldEvents[i].ReturnEventChance())
                 {
-                    currentEvent = possibleEvents[i];
-                    currentEvent.GetRandomAssociatedPerson(rando);
-                    currentEvent.UpdateTextForName();
-                    currentEvent.UpdateTextForItem();
+                    currentWorldEvent = possibleWorldEvents[i];
                     break;
                 }
 
+            }
+
+
+            //check against list of possible passive events, only if a world event isn't going on
+            if (currentWorldEvent == null)
+            {
+                for (int i = 0; i < possibleEvents.Count; ++i)
+                {
+                    int rand = rando.Next(0, 101);
+                    if (rand < possibleEvents[i].ReturnEventChance())
+                    {
+                        currentEvent = possibleEvents[i];
+                        currentEvent.GetRandomAssociatedPerson(rando);
+                        currentEvent.UpdateTextForName();
+                        currentEvent.UpdateTextForItem();
+                        break;
+                    }
+
+                }
             }
 
         }
@@ -116,12 +149,34 @@ namespace The_Mark
 
         void ConsoleLogEvent()
         {
-            Console.WriteLine(currentEvent.ReturnEventText());
+            if (currentEvent != null)
+            {
+                Console.WriteLine(currentEvent.ReturnEventText());
+            }
+            else if (currentWorldEvent != null)
+            {
+                Console.WriteLine(currentWorldEvent.ReturnEventText());
+            }
+
         }
+
 
         void ClearEvent()
         {
             currentEvent = null;
+        }
+
+        public Boolean IsPausedForEvent()
+        {
+            if (currentWorldEvent==null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
         }
 
         //returns minutes to tick down
@@ -130,20 +185,20 @@ namespace The_Mark
             int value = 0;
 
             //if at destination
-            if (currentTravelDistance == totalTravelDistance) 
+            if (currentTravelDistance == totalTravelDistance)
             {
                 //check for event
                 if (currentGridLocation != travelStartingLocation)
                 {
-                    CheckForValidEvents(player, datamanager, rando,gridTerrainType,isOnRoad);
+                    CheckForValidEvents(player, datamanager, rando, gridTerrainType, isOnRoad);
                 }
 
 
-                //if event
+                //if passive event
                 if (currentEvent != null)
                 {
                     currentEvent.PerformPassiveEventActivity(player, rando);
-                    CreateTravelFeed(currentEvent.ReturnEventText(),uihelper);
+                    CreateTravelFeed(currentEvent.ReturnEventText(), uihelper);
                     ConsoleLogEvent();
                     ClearEvent();
                 }
@@ -160,31 +215,33 @@ namespace The_Mark
 
 
                 //get next distance
-                currentGridLocation += new Point((int)(totalTravelDistance.X / 64), (int)(totalTravelDistance.Y / 64));
-                for (int i=0;i < travelPath.Count;++i)
-                {
-                    if (travelPath[i].routeLocation == currentGridLocation)
+                    currentGridLocation += new Point((int)(totalTravelDistance.X / 64), (int)(totalTravelDistance.Y / 64));
+                    for (int i = 0; i < travelPath.Count; ++i)
                     {
-                        totalTravelDistance = travelPath[i].getDirection();
-                        currentTravelDistance = Vector2.Zero;
-                        if (totalTravelDistance == Vector2.Zero)
+                        if (travelPath[i].routeLocation == currentGridLocation)
                         {
-                            value = -1;
+                            totalTravelDistance = travelPath[i].getDirection();
+                            currentTravelDistance = Vector2.Zero;
+                            if (totalTravelDistance == Vector2.Zero)
+                            {
+                                value = -1;
 
+                            }
+                            else
+                            {
+                                value = travelPath[i].GetTravelEstimate();
+                            }
+                            break;
                         }
-                        else
-                        {
-                            value = travelPath[i].GetTravelEstimate();
-                        }
-                        break;
                     }
-                }
+                
+                
             }
 
             //move
-            currentTravelDistance.X += totalTravelDistance.X / 64;
-            currentTravelDistance.Y += totalTravelDistance.Y / 64;
-
+                currentTravelDistance.X += totalTravelDistance.X / 64;
+                currentTravelDistance.Y += totalTravelDistance.Y / 64;
+            
 
 
             return value;

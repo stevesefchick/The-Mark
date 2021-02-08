@@ -22,6 +22,42 @@ namespace The_Mark
         int eventChance;
         List<String> thisEventTextPossibilities = new List<String>();
         List<EventOption> eventOptions = new List<EventOption>();
+        String thisEventText;
+
+        public Boolean CheckForGridRequirements(GridTile.GridTerrain terraintype, Boolean isonroad)
+        {
+            if (requiresRoad == false && requiresTerrain == false)
+            {
+                return true;
+            }
+            else if (requiresRoad == true && isonroadrequirement == isonroad)
+            {
+                return true;
+            }
+            else if (requiresTerrain == true && requiredTerrainType == terraintype)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public String ReturnEventText()
+        {
+            return thisEventText;
+        }
+
+        public void DetermineValidText(Random rando)
+        {
+            thisEventText = thisEventTextPossibilities[rando.Next(0, thisEventTextPossibilities.Count)];
+        }
+
+        public int ReturnEventChance()
+        {
+            return eventChance;
+        }
 
         //world event builder
         public WorldEvent(String thisEventBaseTypeString, int percentChance, String[] eventDescriptionText,

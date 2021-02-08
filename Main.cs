@@ -291,15 +291,18 @@ class GameMain : Game
 		//Travelling
 		if (currentGameState == GameState.Traveling)
 		{
-			int minutes = travelHandler.TravelTick(playerHandler,dataManager,rando,uiHelper,worldMap.GridNodeTerrainType(travelHandler.currentGridLocation),worldMap.IsGridRoad(travelHandler.currentGridLocation));
-			if (minutes == -1)
+			if (travelHandler.IsPausedForEvent() == false)
 			{
-				ChangeGameState(GameState.Idle);
-				travelHandler.TravelCleanup(worldMap);
-			}
-			else
-			{
-				time.timeTick(minutes);
+				int minutes = travelHandler.TravelTick(playerHandler, dataManager, rando, uiHelper, worldMap.GridNodeTerrainType(travelHandler.currentGridLocation), worldMap.IsGridRoad(travelHandler.currentGridLocation));
+				if (minutes == -1)
+				{
+					ChangeGameState(GameState.Idle);
+					travelHandler.TravelCleanup(worldMap);
+				}
+				else
+				{
+					time.timeTick(minutes);
+				}
 			}
 
         }
