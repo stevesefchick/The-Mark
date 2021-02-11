@@ -26,8 +26,14 @@ namespace The_Mark
         Rectangle uiWindowForegroundRightBorder = new Rectangle(50, 10, 10, 10);
 
 
-        public UIEventWindow()
+        public UIEventWindow(Vector2 position, UIEventWindowType windowtype)
         {
+            uiEventWindowPosition = Rectangle.Empty;
+            if (windowtype == UIEventWindowType.WorldEvent)
+            {
+            }
+            thisEventWindowType = windowtype;
+
 
         }
 
