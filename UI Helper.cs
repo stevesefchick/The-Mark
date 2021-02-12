@@ -107,9 +107,11 @@ namespace The_Mark
             }
         }
 
-        public void CreateEventUI(Vector2 position)
+        public void CreateEventUI()
         {
+            Vector2 position = new Vector2(backbuffersize.X / 2, backbuffersize.Y / 2);
 
+            uiEventWindows.Add(new UIEventWindow(position, UIEventWindow.UIEventWindowType.WorldEvent));
 
         }
 
@@ -687,6 +689,12 @@ namespace The_Mark
             for (int i = 0; i < uiCharacterBubbles.Count;++i)
             {
                 uiCharacterBubbles[i].Draw(spriteBatch, uiWindowSprites, healtbarSprites, getUIPosition(uiCharacterBubbles[i].bubblePosition, offset));
+            }
+
+            //event windows
+            for (int i =0; i <uiEventWindows.Count;++i)
+            {
+                uiEventWindows[i].Draw(spriteBatch,uiWindowSprites, mainFont, getUIPosition(uiEventWindows[i].uiEventWindowPosition, offset));
             }
 
             //travel feed

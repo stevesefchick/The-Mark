@@ -194,8 +194,13 @@ namespace The_Mark
                 }
 
 
+                //if world event
+                if (currentWorldEvent != null)
+                {
+                    uihelper.CreateEventUI();
+                }
                 //if passive event
-                if (currentEvent != null)
+                else if (currentEvent != null)
                 {
                     currentEvent.PerformPassiveEventActivity(player, rando);
                     CreateTravelFeed(currentEvent.ReturnEventText(), uihelper);
