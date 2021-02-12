@@ -107,11 +107,11 @@ namespace The_Mark
             }
         }
 
-        public void CreateEventUI()
+        public void CreateEventUI(WorldEvent worldevent)
         {
             Vector2 position = new Vector2(backbuffersize.X / 2, backbuffersize.Y / 2);
 
-            uiEventWindows.Add(new UIEventWindow(position, UIEventWindow.UIEventWindowType.WorldEvent));
+            uiEventWindows.Add(new UIEventWindow(position, UIEventWindow.UIEventWindowType.WorldEvent, worldevent,mainFont));
 
         }
 

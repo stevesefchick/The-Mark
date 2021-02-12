@@ -20,6 +20,7 @@ namespace The_Mark
         //properties
         WorldEventBase thisWorldEventBaseType;
         int eventChance;
+        String thisEventTitle;
         List<String> thisEventTextPossibilities = new List<String>();
         List<EventOption> eventOptions = new List<EventOption>();
         String thisEventText;
@@ -44,14 +45,43 @@ namespace The_Mark
             }
         }
 
-        public String ReturnEventText()
+        public int GetCountofEventOptions()
+        {
+            return eventOptions.Count;
+        }
+        public List<String> GetEventOptionsText()
+        {
+            List<String> eventnamelist = new List<String>();
+
+            for (int i =0;i<eventOptions.Count;++i)
+            {
+                eventnamelist.Add(eventOptions[i].ReturnOptionName());
+            }
+            return eventnamelist;
+        }
+
+
+        public String ReturnEventTitleText()
+        {
+            return thisEventTitle;
+        }
+
+        public String ReturnEventDescriptionText()
         {
             return thisEventText;
+        }
+
+        void UpdateTextForEnemy()
+        {
+            //update to include enemy
+            String newtext = thisEventText.Replace("%enemy%", "Bad Boy");
+            thisEventText = newtext;
         }
 
         public void DetermineValidText(Random rando)
         {
             thisEventText = thisEventTextPossibilities[rando.Next(0, thisEventTextPossibilities.Count)];
+            UpdateTextForEnemy();
         }
 
         public int ReturnEventChance()
@@ -60,12 +90,13 @@ namespace The_Mark
         }
 
         //world event builder
-        public WorldEvent(String thisEventBaseTypeString, int percentChance, String[] eventDescriptionText,
+        public WorldEvent(String thisEventBaseTypeString, int percentChance, String eventTitleText, String[] eventDescriptionText,
             EventOption[] eventoptions, String requiredterrainString, String requiredroadString)
         {
             thisWorldEventBaseType = (WorldEventBase)Enum.Parse(typeof(WorldEventBase), thisEventBaseTypeString);
             eventChance = percentChance;
             //text
+            thisEventTitle = eventTitleText;
             foreach (String t in eventDescriptionText)
             {
                 thisEventTextPossibilities.Add(t);

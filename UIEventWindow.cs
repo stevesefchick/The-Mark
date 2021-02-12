@@ -13,6 +13,10 @@ namespace The_Mark
         //properties
         UIEventWindowType thisEventWindowType;
         public Rectangle uiEventWindowPosition;
+        String titleText;
+        Vector2 titleTextOffset;
+        List<String> descriptionTextLines = new List<String>();
+        List<String> eventOptionTextLines = new List<String>();
         
 
         //rects
@@ -26,24 +30,102 @@ namespace The_Mark
         Rectangle uiWindowForegroundLeftBorder = new Rectangle(30, 10, 10, 10);
         Rectangle uiWindowForegroundRightBorder = new Rectangle(50, 10, 10, 10);
 
+        //const
+        const int maxLengthSize = 250;
 
-        public UIEventWindow(Vector2 position, UIEventWindowType windowtype)
+        public UIEventWindow(Vector2 position, UIEventWindowType windowtype, WorldEvent worldevent,SpriteFont font)
         {
-            uiEventWindowPosition = new Rectangle((int)position.X, (int)position.Y, 100, 100);
+            uiEventWindowPosition = new Rectangle((int)position.X, (int)position.Y, 0, 0);
             if (windowtype == UIEventWindowType.WorldEvent)
             {
-                //determine position offset
-                //scale window based on options
-                //populate options
+                titleText = worldevent.ReturnEventTitleText();
+                uiEventWindowPosition.Width= getCardWidth(font);
+                descriptionTextLines = getEventWindowDescriptionLines(worldevent.ReturnEventDescriptionText(), font);
+                eventOptionTextLines = worldevent.GetEventOptionsText();
+                uiEventWindowPosition.Height = GetCardHeight(descriptionTextLines.Count, worldevent.GetCountofEventOptions());
             }
             thisEventWindowType = windowtype;
 
 
         }
 
+
+        public List<String> getEventWindowDescriptionLines(String eventdescription, SpriteFont font)
+        {
+            List<String> list = new List<String>();
+            String basetext = eventdescription;
+            int maxlength = eventdescription.Length;
+            int currentpointer = 0;
+            int lastline = 0;
+
+            while (currentpointer < maxlength)
+            {
+                if ((basetext.Substring(currentpointer, 1) == " " &&
+                    font.MeasureString(basetext.Substring(lastline, currentpointer - lastline)).X > (uiEventWindowPosition.Width - 50)) ||
+                    currentpointer == (maxlength - 1))
+                {
+
+
+                    //end
+                    if (currentpointer == maxlength - 1)
+                    {
+                        list.Add(basetext.Substring(lastline));
+                    }
+                    else
+                    {
+                        list.Add(basetext.Substring(lastline, currentpointer - lastline));
+                        lastline = currentpointer + 1;
+                    }
+                }
+
+
+                currentpointer += 1;
+            }
+
+            return list;
+        }
+
+        int GetCardHeight(int countofdesclines, int countofoptions)
+        {
+            return ((countofdesclines * 25) + (countofoptions * 25) + 50);
+
+        }
+        int getCardWidth(SpriteFont font)
+        {
+            int buffer = 125;
+
+            if ((int)font.MeasureString(titleText).X < 100)
+            {
+                buffer += 75;
+            }
+
+            int length = ((int)font.MeasureString(titleText).X + buffer);
+            if (length > maxLengthSize)
+            {
+                length = maxLengthSize;
+            }
+
+            titleTextOffset = new Vector2(length / 2, 0);
+
+            return length;
+        }
+
+
         public void Draw(SpriteBatch spriteBatch, Texture2D uiSprite, SpriteFont font, Rectangle offset)
         {
-            //draw sprites
+            //draw title
+            spriteBatch.DrawString(font, titleText, new Vector2(offset.X + (uiEventWindowPosition.Width / 2), offset.Y), Color.White,0,titleTextOffset,1, SpriteEffects.None,0.87f);
+            //draw description
+            for (int i=0; i<descriptionTextLines.Count;++i)
+            {
+                spriteBatch.DrawString(font, descriptionTextLines[i], new Vector2(offset.X, offset.Y + 25 +  (i * 25)), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.87f);
+            }
+            //draw options
+            int starting = 50 + descriptionTextLines.Count * 25;
+            for (int i = 0; i < eventOptionTextLines.Count; ++i)
+            {
+                spriteBatch.DrawString(font, eventOptionTextLines[i], new Vector2(offset.X, offset.Y + starting + (i * 25)), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.87f);
+            }
 
 
             //draw fill

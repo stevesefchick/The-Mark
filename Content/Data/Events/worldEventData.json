@@ -2,6 +2,7 @@
   "WorldEvent_EnemyEncounter": {
     "thisEventBaseTypeString": "CreatureEncounter",
     "percentChance": 10,
+    "eventTitleText": "Creature Encounter",
     "eventDescriptionText": [ "You've encountered a wild %enemy%" ],
     "eventOptions": [
       {

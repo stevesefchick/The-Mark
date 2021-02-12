@@ -23,6 +23,11 @@ namespace The_Mark
         EventOptionType thisOptionType;
         String optionTextDescription;
 
+        public String ReturnOptionName()
+        {
+            return optionTextDescription;
+        }
+
         public EventOption(String optionTypeString, String optionTextDescriptionString,String optionRequiredSkillString, String optionRequiredSkillRankingString,
             String optionRequiredTraitString, String optionAvoidedTraitString)
         {

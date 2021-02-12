@@ -155,7 +155,7 @@ namespace The_Mark
             }
             else if (currentWorldEvent != null)
             {
-                Console.WriteLine(currentWorldEvent.ReturnEventText());
+                Console.WriteLine(currentWorldEvent.ReturnEventTitleText());
             }
 
         }
@@ -197,7 +197,7 @@ namespace The_Mark
                 //if world event
                 if (currentWorldEvent != null)
                 {
-                    uihelper.CreateEventUI();
+                    uihelper.CreateEventUI(currentWorldEvent);
                 }
                 //if passive event
                 else if (currentEvent != null)
