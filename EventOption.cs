@@ -29,6 +29,11 @@ namespace The_Mark
             isAvailable = availability;
         }
 
+        public Boolean IsAvailable()
+        {
+            return isAvailable;
+        }
+
         public String ReturnOptionName()
         {
             return optionTextDescription;

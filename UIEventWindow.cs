@@ -16,7 +16,8 @@ namespace The_Mark
         String titleText;
         Vector2 titleTextOffset;
         List<String> descriptionTextLines = new List<String>();
-        List<String> eventOptionTextLines = new List<String>();
+        List<EventOption> eventOptions = new List<EventOption>();
+
         
 
         //rects
@@ -41,7 +42,7 @@ namespace The_Mark
                 titleText = worldevent.ReturnEventTitleText();
                 uiEventWindowPosition.Width= getCardWidth(font);
                 descriptionTextLines = getEventWindowDescriptionLines(worldevent.ReturnEventDescriptionText(), font);
-                eventOptionTextLines = worldevent.GetEventOptionsText();
+                //eventOptionTextLines = worldevent.GetEventOptionsText();
                 uiEventWindowPosition.Height = GetCardHeight(descriptionTextLines.Count, worldevent.GetCountofEventOptions());
             }
             thisEventWindowType = windowtype;
@@ -122,9 +123,16 @@ namespace The_Mark
             }
             //draw options
             int starting = 50 + descriptionTextLines.Count * 25;
-            for (int i = 0; i < eventOptionTextLines.Count; ++i)
+            // for (int i = 0; i < eventOptionTextLines.Count; ++i)
+            for (int i = 0; i < eventOptions.Count; ++i)
             {
-                spriteBatch.DrawString(font, eventOptionTextLines[i], new Vector2(offset.X, offset.Y + starting + (i * 25)), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.87f);
+                Color optionColor = Color.White;
+                if (eventOptions[i].IsAvailable() == true)
+                {
+                    optionColor = Color.Gray;
+                }
+                    spriteBatch.DrawString(font, eventOptions[i].ReturnOptionName(), new Vector2(offset.X, offset.Y + starting + (i * 25)), optionColor, 0, Vector2.Zero, 1, SpriteEffects.None, 0.87f);
+                
             }
 
 

@@ -47,8 +47,11 @@ namespace The_Mark
             loadPersonData();
             loadEventData();
             loadRandomGenData();
-            Console.WriteLine("\n\nDataManager info loaded! \nfirstNames: " + firstNames.Count + ". \nlastNames: " + lastNames.Count + ". \ntownNames: " + townNames.Count + ". \nrandomGenData: " +
-                randomGenData.Count + ".\nroadNames: " + roadNames.Count + ".\nwaterNames: " + waterNames.Count + ".\ncreatureNames: " + creatureNames.Count + ".\n\n\n\n");
+            Console.WriteLine("\n\nDataManager info loaded! \nfirstNames: " + firstNames.Count + "\nlastNames: " + lastNames.Count + "\ntownNames: " + townNames.Count + "\nrandomGenData: " +
+                randomGenData.Count + "\nroadNames: " + roadNames.Count + "\nwaterNames: " + waterNames.Count + "\ncreatureNames: " + creatureNames.Count +
+                "\nPassive Events: " + passiveEventData.Count + "\nWorld Events: " + worldEventData.Count + 
+                "\nTrait Data: " + traitData.Count + "\nSkill Data: " + skillData.Count + 
+                "\nLoot Items: " + itemLootData.Count + "\nEquipment Items: " + itemEquipmentData.Count + "\nConsumable Items: " + itemConsumableData.Count + "\n\n\n\n");
         }
 
         private void loadNames()
