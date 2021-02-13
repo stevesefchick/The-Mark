@@ -60,6 +60,92 @@ namespace The_Mark
             return eventnamelist;
         }
 
+        public void DetermineEventOptionAvailability(PlayerHandler player)
+        {
+            for (int i =0;i < eventOptions.Count;++i)
+            {
+                if (eventOptions[i].DoesRequireSkill() == false && eventOptions[i].DoesRequireTrait() ==false)
+                {
+                    eventOptions[i].SetAvailability(true);
+                }
+                else
+                {
+                    if (eventOptions[i].DoesRequireSkill() == true && CheckForSkills(player.theMark,eventOptions[i]) == true)
+                    {
+                        eventOptions[i].SetAvailability(true);
+                    }
+                    else if (eventOptions[i].DoesRequireTrait() == true && CheckForTraits(player.theMark, eventOptions[i]) == true)
+                    {
+                        eventOptions[i].SetAvailability(true);
+                    }
+                }
+                
+
+            }
+
+
+        }
+
+
+        Boolean isSkillRankingBetterThan(PersonSkill.SkillRanking requirement, PersonSkill.SkillRanking personskillranking)
+        {
+            if (requirement == PersonSkill.SkillRanking.Apprentice)
+            {
+                return true;
+            }
+            else if (requirement == PersonSkill.SkillRanking.Novice
+                && (personskillranking == PersonSkill.SkillRanking.Novice || personskillranking == PersonSkill.SkillRanking.Master || personskillranking == PersonSkill.SkillRanking.Professional))
+            {
+                return true;
+            }
+            else if (requirement == PersonSkill.SkillRanking.Professional
+    && (personskillranking == PersonSkill.SkillRanking.Master || personskillranking == PersonSkill.SkillRanking.Professional))
+            {
+                return true;
+            }
+            else if (requirement == PersonSkill.SkillRanking.Master && personskillranking == PersonSkill.SkillRanking.Master)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        Boolean CheckForSkills(Person person, EventOption eo)
+        {
+                for (int i = 0; i < person.personSkills.Count; ++i)
+                {
+                    if (eo.ReturnRequiredSkillType() == person.personSkills[i].skillType &&
+                        isSkillRankingBetterThan(eo.ReturnRequiredSkillRanking(), person.personSkills[i].skillRanking) == true)
+                    {
+
+                        return true;
+                    }
+                }
+
+
+            return false;
+        }
+
+        Boolean CheckForTraits(Person person, EventOption eo)
+        {
+                for (int i = 0; i < person.personTraits.Count; ++i)
+                {
+                    if (eo.ReturnRequiredTraitType() == person.personTraits[i])
+                    {
+                        return true;
+                    }
+                    else if (eo.ReturnAvoidedTraitType() == person.personTraits[i])
+                    {
+                    return false;
+                    }
+                }
+
+
+            return false;
+        }
 
         public String ReturnEventTitleText()
         {

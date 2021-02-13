@@ -82,10 +82,13 @@ namespace The_Mark
                 WorldEvent worldevent = e.Value;
                 //determine the text used
                 worldevent.DetermineValidText(rando);
+                //check if the mark is eligible to make a decision for options
+                //party members aren't checked, but are affected by the mark's choice
+
                 //check grid and other reqs, then add to possible events
                 if (worldevent.CheckForGridRequirements(terraintype,isonroad)==true)
                 {
-                    possibleWorldEvents.Add(worldevent);
+                   possibleWorldEvents.Add(worldevent);
                 }
             }
 

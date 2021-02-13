@@ -22,11 +22,56 @@ namespace The_Mark
         //properties
         EventOptionType thisOptionType;
         String optionTextDescription;
+        Boolean isAvailable = false;
+
+        public void SetAvailability(Boolean availability)
+        {
+            isAvailable = availability;
+        }
 
         public String ReturnOptionName()
         {
             return optionTextDescription;
         }
+
+        #region trait and skill methods
+
+        public Boolean DoesRequireSkill()
+        {
+            return requiresSkill;
+        }
+        public Boolean DoesRequireTrait()
+        {
+            if (requiresTrait ==false && avoidsTrait == false)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public PersonSkill.SkillType ReturnRequiredSkillType()
+        {
+            return requiredSkill;
+        }
+
+        public Person.TraitType ReturnRequiredTraitType()
+        {
+            return requiredTraitType;
+        }
+        public Person.TraitType ReturnAvoidedTraitType()
+        {
+            return avoidedTraitType;
+        }
+
+        public PersonSkill.SkillRanking ReturnRequiredSkillRanking()
+        {
+            return requiredRanking;
+        }
+
+        #endregion 
 
         public EventOption(String optionTypeString, String optionTextDescriptionString,String optionRequiredSkillString, String optionRequiredSkillRankingString,
             String optionRequiredTraitString, String optionAvoidedTraitString)
