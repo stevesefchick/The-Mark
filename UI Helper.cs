@@ -565,6 +565,22 @@ namespace The_Mark
                 //Hovercards
                 hoverCards.Clear();
 
+                //UI Event Windows
+                for (int i = 0; i < uiEventWindows.Count; ++i)
+                {
+                    foreach (KeyValuePair<Rectangle, EventOption> o in uiEventWindows[i].eventOptionCollisions)
+                    {
+                        if (mouse.leftMouseClickPosition.Intersects(getUIPosition(o.Key, offset))
+                            && o.Value.IsAvailable() == true)
+                        {
+                            //do a thing
+                            uiEventWindows.Clear();
+                        }
+                    }
+
+
+                }
+
                 //UI Map Selections
                 for (int i =0;i < uiMapSelections.Count;++i)
                 {
@@ -578,6 +594,7 @@ namespace The_Mark
                     else if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].infoCollision))
                     {
                         //do an info thing
+                        
                     }
                     else
                     {

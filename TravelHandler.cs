@@ -84,7 +84,7 @@ namespace The_Mark
                 worldevent.DetermineValidText(rando);
                 //check if the mark is eligible to make a decision for options
                 //party members aren't checked, but are affected by the mark's choice
-
+                worldevent.DetermineEventOptionAvailability(player);
                 //check grid and other reqs, then add to possible events
                 if (worldevent.CheckForGridRequirements(terraintype,isonroad)==true)
                 {

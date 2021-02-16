@@ -17,7 +17,8 @@ namespace The_Mark
         Vector2 titleTextOffset;
         List<String> descriptionTextLines = new List<String>();
         List<EventOption> eventOptions = new List<EventOption>();
-
+        //collisions
+        public Dictionary<Rectangle, EventOption> eventOptionCollisions = new Dictionary<Rectangle, EventOption>();
         
 
         //rects
@@ -40,18 +41,29 @@ namespace The_Mark
             if (windowtype == UIEventWindowType.WorldEvent)
             {
                 titleText = worldevent.ReturnEventTitleText();
+                eventOptions = worldevent.GetEventOptions();
                 uiEventWindowPosition.Width= getCardWidth(font);
                 descriptionTextLines = getEventWindowDescriptionLines(worldevent.ReturnEventDescriptionText(), font);
-                //eventOptionTextLines = worldevent.GetEventOptionsText();
                 uiEventWindowPosition.Height = GetCardHeight(descriptionTextLines.Count, worldevent.GetCountofEventOptions());
+                PopulateEventOptionCollisions();
             }
             thisEventWindowType = windowtype;
 
 
         }
 
+        void PopulateEventOptionCollisions()
+        {
+            int starting = 50 + descriptionTextLines.Count * 25;
 
-        public List<String> getEventWindowDescriptionLines(String eventdescription, SpriteFont font)
+            for (int i =0; i < eventOptions.Count;++i)
+            {
+                eventOptionCollisions.Add(new Rectangle(uiEventWindowPosition.X, uiEventWindowPosition.Y + starting + (i * 25), uiEventWindowPosition.Width, 25), eventOptions[i]);
+            }
+
+        }
+
+        List<String> getEventWindowDescriptionLines(String eventdescription, SpriteFont font)
         {
             List<String> list = new List<String>();
             String basetext = eventdescription;
@@ -127,7 +139,7 @@ namespace The_Mark
             for (int i = 0; i < eventOptions.Count; ++i)
             {
                 Color optionColor = Color.White;
-                if (eventOptions[i].IsAvailable() == true)
+                if (eventOptions[i].IsAvailable() == false)
                 {
                     optionColor = Color.Gray;
                 }

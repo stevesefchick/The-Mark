@@ -49,15 +49,9 @@ namespace The_Mark
         {
             return eventOptions.Count;
         }
-        public List<String> GetEventOptionsText()
+        public List<EventOption> GetEventOptions()
         {
-            List<String> eventnamelist = new List<String>();
-
-            for (int i =0;i<eventOptions.Count;++i)
-            {
-                eventnamelist.Add(eventOptions[i].ReturnOptionName());
-            }
-            return eventnamelist;
+            return eventOptions;
         }
 
         public void DetermineEventOptionAvailability(PlayerHandler player)

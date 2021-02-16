@@ -3,7 +3,7 @@
     "thisEventBaseTypeString": "CreatureEncounter",
     "percentChance": 10,
     "eventTitleText": "Creature Encounter",
-    "eventDescriptionText": [ "You've encountered a wild %enemy%" ],
+    "eventDescriptionText": [ "You've encountered a wild %enemy%." ],
     "eventOptions": [
       {
         "optionTypeString": "Fight",
