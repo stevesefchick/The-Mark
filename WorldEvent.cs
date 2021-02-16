@@ -24,6 +24,7 @@ namespace The_Mark
         List<String> thisEventTextPossibilities = new List<String>();
         List<EventOption> eventOptions = new List<EventOption>();
         String thisEventText;
+        Creature associatedCreature;
 
         public Boolean CheckForGridRequirements(GridTile.GridTerrain terraintype, Boolean isonroad)
         {
@@ -43,6 +44,22 @@ namespace The_Mark
             {
                 return false;
             }
+        }
+
+        //checks for creatures on this tile if applicable
+        //if not creature related, returns true
+        public Boolean ValidCreatureIfApplicable()
+        {
+            if (thisWorldEventBaseType == WorldEventBase.CreatureEncounter)
+            {
+                return true;
+            }
+            else
+            {
+                return true;
+            }    
+
+
         }
 
         public int GetCountofEventOptions()

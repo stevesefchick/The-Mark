@@ -1836,6 +1836,38 @@ namespace The_Mark
 
 		}
 
+		//returns a list of creatures that can appear on a specific tile
+		public List<Creature> ReturnListOfCreaturesOnTile(Point loc)
+        {
+			List<Creature> possiblecreatures = new List<Creature>();
+			GridTile.GridNode thisNode = IsGridNodeType(loc);
+
+			for (int i = 0; i < creatures.Count; ++i)
+			{
+				if (creatures[i].terrainTypeHome == CheckForTerrainsOnTiles(loc))
+                {
+					possiblecreatures.Add(creatures[i]);
+                }
+
+			}
+
+
+			return possiblecreatures;
+        }
+
+		Terrain.TerrainType CheckForTerrainsOnTiles(Point loc)
+        {
+			for (int i =0;i<terrains.Count;++i)
+            {
+				if (divideBy64ToPoint(terrains[i].returnTerrainLocation()) == loc)
+                {
+					return terrains[i].thisTerrainType;
+                }
+            }
+
+			return Terrain.TerrainType.Grass;
+        }
+
 		void LookForFloraAvailability(Random rando)
         {
 			int randchance = 6;
@@ -2456,6 +2488,16 @@ namespace The_Mark
 
 			return number;
 		}
+
+
+		Point divideBy64ToPoint(Vector2 number)
+		{
+			number.X /= 64;
+			number.Y /= 64;
+
+			return new Point((int)number.X,(int)number.Y);
+		}
+
 
 		Vector2 getNewGridPlaceLocation(int maxDistanceFromSource,Vector2 origin,Random rando, int maxDistanceFromNearby)
         {
