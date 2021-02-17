@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,11 +49,20 @@ namespace The_Mark
 
         //checks for creatures on this tile if applicable
         //if not creature related, returns true
-        public Boolean ValidCreatureIfApplicable()
+        public Boolean ValidCreatureIfApplicable(WorldMap world, Point loc, Random rando)
         {
             if (thisWorldEventBaseType == WorldEventBase.CreatureEncounter)
             {
-                return true;
+                associatedCreature = world.ReturnCreatureOnTile(loc, rando);
+
+                if (associatedCreature == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
             else
             {

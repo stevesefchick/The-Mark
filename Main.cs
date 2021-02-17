@@ -293,7 +293,7 @@ class GameMain : Game
 		{
 			if (travelHandler.IsPausedForEvent() == false)
 			{
-				int minutes = travelHandler.TravelTick(playerHandler, dataManager, rando, uiHelper, worldMap.GridNodeTerrainType(travelHandler.currentGridLocation), worldMap.IsGridRoad(travelHandler.currentGridLocation));
+				int minutes = travelHandler.TravelTick(playerHandler, dataManager, rando, uiHelper, worldMap.GridNodeTerrainType(travelHandler.currentGridLocation), worldMap.IsGridRoad(travelHandler.currentGridLocation),worldMap);
 				if (minutes == -1)
 				{
 					ChangeGameState(GameState.Idle);

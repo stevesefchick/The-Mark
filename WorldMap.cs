@@ -1837,14 +1837,14 @@ namespace The_Mark
 		}
 
 		//returns a list of creatures that can appear on a specific tile
-		public List<Creature> ReturnListOfCreaturesOnTile(Point loc)
+		public Creature ReturnCreatureOnTile(Point loc,Random rando)
         {
 			List<Creature> possiblecreatures = new List<Creature>();
-			GridTile.GridNode thisNode = IsGridNodeType(loc);
 
 			for (int i = 0; i < creatures.Count; ++i)
 			{
-				if (creatures[i].terrainTypeHome == CheckForTerrainsOnTiles(loc))
+				if (creatures[i].terrainTypeHome == CheckForTerrainsOnTiles(loc) ||
+					CheckForPlaceOnTile(loc,creatures[i].placeIDHome))
                 {
 					possiblecreatures.Add(creatures[i]);
                 }
@@ -1852,7 +1852,21 @@ namespace The_Mark
 			}
 
 
-			return possiblecreatures;
+
+			return possiblecreatures[rando.Next(0,possiblecreatures.Count)];
+        }
+
+		Boolean CheckForPlaceOnTile(Point loc, String id)
+        {
+			for (int i =0;i < places.Count;++i)
+            {
+				if (divideBy64ToPoint(places[i].placeLocation) == loc &&
+					id == places[i].placeID)
+                {
+					return true;
+                }
+            }
+			return false;
         }
 
 		Terrain.TerrainType CheckForTerrainsOnTiles(Point loc)

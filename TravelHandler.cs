@@ -71,7 +71,7 @@ namespace The_Mark
             return (e);
         }
 
-        void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype,Boolean isonroad)
+        void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype,Boolean isonroad, WorldMap world)
         {
             List<Event> possibleEvents = new List<Event>();
             List<WorldEvent> possibleWorldEvents = new List<WorldEvent>();
@@ -80,16 +80,19 @@ namespace The_Mark
             foreach (KeyValuePair<String, WorldEvent> e in datamanager.worldEventData)
             {
                 WorldEvent worldevent = e.Value;
-                //determine the text used
-                worldevent.DetermineValidText(rando);
                 //check if the mark is eligible to make a decision for options
                 //party members aren't checked, but are affected by the mark's choice
                 worldevent.DetermineEventOptionAvailability(player);
                 //check grid and other reqs, then add to possible events
-                if (worldevent.CheckForGridRequirements(terraintype,isonroad)==true)
+                if (worldevent.CheckForGridRequirements(terraintype,isonroad)==true &&
+                    worldevent.ValidCreatureIfApplicable(world,currentGridLocation,rando) == true)
                 {
-                   possibleWorldEvents.Add(worldevent);
+                    //determine the text used
+                    worldevent.DetermineValidText(rando);
+                    //add to possible events
+                    possibleWorldEvents.Add(worldevent);
                 }
+
             }
 
 
@@ -183,7 +186,7 @@ namespace The_Mark
         }
 
         //returns minutes to tick down
-        public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando, UI_Helper uihelper,GridTile.GridTerrain gridTerrainType, Boolean isOnRoad)
+        public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando, UI_Helper uihelper,GridTile.GridTerrain gridTerrainType, Boolean isOnRoad,WorldMap world)
         {
             int value = 0;
 
@@ -193,7 +196,7 @@ namespace The_Mark
                 //check for event
                 if (currentGridLocation != travelStartingLocation)
                 {
-                    CheckForValidEvents(player, datamanager, rando, gridTerrainType, isOnRoad);
+                    CheckForValidEvents(player, datamanager, rando, gridTerrainType, isOnRoad,world);
                 }
 
 
