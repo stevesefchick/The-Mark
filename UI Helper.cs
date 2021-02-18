@@ -575,6 +575,7 @@ namespace The_Mark
                         {
                             //do a thing
                             uiEventWindows.Clear();
+                            travel.ClearWorldEvent();
                         }
                     }
 

@@ -172,6 +172,11 @@ namespace The_Mark
             currentEvent = null;
         }
 
+        public void ClearWorldEvent()
+        {
+            currentWorldEvent = null;
+        }
+
         public Boolean IsPausedForEvent()
         {
             if (currentWorldEvent==null)
