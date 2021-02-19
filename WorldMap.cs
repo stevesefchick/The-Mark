@@ -1946,6 +1946,8 @@ namespace The_Mark
 						{
 							possibleSpecies.Add(Flora.FloraSpecies.Chillcap);
 							possibleSpecies.Add(Flora.FloraSpecies.FlameLily);
+							possibleSpecies.Add(Flora.FloraSpecies.Dankweed);
+
 
 						}
 						//swamp
@@ -1953,6 +1955,7 @@ namespace The_Mark
 						{
 							possibleSpecies.Add(Flora.FloraSpecies.Bramblebush);
 							possibleSpecies.Add(Flora.FloraSpecies.Dingushroom);
+							possibleSpecies.Add(Flora.FloraSpecies.Dankweed);
 
 						}
 

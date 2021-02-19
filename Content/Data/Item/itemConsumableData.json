@@ -8,7 +8,7 @@
     "maxDropQuantity": 3,
     "recoverytype": "Stamina",
     "recoveryamount": 6,
-    "amountvariance":3
+    "amountvariance": 3
   },
   "Tishelberry": {
     "itemName": "Tishelberry",
@@ -152,5 +152,16 @@
     "recoverytype": "Health",
     "recoveryamount": -5,
     "amountvariance": 2
+  },
+  "Dankweed Clove": {
+    "itemName": "Dankweed Clove",
+    "itemDescription": "A clove from a Dankweed",
+    "itemValue": 25,
+    "canStack": true,
+    "dropRate": 5,
+    "maxDropQuantity": 3,
+    "recoverytype": "Stress",
+    "recoveryamount": 10,
+    "amountvariance": 5
   }
 }

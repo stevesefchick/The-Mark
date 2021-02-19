@@ -26,6 +26,7 @@ namespace The_Mark
         FlameLily,
         FloatingAqualily,
         Dandytiger,
+        Dankweed,
         //algae
         LakeWeed,
         Stinkmoss,
@@ -108,6 +109,10 @@ namespace The_Mark
             {
                 possibleLoot.Add(dataManager.itemConsumableData["Dingushroom Cap"]);
             }
+            else if (thisFloraSpecies == FloraSpecies.Dankweed)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Dankweed Clove"]);
+            }
             for (int i = 0; i < possibleLoot.Count; ++i)
             {
                 int rand = rando.Next(1, 101);
@@ -166,6 +171,22 @@ namespace The_Mark
                 hoursAvailable.Add(1);
                 hoursAvailable.Add(2);
                 hoursAvailable.Add(3);
+            }
+            else if (thisSpecies == FloraSpecies.Dankweed)
+            {
+                thisFloraType = FloraType.Flower;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Flame");
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Dew");
+                monthsAvailable.Add("Light");
+
+                hoursAvailable.Add(4);
+                hoursAvailable.Add(5);
+                hoursAvailable.Add(16);
+                hoursAvailable.Add(17);
             }
             else if (thisSpecies == FloraSpecies.Tishelbush)
             {
