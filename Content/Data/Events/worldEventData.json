@@ -11,7 +11,17 @@
         "optionRequiredSkillString": "",
         "optionRequiredSkillRankingString": "",
         "optionRequiredTraitString": "",
-        "optionAvoidedTraitString": ""
+        "optionAvoidedTraitString": "",
+        "eventoutcomes": [
+          {
+            "outcomename": "Success",
+            "outcomeaction": "Fight"
+          },
+          {
+            "outcomename": "Fail",
+            "outcomeaction": "CreatureFlee"
+          }
+        ]
 
       },
       {
@@ -20,7 +30,17 @@
         "optionRequiredSkillString": "",
         "optionRequiredSkillRankingString": "",
         "optionRequiredTraitString": "",
-        "optionAvoidedTraitString": ""
+        "optionAvoidedTraitString": "",
+        "eventoutcomes": [
+          {
+            "outcomename": "Success",
+            "outcomeaction": "CreaturePet"
+          },
+          {
+            "outcomename": "Fail",
+            "outcomeaction": "CreatureFlee"
+          }
+        ]
 
       },
       {
@@ -29,7 +49,17 @@
         "optionRequiredSkillString": "",
         "optionRequiredSkillRankingString": "",
         "optionRequiredTraitString": "",
-        "optionAvoidedTraitString": ""
+        "optionAvoidedTraitString": "",
+        "eventoutcomes": [
+          {
+            "outcomename": "Success",
+            "outcomeaction": "Run"
+          },
+          {
+            "outcomename": "Fail",
+            "outcomeaction": "Fight"
+          }
+        ]
       }
 
     ],

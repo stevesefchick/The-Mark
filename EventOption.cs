@@ -10,6 +10,7 @@ namespace The_Mark
         //enums
         public enum EventOptionType { Fight, Run, Approach }
 
+
         //requirements
         Boolean requiresSkill = false;
         PersonSkill.SkillType requiredSkill;
@@ -23,6 +24,9 @@ namespace The_Mark
         EventOptionType thisOptionType;
         String optionTextDescription;
         Boolean isAvailable = false;
+        List<EventOptionOutcomes> eventOptionOutcomes = new List<EventOptionOutcomes>();
+
+
 
         public void SetAvailability(Boolean availability)
         {
@@ -79,7 +83,7 @@ namespace The_Mark
         #endregion 
 
         public EventOption(String optionTypeString, String optionTextDescriptionString,String optionRequiredSkillString, String optionRequiredSkillRankingString,
-            String optionRequiredTraitString, String optionAvoidedTraitString)
+            String optionRequiredTraitString, String optionAvoidedTraitString, EventOptionOutcomes[] eventoutcomes)
         {
             thisOptionType = (EventOptionType)Enum.Parse(typeof(EventOptionType), optionTypeString);
             optionTextDescription = optionTextDescriptionString;
@@ -104,7 +108,34 @@ namespace The_Mark
 
             }
 
+            //outcomes
+            foreach (EventOptionOutcomes o in eventoutcomes)
+            {
+                eventOptionOutcomes.Add(o);
+            }
+
 
         }
+    }
+
+    class EventOptionOutcomes
+    {
+        //enums
+        public enum OptionOutcomes { Success, Fail }
+        public enum OptionOutcomeAction { Fight, CreatureFlee, CreaturePet, Run }
+
+        //properties
+        OptionOutcomes thisOptionOutcome;
+        OptionOutcomeAction thisOptionOutcomeAction;
+
+
+        public EventOptionOutcomes(String outcomename, String outcomeaction)
+        {
+            thisOptionOutcome = (OptionOutcomes)Enum.Parse(typeof(OptionOutcomes), outcomename);
+            thisOptionOutcomeAction = (OptionOutcomeAction)Enum.Parse(typeof(OptionOutcomeAction), outcomeaction);
+
+
+        }
+
     }
 }
