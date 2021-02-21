@@ -80,7 +80,44 @@ namespace The_Mark
             return requiredRanking;
         }
 
-        #endregion 
+        #endregion
+
+        #region perform next steps based on selection
+        EventOptionOutcomes CheckForSuccessOrFail(PlayerHandler player)
+        {
+            Boolean isSuccess = false;
+
+            //do checks here
+            isSuccess = true;
+
+
+            for (int i =0;i<eventOptionOutcomes.Count;++i)
+            {
+                if (eventOptionOutcomes[i].thisOptionOutcome == EventOptionOutcomes.OptionOutcome.Success
+                    && isSuccess==true)
+                {
+                    return eventOptionOutcomes[i];
+                }
+                else if (isSuccess == false)
+                {
+                    return eventOptionOutcomes[i];
+                }
+
+            }
+
+
+
+            //if nothing's picked up
+            return eventOptionOutcomes[0];
+
+        }
+
+        public void DetermineEventOutcome(PlayerHandler player)
+        {
+            EventOptionOutcomes thisOutcome = CheckForSuccessOrFail(player);
+        }
+
+        #endregion
 
         public EventOption(String optionTypeString, String optionTextDescriptionString,String optionRequiredSkillString, String optionRequiredSkillRankingString,
             String optionRequiredTraitString, String optionAvoidedTraitString, EventOptionOutcomes[] eventoutcomes)
@@ -121,18 +158,23 @@ namespace The_Mark
     class EventOptionOutcomes
     {
         //enums
-        public enum OptionOutcomes { Success, Fail }
+        public enum OptionOutcome { Success, Fail }
         public enum OptionOutcomeAction { Fight, CreatureFlee, CreaturePet, Run }
+        public enum NextTransition { Combat, BackToTravelSilent, PassiveEvent }
 
         //properties
-        OptionOutcomes thisOptionOutcome;
+        public OptionOutcome thisOptionOutcome;
         OptionOutcomeAction thisOptionOutcomeAction;
+        NextTransition thisNextTransition;
 
 
-        public EventOptionOutcomes(String outcomename, String outcomeaction)
+
+
+        public EventOptionOutcomes(String outcomename, String outcomeaction, String nexttransition)
         {
-            thisOptionOutcome = (OptionOutcomes)Enum.Parse(typeof(OptionOutcomes), outcomename);
+            thisOptionOutcome = (OptionOutcome)Enum.Parse(typeof(OptionOutcome), outcomename);
             thisOptionOutcomeAction = (OptionOutcomeAction)Enum.Parse(typeof(OptionOutcomeAction), outcomeaction);
+            thisNextTransition = (NextTransition)Enum.Parse(typeof(NextTransition), nexttransition);
 
 
         }

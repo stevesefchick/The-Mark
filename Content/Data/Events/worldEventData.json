@@ -15,11 +15,15 @@
         "eventoutcomes": [
           {
             "outcomename": "Success",
-            "outcomeaction": "Fight"
+            "outcomeaction": "Fight",
+            "nexttransition":  "Combat"
+
           },
           {
             "outcomename": "Fail",
-            "outcomeaction": "CreatureFlee"
+            "outcomeaction": "CreatureFlee",
+            "nexttransition": "PassiveEvent"
+
           }
         ]
 
@@ -34,11 +38,15 @@
         "eventoutcomes": [
           {
             "outcomename": "Success",
-            "outcomeaction": "CreaturePet"
+            "outcomeaction": "CreaturePet",
+            "nexttransition": "PassiveEvent"
+
           },
           {
             "outcomename": "Fail",
-            "outcomeaction": "CreatureFlee"
+            "outcomeaction": "CreatureFlee",
+            "nexttransition": "PassiveEvent"
+
           }
         ]
 
@@ -53,11 +61,15 @@
         "eventoutcomes": [
           {
             "outcomename": "Success",
-            "outcomeaction": "Run"
+            "outcomeaction": "Run",
+            "nexttransition": "PassiveEvent"
+
           },
           {
             "outcomename": "Fail",
-            "outcomeaction": "Fight"
+            "outcomeaction": "Fight",
+            "nexttransition": "Combat"
+
           }
         ]
       }

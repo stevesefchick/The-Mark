@@ -573,7 +573,8 @@ namespace The_Mark
                         if (mouse.leftMouseClickPosition.Intersects(getUIPosition(o.Key, offset))
                             && o.Value.IsAvailable() == true)
                         {
-                            //do a thing
+                            //determine event outcome
+                            o.Value.DetermineEventOutcome(party);
                             uiEventWindows.Clear();
                             travel.ClearWorldEvent();
                         }
