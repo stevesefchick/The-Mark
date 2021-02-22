@@ -1939,6 +1939,7 @@ namespace The_Mark
 							possibleSpecies.Add(Flora.FloraSpecies.Tishelbush);
 							possibleSpecies.Add(Flora.FloraSpecies.FiremelonBush);
 							possibleSpecies.Add(Flora.FloraSpecies.FlameLily);
+							possibleSpecies.Add(Flora.FloraSpecies.SweetWheat);
 
 						}
 						//hills

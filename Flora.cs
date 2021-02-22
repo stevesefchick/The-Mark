@@ -8,7 +8,7 @@ namespace The_Mark
     class Flora
     {
         //enums
-        public enum FloraType { Tree,Bush,Fungus,Flower,Algae }
+        public enum FloraType { Tree,Bush,Fungus,Flower,Algae,Grass }
         public enum FloraSpecies { 
         //trees
         MoonTree,
@@ -26,10 +26,12 @@ namespace The_Mark
         FlameLily,
         FloatingAqualily,
         Dandytiger,
-        Dankweed,
         //algae
         LakeWeed,
         Stinkmoss,
+        //grass
+        Dankweed,
+        SweetWheat
 
         }
 
@@ -113,6 +115,10 @@ namespace The_Mark
             {
                 possibleLoot.Add(dataManager.itemConsumableData["Dankweed Clove"]);
             }
+            else if (thisFloraSpecies == FloraSpecies.SweetWheat)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Sweat Wheat Seeds"]);
+            }
             for (int i = 0; i < possibleLoot.Count; ++i)
             {
                 int rand = rando.Next(1, 101);
@@ -172,9 +178,23 @@ namespace The_Mark
                 hoursAvailable.Add(2);
                 hoursAvailable.Add(3);
             }
+            else if (thisSpecies == FloraSpecies.SweetWheat)
+            {
+                thisFloraType = FloraType.Grass;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Dew");
+                monthsAvailable.Add("Light");
+
+                for (int i = 0; i < 24; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+            }
             else if (thisSpecies == FloraSpecies.Dankweed)
             {
-                thisFloraType = FloraType.Flower;
+                thisFloraType = FloraType.Grass;
                 thisFloraSpecies = thisSpecies;
 
                 monthsAvailable.Add("Flame");

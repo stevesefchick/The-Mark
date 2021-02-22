@@ -163,5 +163,16 @@
     "recoverytype": "Stress",
     "recoveryamount": 10,
     "amountvariance": 5
+  },
+  "Sweet Wheat Seeds": {
+    "itemName": "Sweet Wheat Seeds",
+    "itemDescription": "A pile of seeds from Sweat Wheat",
+    "itemValue": 5,
+    "canStack": true,
+    "dropRate": 10,
+    "maxDropQuantity": 4,
+    "recoverytype": "Stamina",
+    "recoveryamount": 2,
+    "amountvariance": 1
   }
 }
