@@ -25,7 +25,7 @@ namespace The_Mark
         String optionTextDescription;
         Boolean isAvailable = false;
         List<EventOptionOutcomes> eventOptionOutcomes = new List<EventOptionOutcomes>();
-
+        int optionBaseSuccessRate;
 
 
         public void SetAvailability(Boolean availability)
@@ -83,12 +83,35 @@ namespace The_Mark
         #endregion
 
         #region perform next steps based on selection
-        EventOptionOutcomes CheckForSuccessOrFail(PlayerHandler player)
+        EventOptionOutcomes CheckForSuccessOrFail(PlayerHandler player,Random rando)
         {
             Boolean isSuccess = false;
 
             //do checks here
-            isSuccess = true;
+            #region check for success
+            int modifiedchance = optionBaseSuccessRate;
+
+
+
+
+
+
+
+
+
+
+
+
+            if (rando.Next(1, 101) > modifiedchance)
+            {
+                isSuccess = true;
+            }
+            else
+            {
+                isSuccess = false;
+            }
+            #endregion
+
 
 
             for (int i =0;i<eventOptionOutcomes.Count;++i)
@@ -112,18 +135,40 @@ namespace The_Mark
 
         }
 
-        public void DetermineEventOutcome(PlayerHandler player)
+        public void DetermineEventOutcome(PlayerHandler player,GameMain game, TravelHandler travel,Random rando)
         {
-            EventOptionOutcomes thisOutcome = CheckForSuccessOrFail(player);
+            //determine success or failure of the outcome and return the outcome
+            EventOptionOutcomes thisOutcome = CheckForSuccessOrFail(player,rando);
+
+
+            //take actions depending on what the event outcome's transition is
+            if (thisOutcome.thisNextTransition == EventOptionOutcomes.NextTransition.BackToTravelSilent)
+            {
+                travel.ClearWorldEvent();
+            }
+            else if (thisOutcome.thisNextTransition == EventOptionOutcomes.NextTransition.Combat)
+            {
+                //TODO: Add Combat
+                //game.ChangeGameState(GameMain.GameState.Combat);
+                travel.ClearWorldEvent();
+
+            }
+            else if (thisOutcome.thisNextTransition == EventOptionOutcomes.NextTransition.PassiveEvent)
+            {
+                //TODO: Add populating a passive event
+                travel.ClearWorldEvent();
+
+            }
         }
 
         #endregion
 
         public EventOption(String optionTypeString, String optionTextDescriptionString,String optionRequiredSkillString, String optionRequiredSkillRankingString,
-            String optionRequiredTraitString, String optionAvoidedTraitString, EventOptionOutcomes[] eventoutcomes)
+            String optionRequiredTraitString, String optionAvoidedTraitString, int basesuccessrate, EventOptionOutcomes[] eventoutcomes)
         {
             thisOptionType = (EventOptionType)Enum.Parse(typeof(EventOptionType), optionTypeString);
             optionTextDescription = optionTextDescriptionString;
+            optionBaseSuccessRate = basesuccessrate;
 
             if (optionRequiredSkillString != "")
             {
@@ -165,7 +210,7 @@ namespace The_Mark
         //properties
         public OptionOutcome thisOptionOutcome;
         OptionOutcomeAction thisOptionOutcomeAction;
-        NextTransition thisNextTransition;
+        public NextTransition thisNextTransition;
 
 
 

@@ -574,9 +574,9 @@ namespace The_Mark
                             && o.Value.IsAvailable() == true)
                         {
                             //determine event outcome
-                            o.Value.DetermineEventOutcome(party);
+                            o.Value.DetermineEventOutcome(party,game,travel);
                             uiEventWindows.Clear();
-                            travel.ClearWorldEvent();
+                            //travel.ClearWorldEvent();
                         }
                     }
 

@@ -12,11 +12,12 @@
         "optionRequiredSkillRankingString": "",
         "optionRequiredTraitString": "",
         "optionAvoidedTraitString": "",
+        "basesuccessrate": 90,
         "eventoutcomes": [
           {
             "outcomename": "Success",
             "outcomeaction": "Fight",
-            "nexttransition":  "Combat"
+            "nexttransition": "Combat"
 
           },
           {
@@ -35,6 +36,7 @@
         "optionRequiredSkillRankingString": "",
         "optionRequiredTraitString": "",
         "optionAvoidedTraitString": "",
+        "basesuccessrate": 50,
         "eventoutcomes": [
           {
             "outcomename": "Success",
@@ -58,6 +60,7 @@
         "optionRequiredSkillRankingString": "",
         "optionRequiredTraitString": "",
         "optionAvoidedTraitString": "",
+        "basesuccessrate": 75,
         "eventoutcomes": [
           {
             "outcomename": "Success",
