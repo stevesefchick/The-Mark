@@ -19,6 +19,31 @@
     "staminaeffect": 0,
     "stresseffect": -3,
     "healtheffect": 0,
-    "partysizemin": 0
+    "partysizemin": 0,
+    "occurswhentravelling": true
+  },
+  "PassiveEvent_PlayerRunAway": {
+    "thisEventBaseString": "Run",
+    "percentChance": 100,
+    "eventText": [ "%char% ran away!","%char% was able to run away!","%char% escaped the battle!" ],
+    "requiredSkillString": "",
+    "requireSkillRankingString": "",
+    "requiredTraitString": "",
+    "itemType": "",
+    "listOfItems": [],
+    "stammin": 1,
+    "stammax": 100,
+    "stressmin": 1,
+    "stressmax": 100,
+    "healthmin": 1,
+    "healthmax": 100,
+    "requiredTerrain": "",
+    "requiredRoad": "",
+    "staminaeffect": -5,
+    "stresseffect": 0,
+    "healtheffect": 0,
+    "partysizemin": 0,
+    "occurswhentravelling": false
+
   }
 }

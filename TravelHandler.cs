@@ -16,6 +16,7 @@ namespace The_Mark
         public String currentDestinationText;
         public String currentDestinationDescription;
         public Point travelStartingLocation;
+        int safeTilesRemaining = 3;
 
         //events
         Event currentEvent;
@@ -28,8 +29,10 @@ namespace The_Mark
         Vector2 currentTravelDistance = Vector2.Zero;
         Vector2 totalTravelDistance = Vector2.Zero;
 
-        //icon
+        //const
         const int mapIconOffset = -32;
+        const int worldEventSafeTiles = 5;
+        const int passiveEventSafeTiles = 3;
 
 
         public TravelHandler()
@@ -73,6 +76,7 @@ namespace The_Mark
 
         void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype,Boolean isonroad, WorldMap world)
         {
+
             List<Event> possibleEvents = new List<Event>();
             List<WorldEvent> possibleWorldEvents = new List<WorldEvent>();
 
@@ -99,18 +103,22 @@ namespace The_Mark
             //check for passive events
             foreach (KeyValuePair<String, Event> e in datamanager.passiveEventData)
             {
+                //check if can occur when travelling
+                if (e.Value.CanOccurWhenTravelling() == true)
+                {
                     //add any eligible people to event
-                    Event newevent = CheckIfPeopleEligible(e.Value,player);
+                    Event newevent = CheckIfPeopleEligible(e.Value, player);
                     //determine the item
-                    newevent.DetermineValidItem(datamanager,rando);
+                    newevent.DetermineValidItem(datamanager, rando);
                     //determine the text used
                     newevent.DetermineValidText(rando);
                     //if eligible people exist, add to event
-                    if (newevent.IsEligibleExists()==true && newevent.CheckForGridRequirements(terraintype,isonroad) == true &&
+                    if (newevent.IsEligibleExists() == true && newevent.CheckForGridRequirements(terraintype, isonroad) == true &&
                         newevent.CheckForPartySizeRequirements(player.partyMembers.Count) == true)
                     {
                         possibleEvents.Add(newevent);
                     }
+                }
             }
 
 
@@ -199,7 +207,8 @@ namespace The_Mark
             if (currentTravelDistance == totalTravelDistance)
             {
                 //check for event
-                if (currentGridLocation != travelStartingLocation)
+                if (currentGridLocation != travelStartingLocation &&
+                    safeTilesRemaining == 0)
                 {
                     CheckForValidEvents(player, datamanager, rando, gridTerrainType, isOnRoad,world);
                 }
@@ -208,11 +217,13 @@ namespace The_Mark
                 //if world event
                 if (currentWorldEvent != null)
                 {
+                    safeTilesRemaining = worldEventSafeTiles;
                     uihelper.CreateEventUI(currentWorldEvent);
                 }
                 //if passive event
                 else if (currentEvent != null)
                 {
+                    safeTilesRemaining = passiveEventSafeTiles;
                     currentEvent.PerformPassiveEventActivity(player, rando);
                     CreateTravelFeed(currentEvent.ReturnEventText(), uihelper);
                     ConsoleLogEvent();
@@ -221,6 +232,10 @@ namespace The_Mark
                 //if no event
                 else
                 {
+                    if (safeTilesRemaining>0)
+                    {
+                        safeTilesRemaining -= 1;
+                    }
                     //player basic ticks
                     player.LoseStamina(PlayerHandler.StaminaDrainType.Travel);
 

@@ -8,7 +8,7 @@ namespace The_Mark
     class Event
     {
         //passive builders
-        public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing}
+        public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing,Run}
         public enum PassiveEventSuccess { Success, Fail}
 
 
@@ -25,6 +25,7 @@ namespace The_Mark
         Boolean requiresRoad = false;
         Boolean isonroadrequirement;
         int eventPartySizeMinimum;
+        Boolean occursWhenTravelling;
 
         int eventStaminaRequirementMin;
         int eventStaminaRequirementMax;
@@ -205,6 +206,12 @@ namespace The_Mark
             }    
         }
 
+
+        public Boolean CanOccurWhenTravelling()
+        {
+            return occursWhenTravelling;
+        }
+
         Boolean CheckForSkills(Person person)
         {
             if (requiresSkill == true)
@@ -326,7 +333,7 @@ namespace The_Mark
         public Event(String thisEventBaseString, int percentChance, String[] eventText, 
             String requiredSkillString, String requireSkillRankingString, String requiredTraitString,
             String itemType, String[] listOfItems, int stammin, int stammax, int stressmin, int stressmax, int healthmin, int healthmax,
-            String requiredTerrain, String requiredRoad, int staminaeffect,int stresseffect, int healtheffect, int partysizemin)
+            String requiredTerrain, String requiredRoad, int staminaeffect,int stresseffect, int healtheffect, int partysizemin, Boolean occurswhentravelling)
         {
             //properties
             thisEventBaseType = (PassiveEventBase) Enum.Parse(typeof(PassiveEventBase), thisEventBaseString);
@@ -339,6 +346,7 @@ namespace The_Mark
             eventStaminaEffect = staminaeffect;
             eventStressEffect = stresseffect;
             eventHealthEffect = healtheffect;
+
 
 
             //requirements
@@ -383,6 +391,8 @@ namespace The_Mark
             eventHealthRequirementMax = healthmax;
 
             eventPartySizeMinimum = partysizemin;
+
+            occursWhenTravelling = occurswhentravelling;
 
             //items
             if (itemType != "")
