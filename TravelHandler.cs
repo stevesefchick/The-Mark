@@ -41,6 +41,11 @@ namespace The_Mark
 
         }
 
+        public String GetWorldEventCreatureName()
+        {
+            return currentWorldEvent.GetAssociatedCreatureName();
+        }
+
         void UpdateCurrentLocation(WorldMap world)
         {
             currentLocationText = world.returnCurrentLocNameDescription(currentGridLocation).Item1;
@@ -143,16 +148,38 @@ namespace The_Mark
                     int rand = rando.Next(0, 101);
                     if (rand < possibleEvents[i].ReturnEventChance())
                     {
-                        currentEvent = possibleEvents[i];
-                        currentEvent.GetRandomAssociatedPerson(rando);
-                        currentEvent.UpdateTextForName();
-                        currentEvent.UpdateTextForItem();
+                        SetCurrentPassiveEvent(possibleEvents[i], true, rando,player,"");
                         break;
                     }
 
                 }
             }
 
+        }
+
+        public void SetCurrentPassiveEvent(Event eventtobeadded, Boolean randomperson, Random rando, PlayerHandler player,String creaturename)
+        {
+            currentEvent = eventtobeadded;
+            if (randomperson == true)
+            {
+                currentEvent.GetRandomAssociatedPerson(rando);
+            }
+            else
+            {
+                currentEvent.AssociateMarkToEvent(player.theMark);
+            }
+            currentEvent.UpdateTextForName();
+            currentEvent.UpdateTextForItem();
+            currentEvent.UpdateTextForEnemy(creaturename);
+        }
+
+        public void RunCurrentPassiveEvent(PlayerHandler player, Random rando, UI_Helper uihelper)
+        {
+            safeTilesRemaining = passiveEventSafeTiles;
+            currentEvent.PerformPassiveEventActivity(player, rando);
+            CreateTravelFeed(currentEvent.ReturnEventText(), uihelper);
+            ConsoleLogEvent();
+            ClearEvent();
         }
 
         void CreateTravelFeed(String text,UI_Helper uihelper)
@@ -198,6 +225,8 @@ namespace The_Mark
 
         }
 
+        
+
         //returns minutes to tick down
         public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando, UI_Helper uihelper,GridTile.GridTerrain gridTerrainType, Boolean isOnRoad,WorldMap world)
         {
@@ -223,11 +252,12 @@ namespace The_Mark
                 //if passive event
                 else if (currentEvent != null)
                 {
-                    safeTilesRemaining = passiveEventSafeTiles;
-                    currentEvent.PerformPassiveEventActivity(player, rando);
-                    CreateTravelFeed(currentEvent.ReturnEventText(), uihelper);
-                    ConsoleLogEvent();
-                    ClearEvent();
+                    RunCurrentPassiveEvent(player,rando,uihelper);
+                    //safeTilesRemaining = passiveEventSafeTiles;
+                    //currentEvent.PerformPassiveEventActivity(player, rando);
+                    //CreateTravelFeed(currentEvent.ReturnEventText(), uihelper);
+                   // ConsoleLogEvent();
+                    //ClearEvent();
                 }
                 //if no event
                 else

@@ -135,7 +135,7 @@ namespace The_Mark
 
         }
 
-        public void DetermineEventOutcome(PlayerHandler player,GameMain game, TravelHandler travel,Random rando)
+        public void DetermineEventOutcome(PlayerHandler player,GameMain game, TravelHandler travel,Random rando,UI_Helper uihelper)
         {
             //determine success or failure of the outcome and return the outcome
             EventOptionOutcomes thisOutcome = CheckForSuccessOrFail(player,rando);
@@ -155,11 +155,15 @@ namespace The_Mark
             }
             else if (thisOutcome.thisNextTransition == EventOptionOutcomes.NextTransition.PassiveEvent)
             {
-                //TODO: Add populating a passive event
+                Event thisPassiveEvent = game.dataManager.passiveEventData[thisOutcome.GetPassiveEventString()];
+                thisPassiveEvent.DetermineValidText(rando); 
+                travel.SetCurrentPassiveEvent(thisPassiveEvent, false, rando,player,travel.GetWorldEventCreatureName());
                 travel.ClearWorldEvent();
+                travel.RunCurrentPassiveEvent(player, rando, uihelper);
 
             }
         }
+
 
         #endregion
 
@@ -211,16 +215,20 @@ namespace The_Mark
         public OptionOutcome thisOptionOutcome;
         OptionOutcomeAction thisOptionOutcomeAction;
         public NextTransition thisNextTransition;
+        String thisOutcomePassiveEventString;
+
+        public String GetPassiveEventString()
+        {
+            return thisOutcomePassiveEventString;
+        }
 
 
-
-
-        public EventOptionOutcomes(String outcomename, String outcomeaction, String nexttransition)
+        public EventOptionOutcomes(String outcomename, String outcomeaction, String nexttransition,String passiveEvent)
         {
             thisOptionOutcome = (OptionOutcome)Enum.Parse(typeof(OptionOutcome), outcomename);
             thisOptionOutcomeAction = (OptionOutcomeAction)Enum.Parse(typeof(OptionOutcomeAction), outcomeaction);
             thisNextTransition = (NextTransition)Enum.Parse(typeof(NextTransition), nexttransition);
-
+            thisOutcomePassiveEventString = passiveEvent;
 
         }
 

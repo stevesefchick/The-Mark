@@ -8,7 +8,7 @@ namespace The_Mark
     class Event
     {
         //passive builders
-        public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing,Run}
+        public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing,Run, PetCreature}
         public enum PassiveEventSuccess { Success, Fail}
 
 
@@ -147,6 +147,11 @@ namespace The_Mark
             eligiblePeople.Clear();
         }
 
+        public void AssociateMarkToEvent(Person person)
+        {
+            associatedPerson = person;
+        }
+
         public void UpdateTextForName()
         {
             String newtext = thisEventText.Replace("%char%", associatedPerson.personFirstName + " " + associatedPerson.personLastName);
@@ -156,6 +161,12 @@ namespace The_Mark
         public void UpdateTextForItem()
         {
             String newtext = thisEventText.Replace("%item%", earnedItemText);
+            thisEventText = newtext;
+        }
+
+        public void UpdateTextForEnemy(String enemyname)
+        {
+            String newtext = thisEventText.Replace("%enemy%", enemyname);
             thisEventText = newtext;
         }
 

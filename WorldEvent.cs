@@ -27,6 +27,11 @@ namespace The_Mark
         String thisEventText;
         Creature associatedCreature;
 
+        public String GetAssociatedCreatureName()
+        {
+            return associatedCreature.thisCreatureType.ToString();
+        }
+
         public Boolean CheckForGridRequirements(GridTile.GridTerrain terraintype, Boolean isonroad)
         {
             if (requiresRoad == false && requiresTerrain == false)

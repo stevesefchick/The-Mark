@@ -17,13 +17,15 @@
           {
             "outcomename": "Success",
             "outcomeaction": "Fight",
-            "nexttransition": "Combat"
+            "nexttransition": "Combat",
+            "passiveEvent": ""
 
           },
           {
             "outcomename": "Fail",
             "outcomeaction": "CreatureFlee",
-            "nexttransition": "PassiveEvent"
+            "nexttransition": "PassiveEvent",
+            "passiveEvent": "PassiveEvent_CreatureRunAway"
 
           }
         ]
@@ -41,13 +43,15 @@
           {
             "outcomename": "Success",
             "outcomeaction": "CreaturePet",
-            "nexttransition": "PassiveEvent"
+            "nexttransition": "PassiveEvent",
+            "passiveEvent": "PassiveEvent_CreaturePet"
 
           },
           {
             "outcomename": "Fail",
             "outcomeaction": "CreatureFlee",
-            "nexttransition": "PassiveEvent"
+            "nexttransition": "PassiveEvent",
+            "passiveEvent": "PassiveEvent_CreatureRunAway"
 
           }
         ]
@@ -65,13 +69,15 @@
           {
             "outcomename": "Success",
             "outcomeaction": "Run",
-            "nexttransition": "PassiveEvent"
+            "nexttransition": "PassiveEvent",
+            "passiveEvent": "PassiveEvent_PlayerRunAway"
 
           },
           {
             "outcomename": "Fail",
             "outcomeaction": "Fight",
-            "nexttransition": "Combat"
+            "nexttransition": "Combat",
+            "passiveEvent": ""
 
           }
         ]
