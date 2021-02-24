@@ -54,11 +54,11 @@ namespace The_Mark
 
         //checks for creatures on this tile if applicable
         //if not creature related, returns true
-        public Boolean ValidCreatureIfApplicable(WorldMap world, Point loc, Random rando)
+        public Boolean ValidCreatureIfApplicable(WorldMap world, Point loc, Random rando, int hour)
         {
             if (thisWorldEventBaseType == WorldEventBase.CreatureEncounter)
             {
-                associatedCreature = world.ReturnCreatureOnTile(loc, rando);
+                associatedCreature = world.ReturnCreatureOnTile(loc, rando, hour);
 
                 if (associatedCreature == null)
                 {
@@ -186,7 +186,7 @@ namespace The_Mark
         void UpdateTextForEnemy()
         {
             //update to include enemy
-            String newtext = thisEventText.Replace("%enemy%", "Bad Boy");
+            String newtext = thisEventText.Replace("%enemy%", GetAssociatedCreatureName());
             thisEventText = newtext;
         }
 

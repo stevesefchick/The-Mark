@@ -1837,14 +1837,15 @@ namespace The_Mark
 		}
 
 		//returns a list of creatures that can appear on a specific tile
-		public Creature ReturnCreatureOnTile(Point loc,Random rando)
+		public Creature ReturnCreatureOnTile(Point loc,Random rando, int hour)
         {
 			List<Creature> possiblecreatures = new List<Creature>();
 
 			for (int i = 0; i < creatures.Count; ++i)
 			{
-				if (creatures[i].terrainTypeHome == CheckForTerrainsOnTiles(loc) ||
-					CheckForPlaceOnTile(loc,creatures[i].placeIDHome))
+				if ((creatures[i].terrainTypeHome == CheckForTerrainsOnTiles(loc) ||
+					CheckForPlaceOnTile(loc,creatures[i].placeIDHome) == true) &&
+					creatures[i].isAvailableForHour(hour) == true)
                 {
 					possiblecreatures.Add(creatures[i]);
                 }

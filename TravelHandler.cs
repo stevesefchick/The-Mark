@@ -79,7 +79,7 @@ namespace The_Mark
             return (e);
         }
 
-        void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype,Boolean isonroad, WorldMap world)
+        void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype,Boolean isonroad, WorldMap world, int hour)
         {
 
             List<Event> possibleEvents = new List<Event>();
@@ -94,7 +94,7 @@ namespace The_Mark
                 worldevent.DetermineEventOptionAvailability(player);
                 //check grid and other reqs, then add to possible events
                 if (worldevent.CheckForGridRequirements(terraintype,isonroad)==true &&
-                    worldevent.ValidCreatureIfApplicable(world,currentGridLocation,rando) == true)
+                    worldevent.ValidCreatureIfApplicable(world,currentGridLocation,rando, hour) == true)
                 {
                     //determine the text used
                     worldevent.DetermineValidText(rando);
@@ -228,7 +228,7 @@ namespace The_Mark
         
 
         //returns minutes to tick down
-        public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando, UI_Helper uihelper,GridTile.GridTerrain gridTerrainType, Boolean isOnRoad,WorldMap world)
+        public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando, UI_Helper uihelper,GridTile.GridTerrain gridTerrainType, Boolean isOnRoad,WorldMap world, int hour)
         {
             int value = 0;
 
@@ -239,7 +239,7 @@ namespace The_Mark
                 if (currentGridLocation != travelStartingLocation &&
                     safeTilesRemaining == 0)
                 {
-                    CheckForValidEvents(player, datamanager, rando, gridTerrainType, isOnRoad,world);
+                    CheckForValidEvents(player, datamanager, rando, gridTerrainType, isOnRoad,world, hour);
                 }
 
 

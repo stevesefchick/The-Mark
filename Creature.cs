@@ -27,6 +27,27 @@ namespace The_Mark
         public string placeIDHome;
         public Terrain.TerrainType terrainTypeHome;
 
+        public Boolean isAvailableForHour(int hour)
+        {
+            if (thisCreatureActiveTime == ActiveTime.Both)
+            {
+                return true;
+            }
+            else if (thisCreatureActiveTime == ActiveTime.Daytime &&
+                hour > 7 && hour <= 19)
+            {
+                return true;
+            }
+            else if (thisCreatureActiveTime == ActiveTime.Nighttime && 
+                (hour <= 7 || hour >19))
+            {
+                return true;
+            }    
+            else
+            {
+                return false;
+            }
+        }
 
         public Creature(ThisCreatureType theType,DataManager dataManager,Random rando)
         {
