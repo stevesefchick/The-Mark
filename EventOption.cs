@@ -26,6 +26,8 @@ namespace The_Mark
         Boolean isAvailable = false;
         List<EventOptionOutcomes> eventOptionOutcomes = new List<EventOptionOutcomes>();
         int optionBaseSuccessRate;
+        List<Person.TraitType> influencialTraits = new List<Person.TraitType>();
+        List<PersonSkill.SkillType> influencialSkills = new List<PersonSkill.SkillType>();
 
 
         public void SetAvailability(Boolean availability)
@@ -90,6 +92,19 @@ namespace The_Mark
             //do checks here
             #region check for success
             int modifiedchance = optionBaseSuccessRate;
+            int influencetick = (int)(modifiedchance * 0.1f);
+
+            //traits
+            for (int i =0;i<influencialTraits.Count;++i)
+            {
+                for (int i2=0;i2<player.theMark.personTraits.Count;++i2)
+                {
+                    if (influencialTraits[i] == player.theMark.personTraits[i2])
+                    {
+
+                    }
+                }
+            }
 
 
 
@@ -100,9 +115,7 @@ namespace The_Mark
 
 
 
-
-
-            if (rando.Next(1, 101) > modifiedchance)
+            if (rando.Next(1, 101) <= modifiedchance)
             {
                 isSuccess = true;
             }
@@ -168,12 +181,13 @@ namespace The_Mark
         #endregion
 
         public EventOption(String optionTypeString, String optionTextDescriptionString,String optionRequiredSkillString, String optionRequiredSkillRankingString,
-            String optionRequiredTraitString, String optionAvoidedTraitString, int basesuccessrate, EventOptionOutcomes[] eventoutcomes)
+            String optionRequiredTraitString, String optionAvoidedTraitString, int basesuccessrate, String[] influenceSkills, String[] influenceTraits, EventOptionOutcomes[] eventoutcomes)
         {
             thisOptionType = (EventOptionType)Enum.Parse(typeof(EventOptionType), optionTypeString);
             optionTextDescription = optionTextDescriptionString;
             optionBaseSuccessRate = basesuccessrate;
 
+            //skills and traits stuff
             if (optionRequiredSkillString != "")
             {
                 requiresSkill = true;
@@ -193,6 +207,15 @@ namespace The_Mark
                 avoidedTraitType = (Person.TraitType)Enum.Parse(typeof(Person.TraitType), optionAvoidedTraitString);
 
             }
+            foreach (String s in influenceSkills)
+            {
+                influencialSkills.Add((PersonSkill.SkillType)Enum.Parse(typeof(PersonSkill.SkillType), s));
+            }
+            foreach (String t in influenceTraits)
+            {
+                influencialTraits.Add((Person.TraitType)Enum.Parse(typeof(Person.TraitType), t));
+            }
+
 
             //outcomes
             foreach (EventOptionOutcomes o in eventoutcomes)

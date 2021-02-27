@@ -12,6 +12,8 @@
         "optionRequiredSkillRankingString": "",
         "optionRequiredTraitString": "",
         "optionAvoidedTraitString": "",
+        "influenceSkills": [],
+        "influenceTraits": [],
         "basesuccessrate": 90,
         "eventoutcomes": [
           {
@@ -38,6 +40,8 @@
         "optionRequiredSkillRankingString": "",
         "optionRequiredTraitString": "",
         "optionAvoidedTraitString": "",
+        "influenceSkills": [],
+        "influenceTraits": [],
         "basesuccessrate": 50,
         "eventoutcomes": [
           {
@@ -64,6 +68,8 @@
         "optionRequiredSkillRankingString": "",
         "optionRequiredTraitString": "",
         "optionAvoidedTraitString": "",
+        "influenceSkills": [],
+        "influenceTraits": [],
         "basesuccessrate": 75,
         "eventoutcomes": [
           {
