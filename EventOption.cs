@@ -101,18 +101,39 @@ namespace The_Mark
                 {
                     if (influencialTraits[i] == player.theMark.personTraits[i2])
                     {
+                        modifiedchance += influencetick;
+                    }
+                }
+            }
+            //skills
+            for (int i = 0; i < influencialSkills.Count; ++i)
+            {
+                for (int i2 = 0; i2 < player.theMark.personSkills.Count; ++i2)
+                {
+                    if (influencialSkills[i] == player.theMark.personSkills[i2].skillType)
+                    {
+                        if (player.theMark.personSkills[i2].skillRanking == PersonSkill.SkillRanking.Novice)
+                        {
+                            modifiedchance += (int)(influencetick * 0.4f);
+                        }
+                        else if (player.theMark.personSkills[i2].skillRanking == PersonSkill.SkillRanking.Apprentice)
+                        {
+                            modifiedchance += (int)(influencetick * 0.8f);
+                        }
+                        else if (player.theMark.personSkills[i2].skillRanking == PersonSkill.SkillRanking.Professional)
+                        {
+                            modifiedchance += (int)(influencetick);
+                        }
+                        else if (player.theMark.personSkills[i2].skillRanking == PersonSkill.SkillRanking.Master)
+                        {
+                            modifiedchance += (int)(influencetick * 1.2f);
+                        }
 
                     }
                 }
             }
 
-
-
-
-
-
-
-
+            #endregion
 
 
             if (rando.Next(1, 101) <= modifiedchance)
@@ -123,7 +144,6 @@ namespace The_Mark
             {
                 isSuccess = false;
             }
-            #endregion
 
 
 
