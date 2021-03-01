@@ -174,5 +174,27 @@
     "recoverytype": "Stamina",
     "recoveryamount": 2,
     "amountvariance": 1
+  },
+  "Bitter Wheat Seeds": {
+    "itemName": "Bitter Wheat Seeds",
+    "itemDescription": "A pile of seeds from Bitter Wheat",
+    "itemValue": 5,
+    "canStack": true,
+    "dropRate": 10,
+    "maxDropQuantity": 4,
+    "recoverytype": "Stamina",
+    "recoveryamount": 2,
+    "amountvariance": 1
+  },
+  "Sour Wheat Seeds": {
+    "itemName": "Sour Wheat Seeds",
+    "itemDescription": "A pile of seeds from Sour Wheat",
+    "itemValue": 5,
+    "canStack": true,
+    "dropRate": 10,
+    "maxDropQuantity": 4,
+    "recoverytype": "Stamina",
+    "recoveryamount": 2,
+    "amountvariance": 1
   }
 }

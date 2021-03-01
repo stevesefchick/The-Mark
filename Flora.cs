@@ -31,7 +31,9 @@ namespace The_Mark
         Stinkmoss,
         //grass
         Dankweed,
-        SweetWheat
+        SweetWheat,
+        BitterWheat,
+        SourWheat
 
         }
 
@@ -119,6 +121,14 @@ namespace The_Mark
             {
                 possibleLoot.Add(dataManager.itemConsumableData["Sweat Wheat Seeds"]);
             }
+            else if (thisFloraSpecies == FloraSpecies.BitterWheat)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Bitter Wheat Seeds"]);
+            }
+            else if (thisFloraSpecies == FloraSpecies.SourWheat)
+            {
+                possibleLoot.Add(dataManager.itemConsumableData["Sour Wheat Seeds"]);
+            }
             for (int i = 0; i < possibleLoot.Count; ++i)
             {
                 int rand = rando.Next(1, 101);
@@ -186,6 +196,34 @@ namespace The_Mark
                 monthsAvailable.Add("Spirit");
                 monthsAvailable.Add("Dew");
                 monthsAvailable.Add("Light");
+
+                for (int i = 0; i < 24; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+            }
+            else if (thisSpecies == FloraSpecies.BitterWheat)
+            {
+                thisFloraType = FloraType.Grass;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Spirit");
+                monthsAvailable.Add("Dew");
+
+                for (int i = 0; i < 24; ++i)
+                {
+                    hoursAvailable.Add(i);
+                }
+            }
+            else if (thisSpecies == FloraSpecies.SourWheat)
+            {
+                thisFloraType = FloraType.Grass;
+                thisFloraSpecies = thisSpecies;
+
+                monthsAvailable.Add("Storm");
+                monthsAvailable.Add("Earth");
+                monthsAvailable.Add("Spirit");
 
                 for (int i = 0; i < 24; ++i)
                 {
