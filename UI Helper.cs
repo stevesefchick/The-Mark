@@ -99,11 +99,11 @@ namespace The_Mark
             hoverCards.Add(new UIHoverCard(position, title, body,mainFont,titleFont));
         }
 
-        public void createMapUISelection(Vector2 position)
+        public void createMapUISelection(Vector2 position, UIMapSelection.MapSelectionType uitype)
         {
             if (uiMapSelections.Count == 0)
             {
-                uiMapSelections.Add(new UIMapSelection(position, UIMapSelection.MapSelectionType.TravelLoc));
+                uiMapSelections.Add(new UIMapSelection(position, uitype));
             }
         }
 
@@ -672,7 +672,6 @@ namespace The_Mark
                     uiCharacterBubbles[i].StressScale = party.returnStressValuesForPartyMember(i).Item3;
                 }
             }
-
         }
 
 

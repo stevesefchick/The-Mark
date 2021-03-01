@@ -257,8 +257,20 @@ class GameMain : Game
 		if (mouse.isRightClickDown == true && uiHelper.areThereUIElementsOpen() == false && currentGameState == GameState.Idle)
 		{
 			camera.CreateDestination(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y));
-			travelHandler.createTravelPath(new Point(mouse.rightMouseClickPosition.X / 64, mouse.rightMouseClickPosition.Y / 64), rando, worldMap);
-			uiHelper.createMapUISelection(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y));
+
+			//if current loc
+			if (travelHandler.currentGridLocation == new Point(mouse.rightMouseClickPosition.X / 64, mouse.rightMouseClickPosition.Y / 64))
+			{
+				uiHelper.createMapUISelection(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y), UIMapSelection.MapSelectionType.CurrentLoc);
+
+			}
+			//if different loc
+			else
+			{
+				travelHandler.createTravelPath(new Point(mouse.rightMouseClickPosition.X / 64, mouse.rightMouseClickPosition.Y / 64), rando, worldMap);
+				uiHelper.createMapUISelection(new Vector2(mouse.rightMouseClickPosition.X, mouse.rightMouseClickPosition.Y), UIMapSelection.MapSelectionType.TravelLoc);
+			}
+
 		}
 	}
 

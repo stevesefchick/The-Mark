@@ -8,7 +8,7 @@ namespace The_Mark
     class UIMapSelection
     {
         //enum
-        public enum MapSelectionType { TravelLoc}
+        public enum MapSelectionType { TravelLoc, CurrentLoc}
 
         //type
         MapSelectionType thisMapSelectionType;
@@ -27,6 +27,7 @@ namespace The_Mark
         //add text selections
         public Rectangle travelCollision;
         public Rectangle infoCollision;
+        public Rectangle restCollision;
 
         //positions
         Rectangle uiMapSelectionPosition;
@@ -44,6 +45,13 @@ namespace The_Mark
                 travelCollision = new Rectangle((int)(position.X + locationOffset.X), (int)(position.Y + locationOffset.Y), 100, 25);
                 infoCollision = new Rectangle((int)(position.X + locationOffset.X), (int)(position.Y + 25 + locationOffset.Y), 100, 25);
             }
+            else if (thisType == MapSelectionType.CurrentLoc)
+            {
+                size = new Vector2(100, 100);
+                restCollision = new Rectangle((int)(position.X + locationOffset.X), (int)(position.Y + locationOffset.Y), 100, 25);
+                infoCollision = new Rectangle((int)(position.X + locationOffset.X), (int)(position.Y + 25 + locationOffset.Y), 100, 25);
+            }
+
             thisMapSelectionType = thisType;
 
             thisGridLocation = new Point((int)(position.X / 64), (int)(position.Y / 64));
@@ -73,6 +81,19 @@ namespace The_Mark
                 spriteBatch.DrawString(font, "Info", new Vector2(uiMapSelectionPosition.X + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 25), Color.White, 0, new Vector2(font.MeasureString("Info").X / 2, 0), 1, SpriteEffects.None, 0.75f);
                 spriteBatch.DrawString(font, "Info", new Vector2(uiMapSelectionPosition.X + 1 + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 26), Color.Black, 0, new Vector2(font.MeasureString("Info").X / 2, 0), 1, SpriteEffects.None, 0.745f);
                 spriteBatch.DrawString(font, "Info", new Vector2(uiMapSelectionPosition.X + 2 + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 27), Color.Black, 0, new Vector2(font.MeasureString("Info").X / 2, 0), 1, SpriteEffects.None, 0.745f);
+            }
+            else if (thisMapSelectionType == MapSelectionType.CurrentLoc)
+            {
+                //text
+                spriteBatch.DrawString(font, "Rest", new Vector2(uiMapSelectionPosition.X + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y), Color.White, 0, new Vector2(font.MeasureString("Rest").X / 2, 0), 1, SpriteEffects.None, 0.75f);
+                spriteBatch.DrawString(font, "Rest", new Vector2(uiMapSelectionPosition.X + 1 + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 1), Color.Black, 0, new Vector2(font.MeasureString("Rest").X / 2, 0), 1, SpriteEffects.None, 0.745f);
+                spriteBatch.DrawString(font, "Rest", new Vector2(uiMapSelectionPosition.X + 2 + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 2), Color.Black, 0, new Vector2(font.MeasureString("Rest").X / 2, 0), 1, SpriteEffects.None, 0.745f);
+
+
+                spriteBatch.DrawString(font, "Info", new Vector2(uiMapSelectionPosition.X + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 25), Color.White, 0, new Vector2(font.MeasureString("Info").X / 2, 0), 1, SpriteEffects.None, 0.75f);
+                spriteBatch.DrawString(font, "Info", new Vector2(uiMapSelectionPosition.X + 1 + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 26), Color.Black, 0, new Vector2(font.MeasureString("Info").X / 2, 0), 1, SpriteEffects.None, 0.745f);
+                spriteBatch.DrawString(font, "Info", new Vector2(uiMapSelectionPosition.X + 2 + (uiMapSelectionPosition.Height * 0.5f), uiMapSelectionPosition.Y + 27), Color.Black, 0, new Vector2(font.MeasureString("Info").X / 2, 0), 1, SpriteEffects.None, 0.745f);
+
             }
 
             //draw fill
