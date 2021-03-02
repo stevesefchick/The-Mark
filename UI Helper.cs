@@ -597,6 +597,11 @@ namespace The_Mark
                         //do an info thing
                         
                     }
+                    else if (mouse.leftMouseClickPosition.Intersects(uiMapSelections[i].restCollision))
+                    {
+                        uiMapSelections.Clear();
+                        game.ChangeGameState(GameMain.GameState.Resting);
+                    }
                     else
                     {
                         uiMapSelections.Clear();

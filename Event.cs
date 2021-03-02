@@ -120,9 +120,36 @@ namespace The_Mark
             {
                 if (player.theMark == associatedPerson)
                 {
-                    player.LoseStaminaSingleMark(PlayerHandler.StaminaDrainType.Event,eventStaminaEffect*-1);
-                    player.GainStressSingleMark(PlayerHandler.StressDrainType.Event, eventStressEffect * -1);
-                    player.LoseHealthSingleMark(PlayerHandler.HealthDrainType.Event, eventHealthEffect * -1);
+                    #region methods
+                    //health
+                    if (eventHealthEffect > 0)
+                    {
+                        player.GainHealthSingleMark(PlayerHandler.HealthGainType.Event, eventHealthEffect);
+                    }
+                    else if (eventHealthEffect < 0)
+                    {
+                        player.LoseHealthSingleMark(PlayerHandler.HealthDrainType.Event, eventHealthEffect * -1);
+                    }
+
+                    //stamina
+                    if (eventStaminaEffect > 0)
+                    {
+                        player.GainStaminaSingleMark(PlayerHandler.StaminaGainType.Event, eventStaminaEffect);
+                    }
+                    else if (eventStaminaEffect < 0)
+                    {
+                        player.LoseStaminaSingleMark(PlayerHandler.StaminaDrainType.Event, eventStaminaEffect * -1);
+                    }
+                    //stress
+                    if (eventStressEffect > 0)
+                    {
+                        player.GainStressSingleMark(PlayerHandler.StressDrainType.Event, eventStressEffect * -1);
+                    }
+                    else if (eventStressEffect < 0)
+                    {
+                        player.ReduceStressSingleMark(PlayerHandler.StressReduceType.Event, eventStressEffect);
+                    }
+                    #endregion
                 }
                 else
                 {
@@ -130,9 +157,36 @@ namespace The_Mark
                     {
                         if (player.partyMembers[i] == associatedPerson)
                         {
-                            player.LoseStaminaSingleCharacter(PlayerHandler.StaminaDrainType.Event, eventStaminaEffect * -1,player.partyMembers[i]);
-                            player.GainStressSingleCharacter(PlayerHandler.StressDrainType.Event, eventStressEffect * -1, player.partyMembers[i]);
-                            player.LoseHealthSingleCharacter(PlayerHandler.HealthDrainType.Event, eventHealthEffect * -1, player.partyMembers[i]);
+                            #region methods
+                            //health
+                            if (eventHealthEffect > 0)
+                            {
+                                player.GainHealthSingleCharacter(PlayerHandler.HealthGainType.Event, eventHealthEffect, player.partyMembers[i]);
+                            }
+                            else if (eventHealthEffect < 0)
+                            {
+                                player.LoseHealthSingleCharacter(PlayerHandler.HealthDrainType.Event, eventHealthEffect * -1, player.partyMembers[i]);
+                            }
+
+                            //stamina
+                            if (eventStaminaEffect > 0)
+                            {
+                                player.GainStaminaSingleCharacter(PlayerHandler.StaminaGainType.Event, eventStaminaEffect, player.partyMembers[i]);
+                            }
+                            else if (eventStaminaEffect < 0)
+                            {
+                                player.LoseStaminaSingleCharacter(PlayerHandler.StaminaDrainType.Event, eventStaminaEffect * -1, player.partyMembers[i]);
+                            }
+                            //stress
+                            if (eventStressEffect > 0)
+                            {
+                                player.GainStressSingleCharacter(PlayerHandler.StressDrainType.Event, eventStressEffect * -1, player.partyMembers[i]);
+                            }
+                            else if (eventStressEffect < 0)
+                            {
+                                player.ReduceStressSingleCharacter(PlayerHandler.StressReduceType.Event, eventStressEffect, player.partyMembers[i]);
+                            }
+                            #endregion
 
                         }
                     }

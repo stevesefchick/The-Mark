@@ -300,7 +300,7 @@ class GameMain : Game
 		uiHelper.Update(mouse,playerHandler, returnPositionCameraOffset(Vector2.Zero),dataManager,travelHandler,worldMap,rando,this);
 
 		//GameState
-		//Travelling
+		//Traveling
 		if (currentGameState == GameState.Traveling)
 		{
 			if (travelHandler.IsPausedForEvent() == false)
@@ -317,6 +317,13 @@ class GameMain : Game
 				}
 			}
 
+        }
+		//Resting
+		else if (currentGameState == GameState.Resting)
+        {
+			int minutes = 5;
+
+			time.timeTick(minutes);
         }
 
 		//debug
