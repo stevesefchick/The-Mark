@@ -16,6 +16,12 @@ namespace The_Mark
         public enum HealthDrainType { Event}
         public enum HealthGainType { Sleeping,Event }
 
+        //const
+        const int travel_stamdrain = 2;
+        const int sleep_stamgain = 2;
+        const int sleep_stressreduce = 1;
+        const int sleep_healthgain = 1;
+
         //party information
         public Person theMark;
         public List<Person> partyMembers = new List<Person>();
@@ -73,12 +79,23 @@ namespace The_Mark
         {
             int amount = eventAmount;
 
+            if (stresstype == StressReduceType.Sleeping)
+            {
+                amount = sleep_stressreduce;
+            }
+
 
             theMark.currentStress -= amount;
         }
         void RemoveStressFromCharacters(StressReduceType stresstype, int eventAmount, Boolean isAll, Person affectedperson)
         {
             int amount = eventAmount;
+
+            if (stresstype == StressReduceType.Sleeping)
+            {
+                amount = sleep_stressreduce;
+            }
+
 
             if (isAll == true)
             {
@@ -169,6 +186,12 @@ namespace The_Mark
         void AddHealthToMark(HealthGainType healthtype, int eventAmount)
         {
             int amount = eventAmount;
+            if (healthtype == HealthGainType.Sleeping)
+            {
+                amount = sleep_healthgain;
+            }
+
+
 
             theMark.currentHealth += amount;
         }
@@ -200,6 +223,11 @@ namespace The_Mark
         void AddHealthToCharacters(HealthGainType healthtype, int eventAmount, Boolean isAll, Person affectedperson)
         {
             int amount = eventAmount;
+
+            if (healthtype == HealthGainType.Sleeping)
+            {
+                amount = sleep_healthgain;
+            }
 
             if (isAll == true)
             {
@@ -262,7 +290,7 @@ namespace The_Mark
             int amount = eventAmount;
             if (stamtype== StaminaDrainType.Travel)
             {
-                amount = 1;
+                amount = travel_stamdrain;
             }
             theMark.currentStamina -= amount;
         }
@@ -271,7 +299,7 @@ namespace The_Mark
             int amount = eventAmount;
             if (stamtype == StaminaGainType.Sleeping)
             {
-                amount = 3;
+                amount = sleep_stamgain;
             }
             theMark.currentStamina -= amount;
         }
@@ -279,14 +307,17 @@ namespace The_Mark
         {
             int amount = eventAmount;
 
+            if (stamtype == StaminaGainType.Sleeping)
+            {
+                amount = sleep_stamgain;
+            }
+
+
             if (isAll == true)
             {
                 for (int i = 0; i < partyMembers.Count; ++i)
                 {
-                    if (stamtype == StaminaGainType.Sleeping)
-                    {
-                        amount = 3;
-                    }
+
 
                     partyMembers[i].currentStamina += amount;
                 }
@@ -297,11 +328,6 @@ namespace The_Mark
                 {
                     if (partyMembers[i] == affectedperson)
                     {
-                        if (stamtype == StaminaGainType.Sleeping)
-                        {
-                            amount = 3;
-                        }
-
                         partyMembers[i].currentStamina += amount;
 
                     }
@@ -319,7 +345,7 @@ namespace The_Mark
                 {
                     if (stamtype == StaminaDrainType.Travel)
                     {
-                        amount = 1;
+                        amount = travel_stamdrain;
                     }
 
                     partyMembers[i].currentStamina -= amount;
@@ -333,7 +359,7 @@ namespace The_Mark
                     {
                         if (stamtype == StaminaDrainType.Travel)
                         {
-                            amount = 1;
+                            amount = travel_stamdrain;
                         }
 
                         partyMembers[i].currentStamina -= amount;
@@ -680,6 +706,12 @@ namespace The_Mark
         }
         #endregion
 
+        public void RestTick()
+        {
+            ReduceStress(StressReduceType.Sleeping);
+            GainHealth(HealthGainType.Sleeping);
+            GainStamina(StaminaGainType.Sleeping);
+        }
 
         public void CreateTheMark(WorldMap world, Random rando)
         {

@@ -322,7 +322,7 @@ class GameMain : Game
 		else if (currentGameState == GameState.Resting)
         {
 			int minutes = 5;
-
+			playerHandler.RestTick();
 			time.timeTick(minutes);
         }
 
