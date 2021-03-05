@@ -23,8 +23,8 @@ namespace The_Mark
         const int sleep_stamgain = 2;
         const int sleep_stressreduce = 1;
         const int sleep_healthgain = 1;
-        const int travel_restedloss = 2;
-        const int sleep_restedgain = 3;
+        const int travel_restedloss = 1;
+        const int sleep_restedgain = 1;
 
         //party information
         public Person theMark;
@@ -836,7 +836,8 @@ namespace The_Mark
 
         public Boolean OKToWakeUp()
         {
-            if (theMark.currentRested >= theMark.maxRested)
+            if (theMark.currentRested >= theMark.maxRested &&
+                theMark.currentStamina >= (theMark.maxStamina*0.5f))
             {
                 return true;
             }

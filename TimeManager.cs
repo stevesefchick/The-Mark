@@ -298,6 +298,17 @@ namespace The_Mark
 
         }
 
+        public Boolean OKToSleepTick()
+        {
+            if (minutesToDetriment>20)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }    
+        }
 
 
 

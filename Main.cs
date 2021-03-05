@@ -321,17 +321,20 @@ class GameMain : Game
 		//Resting
 		else if (currentGameState == GameState.Resting)
         {
-			int minutes = 5;
-			playerHandler.RestTick();
-			time.timeTick(minutes);
+			if (time.OKToSleepTick() == true)
+			{
+				int minutes = 5;
+				playerHandler.RestTick();
+				time.timeTick(minutes);
 
-			//TODO: Add ticks for event checks
-			
-			//wake up?
-			if (playerHandler.OKToWakeUp()==true)
-            {
-				ChangeGameState(GameState.Idle);
-            }
+				//TODO: Add ticks for event checks
+
+				//wake up?
+				if (playerHandler.OKToWakeUp() == true)
+				{
+					ChangeGameState(GameState.Idle);
+				}
+			}
         }
 
 		//debug
