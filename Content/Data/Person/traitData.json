@@ -9,7 +9,8 @@
     "charisma": 1,
     "health": 5,
     "stamina": 0,
-    "stress": 5
+    "stress": 5,
+    "rsted": 0
 
   },
   "Shy": {
@@ -22,7 +23,8 @@
     "charisma": 0,
     "health": 0,
     "stamina": 0,
-    "stress": 0
+    "stress": 0,
+    "rsted": 0
 
   },
   "ShortTempered": {
@@ -35,7 +37,8 @@
     "charisma": 0,
     "health": 5,
     "stamina": 5,
-    "stress": 0
+    "stress": 0,
+    "rsted": 0
 
   },
   "Anxious": {
@@ -48,7 +51,8 @@
     "charisma": 0,
     "health": 0,
     "stamina": 0,
-    "stress": 0
+    "stress": 0,
+    "rsted": -3
 
   },
   "Talkative": {
@@ -61,7 +65,8 @@
     "charisma": 2,
     "health": 0,
     "stamina": 5,
-    "stress": 0
+    "stress": 0,
+    "rsted": 0
 
   },
   "Kind": {
@@ -74,7 +79,8 @@
     "charisma": 1,
     "health": 0,
     "stamina": 0,
-    "stress": 5
+    "stress": 5,
+    "rsted": 0
 
   },
   "Studious": {
@@ -87,7 +93,8 @@
     "charisma": 1,
     "health": 0,
     "stamina": 0,
-    "stress": 5
+    "stress": 5,
+    "rsted": 0
 
   },
   "Curious": {
@@ -100,7 +107,8 @@
     "charisma": 0,
     "health": 0,
     "stamina": 5,
-    "stress": 0
+    "stress": 0,
+    "rsted": 0
 
   },
   "Brave": {
@@ -113,7 +121,8 @@
     "charisma": 1,
     "health": 0,
     "stamina": 0,
-    "stress": 10
+    "stress": 10,
+    "rsted": 0
 
   },
   "Oblivious": {
@@ -126,7 +135,9 @@
     "charisma": 0,
     "health": 5,
     "stamina": 5,
-    "stress": 0
+    "stress": 0,
+    "rsted": 0
+
   },
   "Athletic": {
     "description": "Athletic people are driven to compete and better themselves physically.",
@@ -138,7 +149,8 @@
     "charisma": 0,
     "health": 5,
     "stamina": 10,
-    "stress": 0
+    "stress": 0,
+    "rsted": 6
 
   },
   "Arrogant": {
@@ -151,7 +163,8 @@
     "charisma": 0,
     "health": 0,
     "stamina": 0,
-    "stress": 5
+    "stress": 5,
+    "rsted": 0
 
   },
   "Lazy": {
@@ -164,7 +177,8 @@
     "charisma": 0,
     "health": 0,
     "stamina": 0,
-    "stress": 5
+    "stress": 5,
+    "rsted": -5
 
   },
   "Spiritual": {
@@ -177,7 +191,8 @@
     "charisma": 1,
     "health": 0,
     "stamina": 0,
-    "stress": 5
+    "stress": 5,
+    "rsted": 0
 
   },
   "Loyal": {
@@ -190,7 +205,9 @@
     "charisma": 1,
     "health": 0,
     "stamina": 5,
-    "stress": 0
+    "stress": 0,
+    "rsted": 0
+
   },
   "HardWorking": {
     "description": "Hardworking people love to dedicate their energy towards getting the job done right.",
@@ -202,7 +219,8 @@
     "charisma": 0,
     "health": 5,
     "stamina": 5,
-    "stress": 0
+    "stress": 0,
+    "rsted": 4
 
   },
   "Tidy": {
@@ -215,7 +233,9 @@
     "charisma": 0,
     "health": 0,
     "stamina": 0,
-    "stress": 0
+    "stress": 0,
+    "rsted": 0
+
   },
   "Dramatic": {
     "description": "Dramatic people tend to overexaggerate their situation, and cause unneeded tension between others for personal entertainment.",
@@ -227,7 +247,9 @@
     "charisma": 1,
     "health": 0,
     "stamina": 0,
-    "stress": 0
+    "stress": 0,
+    "rsted": 0
+
   },
   "Energetic": {
     "description": "Energetic people are full of life, and seem to have more stamina than others. They are more likely to overexcert themselves.",
@@ -239,7 +261,9 @@
     "charisma": 0,
     "health": 0,
     "stamina": 5,
-    "stress": 0
+    "stress": 0,
+    "rsted": 10
+
   },
   "Creative": {
     "description": "Creative people are driven to make art or practical tools. They often think outside of the box, and can produce unusual or surprising ideas.",
@@ -251,6 +275,8 @@
     "charisma": 1,
     "health": 0,
     "stamina": 0,
-    "stress": 0
+    "stress": 0,
+    "rsted": 0
+
   }
 }

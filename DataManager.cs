@@ -187,8 +187,9 @@ namespace The_Mark
         public int health;
         public int stamina;
         public int stress;
+        public int rested;
 
-        public TraitData(string thedesc, int end, int dex, int str, int wt, int wis, int cha, int hlth, int stm, int strss)
+        public TraitData(string thedesc, int end, int dex, int str, int wt, int wis, int cha, int hlth, int stm, int strss,int rsted)
         {
             description = thedesc;
             endurance = end;
@@ -200,6 +201,7 @@ namespace The_Mark
             health = hlth;
             stamina = stm;
             stress = strss;
+            rested = rsted;
         }
     }
 

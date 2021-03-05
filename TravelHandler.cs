@@ -228,6 +228,7 @@ namespace The_Mark
         
 
         //returns minutes to tick down
+        //this performs all checks/stat changes, etc for travelling
         public int TravelTick(PlayerHandler player, DataManager datamanager, Random rando, UI_Helper uihelper,GridTile.GridTerrain gridTerrainType, Boolean isOnRoad,WorldMap world, int hour)
         {
             int value = 0;
@@ -268,11 +269,9 @@ namespace The_Mark
                     }
                     //player basic ticks
                     player.LoseStamina(PlayerHandler.StaminaDrainType.Travel);
+                    player.LoseRested(PlayerHandler.RestedLossType.Travel);
 
                 }
-
-                //player do stuff
-
 
 
                 //get next distance

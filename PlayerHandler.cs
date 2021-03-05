@@ -15,12 +15,16 @@ namespace The_Mark
         public enum StressReduceType { Sleeping,Event }
         public enum HealthDrainType { Event}
         public enum HealthGainType { Sleeping,Event }
+        public enum RestedLossType { Event, Travel }
+        public enum RestedGainType { Event, Sleeping }
 
         //const
         const int travel_stamdrain = 2;
         const int sleep_stamgain = 2;
         const int sleep_stressreduce = 1;
         const int sleep_healthgain = 1;
+        const int travel_restedloss = 2;
+        const int sleep_restedgain = 3;
 
         //party information
         public Person theMark;
@@ -40,6 +44,7 @@ namespace The_Mark
         #region stat gains/loss
 
         //STRESS
+        #region stress
         public void ReduceStress(StressReduceType stresstype)
         {
             RemoveStressFromMark(stresstype, 0);
@@ -145,9 +150,10 @@ namespace The_Mark
                 }
             }
         }
-
+        #endregion
 
         //HEALTH
+        #region health
         public void GainHealth(HealthGainType healthtype)
         {
             AddHealthToMark(healthtype, 0);
@@ -250,13 +256,10 @@ namespace The_Mark
                 }
             }
         }
-
-
-
-
-
+        #endregion
 
         //STAMINA
+        #region stamina
         public void GainStamina(StaminaGainType stamtype)
         {
             AddStaminaToMark(stamtype, 0);
@@ -264,7 +267,7 @@ namespace The_Mark
         }
         public void GainStaminaSingleMark(StaminaGainType stamtype, int eventamount)
         {
-            AddStaminaToMark(stamtype, 0);
+            AddStaminaToMark(stamtype, eventamount);
         }
         public void GainStaminaSingleCharacter(StaminaGainType stamtype, int eventamount, Person person)
         {
@@ -301,7 +304,7 @@ namespace The_Mark
             {
                 amount = sleep_stamgain;
             }
-            theMark.currentStamina -= amount;
+            theMark.currentStamina += amount;
         }
         void AddStaminaToCharacters(StaminaGainType stamtype, int eventAmount, Boolean isAll, Person affectedperson)
         {
@@ -369,6 +372,123 @@ namespace The_Mark
                 }
             }
         }
+        #endregion
+
+        //RESTED
+        #region rested
+
+        public void GainRested(RestedGainType restedtype)
+        {
+            AddRestedToMark(restedtype, 0);
+            AddRestedToCharacters(restedtype, 0, true, null);
+        }
+        public void GainRestedSingleMark(RestedGainType restedtype, int eventamount)
+        {
+            AddRestedToMark(restedtype, eventamount);
+        }
+        public void GainRestedSingleCharacter(RestedGainType restedtype, int eventamount, Person person)
+        {
+            AddRestedToCharacters(restedtype, eventamount, false, person);
+        }
+
+        public void LoseRested(RestedLossType restedtype)
+        {
+            SubtractRestedFromMark(restedtype, 0);
+            SubtractRestedFromCharacters(restedtype, 0, true, null);
+        }
+        public void LoseRestedSingleMark(RestedLossType restedtype, int eventamount)
+        {
+            SubtractRestedFromMark(restedtype,eventamount);
+        }
+        public void LoseStaminaSingleCharacter(RestedLossType restedtype, int eventamount, Person person)
+        {
+            SubtractRestedFromCharacters(restedtype, eventamount, false, person);
+        }
+
+
+
+
+        void SubtractRestedFromMark(RestedLossType restedtype, int eventAmount)
+        {
+            int amount = eventAmount;
+            if (restedtype == RestedLossType.Travel)
+            {
+                amount = travel_restedloss;
+            }
+            theMark.currentRested -= amount;
+        }
+        void AddRestedToMark(RestedGainType restedtype, int eventAmount)
+        {
+            int amount = eventAmount;
+            if (restedtype == RestedGainType.Sleeping)
+            {
+                amount = sleep_restedgain;
+            }
+            theMark.currentRested += amount;
+        }
+        void AddRestedToCharacters(RestedGainType restedtype, int eventAmount, Boolean isAll, Person affectedperson)
+        {
+            int amount = eventAmount;
+
+            if (restedtype == RestedGainType.Sleeping)
+            {
+                amount = sleep_restedgain;
+            }
+
+
+            if (isAll == true)
+            {
+                for (int i = 0; i < partyMembers.Count; ++i)
+                {
+
+
+                    partyMembers[i].currentRested += amount;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < partyMembers.Count; ++i)
+                {
+                    if (partyMembers[i] == affectedperson)
+                    {
+                        partyMembers[i].currentRested += amount;
+
+                    }
+
+                }
+            }
+        }
+        void SubtractRestedFromCharacters(RestedLossType restedtype, int eventAmount, Boolean isAll, Person affectedperson)
+        {
+            int amount = eventAmount;
+            if (restedtype == RestedLossType.Travel)
+            {
+                amount = travel_restedloss;
+            }
+
+            if (isAll == true)
+            {
+                for (int i = 0; i < partyMembers.Count; ++i)
+                {
+                    partyMembers[i].currentRested -= amount;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < partyMembers.Count; ++i)
+                {
+                    if (partyMembers[i] == affectedperson)
+                    {
+                        partyMembers[i].currentRested -= amount;
+
+                    }
+
+                }
+            }
+        }
+        #endregion
+
+
 
         #endregion
 
@@ -711,6 +831,7 @@ namespace The_Mark
             ReduceStress(StressReduceType.Sleeping);
             GainHealth(HealthGainType.Sleeping);
             GainStamina(StaminaGainType.Sleeping);
+            GainRested(RestedGainType.Sleeping);
         }
 
         public void CreateTheMark(WorldMap world, Random rando)

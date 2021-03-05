@@ -59,8 +59,8 @@ namespace The_Mark
 		public int maxStress;
 		public int currentStress;
 		//Health - Silent
-		int maxRested;
-		int currentRested;
+		public int maxRested;
+		public int currentRested;
 
 
 		#region stat string returns
@@ -627,6 +627,7 @@ namespace The_Mark
 				maxHealth += data.traitData[personTraits[i].ToString()].health;
 				maxStamina += data.traitData[personTraits[i].ToString()].stamina;
 				maxStress += data.traitData[personTraits[i].ToString()].stress;
+				maxRested += data.traitData[personTraits[i].ToString()].rested;
 			}
 			for (int i = 0; i < personSkills.Count; ++i)
 			{
