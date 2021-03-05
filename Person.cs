@@ -58,6 +58,10 @@ namespace The_Mark
 		public int currentStamina;
 		public int maxStress;
 		public int currentStress;
+		//Health - Silent
+		int maxRested;
+		int currentRested;
+
 
 		#region stat string returns
 		public String returnEnduranceString()
@@ -616,6 +620,7 @@ namespace The_Mark
 			maxHealth = rando.Next(75, 101);
 			maxStamina = rando.Next(75, 101);
 			maxStress = rando.Next(75, 101);
+			maxRested = rando.Next(75, 101);
 
 			for (int i = 0; i < personTraits.Count; ++i)
 			{
@@ -633,7 +638,7 @@ namespace The_Mark
 			currentHealth = maxHealth;
 			currentStamina = maxStamina;
 			currentStress = 0;
-
+			currentRested = maxRested;
         }
 
 		void GetAttributeStats(Random rando,DataManager data)
