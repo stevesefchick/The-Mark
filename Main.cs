@@ -324,6 +324,14 @@ class GameMain : Game
 			int minutes = 5;
 			playerHandler.RestTick();
 			time.timeTick(minutes);
+
+			//TODO: Add ticks for event checks
+			
+			//wake up?
+			if (playerHandler.OKToWakeUp()==true)
+            {
+				ChangeGameState(GameState.Idle);
+            }
         }
 
 		//debug

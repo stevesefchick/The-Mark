@@ -834,6 +834,18 @@ namespace The_Mark
             GainRested(RestedGainType.Sleeping);
         }
 
+        public Boolean OKToWakeUp()
+        {
+            if (theMark.currentRested >= theMark.maxRested)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void CreateTheMark(WorldMap world, Random rando)
         {
             theMark = selectTheMark(world, rando);
