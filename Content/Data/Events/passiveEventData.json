@@ -20,7 +20,9 @@
     "stresseffect": -3,
     "healtheffect": 0,
     "partysizemin": 0,
-    "occurswhentravelling": true
+    "occurswhentravelling": true,
+    "occurswhensleeping": false,
+    "occurswhenwakingup": false
   },
   "PassiveEvent_PlayerRunAway": {
     "thisEventBaseString": "Run",
@@ -43,8 +45,9 @@
     "stresseffect": 0,
     "healtheffect": 0,
     "partysizemin": 0,
-    "occurswhentravelling": false
-
+    "occurswhentravelling": false,
+    "occurswhensleeping": false,
+    "occurswhenwakingup": false
   },
   "PassiveEvent_CreatureRunAway": {
     "thisEventBaseString": "Run",
@@ -67,8 +70,9 @@
     "stresseffect": 0,
     "healtheffect": 0,
     "partysizemin": 0,
-    "occurswhentravelling": false
-
+    "occurswhentravelling": false,
+    "occurswhensleeping": false,
+    "occurswhenwakingup": false
   },
   "PassiveEvent_CreaturePet": {
     "thisEventBaseString": "PetCreature",
@@ -91,7 +95,33 @@
     "stresseffect": -5,
     "healtheffect": 0,
     "partysizemin": 0,
-    "occurswhentravelling": false
-
+    "occurswhentravelling": false,
+    "occurswhensleeping": false,
+    "occurswhenwakingup": false
+  },
+  "PassiveEvent_Sleep_Dream": {
+    "thisEventBaseString": "SleepDream",
+    "percentChance": 5,
+    "eventText": [ "%char% had an inspirational dream in the night!", "%char% had a pleasant dream." ],
+    "requiredSkillString": "",
+    "requireSkillRankingString": "",
+    "requiredTraitString": "",
+    "itemType": "",
+    "listOfItems": [],
+    "stammin": 1,
+    "stammax": 100,
+    "stressmin": 1,
+    "stressmax": 50,
+    "healthmin": 1,
+    "healthmax": 100,
+    "requiredTerrain": "",
+    "requiredRoad": "",
+    "staminaeffect": 0,
+    "stresseffect": -3,
+    "healtheffect": 0,
+    "partysizemin": 0,
+    "occurswhentravelling": false,
+    "occurswhensleeping": true,
+    "occurswhenwakingup": false
   }
 }

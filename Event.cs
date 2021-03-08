@@ -26,6 +26,8 @@ namespace The_Mark
         Boolean isonroadrequirement;
         int eventPartySizeMinimum;
         Boolean occursWhenTravelling;
+        Boolean occursWhileSleeping;
+        Boolean occursWhenWakingUp;
 
         int eventStaminaRequirementMin;
         int eventStaminaRequirementMax;
@@ -277,6 +279,11 @@ namespace The_Mark
             return occursWhenTravelling;
         }
 
+        public Boolean CanOccurWhenSleeping()
+        {
+            return occursWhileSleeping;
+        }
+
         Boolean CheckForSkills(Person person)
         {
             if (requiresSkill == true)
@@ -398,7 +405,8 @@ namespace The_Mark
         public Event(String thisEventBaseString, int percentChance, String[] eventText, 
             String requiredSkillString, String requireSkillRankingString, String requiredTraitString,
             String itemType, String[] listOfItems, int stammin, int stammax, int stressmin, int stressmax, int healthmin, int healthmax,
-            String requiredTerrain, String requiredRoad, int staminaeffect,int stresseffect, int healtheffect, int partysizemin, Boolean occurswhentravelling)
+            String requiredTerrain, String requiredRoad, int staminaeffect,int stresseffect, int healtheffect, int partysizemin, 
+            Boolean occurswhentravelling, Boolean occurswhensleeping, Boolean occurswhenwakingup)
         {
             //properties
             thisEventBaseType = (PassiveEventBase) Enum.Parse(typeof(PassiveEventBase), thisEventBaseString);
@@ -458,6 +466,8 @@ namespace The_Mark
             eventPartySizeMinimum = partysizemin;
 
             occursWhenTravelling = occurswhentravelling;
+            occursWhileSleeping = occurswhensleeping;
+            occursWhenWakingUp = occurswhenwakingup;
 
             //items
             if (itemType != "")

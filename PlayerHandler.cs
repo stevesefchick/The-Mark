@@ -20,7 +20,7 @@ namespace The_Mark
 
         //const
         const int travel_stamdrain = 2;
-        const int sleep_stamgain = 2;
+        const int sleep_stamgain = 1;
         const int sleep_stressreduce = 1;
         const int sleep_healthgain = 1;
         const int travel_restedloss = 1;
