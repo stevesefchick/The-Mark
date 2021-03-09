@@ -79,6 +79,33 @@ namespace The_Mark
             return (e);
         }
 
+        public void CheckForValidSleepEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype, Boolean isonroad, WorldMap world, int hour)
+        {
+            List<Event> possibleEvents = new List<Event>();
+
+            //check for valid sleep events
+            foreach (KeyValuePair<String,Event> e in datamanager.passiveEventData)
+            {
+                //check if this is a sleep specific event
+                if (e.Value.CanOccurWhenSleeping()==true)
+                {
+                    //add any eligible people to event
+                    Event newevent = CheckIfPeopleEligible(e.Value, player);
+                    //determine the text used
+                    newevent.DetermineValidText(rando);
+                    //if eligible people exist, add to event
+                    if (newevent.IsEligibleExists() == true && newevent.CheckForGridRequirements(terraintype, isonroad) == true &&
+                        newevent.CheckForPartySizeRequirements(player.partyMembers.Count) == true)
+                    {
+                        possibleEvents.Add(newevent);
+                    }
+
+
+                }
+
+            }
+        }
+
 
         void CheckForValidEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype,Boolean isonroad, WorldMap world, int hour)
         {
