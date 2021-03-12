@@ -79,7 +79,7 @@ namespace The_Mark
             return (e);
         }
 
-        public void CheckForValidSleepEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype, Boolean isonroad, WorldMap world, int hour)
+        public void CheckForValidSleepEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype, Boolean isonroad, WorldMap world, int hour, UI_Helper uihelper)
         {
             List<Event> possibleEvents = new List<Event>();
 
@@ -104,6 +104,20 @@ namespace The_Mark
                 }
 
             }
+
+
+            for (int i = 0; i < possibleEvents.Count; ++i)
+            {
+                int rand = rando.Next(0, 101);
+                if (rand < possibleEvents[i].ReturnEventChance())
+                {
+                    SetCurrentPassiveEvent(possibleEvents[i], true, rando, player, "");
+                    RunCurrentPassiveEvent(player, rando, uihelper);
+                    break;
+                }
+
+            }
+
         }
 
 

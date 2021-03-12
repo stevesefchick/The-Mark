@@ -327,8 +327,9 @@ class GameMain : Game
 				playerHandler.RestTick();
 				time.timeTick(minutes);
 
-				//TODO: Add ticks for event checks
-				travelHandler.CheckForValidSleepEvents(playerHandler, dataManager, rando, worldMap.GridNodeTerrainType(travelHandler.currentGridLocation), worldMap.IsGridRoad(travelHandler.currentGridLocation), worldMap, time.Hour);
+				//check for valid sleep events
+				travelHandler.CheckForValidSleepEvents(playerHandler, dataManager, rando, worldMap.GridNodeTerrainType(travelHandler.currentGridLocation), worldMap.IsGridRoad(travelHandler.currentGridLocation), worldMap, time.Hour,uiHelper);
+
 
 				//wake up?
 				if (playerHandler.OKToWakeUp() == true)

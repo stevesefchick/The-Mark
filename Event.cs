@@ -8,7 +8,7 @@ namespace The_Mark
     class Event
     {
         //passive builders
-        public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing,Run, PetCreature}
+        public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing,Run, PetCreature, SleepDream}
         public enum PassiveEventSuccess { Success, Fail}
 
 
