@@ -84,7 +84,7 @@ namespace The_Mark
         {
             int amount = eventAmount;
 
-            if (stresstype == StressReduceType.Sleeping)
+            if (stresstype == StressReduceType.Sleeping && theMark.currentStress > 40)
             {
                 amount = sleep_stressreduce;
             }
@@ -96,16 +96,17 @@ namespace The_Mark
         {
             int amount = eventAmount;
 
-            if (stresstype == StressReduceType.Sleeping)
-            {
-                amount = sleep_stressreduce;
-            }
+
 
 
             if (isAll == true)
             {
                 for (int i = 0; i < partyMembers.Count; ++i)
                 {
+                    if (stresstype == StressReduceType.Sleeping && partyMembers[i].currentStress>40)
+                    {
+                        amount = sleep_stressreduce;
+                    }
 
                     partyMembers[i].currentStress -= amount;
                 }
@@ -116,6 +117,10 @@ namespace The_Mark
                 {
                     if (partyMembers[i] == affectedperson)
                     {
+                        if (stresstype == StressReduceType.Sleeping && partyMembers[i].currentStress > 40)
+                        {
+                            amount = sleep_stressreduce;
+                        }
 
                         partyMembers[i].currentStress -= amount;
 
@@ -192,7 +197,7 @@ namespace The_Mark
         void AddHealthToMark(HealthGainType healthtype, int eventAmount)
         {
             int amount = eventAmount;
-            if (healthtype == HealthGainType.Sleeping)
+            if (healthtype == HealthGainType.Sleeping && theMark.currentHealth < 50)
             {
                 amount = sleep_healthgain;
             }
@@ -230,15 +235,17 @@ namespace The_Mark
         {
             int amount = eventAmount;
 
-            if (healthtype == HealthGainType.Sleeping)
-            {
-                amount = sleep_healthgain;
-            }
 
             if (isAll == true)
             {
                 for (int i = 0; i < partyMembers.Count; ++i)
                 {
+
+                    if (healthtype == HealthGainType.Sleeping && partyMembers[i].currentHealth < 50)
+                    {
+                        amount = sleep_healthgain;
+                    }
+
                     partyMembers[i].currentHealth += amount;
                 }
             }
@@ -249,6 +256,10 @@ namespace The_Mark
                     if (partyMembers[i] == affectedperson)
                     {
 
+                        if (healthtype == HealthGainType.Sleeping && partyMembers[i].currentHealth < 50)
+                        {
+                            amount = sleep_healthgain;
+                        }
                         partyMembers[i].currentHealth += amount;
 
                     }
