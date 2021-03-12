@@ -334,6 +334,7 @@ class GameMain : Game
 				//wake up?
 				if (playerHandler.OKToWakeUp() == true)
 				{
+					travelHandler.RunCurrentWakeEvent(playerHandler, rando, uiHelper);
 					ChangeGameState(GameState.Idle);
 				}
 			}

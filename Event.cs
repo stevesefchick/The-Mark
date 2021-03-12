@@ -8,7 +8,7 @@ namespace The_Mark
     class Event
     {
         //passive builders
-        public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing,Run, PetCreature, SleepDream}
+        public enum PassiveEventBase { Find, Harvest, Say, Eat, Injure, Joke, Sing,Run, PetCreature, SleepDream, SleepWakeCramp}
         public enum PassiveEventSuccess { Success, Fail}
 
 
@@ -282,6 +282,11 @@ namespace The_Mark
         public Boolean CanOccurWhenSleeping()
         {
             return occursWhileSleeping;
+        }
+
+        public Boolean OccursWhenWakingUp()
+        {
+            return occursWhenWakingUp;
         }
 
         Boolean CheckForSkills(Person person)

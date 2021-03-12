@@ -90,7 +90,7 @@ namespace The_Mark
             }
 
 
-            theMark.currentStress -= amount;
+            theMark.currentStress -= amount * -1;
         }
         void RemoveStressFromCharacters(StressReduceType stresstype, int eventAmount, Boolean isAll, Person affectedperson)
         {
@@ -108,7 +108,7 @@ namespace The_Mark
                         amount = sleep_stressreduce;
                     }
 
-                    partyMembers[i].currentStress -= amount;
+                    partyMembers[i].currentStress -= amount * -1;
                 }
             }
             else
@@ -122,7 +122,7 @@ namespace The_Mark
                             amount = sleep_stressreduce;
                         }
 
-                        partyMembers[i].currentStress -= amount;
+                        partyMembers[i].currentStress -= amount * -1;
 
                     }
 

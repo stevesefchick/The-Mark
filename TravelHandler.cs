@@ -21,6 +21,7 @@ namespace The_Mark
         //events
         Event currentEvent;
         WorldEvent currentWorldEvent;
+        Event currentWakeEvent;
 
         //paths
         public List<TravelRoute> travelPath = new List<TravelRoute>();
@@ -87,7 +88,7 @@ namespace The_Mark
             foreach (KeyValuePair<String,Event> e in datamanager.passiveEventData)
             {
                 //check if this is a sleep specific event
-                if (e.Value.CanOccurWhenSleeping()==true)
+                if (e.Value.CanOccurWhenSleeping()==true || (e.Value.OccursWhenWakingUp() == true && currentWakeEvent==null))
                 {
                     //add any eligible people to event
                     Event newevent = CheckIfPeopleEligible(e.Value, player);
@@ -111,8 +112,15 @@ namespace The_Mark
                 int rand = rando.Next(0, 101);
                 if (rand < possibleEvents[i].ReturnEventChance())
                 {
-                    SetCurrentPassiveEvent(possibleEvents[i], true, rando, player, "");
-                    RunCurrentPassiveEvent(player, rando, uihelper);
+                    if (possibleEvents[i].OccursWhenWakingUp() == true)
+                    {
+                        SetCurrentWakeEventEvent(possibleEvents[i], true, rando, player, "");
+                    }
+                    else
+                    {
+                        SetCurrentPassiveEvent(possibleEvents[i], true, rando, player, "");
+                        RunCurrentPassiveEvent(player, rando, uihelper);
+                    }
                     break;
                 }
 
@@ -215,6 +223,22 @@ namespace The_Mark
             currentEvent.UpdateTextForEnemy(creaturename);
         }
 
+        void SetCurrentWakeEventEvent(Event eventtobeadded, Boolean randomperson, Random rando, PlayerHandler player, String creaturename)
+        {
+            currentWakeEvent = eventtobeadded;
+            if (randomperson == true)
+            {
+                currentWakeEvent.GetRandomAssociatedPerson(rando);
+            }
+            else
+            {
+                currentWakeEvent.AssociateMarkToEvent(player.theMark);
+            }
+            currentWakeEvent.UpdateTextForName();
+            currentWakeEvent.UpdateTextForItem();
+            currentWakeEvent.UpdateTextForEnemy(creaturename);
+        }
+
         public void RunCurrentPassiveEvent(PlayerHandler player, Random rando, UI_Helper uihelper)
         {
             safeTilesRemaining = passiveEventSafeTiles;
@@ -222,6 +246,18 @@ namespace The_Mark
             CreateTravelFeed(currentEvent.ReturnEventText(), uihelper);
             ConsoleLogEvent();
             ClearEvent();
+        }
+
+        public void RunCurrentWakeEvent(PlayerHandler player, Random rando, UI_Helper uihelper)
+        {
+            if (currentWakeEvent != null)
+            {
+                safeTilesRemaining = passiveEventSafeTiles;
+                currentWakeEvent.PerformPassiveEventActivity(player, rando);
+                CreateTravelFeed(currentWakeEvent.ReturnEventText(), uihelper);
+                ConsoleLogEvent();
+                ClearWakeEvent();
+            }
         }
 
         void CreateTravelFeed(String text,UI_Helper uihelper)
@@ -240,6 +276,10 @@ namespace The_Mark
             {
                 Console.WriteLine(currentWorldEvent.ReturnEventTitleText());
             }
+            else if (currentWakeEvent != null)
+            {
+                Console.WriteLine(currentWakeEvent.ReturnEventText());
+            }    
 
         }
 
@@ -247,6 +287,11 @@ namespace The_Mark
         void ClearEvent()
         {
             currentEvent = null;
+        }
+
+        void ClearWakeEvent()
+        {
+            currentWakeEvent = null;
         }
 
         public void ClearWorldEvent()
