@@ -17,6 +17,7 @@ namespace The_Mark
         public String currentDestinationDescription;
         public Point travelStartingLocation;
         int safeTilesRemaining = 3;
+        int restSafeTilesRemaining = 3;
 
         //events
         Event currentEvent;
@@ -34,7 +35,7 @@ namespace The_Mark
         const int mapIconOffset = -32;
         const int worldEventSafeTiles = 5;
         const int passiveEventSafeTiles = 3;
-
+        const int restEventSafeTiles = 3;
 
         public TravelHandler()
         {
@@ -80,15 +81,30 @@ namespace The_Mark
             return (e);
         }
 
+        void RestSafeTick()
+        {
+            if (restSafeTilesRemaining>0)
+            {
+                restSafeTilesRemaining -= 1;
+            }
+        }
+
+        void RestSafeSet()
+        {
+            restSafeTilesRemaining = restEventSafeTiles;
+        }
+
         public void CheckForValidSleepEvents(PlayerHandler player, DataManager datamanager, Random rando, GridTile.GridTerrain terraintype, Boolean isonroad, WorldMap world, int hour, UI_Helper uihelper)
         {
             List<Event> possibleEvents = new List<Event>();
+            RestSafeTick();
 
             //check for valid sleep events
             foreach (KeyValuePair<String,Event> e in datamanager.passiveEventData)
             {
                 //check if this is a sleep specific event
-                if (e.Value.CanOccurWhenSleeping()==true || (e.Value.OccursWhenWakingUp() == true && currentWakeEvent==null))
+                if ((e.Value.CanOccurWhenSleeping()==true && e.Value.CanOccurWhenSleeping() == false) 
+                    || (e.Value.OccursWhenWakingUp() == true && currentWakeEvent==null))
                 {
                     //add any eligible people to event
                     Event newevent = CheckIfPeopleEligible(e.Value, player);
@@ -116,10 +132,11 @@ namespace The_Mark
                     {
                         SetCurrentWakeEventEvent(possibleEvents[i], true, rando, player, "");
                     }
-                    else
+                    else if (restSafeTilesRemaining==0)
                     {
                         SetCurrentPassiveEvent(possibleEvents[i], true, rando, player, "");
                         RunCurrentPassiveEvent(player, rando, uihelper);
+                        RestSafeSet();
                     }
                     break;
                 }

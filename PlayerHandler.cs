@@ -843,12 +843,13 @@ namespace The_Mark
             GainHealth(HealthGainType.Sleeping);
             GainStamina(StaminaGainType.Sleeping);
             GainRested(RestedGainType.Sleeping);
+
         }
 
         public Boolean OKToWakeUp()
         {
             if (theMark.currentRested >= theMark.maxRested &&
-                theMark.currentStamina >= (theMark.maxStamina*0.5f))
+                theMark.currentStamina >= (theMark.maxStamina*0.9f))
             {
                 return true;
             }
