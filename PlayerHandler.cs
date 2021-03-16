@@ -43,6 +43,92 @@ namespace The_Mark
 
         #region stat gains/loss
 
+        #region caps
+        //CAP STATS
+        void CapStatsMark()
+        {
+            //stress
+            if (theMark.currentStress > theMark.maxStress)
+            {
+                theMark.currentStress = theMark.maxStress;
+            }
+            else if (theMark.currentStress < 0)
+            {
+                theMark.currentStress = 0;
+            }
+            //health
+            if (theMark.currentHealth > theMark.maxHealth)
+            {
+                theMark.currentHealth = theMark.maxHealth;
+            }
+            else if (theMark.currentHealth < 0)
+            {
+                theMark.currentHealth = 0;
+            }
+            //stamina
+            if (theMark.currentStamina > theMark.maxStamina)
+            {
+                theMark.currentStamina = theMark.maxStamina;
+            }
+            else if (theMark.currentStamina < 0)
+            {
+                theMark.currentStamina = 0;
+            }
+            //rested
+            if (theMark.currentRested > theMark.maxRested)
+            {
+                theMark.currentRested = theMark.maxRested;
+            }
+            else if (theMark.currentRested < 0)
+            {
+                theMark.currentRested = 0;
+            }
+        }
+        void CapStatsCharacter(int character)
+        {
+            //stress
+            if (partyMembers[character].currentStress > partyMembers[character].maxStress)
+            {
+                partyMembers[character].currentStress = partyMembers[character].maxStress;
+            }
+            else if (partyMembers[character].currentStress < 0)
+            {
+                partyMembers[character].currentStress = 0;
+            }
+            //health
+            if (partyMembers[character].currentHealth > partyMembers[character].maxHealth)
+            {
+                partyMembers[character].currentHealth = partyMembers[character].maxHealth;
+            }
+            else if (partyMembers[character].currentHealth < 0)
+            {
+                partyMembers[character].currentHealth = 0;
+            }
+            //stamina
+            if (partyMembers[character].currentStamina > partyMembers[character].maxStamina)
+            {
+                partyMembers[character].currentStamina = partyMembers[character].maxStamina;
+            }
+            else if (partyMembers[character].currentStamina < 0)
+            {
+                partyMembers[character].currentStamina = 0;
+            }
+            //rested
+            if (partyMembers[character].currentRested > partyMembers[character].maxRested)
+            {
+                partyMembers[character].currentRested = partyMembers[character].maxRested;
+            }
+            else if (partyMembers[character].currentRested < 0)
+            {
+                partyMembers[character].currentRested = 0;
+            }
+
+
+
+
+        }
+        #endregion
+
         //STRESS
         #region stress
         public void ReduceStress(StressReduceType stresstype)
@@ -79,6 +165,8 @@ namespace The_Mark
 
 
             theMark.currentStress += amount;
+            CapStatsMark();
+
         }
         void RemoveStressFromMark(StressReduceType stresstype, int eventAmount)
         {
@@ -91,6 +179,7 @@ namespace The_Mark
 
 
             theMark.currentStress -= amount * -1;
+            CapStatsMark();
         }
         void RemoveStressFromCharacters(StressReduceType stresstype, int eventAmount, Boolean isAll, Person affectedperson)
         {
@@ -109,6 +198,7 @@ namespace The_Mark
                     }
 
                     partyMembers[i].currentStress -= amount * -1;
+                    CapStatsCharacter(i);
                 }
             }
             else
@@ -123,6 +213,8 @@ namespace The_Mark
                         }
 
                         partyMembers[i].currentStress -= amount * -1;
+                        CapStatsCharacter(i);
+
 
                     }
 
@@ -139,6 +231,8 @@ namespace The_Mark
                 {
 
                     partyMembers[i].currentStress += amount;
+                    CapStatsCharacter(i);
+
                 }
             }
             else
@@ -149,6 +243,8 @@ namespace The_Mark
                     {
 
                         partyMembers[i].currentStress += amount;
+                        CapStatsCharacter(i);
+
 
                     }
 
@@ -193,6 +289,8 @@ namespace The_Mark
             int amount = eventAmount;
 
             theMark.currentHealth -= amount;
+            CapStatsMark();
+
         }
         void AddHealthToMark(HealthGainType healthtype, int eventAmount)
         {
@@ -205,6 +303,8 @@ namespace The_Mark
 
 
             theMark.currentHealth += amount;
+            CapStatsMark();
+
         }
         void SubtractHealthFromCharacters(HealthDrainType healthtype, int eventAmount, Boolean isAll, Person affectedperson)
         {
@@ -215,6 +315,8 @@ namespace The_Mark
                 for (int i = 0; i < partyMembers.Count; ++i)
                 {
                     partyMembers[i].currentHealth -= amount;
+                    CapStatsCharacter(i);
+
                 }
             }
             else
@@ -225,6 +327,8 @@ namespace The_Mark
                     {
 
                         partyMembers[i].currentHealth -= amount;
+                        CapStatsCharacter(i);
+
 
                     }
 
@@ -247,6 +351,8 @@ namespace The_Mark
                     }
 
                     partyMembers[i].currentHealth += amount;
+                    CapStatsCharacter(i);
+
                 }
             }
             else
@@ -261,6 +367,8 @@ namespace The_Mark
                             amount = sleep_healthgain;
                         }
                         partyMembers[i].currentHealth += amount;
+                        CapStatsCharacter(i);
+
 
                     }
 
@@ -307,6 +415,8 @@ namespace The_Mark
                 amount = travel_stamdrain;
             }
             theMark.currentStamina -= amount;
+            CapStatsMark();
+
         }
         void AddStaminaToMark(StaminaGainType stamtype, int eventAmount)
         {
@@ -316,6 +426,8 @@ namespace The_Mark
                 amount = sleep_stamgain;
             }
             theMark.currentStamina += amount;
+            CapStatsMark();
+
         }
         void AddStaminaToCharacters(StaminaGainType stamtype, int eventAmount, Boolean isAll, Person affectedperson)
         {
@@ -334,6 +446,8 @@ namespace The_Mark
 
 
                     partyMembers[i].currentStamina += amount;
+                    CapStatsCharacter(i);
+
                 }
             }
             else
@@ -343,6 +457,8 @@ namespace The_Mark
                     if (partyMembers[i] == affectedperson)
                     {
                         partyMembers[i].currentStamina += amount;
+                        CapStatsCharacter(i);
+
 
                     }
 
@@ -363,6 +479,8 @@ namespace The_Mark
                     }
 
                     partyMembers[i].currentStamina -= amount;
+                    CapStatsCharacter(i);
+
                 }
             }
             else
@@ -377,6 +495,8 @@ namespace The_Mark
                         }
 
                         partyMembers[i].currentStamina -= amount;
+                        CapStatsCharacter(i);
+
 
                     }
 
@@ -427,6 +547,8 @@ namespace The_Mark
                 amount = travel_restedloss;
             }
             theMark.currentRested -= amount;
+            CapStatsMark();
+
         }
         void AddRestedToMark(RestedGainType restedtype, int eventAmount)
         {
@@ -436,6 +558,8 @@ namespace The_Mark
                 amount = sleep_restedgain;
             }
             theMark.currentRested += amount;
+            CapStatsMark();
+
         }
         void AddRestedToCharacters(RestedGainType restedtype, int eventAmount, Boolean isAll, Person affectedperson)
         {
@@ -454,6 +578,8 @@ namespace The_Mark
 
 
                     partyMembers[i].currentRested += amount;
+                    CapStatsCharacter(i);
+
                 }
             }
             else
@@ -463,6 +589,8 @@ namespace The_Mark
                     if (partyMembers[i] == affectedperson)
                     {
                         partyMembers[i].currentRested += amount;
+                        CapStatsCharacter(i);
+
 
                     }
 
@@ -482,6 +610,8 @@ namespace The_Mark
                 for (int i = 0; i < partyMembers.Count; ++i)
                 {
                     partyMembers[i].currentRested -= amount;
+                    CapStatsCharacter(i);
+
                 }
             }
             else
@@ -491,6 +621,8 @@ namespace The_Mark
                     if (partyMembers[i] == affectedperson)
                     {
                         partyMembers[i].currentRested -= amount;
+                        CapStatsCharacter(i);
+
 
                     }
 
